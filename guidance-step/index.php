@@ -2385,8 +2385,8 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Title-->
 									<!--begin::Notice-->
 									<div class="text-muted fw-bold fs-6">If you need more info, please
-										<a href="../index.php"
-											class="link-primary fw-bolder">Sign In</a>.
+										<!-- <a href="../index.php"
+											class="link-primary fw-bolder">Sign In</a>. -->
 									</div>
 									<!--end::Notice-->
 								</div>
@@ -2394,8 +2394,8 @@ License: For each use you must have a valid license purchased only from above li
 								<!--begin::Body-->
 								<div class="mb-0">
 									<!--begin::Text-->
-									<div class="fs-6 text-gray-600 mb-5">visit our registart office &amp;
-									or conatact us.</div>
+									<div class="fs-6 text-gray-600 mb-5">Visit our Registrar Office &amp;
+									or Contact Us.</div>
 									<!--end::Text-->
 									<!--begin::Alert-->
 									<!--begin::Notice-->
@@ -2417,18 +2417,7 @@ License: For each use you must have a valid license purchased only from above li
 										<!--end::Svg Icon-->
 										<!--end::Icon-->
 										<!--begin::Wrapper-->
-										<div class="d-flex flex-stack flex-grow-1">
-											<!--begin::Content-->
-											<div class="fw-bold">
-												<h4 class="text-gray-900 fw-bolder">We need your attention!
-												</h4>
-												<div class="fs-6 text-gray-700">To start using great tools,
-													please, please
-													<a href="#" class="fw-bolder">Create Team Platform</a>
-												</div>
-											</div>
-											<!--end::Content-->
-										</div>
+										
 										<!--end::Wrapper-->
 									</div>
 									<!--end::Notice-->
