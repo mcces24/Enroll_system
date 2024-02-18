@@ -1588,7 +1588,9 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x8 h7 y1c ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>i<span class="_ _4"></span>gh<span class="_ _6"></span> <span class="_ _5"></span>Sch<span class="_ _6"></span>o<span class="_ _4"></span>ol </div>
                </div>
                <div class="c x2e y7b w1b h11">
-                  <div class="t m0 x12 h26 y1c ff5 fs4 fc0 sc0 ls0 ws0">San <span class="_ _4"></span>Agus<span class="_ _4"></span>t<span class="_ _4"></span>in <span class="_ _5"></span>Nat<span class="_ _5"></span>ional <span class="_ _4"></span>H<span class="_ _4"></span>igh <span class="_ _5"></span>School<span class="_ _4"></span> </div>
+                  <?php
+                   echo $record ['padd'];
+                  ?>
                </div>
                <div class="c x2f y7b w1c h11">
                   <div class="t m0 x30 h26 y1c ff5 fs4 fc0 sc0 ls6 ws0">2022<span class="ls0">-</span>2023<span class="ls0"> </span></div>
