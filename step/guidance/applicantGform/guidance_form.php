@@ -1482,7 +1482,7 @@ if(isset($_GET['applicant_id']))
                   ?> </div>
                </div>
                <div class="c x29 y57 w16 h20">
-                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0">sss</div>
+                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0"></div>
                </div>
                <div class="c x2a y48 w17 h21">
                   <div class="t m0 x1a h14 y52 ff1 fs4 fc0 sc0 ls4 ws0"><?php 
@@ -1770,10 +1770,14 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x3 h7 y8e ff5 fs1 fc0 sc0 ls0 ws0">D<span class="_ _4"></span>o y<span class="_ _1"></span>ou<span class="_ _6"></span> <span class="_ _9"></span>h<span class="_ _6"></span>a<span class="_ _4"></span>v<span class="_ _6"></span>e <span class="_ _7"></span>a<span class="_ _4"></span> <span class="_ _4"></span>pe<span class="_ _4"></span>r<span class="_ _0"></span>man<span class="_ _6"></span>en<span class="_ _0"></span>t<span class="_ _0"></span>/<span class="_ _0"></span>fam<span class="_ _0"></span>i<span class="_ _4"></span>l<span class="_ _0"></span>y<span class="_ _6"></span> <span class="_"> </span>d<span class="_ _4"></span>oct<span class="_ _0"></span>or? <span class="_ _4"></span>__<span class="_ _4"></span>____<span class="_ _4"></span>__<span class="_ _5"></span> <span class="_ _1"></span>H<span class="_ _0"></span>ow<span class="_ _0"></span> <span class="_ _9"></span>of<span class="_ _0"></span>ten<span class="_ _6"></span> <span class="_ _7"></span>do<span class="_ _4"></span> <span class="_ _0"></span>y<span class="_ _6"></span>ou<span class="_ _0"></span> <span class="_ _7"></span>v<span class="_ _6"></span>i<span class="_ _4"></span>si<span class="_ _4"></span>t:<span class="_ _0"></span> <span class="_ _9"></span><span class="ls2">__________________</span> <span class="_ _1"></span> </div>
                </div>
                <div class="c x38 y8f w22 h20">
-                  <div class="t m0 x13 h16 y90 ff1 fs5 fc0 sc0 ls0 ws0">F<span class="_ _4"></span>i<span class="_ _7"></span>s<span class="_ _7"></span>hin<span class="_ _0"></span>g<span class="_ _4"></span> </div>
+                  <div class="t m0 x13 h16 y90 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['sincome'];
+                  ?></div>
                </div>
                <div class="c x39 y91 w23 h20">
-                  <div class="t m0 x13 h16 y50 ff1 fs5 fc0 sc0 ls9 ws0">lax<span class="_ _1"></span><span class="ls0"> </span></div>
+                  <div class="t m0 x13 h16 y50 ff1 fs5 fc0 sc0 ls9 ws0"><?php
+                   echo $record ['radius3'];
+                  ?></div>
                </div>
                <div class="c x3a y92 w24 h20">
                   <div class="t m0 x1a h16 y56 ff1 fs5 fc0 sc0 ls0 ws0">p<span class="_ _4"></span>ro<span class="_ _5"></span>v<span class="_ _0"></span>i<span class="_ _5"></span>n<span class="_ _5"></span>ce </div>
