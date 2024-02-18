@@ -2381,12 +2381,22 @@ if(isset($_GET['applicant_id']))
       </div>
    </body>
    <script type="text/javascript">
-       function PrintPage() {
-           window.print();
-       }
-       window.addEventListener('DOMContentLoaded', (event) => {
-           PrintPage()
-           setTimeout(function(){ window.close() },750)
-       });
-   </script>
+    function PrintPageAndClose() {
+        var printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write('<html><head><title>Print</title><style>@media print { @page { size: A4; } body { zoom: 80%; } }</style></head><body>');
+        printWindow.document.write(document.getElementById('content').innerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+        setTimeout(function() {
+            printWindow.close();
+        }, 2000); // Close the window after 2 seconds (2000 milliseconds)
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        PrintPageAndClose();
+    });
+</script>
+
 </html>
