@@ -1482,7 +1482,10 @@ if(isset($_GET['applicant_id']))
                   ?> </div>
                </div>
                <div class="c x29 y57 w16 h20">
-                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0"> </div>
+                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0">
+                  <?php
+                   echo $record ['course_id'];
+                  ?> </div>
                </div>
                <div class="c x2a y48 w17 h21">
                   <div class="t m0 x1a h14 y52 ff1 fs4 fc0 sc0 ls4 ws0"><?php 
