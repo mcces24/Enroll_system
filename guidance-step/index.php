@@ -2384,8 +2384,7 @@ License: For each use you must have a valid license purchased only from above li
 								<!--begin::Body-->
 								<div class="mb-0">
 									<!--begin::Text-->
-									<div class="fs-6 text-gray-600 mb-5">Visit our Registrar Office &amp;
-									or Contact Us.</div>
+									
 									<!--end::Text-->
 									<!--begin::Alert-->
 									<!--begin::Notice-->
@@ -2413,6 +2412,8 @@ License: For each use you must have a valid license purchased only from above li
 										<!-- <a href="../index.php"
 											class="link-primary fw-bolder">Sign In</a>. -->
 									</div>
+									<div class="fs-6 text-gray-600 mb-5">Visit our Guidance Office
+									or Contact Us.</div>
 									<!--end::Notice-->
 								</div>
 										<!--end::Svg Icon-->
