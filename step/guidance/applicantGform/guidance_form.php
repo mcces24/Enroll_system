@@ -1218,23 +1218,25 @@ if(isset($_GET['applicant_id']))
                <div class="c x9 y1d w4 hc">
                   <div class="t m0 x8 hd y1f ff5 fs3 fc0 sc0 ls0 ws0"><?php
                    echo $record ['ffullname'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c xb y1d w5 hc">
                   <div class="t m0 x8 hd y1f ff5 fs3 fc0 sc0 ls0 ws0"><?php
                    echo $record ['mfullname'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c x3 y20 w3 he">
                   <div class="t m0 xe h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">D<span class="_ _4"></span>A<span class="_ _4"></span>T<span class="_ _6"></span>E<span class="_ _4"></span> <span class="_ _0"></span>OF <span class="_ _4"></span>B<span class="_ _4"></span>I<span class="_ _1"></span>R<span class="_ _0"></span>T<span class="_ _6"></span>H </div>
                </div>
-               <div class="c x9 y20 w4 he"><?php
+               <div class="c x9 y20 w4 he">
+               <?php
                    echo $record ['fdbirth'];
                   ?> </div>
                </div>
-               <div class="c xb y20 w5 he"><?php
+               <div class="c xb y20 w5 he">
+                  <<?php
                    echo $record ['mdbirth'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c x3 y23 w3 hc">
                   <div class="t m0 xf h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">AGE </div>
@@ -1267,41 +1269,31 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x9 y25 w4 hc">
                   <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['foccopation'];
+                   echo $record ['occopation'];
                   ?></div>
                </div>
                <div class="c xb y25 w5 hc">
-                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['moccopation'];
-                  ?></div>
+                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0">H<span class="_ _6"></span>ousew<span class="_ _3"> </span>i<span class="_ _0"></span>f<span class="_ _5"></span>e </div>
                </div>
                <div class="c x3 y27 w3 h10">
                   <div class="t m0 x12 h7 y28 ff5 fs1 fc0 sc0 ls0 ws0">N<span class="_ _0"></span>A<span class="_ _4"></span>M<span class="_ _0"></span>E<span class="_ _4"></span> <span class="_ _5"></span>O<span class="_ _0"></span>F </div>
                   <div class="t m0 x13 h7 y1c ff5 fs1 fc0 sc0 ls0 ws0">EMP<span class="_ _4"></span>LO<span class="_ _0"></span>Y<span class="_ _1"></span>ER/<span class="_ _6"></span>C<span class="_ _4"></span>OM<span class="_ _0"></span>P<span class="_ _4"></span>A<span class="_ _4"></span>N<span class="_ _0"></span>Y<span class="_ _1"></span> </div>
                </div>
                <div class="c x9 y27 w4 h10">
-                  <div class="t m0 x8 hd y29 ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['femploy'];
-                  ?></div>
+                  <div class="t m0 x8 hd y29 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
                </div>
                <div class="c xb y27 w5 h10">
-                  <div class="t m0 x8 hd y29 ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['memploy'];
-                  ?></div>
+                  <div class="t m0 x8 hd y29 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
                </div>
                <div class="c x3 y2a w3 h10">
                   <div class="t m0 x10 h7 y2b ff5 fs1 fc0 sc0 ls0 ws0">ED<span class="_ _5"></span>U<span class="_ _6"></span>C<span class="_ _4"></span>A<span class="_ _4"></span>T<span class="_ _0"></span>I<span class="_ _1"></span>O<span class="_ _0"></span>N<span class="_ _0"></span>A<span class="_ _4"></span>L </div>
                   <div class="t m0 x14 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">AT<span class="_ _0"></span>T<span class="_ _0"></span>AI<span class="_ _1"></span>N<span class="_ _0"></span>MENT<span class="_ _6"></span> </div>
                </div>
                <div class="c x9 y2a w4 h10">
-                  <div class="t m0 x8 hd y2c ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['feducattend'];
-                  ?></div>
+                  <div class="t m0 x8 hd y2c ff5 fs3 fc0 sc0 ls0 ws0">E<span class="_ _1"></span>l<span class="_ _0"></span>em<span class="_ _6"></span>ent<span class="_ _0"></span>ar<span class="_ _4"></span>y<span class="_ _4"></span> <span class="_ _5"></span>Lev<span class="_ _4"></span>el<span class="_ _0"></span> </div>
                </div>
                <div class="c xb y2a w5 h10">
-                  <div class="t m0 x8 hd y2c ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['meducattend'];
-                  ?></div>
+                  <div class="t m0 x8 hd y2c ff5 fs3 fc0 sc0 ls0 ws0">H<span class="_ _6"></span>i<span class="_ _0"></span>gh <span class="_ _5"></span>S<span class="_ _0"></span>c<span class="_ _4"></span>hool<span class="_ _0"></span> </div>
                </div>
                <div class="c x3 y2d w3 he">
                   <div class="t m0 x0 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>O<span class="_ _0"></span>ME <span class="_ _4"></span>A<span class="_ _4"></span>D<span class="_ _4"></span>D<span class="_ _4"></span>RES<span class="_ _4"></span>S<span class="_ _4"></span> </div>
@@ -1414,12 +1406,12 @@ if(isset($_GET['applicant_id']))
                <div class="c x20 y15 wd h19">
                   <div class="t m0 x1a h14 y4e ff1 fs4 fc0 sc0 ls0 ws0"><?php
                    echo $record ['sex'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c x21 y4f wc h18">
                   <div class="t m0 x13 h1a y50 ff1 fs6 fc0 sc0 ls0 ws0"><?php
                    echo $record ['pbirth'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c x22 y15 we h1b">
                   <div class="t m0 x1a h1c y21 ff1 fs3 fc0 sc0 ls0 ws0"><?php
@@ -1434,7 +1426,7 @@ if(isset($_GET['applicant_id']))
                <div class="c x24 y51 w10 h1e">
                   <div class="t m0 x1a h14 y52 ff1 fs4 fc0 sc0 ls0 ws0"><?php
                    echo $record ['complex'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c x25 y4f w11 h17">
                   <div class="t m0 x1a h14 y49 ff1 fs4 fc0 sc0 ls0 ws0">3<span class="_ _4"></span>/<span class="_ _0"></span>1<span class="_ _4"></span>5<span class="_ _4"></span>/20<span class="_ _4"></span>0<span class="_ _4"></span>4<span class="_ _5"></span> </div>
@@ -1447,12 +1439,12 @@ if(isset($_GET['applicant_id']))
                <div class="c x9 y54 w13 h1f">
                   <div class="t m0 x13 h14 y52 ff1 fs4 fc0 sc0 ls0 ws0"><?php
                    echo $record ['langdi'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c x27 y54 w14 h1e">
                   <div class="t m0 x13 h14 y49 ff1 fs4 fc0 sc0 ls0 ws0"><?php
                    echo $record ['email'];
-                  ?></div>
+                  ?> </div>
                </div>
                <div class="c x28 y55 w15 h20">
                   <div class="t m0 x13 h14 y56 ff1 fs4 fc0 sc0 ls0 ws0"><?php
@@ -1460,17 +1452,15 @@ if(isset($_GET['applicant_id']))
                   ?> </div>
                </div>
                <div class="c x29 y57 w16 h20">
-                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0">
-
-                  </div>
+                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0"> </div>
                </div>
                <div class="c x2a y48 w17 h21">
                   <div class="t m0 x1a h14 y52 ff1 fs4 fc0 sc0 ls4 ws0"><?php 
-                  foreach ($record as $key => $value) {
-                     if($key == "age"){
-                        echo "$value";
-                     }
-                  } ?><span class="ls0"> </span></div>
+   foreach ($record as $key => $value) {
+       if($key == "age"){
+         echo "$value";
+       }
+   } ?><span class="ls0"> </span></div>
                </div>
                <div class="c x2b y46 w9 h13">
                   <div class="t m0 x1a h14 y22 ff1 fs4 fc0 sc0 ls4 ws0"><?php echo $student['applicant_id']; ?><span class="ls0"> </span></div>
