@@ -478,7 +478,7 @@ License: For each use you must have a valid license purchased only from above li
 													class="required fs-6 fw-bold form-label mb-2">Full Name</label>
 												<!--end::Label-->
 												<!--begin::Input-->
-												<input type="text"
+												<input type="text" 
 													class="form-control form-control-lg form-control-solid"
 													name="ffullname" placeholder="Ex: Jose L. Dela Cruz" value="" />
 												<!--end::Input-->
