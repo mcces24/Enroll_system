@@ -1381,22 +1381,34 @@ if(isset($_GET['applicant_id']))
                   ?> </div>
                </div>
                <div class="c x1f y4c wc h17">
-                  <div class="t m0 x13 h14 y4d ff1 fs4 fc0 sc0 ls0 ws0">Sa<span class="_ _0"></span>n<span class="_ _4"></span> <span class="_ _5"></span>Ag<span class="_ _0"></span>u<span class="_ _4"></span>s<span class="_ _4"></span>tin M<span class="_ _4"></span>adridej<span class="_ _0"></span>o<span class="_ _4"></span>s<span class="_ _4"></span> <span class="_"> </span>Ce<span class="_ _0"></span>b<span class="_ _4"></span>u<span class="_ _4"></span> </div>
+                  <div class="t m0 x13 h14 y4d ff1 fs4 fc0 sc0 ls0 ws0">S<?php
+                   echo $record ['cadd'];
+                  ?></div>
                </div>
                <div class="c x20 y15 wd h19">
-                  <div class="t m0 x1a h14 y4e ff1 fs4 fc0 sc0 ls0 ws0">Male<span class="_ _0"></span> </div>
+                  <div class="t m0 x1a h14 y4e ff1 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['gender'];
+                  ?> </div>
                </div>
                <div class="c x21 y4f wc h18">
-                  <div class="t m0 x13 h1a y50 ff1 fs6 fc0 sc0 ls0 ws0">Cagay<span class="_ _4"></span>a<span class="_ _4"></span>n de Oro c<span class="_ _0"></span>it<span class="_ _4"></span>y<span class="_ _4"></span> </div>
+                  <div class="t m0 x13 h1a y50 ff1 fs6 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['pbirth'];
+                  ?> </div>
                </div>
                <div class="c x22 y15 we h1b">
-                  <div class="t m0 x1a h1c y21 ff1 fs3 fc0 sc0 ls0 ws0">4<span class="_ _4"></span>&apos;<span class="_ _0"></span>1<span class="_ _4"></span>2<span class="_ _4"></span> </div>
+                  <div class="t m0 x1a h1c y21 ff1 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['height'];
+                  ?></div>
                </div>
                <div class="c x23 y15 wf h1d">
-                  <div class="t m0 x13 h16 y21 ff1 fs5 fc0 sc0 ls0 ws0">41k<span class="_ _4"></span>g<span class="_ _4"></span> </div>
+                  <div class="t m0 x13 h16 y21 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['weigth'];
+                  ?></div>
                </div>
                <div class="c x24 y51 w10 h1e">
-                  <div class="t m0 x1a h14 y52 ff1 fs4 fc0 sc0 ls0 ws0">Fa<span class="_ _0"></span>ir </div>
+                  <div class="t m0 x1a h14 y52 ff1 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['complex'];
+                  ?> </div>
                </div>
                <div class="c x25 y4f w11 h17">
                   <div class="t m0 x1a h14 y49 ff1 fs4 fc0 sc0 ls0 ws0">3<span class="_ _4"></span>/<span class="_ _0"></span>1<span class="_ _4"></span>5<span class="_ _4"></span>/20<span class="_ _4"></span>0<span class="_ _4"></span>4<span class="_ _5"></span> </div>
