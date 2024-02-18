@@ -1435,11 +1435,11 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x20 y15 wd h19">
                   <div class="t m0 x1a h14 y4e ff1 fs4 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['gender'];
+                   echo $record ['sex'];
                   ?> </div>
                </div>
                <div class="c x21 y4f wc h18">
-                  <div class="t m0 x13 h1a y50 ff1 fs6 fc0 sc0 ls0 ws0"><?php
+                  <div class="t m0 x13 h1a y50 ff1 fs6 fc0 sc0 ls0 ws0">sss<?php
                    echo $record ['pbirth'];
                   ?> </div>
                </div>
@@ -1482,7 +1482,7 @@ if(isset($_GET['applicant_id']))
                   ?> </div>
                </div>
                <div class="c x29 y57 w16 h20">
-                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0"></div>
+                  <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0">sss</div>
                </div>
                <div class="c x2a y48 w17 h21">
                   <div class="t m0 x1a h14 y52 ff1 fs4 fc0 sc0 ls4 ws0"><?php 
