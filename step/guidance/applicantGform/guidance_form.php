@@ -1646,13 +1646,19 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x8 h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">Elem<span class="_ _0"></span>en<span class="_ _0"></span>t<span class="_ _0"></span>ary<span class="_ _6"></span> </div>
                </div>
                <div class="c x2e y7a w1b hb">
-                  <div class="t m0 x1b h26 y32 ff5 fs4 fc0 sc0 ls0 ws0">At<span class="_ _4"></span>op-at<span class="_ _4"></span>op <span class="_ _4"></span>elem<span class="_ _5"></span>entary<span class="_ _9"> </span> <span class="_ _0"></span>s<span class="_ _4"></span>c<span class="_ _5"></span>hool<span class="fs6"> </span></div>
+                  <div class="t m0 x1b h26 y32 ff5 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['enameschool'];
+                  ?></div>
                </div>
                <div class="c x2f y7a w1c hb">
-                  <div class="t m0 x30 h26 y32 ff5 fs4 fc0 sc0 ls6 ws0">2016<span class="ls0">-</span>2017<span class="ls0"> </span></div>
+                  <div class="t m0 x30 h26 y32 ff5 fs4 fc0 sc0 ls6 ws0"><?php
+                   echo $record ['eincdate'];
+                  ?></div>
                </div>
                <div class="c x19 y7a w1d hb">
-                  <div class="t m0 x31 h26 y32 ff5 fs4 fc0 sc0 ls0 ws0">N<span class="_ _4"></span>one </div>
+                  <div class="t m0 x31 h26 y32 ff5 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['ehonor'];
+                  ?></div>
                </div>
                <div class="c x3 y7b w9 h11">
                   <div class="t m0 x8 h7 y1c ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>i<span class="_ _4"></span>gh<span class="_ _6"></span> <span class="_ _5"></span>Sch<span class="_ _6"></span>o<span class="_ _4"></span>ol </div>
