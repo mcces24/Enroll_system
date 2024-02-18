@@ -1638,7 +1638,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="mdheight" placeholder="Ex: 152" value="" />
+													name="mdheight" placeholder="Ex: 4'5" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1650,7 +1650,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="mdweight" placeholder="Ex: 50" value="" />
+													name="mdweight" placeholder="Ex: 50kg" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->	
@@ -1754,7 +1754,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="mdopexp" placeholder="Ex:" value="" />
+													name="mdopexp" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->		
