@@ -1376,9 +1376,10 @@ if(isset($_GET['applicant_id']))
    } ?></div>
                </div>
                <div class="c x1e y4a wc h18">
-                  <?php
+                  <div class="t m0 x1a h14 y4b ff1 fs4 fc0 sc0 ls0 ws0"><?php
                    echo $record ['padd'];
-                  ?></div>
+                  ?> </div>
+               </div>
                <div class="c x1f y4c wc h17">
                   <div class="t m0 x13 h14 y4d ff1 fs4 fc0 sc0 ls0 ws0">Sa<span class="_ _0"></span>n<span class="_ _4"></span> <span class="_ _5"></span>Ag<span class="_ _0"></span>u<span class="_ _4"></span>s<span class="_ _4"></span>tin M<span class="_ _4"></span>adridej<span class="_ _0"></span>o<span class="_ _4"></span>s<span class="_ _4"></span> <span class="_"> </span>Ce<span class="_ _0"></span>b<span class="_ _4"></span>u<span class="_ _4"></span> </div>
                </div>
