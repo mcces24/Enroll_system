@@ -764,7 +764,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="gage" placeholder="Ex: 48" value="" />
+													name="gage" placeholder="Ex: 21" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1844,7 +1844,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaname1" placeholder="Ex:" value="" />
+													name="oaname1" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1887,14 +1887,14 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oadate2" placeholder="Ex:" value="" />
+													name="oadate2" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaposition2" placeholder="Ex:" value="" />
+													name="oaposition2" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 										</div>
