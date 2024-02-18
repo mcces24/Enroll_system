@@ -1363,9 +1363,8 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x1b y47 wa h15">
                         <div class="t m0 x1c h16 y32 ff1 fs5 fc0 sc0 ls0 ws0"><?php 
-                     foreach ($record as $value) {
-                        echo $record['lname'] . ', ';
-                        } ?>
+                              echo $record['lname'] . ', ';
+                        ?>
                         </div>
                      </div>
                <div class="c x1d y48 wb h17">
