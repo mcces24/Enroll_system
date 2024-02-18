@@ -1776,25 +1776,13 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x39 y91 w23 h20">
                   <div class="t m0 x13 h16 y50 ff1 fs5 fc0 sc0 ls9 ws0"><?php
-                   foreach ($record as $key => $value) {
-                     if($key == "radios3"){
-                       foreach ($value as $keys => $values) {
-                          if($keys == 0){
-                             echo "$values, ";
-                          }
-                          if($keys == 1){
-                             echo "$values, ";
-                          }
-                          if($keys == 2){
-                             echo "$values, ";
-                          }
-                        }
-                     }
-                     
-                 } ?></div>
+                   echo $record ['radios3'];
+                  ?></div>
                </div>
                <div class="c x3a y92 w24 h20">
-                  <div class="t m0 x1a h16 y56 ff1 fs5 fc0 sc0 ls0 ws0">p<span class="_ _4"></span>ro<span class="_ _5"></span>v<span class="_ _0"></span>i<span class="_ _5"></span>n<span class="_ _5"></span>ce </div>
+                  <div class="t m0 x1a h16 y56 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['radios3'];
+                  ?></div>
                </div>
                <div class="c x3b y93 w25 h20">
                   <div class="t m0 x13 h16 y49 ff1 fs5 fc0 sc0 ls0 ws0"> </div>
