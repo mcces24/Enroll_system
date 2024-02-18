@@ -1783,15 +1783,17 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x1a h16 y56 ff1 fs5 fc0 sc0 ls0 ws0">p<span class="_ _4"></span>ro<span class="_ _5"></span>v<span class="_ _0"></span>i<span class="_ _5"></span>n<span class="_ _5"></span>ce </div>
                </div>
                <div class="c x3b y93 w25 h20">
-                  <div class="t m0 x13 h16 y49 ff1 fs5 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['brank'];
-                  ?></div>
+                  <div class="t m0 x13 h16 y49 ff1 fs5 fc0 sc0 ls0 ws0"></div>
                </div>
                <div class="c x3c y94 w26 h27">
-                  <div class="t m0 x13 h16 y95 ff1 fs5 fc0 sc0 ls0 ws0">4&apos;12 </div>
+                  <div class="t m0 x13 h16 y95 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['weight'];
+                  ?></div>
                </div>
                <div class="c x3d y96 w26 h27">
-                  <div class="t m0 x13 h16 y97 ff1 fs5 fc0 sc0 ls0 ws0">41k<span class="_ _4"></span>g </div>
+                  <div class="t m0 x13 h16 y97 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['height'];
+                  ?></div>
                </div>
                <div class="c x3e y8b we h28">
                   <div class="t m0 x1a h16 y4e ff1 fs5 fc0 sc0 lsa ws0">No<span class="_ _4"></span><span class="ls0"> </span></div>

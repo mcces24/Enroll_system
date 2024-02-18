@@ -553,7 +553,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="femploy" placeholder="Ex: Laurel" value="" />
+													name="femploy" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -681,7 +681,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="meploy" placeholder="Ex: Laurel" value="" />
+													name="meploy" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1028,21 +1028,21 @@ License: For each use you must have a valid license purchased only from above li
 													class="fs-6 fw-bold form-label mb-2">Date of Birth</label>
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="sdbirth" placeholder="Ex: Jose L. Dela Cruz" value="" />
+													name="sdbirth" placeholder="Ex: February 14, 2000" value="" />
 											</div>
 											<div class="col-4">
 												<label
 													class="fs-6 fw-bold form-label mb-2">Age</label>
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="sage" placeholder="Ex: Jose L. Dela Cruz" value="" />
+													name="sage" placeholder="Ex: 21" value="" />
 											</div>
 											<div class="col-4">
 												<label
 													class="fs-6 fw-bold form-label mb-2">Contact No.</label>
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="scontact" placeholder="Ex: Jose L. Dela Cruz" value="" />
+													name="scontact" placeholder="Ex: 09213456874" value="" />
 											</div>
 											<div class="col-4">
 												<label
@@ -1056,14 +1056,14 @@ License: For each use you must have a valid license purchased only from above li
 													class="fs-6 fw-bold form-label mb-2">Educational Attainment</label>
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="seducattend" placeholder="Ex: Jose L. Dela Cruz" value="" />
+													name="seducattend" placeholder="Ex: High School Level" value="" />
 											</div>
 											<div class="col-4">
 												<label
 													class="fs-6 fw-bold form-label mb-2">Home Address</label>
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="sadd" placeholder="Ex: Jose L. Dela Cruz" value="" />
+													name="sadd" placeholder="Ex: Bunakan, Madridejos, Cebu" value="" />
 											</div>
 										</div>
 									</div>	
@@ -1409,7 +1409,7 @@ License: For each use you must have a valid license purchased only from above li
 												
 											<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="syname" placeholder="Ex: Laurel" value="" />
+													name="syname" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1856,7 +1856,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oadate1" placeholder="Ex: Laurel" value="" />
+													name="oadate1" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
@@ -1867,7 +1867,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaposition1" placeholder="Ex: Dela Crus" value="" />
+													name="oaposition1" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 										</div>
@@ -1878,7 +1878,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaname2" placeholder="Ex: Dela Crus" value="" />
+													name="oaname2" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1905,7 +1905,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaname3" placeholder="Ex: Dela Crus" value="" />
+													name="oaname3" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1914,14 +1914,14 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oadate3" placeholder="Ex: Laurel" value="" />
+													name="oadate3" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaposition3" placeholder="Ex: Dela Crus" value="" />
+													name="oaposition3" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 										</div>
@@ -1932,21 +1932,21 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaname4" placeholder="Ex: Dela Crus" value="" />
+													name="oaname4" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oadate4" placeholder="Ex: Laurel" value="" />
+													name="oadate4" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="oaposition4" placeholder="Ex: Dela Crus" value="" />
+													name="oaposition4" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											
@@ -1991,7 +1991,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptname1" placeholder="Ex: Dela Crus" value="" />
+													name="ptname1" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2003,7 +2003,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptdate1" placeholder="Ex: Laurel" value="" />
+													name="ptdate1" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
@@ -2014,7 +2014,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptscore1" placeholder="Ex: Dela Crus" value="" />
+													name="ptscore1" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
@@ -2025,7 +2025,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptinter1" placeholder="Ex: Dela Crus" value="" />
+													name="ptinter1" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2038,7 +2038,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptname2" placeholder="Ex: Dela Crus" value="" />
+													name="ptname2" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2047,21 +2047,21 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptdate2" placeholder="Ex: Laurel" value="" />
+													name="ptdate2" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptscore2" placeholder="Ex: Dela Crus" value="" />
+													name="ptscore2" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptinter2" placeholder="Ex: Dela Crus" value="" />
+													name="ptinter2" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2074,7 +2074,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptname3" placeholder="Ex: Dela Crus" value="" />
+													name="ptname3" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2083,21 +2083,21 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptdate3" placeholder="Ex: Laurel" value="" />
+													name="ptdate3" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptscore3" placeholder="Ex: Dela Crus" value="" />
+													name="ptscore3" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptinter3" placeholder="Ex: Dela Crus" value="" />
+													name="ptinter3" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2110,7 +2110,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptname4" placeholder="Ex: Dela Crus" value="" />
+													name="ptname4" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2119,21 +2119,21 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptdate4" placeholder="Ex: Laurel" value="" />
+													name="ptdate4" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptscore4" placeholder="Ex: Dela Crus" value="" />
+													name="ptscore4" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<div class="col-3">
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="ptinter4" placeholder="Ex: Dela Crus" value="" />
+													name="ptinter4" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2183,7 +2183,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<!-- <input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="" placeholder="Ex: Dela Crus" value="" /> -->
+													name="" placeholder="" value="" /> -->
 											
 											
 												<label class="col-form-label text-right col-lg-3 col-sm-12">Select Here</label>
@@ -2291,7 +2291,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="hobbies" placeholder="Ex: Dela Crus" value="" />
+													name="hobbies" placeholder="Ex: Reading" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2303,7 +2303,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="talent" placeholder="Ex: Dela Crus" value="" />
+													name="talent" placeholder="Ex: Singing" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2315,7 +2315,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="interest" placeholder="Ex: Dela Crus" value="" />
+													name="interest" placeholder="Ex: Reading" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2327,7 +2327,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="sport" placeholder="Ex: Dela Crus" value="" />
+													name="sport" placeholder="Ex: Dancing" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2339,7 +2339,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="msubject" placeholder="Ex: Dela Crus" value="" />
+													name="msubject" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2351,7 +2351,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="lsubject" placeholder="Ex: Dela Crus" value="" />
+													name="lsubject" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -2363,7 +2363,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="plan" placeholder="Ex: Dela Crus" value="" />
+													name="plan" placeholder="" value="" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
