@@ -1381,13 +1381,13 @@ if(isset($_GET['applicant_id']))
                   ?> </div>
                </div>
                <div class="c x1f y4c wc h17">
-                  <div class="t m0 x13 h14 y4d ff1 fs4 fc0 sc0 ls0 ws0">S<?php
+                  <div class="t m0 x13 h14 y4d ff1 fs4 fc0 sc0 ls0 ws0"><?php
                    echo $record ['cadd'];
                   ?></div>
                </div>
                <div class="c x20 y15 wd h19">
                   <div class="t m0 x1a h14 y4e ff1 fs4 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['gender'];
+                   echo $record ['sex'];
                   ?> </div>
                </div>
                <div class="c x21 y4f wc h18">
@@ -1402,7 +1402,7 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x23 y15 wf h1d">
                   <div class="t m0 x13 h16 y21 ff1 fs5 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['weigth'];
+                   echo $record ['weight'];
                   ?></div>
                </div>
                <div class="c x24 y51 w10 h1e">
@@ -1414,16 +1414,24 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x1a h14 y49 ff1 fs4 fc0 sc0 ls0 ws0">3<span class="_ _4"></span>/<span class="_ _0"></span>1<span class="_ _4"></span>5<span class="_ _4"></span>/20<span class="_ _4"></span>0<span class="_ _4"></span>4<span class="_ _5"></span> </div>
                </div>
                <div class="c x26 y53 w12 h17">
-                  <div class="t m0 x13 h16 y52 ff1 fs4 fc0 sc0 ls0 ws0">Catho<span class="_ _4"></span>lic<span class="fs5"> </span></div>
+                  <div class="t m0 x13 h16 y52 ff1 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['religion'];
+                  ?></div>
                </div>
                <div class="c x9 y54 w13 h1f">
-                  <div class="t m0 x13 h14 y52 ff1 fs4 fc0 sc0 ls0 ws0">Bis<span class="_ _4"></span>aya<span class="_ _0"></span> </div>
+                  <div class="t m0 x13 h14 y52 ff1 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['langdi'];
+                  ?> </div>
                </div>
                <div class="c x27 y54 w14 h1e">
-                  <div class="t m0 x13 h14 y49 ff1 fs4 fc0 sc0 ls0 ws0">ch<span class="_ _4"></span>ristianvilla<span class="_ _0"></span>c<span class="_ _4"></span>a<span class="_ _0"></span>rlos<span class="_ _4"></span>@gma<span class="_ _0"></span>il.com </div>
+                  <div class="t m0 x13 h14 y49 ff1 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['email'];
+                  ?> </div>
                </div>
                <div class="c x28 y55 w15 h20">
-                  <div class="t m0 x13 h14 y56 ff1 fs4 fc0 sc0 ls0 ws0">ma<span class="_ _0"></span>rrie<span class="_ _6"></span>d<span class="_ _4"></span> <span class="_"> </span>and <span class="_ _5"></span>living <span class="_ _5"></span>toge<span class="_ _0"></span>th<span class="_ _4"></span>e<span class="_ _0"></span>r </div>
+                  <div class="t m0 x13 h14 y56 ff1 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['radios1'];
+                  ?> </div>
                </div>
                <div class="c x29 y57 w16 h20">
                   <div class="t m0 x1a h14 y58 ff1 fs4 fc0 sc0 ls0 ws0"> </div>
