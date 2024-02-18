@@ -1309,10 +1309,14 @@ if(isset($_GET['applicant_id']))
                   ?></div>
                </div>
                <div class="c x9 y2d w4 he">
-                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0">S<span class="_ _0"></span>an A<span class="_ _4"></span>gus<span class="_ _4"></span>ti<span class="_ _0"></span>n <span class="_ _6"></span>M<span class="_ _1"></span>adride<span class="_ _0"></span>jo<span class="_ _0"></span>s<span class="_ _4"></span> C<span class="_ _6"></span>ebu </div>
+                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['fhomeadd'];
+                  ?></div>
                </div>
                <div class="c xb y2d w5 he">
-                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0">S<span class="_ _0"></span>an A<span class="_ _4"></span>gus<span class="_ _4"></span>ti<span class="_ _0"></span>n <span class="_ _6"></span>M<span class="_ _1"></span>adride<span class="_ _0"></span>jo<span class="_ _0"></span>s<span class="_ _4"></span> C<span class="_ _0"></span><span class="ls3">ebu<span class="ls0"> </span></span></div>
+                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['mhomeadd'];
+                  ?></div>
                </div>
                <div class="c x1 y1 w2 h0">
                   <div class="t m0 x3 h7 y2e ff5 fs1 fc0 sc0 ls0 ws0"> </div>
@@ -1329,31 +1333,41 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 xd h7 y1c ff5 fs1 fc0 sc0 ls0 ws0">N<span class="_ _0"></span>A<span class="_ _4"></span>M<span class="_ _0"></span>E<span class="_ _4"></span> </div>
                </div>
                <div class="c x15 y33 w7 h11">
-                  <div class="t m0 x8 hd y34 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y34 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['gfullname'];
+                  ?></div>
                </div>
                <div class="c x3 y35 w6 hb">
                   <div class="t m0 x17 h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">D<span class="_ _4"></span>A<span class="_ _4"></span>T<span class="_ _6"></span>E<span class="_ _4"></span> <span class="_ _0"></span>OF <span class="_ _4"></span>B<span class="_ _4"></span>I<span class="_ _1"></span>R<span class="_ _0"></span>T<span class="_ _6"></span>H </div>
                </div>
                <div class="c x15 y35 w7 hb">
-                  <div class="t m0 x8 hd y36 ff5 fs3 fc0 sc0 ls0 ws0">7/31<span class="_ _0"></span>/1977 </div>
+                  <div class="t m0 x8 hd y36 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['gdbirth'];
+                  ?></div>
                </div>
                <div class="c x3 y37 w6 h11">
                   <div class="t m0 xf h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">AGE </div>
                </div>
                <div class="c x15 y37 w7 h11">
-                  <div class="t m0 x8 hd y36 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y36 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['gage'];
+                  ?></div>
                </div>
                <div class="c x3 y38 w6 hb">
                   <div class="t m0 x11 h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">C<span class="_ _4"></span>O<span class="_ _0"></span>N<span class="_ _0"></span>T<span class="_ _0"></span>AC<span class="_ _5"></span>T<span class="_ _6"></span> <span class="_ _7"></span>NO<span class="_ _6"></span>. </div>
                </div>
                <div class="c x15 y38 w7 hb">
-                  <div class="t m0 x8 hd y36 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y36 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['gcontact'];
+                  ?></div>
                </div>
                <div class="c x3 y39 w6 h11">
                   <div class="t m0 x11 h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">O<span class="_ _0"></span>C<span class="_ _4"></span>C<span class="_ _4"></span>U<span class="_ _0"></span>P<span class="_ _4"></span>A<span class="_ _4"></span>T<span class="_ _6"></span>I<span class="_ _1"></span>ON<span class="_ _0"></span> </div>
                </div>
                <div class="c x15 y39 w7 h11">
-                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['goccupation'];
+                  ?></div>
                </div>
                <div class="c x3 y3a w8 h12">
                   <div class="t m0 x18 h7 y3b ff5 fs1 fc0 sc0 ls0 ws0">N<span class="_ _0"></span>A<span class="_ _4"></span>M<span class="_ _0"></span>E<span class="_ _4"></span> <span class="_ _4"></span>OF </div>
@@ -1362,7 +1376,9 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x13 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">EMP<span class="_ _4"></span>LO<span class="_ _0"></span>Y<span class="_ _1"></span>ER/<span class="_ _6"></span>C<span class="_ _4"></span>OM<span class="_ _0"></span>P<span class="_ _4"></span>A<span class="_ _4"></span>N<span class="_ _0"></span>Y<span class="_ _1"></span> </div>
                </div>
                <div class="c x15 y3a w7 h12">
-                  <div class="t m0 x8 hd y3c ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y3c ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['gemploy'];
+                  ?></div>
                </div>
                <div class="c x3 y3d w8 h10">
                   <div class="t m0 x10 h7 y2b ff5 fs1 fc0 sc0 ls0 ws0">ED<span class="_ _5"></span>U<span class="_ _6"></span>C<span class="_ _4"></span>A<span class="_ _4"></span>T<span class="_ _0"></span>I<span class="_ _1"></span>O<span class="_ _0"></span>N<span class="_ _0"></span>A<span class="_ _4"></span>L<span class="_ _4"></span> </div>
@@ -1371,13 +1387,17 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x14 h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">AT<span class="_ _0"></span>T<span class="_ _0"></span>AI<span class="_ _1"></span>N<span class="_ _0"></span>MENT<span class="_ _6"></span> </div>
                </div>
                <div class="c x15 y3d w7 h10">
-                  <div class="t m0 x8 hd y3e ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y3e ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['geducattend'];
+                  ?></div>
                </div>
                <div class="c x3 y3f w6 h11">
                   <div class="t m0 x0 h7 y40 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>O<span class="_ _0"></span>ME <span class="_ _5"></span>AD<span class="_ _4"></span>D<span class="_ _4"></span>RESS<span class="_ _5"></span> </div>
                </div>
                <div class="c x15 y3f w7 h11">
-                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['gadd'];
+                  ?></div>
                </div>
                <div class="c x1 y1 w2 h0">
                   <div class="t m0 x3 h7 y41 ff5 fs1 fc0 sc0 ls0 ws0"> </div>
