@@ -1438,10 +1438,10 @@ if(isset($_GET['applicant_id']))
                    foreach ($record as $key => $value) {
                      if($key == "gender"){
                        foreach ($value as $keys => $values) {
-                          if($keys == 0){
+                          if($keys == Male){
                              echo "$values, ";
                           }
-                          if($keys == 1){
+                          if($keys == Female){
                              echo "$values, ";
                           }
                           
