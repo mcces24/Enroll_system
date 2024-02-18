@@ -1364,13 +1364,13 @@ if(isset($_GET['applicant_id']))
                <div class="c x1b y47 wa h15">
                   <div class="t m0 x1c h16 y32 ff1 fs5 fc0 sc0 ls0 ws0"><?php 
    foreach ($record as $key => $value) {
-       if($key == "lname"){
+       if($key == "fname"){
          echo "$value";
        }
        else if($key == "mname"){
-            echo ", $value";
+            echo "$value";
        }
-       else if($key == "fname"){
+       else if($key == "lname"){
             echo ", $value";
        }
    } ?></div>
