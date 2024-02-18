@@ -1776,7 +1776,7 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x39 y91 w23 h20">
                   <div class="t m0 x13 h16 y50 ff1 fs5 fc0 sc0 ls9 ws0"><?php
-                   echo $record ['radius3'];
+                   echo $record ['radios3'];
                   ?></div>
                </div>
                <div class="c x3a y92 w24 h20">
