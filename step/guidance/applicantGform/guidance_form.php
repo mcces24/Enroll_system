@@ -1478,7 +1478,7 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x28 y55 w15 h20">
                   <div class="t m0 x13 h14 y56 ff1 fs4 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['radios1'];
+                   echo $record ['radios3'];
                   ?> </div>
                </div>
                <div class="c x29 y57 w16 h20">
