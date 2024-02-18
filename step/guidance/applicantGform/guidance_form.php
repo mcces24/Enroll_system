@@ -1436,18 +1436,11 @@ if(isset($_GET['applicant_id']))
                <div class="c x20 y15 wd h19">
                   <div class="t m0 x1a h14 y4e ff1 fs4 fc0 sc0 ls0 ws0"><?php
                    foreach ($record as $key => $value) {
-                     if($key == "sex"){
-                       foreach ($value as $keys => $values) {
-                          if($keys == Male){
-                             echo "$values, ";
-                          }
-                          if($keys == Female){
-                             echo "$values, ";
-                          }
-                          
-                       }
+                     if ($key == "gender") {
+                         foreach ($value as $keys => $values) {
+                             echo "<li>$values</li>";
+                         }
                      }
-                     
                  } ?></div>
                </div>
                <div class="c x21 y4f wc h18">
