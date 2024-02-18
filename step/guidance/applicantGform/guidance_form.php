@@ -1664,25 +1664,37 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x8 h7 y1c ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>i<span class="_ _4"></span>gh<span class="_ _6"></span> <span class="_ _5"></span>Sch<span class="_ _6"></span>o<span class="_ _4"></span>ol </div>
                </div>
                <div class="c x2e y7b w1b h11">
-                  <div class="t m0 x12 h26 y1c ff5 fs4 fc0 sc0 ls0 ws0">San <span class="_ _4"></span>Agus<span class="_ _4"></span>t<span class="_ _4"></span>in <span class="_ _5"></span>Nat<span class="_ _5"></span>ional <span class="_ _4"></span>H<span class="_ _4"></span>igh <span class="_ _5"></span>School<span class="_ _4"></span> </div>
+                  <div class="t m0 x12 h26 y1c ff5 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['hnameschool'];
+                  ?></div>
                </div>
                <div class="c x2f y7b w1c h11">
-                  <div class="t m0 x30 h26 y1c ff5 fs4 fc0 sc0 ls6 ws0">2022<span class="ls0">-</span>2023<span class="ls0"> </span></div>
+                  <div class="t m0 x30 h26 y1c ff5 fs4 fc0 sc0 ls6 ws0"><?php
+                   echo $record ['hincdate'];
+                  ?></div>
                </div>
                <div class="c x19 y7b w1d h11">
-                  <div class="t m0 x31 h26 y1c ff5 fs4 fc0 sc0 ls0 ws0">N<span class="_ _4"></span>one </div>
+                  <div class="t m0 x31 h26 y1c ff5 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['hhonor'];
+                  ?></div>
                </div>
                <div class="c x3 y7c w9 hb">
                   <div class="t m0 x8 h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">C<span class="_ _4"></span>ol<span class="_ _0"></span>l<span class="_ _0"></span>eg<span class="_ _4"></span>e </div>
                </div>
                <div class="c x2e y7c w1b hb">
-                  <div class="t m0 x32 h26 y32 ff5 fs4 fc0 sc0 ls0 ws0">M<span class="_ _0"></span>C<span class="_ _4"></span>C<span class="_ _4"></span> </div>
+                  <div class="t m0 x32 h26 y32 ff5 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['cnameschool'];
+                  ?></div>
                </div>
                <div class="c x2f y7c w1c hb">
-                  <div class="t m0 x30 h26 y32 ff5 fs4 fc0 sc0 ls6 ws0">2023<span class="ls0">-</span>2024<span class="ls0"> </span></div>
+                  <div class="t m0 x30 h26 y32 ff5 fs4 fc0 sc0 ls6 ws0"><?php
+                   echo $record ['cincdate'];
+                  ?></div>
                </div>
                <div class="c x19 y7c w1d hb">
-                  <div class="t m0 x31 h26 y32 ff5 fs4 fc0 sc0 ls0 ws0">N<span class="_ _4"></span>one </div>
+                  <div class="t m0 x31 h26 y32 ff5 fs4 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['chonor'];
+                  ?></div>
                </div>
                <div class="c x3 y7d w9 h11">
                   <div class="t m0 x8 h7 y32 ff5 fs1 fc0 sc0 ls0 ws0">Vo<span class="_ _4"></span>cation<span class="_ _6"></span>a<span class="_ _4"></span>l<span class="_ _0"></span> </div>
