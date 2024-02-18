@@ -1508,7 +1508,7 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x3 h7 y5 ff5 fs1 fc0 sc0 ls0 ws0">Li<span class="_ _4"></span>v<span class="_ _6"></span>i<span class="_ _4"></span>n<span class="_ _6"></span>g<span class="_ _4"></span> <span class="_ _4"></span>Wi<span class="_ _4"></span>t<span class="_ _0"></span>h<span class="_ _0"></span>:<span class="_ _0"></span> <span class="_ _9"></span><span class="ls2">_________________________________ <span class="_ _6"></span><span class="ls0">(<span class="_ _0"></span> <span class="_ _1"></span>) <span class="_ _4"></span>paren<span class="_ _6"></span>t<span class="_ _0"></span>s <span class="_ _9"></span>( ) <span class="_ _0"></span>gran<span class="_ _6"></span>dparen<span class="_ _6"></span>ts <span class="_ _3"></span>(<span class="_ _0"></span> <span class="_ _4"></span>) <span class="_ _4"></span>relat<span class="_ _0"></span>i<span class="_ _4"></span>v<span class="_ _6"></span>es <span class="_ _9"></span>(<span class="_ _0"></span> <span class="_ _5"></span>)<span class="_ _0"></span> <span class="_ _0"></span>fr<span class="_ _0"></span>i<span class="_ _4"></span>en<span class="_ _6"></span>d<span class="_ _4"></span>s<span class="_ _5"></span> </span></span></div>
                   <div class="t m0 x3 h7 y5b ff5 fs1 fc0 sc0 ls0 ws0">(<span class="_ _0"></span> <span class="_ _5"></span>)<span class="_ _0"></span> <span class="_ _4"></span>o<span class="_ _4"></span>t<span class="_ _0"></span>h<span class="_ _6"></span>ers <span class="_ _4"></span>pl<span class="_ _0"></span>ea<span class="_ _4"></span>se <span class="_ _4"></span>sp<span class="_ _4"></span>eci<span class="_ _4"></span>f<span class="_ _0"></span>y<span class="_ _6"></span>: <span class="_ _9"></span><span class="ls2">__________</span>_ <span class="_ _1"></span> </div>
                   <div class="t m0 x3 h7 y7 ff5 fs1 fc0 sc0 ls0 ws0"> </div>
-                  <div class="t m0 x3 h7 y5c ff5 fs1 fc0 sc0 ls0 ws0">T<span class="_ _6"></span>y<span class="_ _6"></span>pe<span class="_ _4"></span> <span class="_ _7"></span>o<span class="_ _4"></span>f<span class="_ _0"></span> <span class="_ _4"></span>D<span class="_ _4"></span>i<span class="_ _4"></span>sci<span class="_ _5"></span>pl<span class="_ _0"></span>i<span class="_ _4"></span>n<span class="_ _6"></span>e:<span class="ls2">______________________</span> <span class="_ _1"></span>( <span class="_ _0"></span>) lax<span class="_ _1"></span> <span class="_ _9"></span>( <span class="_ _0"></span>)<span class="_ _0"></span> <span class="_ _4"></span>str<span class="_ _0"></span>i<span class="_ _4"></span>ct ( <span class="_ _4"></span>) d<span class="_ _4"></span>emocr<span class="_ _0"></span>atic <span class="_ _5"></span> </div>
+                  <div class="t m0 x3 h7 y5c ff5 fs1 fc0 sc0 ls0 ws0">T<span class="_ _6"></span>y<span class="_ _6"></span>pe<span class="_ _4"></span> <span class="_ _7"></span>o<span class="_ _4"></span>f<span class="_ _0"></span> <span class="_ _4"></span>D<span class="_ _4"></span>i<span class="_ _4"></span>sci<span class="_ _5"></span>pl<span class="_ _0"></span>i<span class="_ _4"></span>n<span class="_ _6"></span>e:<span class="ls2">______________________</span> <span class="_ _1"></span>( <span class="_ _0"></span>) law<span class="_ _1"></span> <span class="_ _9"></span>( <span class="_ _0"></span>)<span class="_ _0"></span> <span class="_ _4"></span>str<span class="_ _0"></span>i<span class="_ _4"></span>ct ( <span class="_ _4"></span>) d<span class="_ _4"></span>emocr<span class="_ _0"></span>atic <span class="_ _5"></span> </div>
                   <div class="t m0 x3 h7 y5d ff5 fs1 fc0 sc0 ls0 ws0">Ambi<span class="_ _4"></span>en<span class="_ _0"></span>t<span class="_ _0"></span> <span class="_ _4"></span>of <span class="_ _4"></span>G<span class="_ _0"></span>row<span class="_ _0"></span>t<span class="_ _0"></span>h<span class="_ _6"></span>: <span class="_ _3"></span><span class="ls2">____________________ <span class="_ _1"></span><span class="ls0">( <span class="_ _4"></span>) ci<span class="_ _4"></span>ty<span class="_ _6"></span> <span class="_ _4"></span>( ) <span class="_ _4"></span>prov<span class="_ _6"></span>i<span class="_ _4"></span>n<span class="_ _6"></span>ce <span class="_ _5"></span>Bi<span class="_ _4"></span>rt<span class="_ _0"></span>h<span class="_ _6"></span> <span class="_ _9"></span>R<span class="_ _0"></span>an<span class="_ _6"></span>k<span class="_ _4"></span> <span class="_ _9"></span>:<span class="_ _0"></span> <span class="_ _4"></span>_<span class="_ _4"></span>____<span class="_ _4"></span>____<span class="_ _4"></span>__<span class="_ _4"></span> </span></span></div>
                   <div class="t m0 x3 h7 y5e ff5 fs1 fc0 sc0 ls0 ws0"> </div>
                   <div class="t m0 x3 h7 y5f ff1 fs1 fc0 sc0 ls0 ws0">(If <span class="_ _0"></span>yo<span class="_ _0"></span>u<span class="_ _0"></span> <span class="_ _9"></span>a<span class="_ _4"></span>r<span class="_ _0"></span>e <span class="_ _4"></span>M<span class="_ _0"></span>A<span class="_ _0"></span>R<span class="_ _4"></span>R<span class="_ _4"></span>IED<span class="_ _4"></span>, pl<span class="_ _4"></span>ea<span class="_ _4"></span>s<span class="_ _4"></span>e<span class="_ _4"></span> <span class="_ _0"></span>fi<span class="_ _4"></span>ll<span class="_ _4"></span> <span class="_ _0"></span>th<span class="_ _0"></span>is<span class="_ _5"></span> <span class="_ _0"></span>u<span class="_ _0"></span>p)<span class="ff5"> </span></div>
@@ -1715,49 +1715,71 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">Fi<span class="_ _4"></span>rst<span class="_ _0"></span> <span class="_ _4"></span>Y<span class="_ _1"></span>ear </div>
                </div>
                <div class="c x34 y82 w1f he">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls8 ws0">HA<span class="_ _5"></span><span class="ls0"> </span></div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls8 ws0"><?php
+                   echo $record ['fyname'];
+                  ?></div>
                </div>
                <div class="c x35 y82 w20 he">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH </div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acfradios1'];
+                  ?></div>
                </div>
                <div class="c x37 y82 w21 he">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH<span class="fs6"> </span></div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acsradios1'];
+                  ?></div>
                </div>
                <div class="c x3 y83 w1e hc">
                   <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">Se<span class="_ _4"></span>con<span class="_ _6"></span>d <span class="_ _5"></span>Y<span class="_ _1"></span>ear </div>
                </div>
                <div class="c x34 y83 w1f hc">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span> </div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['syname'];
+                  ?></div>
                </div>
                <div class="c x35 y83 w20 hc">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH<span class="fs6"> </span></div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acfradios2'];
+                  ?></div>
                </div>
                <div class="c x37 y83 w21 hc">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH<span class="fs6"> </span></div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acsradios2'];
+                  ?></div>
                </div>
                <div class="c x3 y84 w1e he">
                   <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0">T<span class="_ _6"></span>h<span class="_ _0"></span>i<span class="_ _4"></span>r<span class="_ _0"></span>d <span class="_ _9"></span>Y<span class="_ _1"></span>ear </div>
                </div>
                <div class="c x34 y84 w1f he">
-                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['tyname'];
+                  ?></div>
                </div>
                <div class="c x35 y84 w20 he">
-                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH<span class="fs6"> </span></div>
+                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acfradios3'];
+                  ?></div>
                </div>
                <div class="c x37 y84 w21 he">
-                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH<span class="fs6"> </span></div>
+                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0">acsradios3</div>
                </div>
                <div class="c x3 y86 w1e hc">
                   <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">Fou<span class="_ _0"></span>r<span class="_ _0"></span>th<span class="_ _1"></span> <span class="_ _a"></span>Y<span class="_ _1"></span>ear </div>
                </div>
                <div class="c x34 y86 w1f hc">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span> </div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['fthyname'];
+                  ?></div>
                </div>
                <div class="c x35 y86 w20 hc">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH<span class="fs6"> </span></div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acfradios4'];
+                  ?></div>
                </div>
                <div class="c x37 y86 w21 hc">
-                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">H<span class="_ _0"></span>A<span class="_ _4"></span>H<span class="_ _0"></span>AH<span class="fs6"> </span></div>
+                  <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acsradios4'];
+                  ?></div>
                </div>
                <div class="c x1 y1 w2 h0">
                   <div class="t m0 x3 h7 y87 ff5 fs1 fc0 sc0 ls0 ws0"> </div>
@@ -1826,10 +1848,14 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 x13 h16 y95 ff1 fs5 fc0 sc0 ls0 ws0">No<span class="_ _5"></span>n<span class="_ _4"></span>e<span class="_ _7"></span> </div>
                </div>
                <div class="c x44 y9 w2c h18">
-                  <div class="t m0 x1a h16 y52 ff1 fs5 fc0 sc0 ls0 ws0">1s<span class="_ _5"></span>t <span class="_ _0"></span>ch<span class="_ _5"></span>i<span class="_ _5"></span>ld<span class="_ _5"></span> </div>
+                  <div class="t m0 x1a h16 y52 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['brank'];
+                  ?></div>
                </div>
                <div class="c x32 ya0 w2d h18">
-                  <div class="t m0 x13 h16 y52 ff1 fs5 fc0 sc0 ls0 ws0">p<span class="_ _4"></span>a<span class="_ _7"></span>re<span class="_ _5"></span>n<span class="_ _5"></span>t<span class="_ _1"></span>s<span class="_ _4"></span> </div>
+                  <div class="t m0 x13 h16 y52 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['radios2'];
+                  ?> </div>
                </div>
             </div>
             <div class="pi" data-data='{"ctm":[1.200000,0.000000,0.000000,1.200000,0.000000,0.000000]}'></div>
