@@ -1315,7 +1315,7 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c xb y2d w5 he">
                   <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['mhomeadd'];
+                   echo $record ['madd'];
                   ?></div>
                </div>
                <div class="c x1 y1 w2 h0">
