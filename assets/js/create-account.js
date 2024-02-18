@@ -385,120 +385,120 @@ var KTCreateAccount = function () {
 		validations.push(FormValidation.formValidation(
 			form,
 			{
-				// fields: {
-				// 	ffullname: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Time size is required'
-				// 			}
-				// 		}
-				// 	},
-				// 	fdbirth: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Account name is required'
-				// 			}
-				// 		}
-				// 	},
-				// 	fage: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Account plan is required'
-				// 			}
-				// 		}
-				// 	},
-				// 	fcontact: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	foccopation: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	femploy: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	feducattend: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	fhomeadd: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	mfullname: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	mdbirth: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	mage: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	mcontact: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	moccupation: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	memply: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	meducattend: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	},
-				// 	madd: {
-				// 		validators: {
-				// 			notEmpty: {
-				// 				message: 'Field is required'
-				// 			},
-				// 		}
-				// 	}
-				// },
+				fields: {
+					ffullname: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							}
+						}
+					},
+					fdbirth: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							}
+						}
+					},
+					fage: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							}
+						}
+					},
+					fcontact: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					foccopation: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					femploy: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					feducattend: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					fhomeadd: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					mfullname: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					mdbirth: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					mage: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					mcontact: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					moccupation: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					memply: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					meducattend: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					},
+					madd: {
+						validators: {
+							notEmpty: {
+								message: 'Field is required'
+							},
+						}
+					}
+				},
 				plugins: {
 					trigger: new FormValidation.plugins.Trigger(),
 					// Bootstrap Framework Integration

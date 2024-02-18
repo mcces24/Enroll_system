@@ -2379,17 +2379,7 @@ License: For each use you must have a valid license purchased only from above li
 							<!--begin::Wrapper-->
 							<div class="w-100">
 								<!--begin::Heading-->
-								<div class="pb-8 pb-lg-10">
-									<!--begin::Title-->
-									<h2 class="fw-bolder text-dark">Your Are Done!</h2>
-									<!--end::Title-->
-									<!--begin::Notice-->
-									<div class="text-muted fw-bold fs-6">If you need more info, please
-										<!-- <a href="../index.php"
-											class="link-primary fw-bolder">Sign In</a>. -->
-									</div>
-									<!--end::Notice-->
-								</div>
+								
 								<!--end::Heading-->
 								<!--begin::Body-->
 								<div class="mb-0">
@@ -2414,6 +2404,17 @@ License: For each use you must have a valid license purchased only from above li
 													transform="rotate(-90 11 17)" fill="black" />
 											</svg>
 										</span>
+										<div class="pb-8 pb-lg-10">
+									<!--begin::Title-->
+									<h2 class="fw-bolder text-dark">Your Are Done!</h2>
+									<!--end::Title-->
+									<!--begin::Notice-->
+									<div class="text-muted fw-bold fs-6">If you need more info, please
+										<!-- <a href="../index.php"
+											class="link-primary fw-bolder">Sign In</a>. -->
+									</div>
+									<!--end::Notice-->
+								</div>
 										<!--end::Svg Icon-->
 										<!--end::Icon-->
 										<!--begin::Wrapper-->
