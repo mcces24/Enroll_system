@@ -1761,7 +1761,9 @@ if(isset($_GET['applicant_id']))
                   ?></div>
                </div>
                <div class="c x37 y84 w21 he">
-                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0">acsradios3</div>
+                  <div class="t m0 x8 h7 y85 ff5 fs1 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['acsradios3'];
+                  ?></div>
                </div>
                <div class="c x3 y86 w1e hc">
                   <div class="t m0 x8 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">Fou<span class="_ _0"></span>r<span class="_ _0"></span>th<span class="_ _1"></span> <span class="_ _a"></span>Y<span class="_ _1"></span>ear </div>
