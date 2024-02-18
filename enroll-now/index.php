@@ -2572,7 +2572,7 @@
                                                                <input type="hidden" name="exam_remarks" value="Old Students">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="status_type" value="Pre Old Students">
+                                                               <input type="hidden" name="status_type" value="New Applicant">
                                                             </div>
                                                             <div>
                                                                <input type="hidden" name="academic" value="<?=$rows['academic_start'];?>-<?=$rows['academic_end'];?>">
