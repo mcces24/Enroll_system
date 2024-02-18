@@ -1478,7 +1478,7 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x28 y55 w15 h20">
                   <div class="t m0 x13 h14 y56 ff1 fs4 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['radios3'];
+                   echo $record ['radios1'];
                   ?> </div>
                </div>
                <div class="c x29 y57 w16 h20">
@@ -1780,12 +1780,12 @@ if(isset($_GET['applicant_id']))
                   ?></div>
                </div>
                <div class="c x3a y92 w24 h20">
-                  <div class="t m0 x1a h16 y56 ff1 fs5 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['radios3'];
-                  ?></div>
+                  <div class="t m0 x1a h16 y56 ff1 fs5 fc0 sc0 ls0 ws0">p<span class="_ _4"></span>ro<span class="_ _5"></span>v<span class="_ _0"></span>i<span class="_ _5"></span>n<span class="_ _5"></span>ce </div>
                </div>
                <div class="c x3b y93 w25 h20">
-                  <div class="t m0 x13 h16 y49 ff1 fs5 fc0 sc0 ls0 ws0"> </div>
+                  <div class="t m0 x13 h16 y49 ff1 fs5 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['brank'];
+                  ?></div>
                </div>
                <div class="c x3c y94 w26 h27">
                   <div class="t m0 x13 h16 y95 ff1 fs5 fc0 sc0 ls0 ws0">4&apos;12 </div>
