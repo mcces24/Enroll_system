@@ -1269,7 +1269,7 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c x9 y25 w4 hc">
                   <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['occopation'];
+                   echo $record ['foccopation'];
                   ?></div>
                </div>
                <div class="c xb y25 w5 hc">
