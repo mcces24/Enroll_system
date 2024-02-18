@@ -1229,37 +1229,53 @@ if(isset($_GET['applicant_id']))
                   <div class="t m0 xe h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">D<span class="_ _4"></span>A<span class="_ _4"></span>T<span class="_ _6"></span>E<span class="_ _4"></span> <span class="_ _0"></span>OF <span class="_ _4"></span>B<span class="_ _4"></span>I<span class="_ _1"></span>R<span class="_ _0"></span>T<span class="_ _6"></span>H </div>
                </div>
                <div class="c x9 y20 w4 he">
-                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0">7/31<span class="_ _0"></span>/1977 </div>
+                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['fdbirth'];
+                  ?></div>
                </div>
                <div class="c xb y20 w5 he">
-                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0">1/15<span class="_ _0"></span>/1985 <span class="_ _1"></span> </div>
+                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['mdbirth'];
+                  ?> </div>
                </div>
                <div class="c x3 y23 w3 hc">
                   <div class="t m0 xf h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">AGE </div>
                </div>
                <div class="c x9 y23 w4 hc">
-                  <div class="t m0 x8 hd y1f ff5 fs3 fc0 sc0 ls3 ws0">46<span class="ls0"> </span></div>
+                  <div class="t m0 x8 hd y1f ff5 fs3 fc0 sc0 ls3 ws0"><?php
+                   echo $record ['fage'];
+                  ?> </div>
                </div>
                <div class="c xb y23 w5 hc">
-                  <div class="t m0 x8 hd y1f ff5 fs3 fc0 sc0 ls3 ws0">38<span class="ls0"> </span></div>
+                  <div class="t m0 x8 hd y1f ff5 fs3 fc0 sc0 ls3 ws0"><?php
+                   echo $record ['mage'];
+                  ?></div>
                </div>
                <div class="c x3 y24 w3 hf">
                   <div class="t m0 x10 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">C<span class="_ _4"></span>O<span class="_ _0"></span>N<span class="_ _0"></span>T<span class="_ _0"></span>AC<span class="_ _5"></span>T<span class="_ _6"></span> <span class="_ _7"></span>NO<span class="_ _6"></span>. </div>
                </div>
                <div class="c x9 y24 w4 hf">
-                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['fcontact'];
+                  ?></div>
                </div>
                <div class="c xb y24 w5 hf">
-                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0">N<span class="_ _6"></span>/A<span class="_ _4"></span> </div>
+                  <div class="t m0 x8 hd y22 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['mcontact'];
+                  ?></div>
                </div>
                <div class="c x3 y25 w3 hc">
                   <div class="t m0 x11 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0">O<span class="_ _0"></span>C<span class="_ _4"></span>C<span class="_ _4"></span>U<span class="_ _0"></span>P<span class="_ _4"></span>A<span class="_ _4"></span>T<span class="_ _6"></span>I<span class="_ _1"></span>ON<span class="_ _0"></span> </div>
                </div>
                <div class="c x9 y25 w4 hc">
-                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0">f<span class="_ _5"></span>i<span class="_ _0"></span>s<span class="_ _4"></span>herm<span class="_ _6"></span>an </div>
+                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['foccopation'];
+                  ?></div>
                </div>
                <div class="c xb y25 w5 hc">
-                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0">H<span class="_ _6"></span>ousew<span class="_ _3"> </span>i<span class="_ _0"></span>f<span class="_ _5"></span>e </div>
+                  <div class="t m0 x8 hd y26 ff5 fs3 fc0 sc0 ls0 ws0"><?php
+                   echo $record ['moccopation'];
+                  ?></div>
                </div>
                <div class="c x3 y27 w3 h10">
                   <div class="t m0 x12 h7 y28 ff5 fs1 fc0 sc0 ls0 ws0">N<span class="_ _0"></span>A<span class="_ _4"></span>M<span class="_ _0"></span>E<span class="_ _4"></span> <span class="_ _5"></span>O<span class="_ _0"></span>F </div>
