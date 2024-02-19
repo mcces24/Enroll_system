@@ -1300,12 +1300,12 @@ if(isset($_GET['applicant_id']))
                </div>
                <div class="c xb y2a w5 h10">
                   <div class="t m0 x8 hd y2c ff5 fs3 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['feducattend'];
+                   echo $record ['meducattend'];
                   ?></div>
                </div>
                <div class="c x3 y2d w3 he">
                   <div class="t m0 x0 h7 y21 ff5 fs1 fc0 sc0 ls0 ws0"><?php
-                   echo $record ['meducattend'];
+                   echo $record ['feducattend'];
                   ?></div>
                </div>
                <div class="c x9 y2d w4 he">
