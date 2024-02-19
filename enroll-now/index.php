@@ -166,12 +166,12 @@
 
      
 
-     $query = "SELECT * FROM students  WHERE semester_id = '$semester' AND academic = '$academic' AND fname = '$fname' AND mname = '$mname' AND lname = '$lname' AND date_of_birth = '$date_of_birth' AND type = '$type' ";
+     $query = "SELECT * FROM students  WHERE semester_id = '$semester' AND academic = '$academic' AND fname = '$fname' AND mname = '$mname' AND lname = '$lname' AND date_of_birth = '$date_of_birth' AND type = '$type' and email='$email' ";
      $query_run = mysqli_query($conn, $query);
    
      if(mysqli_num_rows($query_run) > 0){
        foreach($query_run as $students){
-         if ($students['id_number'] != $id_number) {
+         if ($students['email'] != $email) {
            $_SESSION['statuss1'] = "You Already Submitted";
            $_SESSION['icon'] = "error";
          }
