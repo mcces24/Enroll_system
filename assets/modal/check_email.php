@@ -1,12 +1,5 @@
 <?php
 
-require '../../../phpmailer/src/Exception.php';
-require '../../../phpmailer/src/PHPMailer.php';
-require '../../../phpmailer/src/SMTP.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Replace these credentials with your database connection details
