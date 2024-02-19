@@ -1,4 +1,5 @@
-            <!--begin::Modal - Offer A Deal-->
+
+<!--begin::Modal - Offer A Deal-->
             <div class="modal" id="kt_modal_login" tabindex="-1" aria-hidden="true">
         <!--begin::Modal dialog-->
         <div class="modal-dialog modal-dialog-centered mw-1000px">
@@ -101,7 +102,7 @@
 							<!--begin::Input group-->
 							<div class="fv-row mb-7">
 								<label class="form-label fw-bolder text-dark fs-6">Email</label>
-								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="Ex: jdc.cafe@gmail.com" name="email" autocomplete="off" />
+								<input class="form-control form-control-lg form-control-solid" type="email" placeholder="Ex: mcc.es@gmail.com" name="email" autocomplete="off" />
 							</div>
 							<!--end::Input group-->
 							<!--begin::Input group-->

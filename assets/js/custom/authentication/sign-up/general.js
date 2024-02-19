@@ -15,23 +15,43 @@ var KTSignupGeneral = function () {
     var formElements = document.getElementById('kt_sign_up_form').elements;
 
     function submitForm(formData) {
-        // Create a data object with email and password
-        
+       
+        var xhrCheckEmail = new XMLHttpRequest();
+        xhrCheckEmail.open('POST', 'check_email.php', true);
+        xhrCheckEmail.setRequestHeader('Content-Type', 'application/json');
+        xhrCheckEmail.onreadystatechange = function () {
+            if (xhrCheckEmail.readyState == 4 && xhrCheckEmail.status == 200) {
+                var response = JSON.parse(xhrCheckEmail.responseText);
+                if (response.emailExists) {
+                    Swal.fire({
+                        text: "Email already exists. Please use a different email address.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                } else {
+                    submitFormData(formData);
+                }
+            }
+        };
+        xhrCheckEmail.send(JSON.stringify({ email: formData.email }));
+    }
 
-        // Make an AJAX request to the PHP script
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'insert_user.php', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
-
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
+    function submitFormData(formData) {
+        // Make an AJAX request to insert user data
+        var xhrInsertUser = new XMLHttpRequest();
+        xhrInsertUser.open('POST', 'insert_user.php', true);
+        xhrInsertUser.setRequestHeader('Content-Type', 'application/json');
+        xhrInsertUser.onreadystatechange = function () {
+            if (xhrInsertUser.readyState == 4 && xhrInsertUser.status == 200) {
                 // Handle the response from the server if needed
                 console.log('formData: ', formData);
             }
         };
-
-        // Send the data as JSON in the request body
-        xhr.send(JSON.stringify(formData));
+        xhrInsertUser.send(JSON.stringify(formData));
     }
     
 
