@@ -1103,7 +1103,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="enameschool" placeholder="Ex: Madridejos Central Elementary School" value="<?php echo $student['elementary'] ?>" disabled />
+													name="enameschool" placeholder="" value="<?php echo $student['elementary'] ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1115,7 +1115,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="eincdate" placeholder="2006-2007" value="<?php echo $student['elem_year'] ?>" disabled />
+													name="eincdate" placeholder="" value="<?php echo $student['elem_year'] ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
@@ -1156,7 +1156,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="hnameschool" placeholder="Ex: Madridejos National High SChool" value="<?php echo $student['high_school'] ?>" disabled />
+													name="hnameschool" placeholder="" value="<?php echo $student['high_school'] ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1168,7 +1168,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="hincdate" placeholder="Ex: 2006-2007" value="<?php echo $student['high_year'] ?>" disabled />
+													name="hincdate" placeholder="" value="<?php echo $student['high_year'] ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
