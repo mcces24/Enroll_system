@@ -185,7 +185,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="fname" placeholder="Ex: Jose" value="<?php echo $student['fname'] ?>" disabled/>
+													name="fname" placeholder="Ex: Jose" value="<?php echo $student['fname'] ?>" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
