@@ -1,7 +1,14 @@
 <?php
-// Establish a database connection (assuming you have already done this)
+include_once "../../database/conn.php";
 
-// Retrieve the email from the request body
+// Create a database connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
 $requestData = json_decode(file_get_contents('php://input'), true);
 $email = $requestData['email'];
 
@@ -18,4 +25,5 @@ if ($result['count'] > 0) {
 } else {
     echo json_encode(['emailExists' => false]);
 }
+
 ?>
