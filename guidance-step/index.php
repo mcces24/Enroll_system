@@ -404,7 +404,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="religion" placeholder="Ex: Roman Catholic" value="<?php echo $student['religion'] ?>" />
+													name="religion" placeholder="Ex: Roman Catholic" value="<?php echo $student['religion'] ?>"  disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
