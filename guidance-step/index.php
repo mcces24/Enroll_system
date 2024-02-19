@@ -198,7 +198,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="mname" placeholder="Ex: Laurel" value="<?php echo $student['mname'] ?>" />
+													name="mname" placeholder="Ex: Laurel" value="<?php echo $student['mname'] ?>" disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -211,7 +211,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="lname" placeholder="Ex: Dela Crus" value="<?php echo $student['lname'] ?>" />
+													name="lname" placeholder="Ex: Dela Crus" value="<?php echo $student['lname'] ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -247,7 +247,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Label-->
 												<label class="required fs-6 fw-bold form-label mb-2">Sex</label>
 												<!--end::Label-->
-												<select name="sex" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true">
+												<select name="sex" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true" disabled>
 												   <option></option>
 												   <option <?php echo  $student['gender'] == 'Male' ? 'selected' : '' ?> value="Male">Male</option>
 												   <option <?php echo  $student['gender'] == 'Female' ? 'selected' : '' ?> value="Female">Female</option>
@@ -265,7 +265,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!-- <input type="text" class="form-control" id="kt_datepicker_1" readonly placeholder="Select date"/> -->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $student['date_of_birth'] ?>" />
+													name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $student['date_of_birth'] ?>" disabled/>
 													
 												<!--end::Input-->
 											</div>
@@ -277,7 +277,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="numeric" maxlength="2" pattern="[0-9\s]{13,19}"
 													class="form-control form-control-lg form-control-solid"
-													name="age" placeholder="24" value="<?php echo $student['age'] ?>" />
+													name="age" placeholder="24" value="<?php echo $student['age'] ?>" disabled/>
 													<!-- <span class="form-text text-muted">Please enter only digits</span> -->
 												<!--end::Input-->
 											</div>
@@ -290,7 +290,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="pbirth" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['place_of_birth'] ?>" />
+													name="pbirth" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['place_of_birth'] ?>" disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -427,7 +427,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $student['email'] ?>" />
+													name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $student['email'] ?>" disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
