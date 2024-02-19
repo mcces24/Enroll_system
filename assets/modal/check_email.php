@@ -1,6 +1,7 @@
 <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
     
     // Replace these credentials with your database connection details
    include_once "../../database/conn.php";
@@ -17,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $requestData['email'];
 
         // Prepare and execute a SQL query to check if the email exists
-        $stmt = $pdo->prepare("SELECT COUNT(*) AS count FROM new_user WHERE email = :email");
+        $stmt = $pdo->prepare("SELECT COUNT(*) AS count FROM new_user WHERE email = '$email'");
         $stmt->execute(['email' => $email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
