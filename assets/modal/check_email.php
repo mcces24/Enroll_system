@@ -6,7 +6,7 @@ $requestData = json_decode(file_get_contents('php://input'), true);
 $email = $requestData['email'];
 
 // Prepare and execute a SQL query to check if the email exists
-$stmt = $pdo->prepare("SELECT COUNT(*) AS count FROM users WHERE email = :email");
+$stmt = $pdo->prepare("SELECT COUNT(*) AS count FROM new_user WHERE email = :email");
 $stmt->execute(['email' => $email]);
 $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
