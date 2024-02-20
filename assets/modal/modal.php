@@ -86,7 +86,7 @@
                         <!--begin::Wrapper-->
                         <div class="w-lg-600px bg-body rounded shadow-sm p-10 p-lg-15 mx-auto">
 						<!--begin::Form-->
-						<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form"  method="POST">
+						<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" action="insert_user.php" method="POST">
 							<!--begin::Heading-->
 							<div class="mb-10 text-center">
 								<!--begin::Title-->
