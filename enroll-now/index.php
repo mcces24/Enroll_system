@@ -166,7 +166,7 @@
 
      
 
-     $query = "SELECT * FROM students  WHERE semester_id = '$semester' AND academic = '$academic' AND fname = '$fname' AND mname = '$mname' AND lname = '$lname' AND date_of_birth = '$date_of_birth' AND type = '$type' and email='$email' ";
+     $query = "SELECT * FROM students  WHERE semester_id = '$semester' AND academic = '$academic' AND fname = '$fname' AND mname = '$mname' AND lname = '$lname' AND date_of_birth = '$date_of_birth' AND type = '$type' ";
      $query_run = mysqli_query($conn, $query);
    
      if(mysqli_num_rows($query_run) > 0){
