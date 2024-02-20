@@ -166,13 +166,24 @@
 
      
 
-     $query = "SELECT * FROM students  WHERE semester_id = '$semester' AND academic = '$academic' AND fname = '$fname' AND mname = '$mname' AND lname = '$lname' AND date_of_birth = '$date_of_birth' AND type = '$type' and email='$email' ";
-     $query_run = mysqli_query($conn, $query);
-   
-     if (mysqli_num_rows($query_run) > 0) {
-      // Record already exists
-      $_SESSION['statuss1'] = "You Already Submitted";
-      $_SESSION['icon'] = "error";
+      $query = "SELECT fname, lname FROM students WHERE email = ?";
+      $stmt = $conn->prepare($query);
+      $stmt->bind_param("s", $email);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      
+      if ($result->num_rows > 0) {
+          $row = $result->fetch_assoc();
+          $existing_fname = $row['fname'];
+          $existing_lname = $row['lname'];
+          
+          if ($existing_fname != $fname || $existing_lname != $lname) {
+              $_SESSION['statuss1'] = "You have already submitted with a different name.";
+              $_SESSION['icon'] = "error";
+          } else {
+              $_SESSION['statuss1'] = "You have already submitted.";
+              $_SESSION['icon'] = "error";
+          }
       }else{
            $query1 = "INSERT INTO students VALUES('', '$applicant_id', '$fname', '$mname', '$lname', '$semester_id', '$course_id','$year_id', '$section_id', '$id_number','$age', '$strand','$address', '$status', '$gender', '$place_of_birth', '$date_of_birth', '$religion', '$contact', '$email', '$guardian', '$occupation', '$guardian_address', '$home_zipcode', '$nsat_score', '$year', '$elementary', '$elem_year', '$elem_address', '$high_school', '$high_year', '$high_address', '$school_graduated', '$school_year', '$school_address','$type','$status_type','$academic', '$new_user_id')";
          $run = mysqli_query($conn,$query1);
@@ -186,7 +197,7 @@
            $_SESSION['icon'] = "error";
          }
      }
- }
+   }
      
    }
    ?>
