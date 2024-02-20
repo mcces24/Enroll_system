@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 }
-?> -->
-<?php
+?>
+<!-- <?php
 if($_SERVER["REQUEST_METHOD"] == "POST")if(isset($_POST["email"])){
     
     include_once "../../database/conn.php";
@@ -52,4 +52,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST")if(isset($_POST["email"])){
         }
      }
     }
-?>
+?> -->
