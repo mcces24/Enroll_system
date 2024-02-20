@@ -169,19 +169,11 @@
      $query = "SELECT * FROM students  WHERE semester_id = '$semester' AND academic = '$academic' AND fname = '$fname' AND mname = '$mname' AND lname = '$lname' AND date_of_birth = '$date_of_birth' AND type = '$type' and email='$email' ";
      $query_run = mysqli_query($conn, $query);
    
-     if(mysqli_num_rows($query_run) > 0){
-       foreach($query_run as $students){
-         if ($students['email'] != new $email) {
-           $_SESSION['statuss1'] = "You Already Submitted";
-           $_SESSION['icon'] = "error";
-         }
-         else{
-           $_SESSION['statuss1'] = "You Already Submitted";
-           $_SESSION['icon'] = "error";
-         }
-       }
-     }
-     else{
+     if (mysqli_num_rows($query_run) > 0) {
+      // Record already exists
+      $_SESSION['statuss1'] = "You Already Submitted";
+      $_SESSION['icon'] = "error";
+      }else{
            $query1 = "INSERT INTO students VALUES('', '$applicant_id', '$fname', '$mname', '$lname', '$semester_id', '$course_id','$year_id', '$section_id', '$id_number','$age', '$strand','$address', '$status', '$gender', '$place_of_birth', '$date_of_birth', '$religion', '$contact', '$email', '$guardian', '$occupation', '$guardian_address', '$home_zipcode', '$nsat_score', '$year', '$elementary', '$elem_year', '$elem_address', '$high_school', '$high_year', '$high_address', '$school_graduated', '$school_year', '$school_address','$type','$status_type','$academic', '$new_user_id')";
          $run = mysqli_query($conn,$query1);
            if ($run) {
