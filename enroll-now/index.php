@@ -171,7 +171,7 @@
    
      if(mysqli_num_rows($query_run) > 0){
        foreach($query_run as $students){
-         if ($students['email'] != $email) {
+         if ($students['email'] != new $email) {
            $_SESSION['statuss1'] = "You Already Submitted";
            $_SESSION['icon'] = "error";
          }
