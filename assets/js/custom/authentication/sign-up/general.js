@@ -22,6 +22,7 @@ var KTSignupGeneral = function () {
         xhrCheckEmail.onreadystatechange = function () {
             if (xhrCheckEmail.readyState == 4 && xhrCheckEmail.status == 200) {
                 var response = JSON.parse(xhrCheckEmail.responseText);
+                console.log('formData: ', formData);
                 if (response.emailExists) {
                     Swal.fire({
                         text: "Email already exists. Please use a different email address.",
