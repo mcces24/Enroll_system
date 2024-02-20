@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
@@ -32,4 +32,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 }
+?> -->
+<?php
+if($_SERVER["REQUEST_METHOD"] == "POST")if(isset($_POST["email"])){
+   
+    $email = $_POST["email"];
+      
+    $query = "SELECT email FROM new_user WHERE email = ?";
+     $stmt = $conn->prepare($query);
+     $stmt->bind_param("s", $email);
+     $stmt->execute();
+     $result = $stmt->get_result();
+     
+     if ($result->num_rows > 0) {
+         $row = $result->fetch_assoc();
+         $existing_email = $row['email'];
+         
+         if ($existing_email != $email) {
+            echo json_encode(['emailExists' => true]);
+        } else {
+            echo json_encode(['emailExists' => false]);
+        }
+     }
+    }
 ?>
