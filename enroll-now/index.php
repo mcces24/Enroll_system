@@ -249,21 +249,26 @@
      $academic = "$start-$end";
 
    
-     $query = "SELECT * FROM students INNER JOIN course c ON students.course_id=c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id WHERE  semester_id = '$semester' AND academic = '$academic' AND id_number = '$id_number' AND type = '$type' ";
-     $query_run = mysqli_query($conn, $query);
-   
-     if(mysqli_num_rows($query_run) > 0){
-       foreach($query_run as $students){
-         if ($students['id_number'] != $id_number) {
-           $_SESSION['statuss1'] = "You Already Submitted";
-           $_SESSION['icon'] = "error";
-         }
-         else{
-           $_SESSION['statuss1'] = "You Already Submitted";
-           $_SESSION['icon'] = "error";
-         }
-       }
-     }
+     $query = "SELECT fname, lname, id_number FROM students WHERE email = ?";
+      $stmt = $conn->prepare($query);
+      $stmt->bind_param("s", $email);
+      $stmt->execute();
+      $result = $stmt->get_result();
+      
+      if ($result->num_rows > 0) {
+          $row = $result->fetch_assoc();
+          $existing_fname = $row['fname'];
+          $existing_lname = $row['lname'];
+          $existing_idnumber = $row['id_number'];
+          
+          if ($existing_fname != $fname || $existing_lname != $lname || $existing_idnumber != $id_number) {
+              $_SESSION['statuss1'] = "You have already submitted with a different name.";
+              $_SESSION['icon'] = "error";
+          } else {
+              $_SESSION['statuss1'] = "You have already submitted.";
+              $_SESSION['icon'] = "error";
+          }
+      }
      else{
         $query2 = "INSERT INTO students VALUES('', '$applicant_id', '$fname', '$mname', '$lname', '$semester_id', '$course_id','$year_id', '$section_id', '$id_number','$age', '$strand','$address', '$status', '$gender', '$place_of_birth', '$date_of_birth', '$religion', '$contact', '$email', '$guardian', '$occupation', '$guardian_address', '$home_zipcode', '$nsat_score', '$year', '$elementary', '$elem_year', '$elem_address', '$high_school', '$high_year', '$high_address', '$school_graduated', '$school_year', '$school_address','$type','$status_type','$academic', '$new_user_id')";
    
