@@ -151,7 +151,7 @@ var KTSignupGeneral = function () {
                             t.removeAttribute("data-kt-indicator");
                             t.disabled = false;
                             Swal.fire({
-                                text: "Account created success!",
+                                text: "Account created success!!",
                                 icon: "success",
                                 buttonsStyling: false,
                                 confirmButtonText: "Login Now",
