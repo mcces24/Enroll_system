@@ -1,24 +1,15 @@
-<!-- <?php
+<?php
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     
     // Replace these credentials with your database connection details
-   include_once "../../database/conn.php";
-
-    // Create a database connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
+   
         $requestData = json_decode(file_get_contents('php://input'), true);
         $email = $requestData['email'];
 
         // Prepare and execute a SQL query to check if the email exists
-        $stmt = $pdo->prepare("SELECT COUNT(*) AS count FROM new_user WHERE email = '$email'");
+        $stmt = $pdo->prepare("SELECT COUNT(*) AS count FROM student_acc WHERE email = '$email'");
         $stmt->execute(['email' => $email]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -32,13 +23,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
 }
-?> -->
-<?php
+?>
+<!-- <?php
 if($_SERVER["REQUEST_METHOD"] == "POST")if(isset($_POST["email"])){
-   
+    
+    include_once "../../database/conn.php";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
     $email = $_POST["email"];
       
-    $query = "SELECT email FROM new_user WHERE email = ?";
+     $query = "SELECT email FROM student_acc WHERE email = ?";
      $stmt = $conn->prepare($query);
      $stmt->bind_param("s", $email);
      $stmt->execute();
@@ -55,4 +52,4 @@ if($_SERVER["REQUEST_METHOD"] == "POST")if(isset($_POST["email"])){
         }
      }
     }
-?>
+?> -->
