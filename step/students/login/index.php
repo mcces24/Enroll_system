@@ -108,7 +108,7 @@
                 $msg = "<div class='alert alert-info'>ID Number Is Not Yet Enroll In This Semester</div>";
             }
         } else {
-            $msg = "<div class='alert alert-danger'>ID Number Not Found OR Invalid ID Number</div>";
+            $msg = "<div class='alert alert-danger'>ID Number/Email Account Not Found OR Invalid</div>";
         }
     }
 ?>
