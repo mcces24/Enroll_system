@@ -1,8 +1,8 @@
 <?php 
 	$host = 'localhost';
-$username = 'u524183941_mcces';
+$username = 'u510162695_mcces';
 $pass = 'MccAdmin1';
-$db = 'u524183941_mcc_es';
+$db = 'u510162695_mcc_es';
 
 $db = new mysqli($host,$username,$pass,$db);
 

@@ -3,6 +3,6 @@
 
 //database_connection.php
 
-$connect = new PDO("mysql:host=localhost;dbname=u524183941_mcc_es", "u524183941_mcces", "MccAdmin1");
+$connect = new PDO("mysql:host=localhost;dbname=u510162695_mcc_es", "u510162695_mcces", "MccAdmin1");
 
 ?>

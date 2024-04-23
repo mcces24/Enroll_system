@@ -1,8 +1,8 @@
 <?php
 Class Connection{
   
-    private $server = "mysql:host=localhost;dbname=u524183941_mcc_es";
-    private $username = "u524183941_mcces";
+    private $server = "mysql:host=localhost;dbname=u510162695_mcc_es";
+    private $username = "u510162695_mcces";
     private $password = "MccAdmin1";
     private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
     protected $conn;
@@ -27,12 +27,12 @@ Class Connection{
 
 <?php
 
-$conn = new PDO('mysql:host=localhost; dbname=u524183941_mcc_es','u524183941_mcces', 'MccAdmin1'); 
+$conn = new PDO('mysql:host=localhost; dbname=u510162695_mcc_es','u510162695_mcces', 'MccAdmin1'); 
 
 $server = "localhost";
-$username = "u524183941_mcces";
+$username = "u510162695_mcces";
 $password = "MccAdmin1";
-$database = "u524183941_mcc_es";
+$database = "u510162695_mcc_es";
 $connection = mysqli_connect("$server","$username","$password");
 $select_db = mysqli_select_db($connection, $database);
 if(!$select_db)
