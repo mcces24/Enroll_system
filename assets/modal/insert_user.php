@@ -8,21 +8,27 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
+    // Get JSON input
     $requestData = json_decode(file_get_contents('php://input'), true);
     $email = $requestData['email'];
     $passwordHash = md5($requestData["password"]);
     $randomNumber = rand(100000, 999999);
 
-    // Replace these credentials with your database connection details
-   include_once "../../database/conn.php";
+    // Include database connection
+    include_once "../../database/conn.php";
+
+    // Initialize response array
+    $response = ['isSave' => false];
 
     // Create a database connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     // Check connection
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        header('HTTP/1.1 500 Internal Server Error');
+        $response['error'] = 'Database connection failed';
+        echo json_encode($response);
+        exit();
     }
 
     // Prepare and execute SQL statement to insert data
@@ -30,48 +36,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bind_param("sss", $email, $passwordHash, $randomNumber);
 
     if ($stmt->execute() === TRUE) {
-        echo json_encode(['isSave' => true]);
+        $response['isSave'] = true;
         $mail = new PHPMailer(true);
 
-		try {
-			$mail = new PHPMailer(true);
-		
-			$mail->SMTPDebug = false; // Set to false for production
-			$mail->isSMTP();
-			$mail->Host       = 'smtp.gmail.com';
-			$mail->SMTPAuth   = true;
-			$mail->Username   = 'capstone.project2022.2023@gmail.com';
-			$mail->Password   = 'nxnqxklsnggbkdtc';
-			$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-			$mail->Port       = 465;
-		
-			$senderName = 'MCC - Verify Account';
-			$senderEmail = 'capstone.project2022.2023@gmail.com';
+        try {
+            // PHPMailer setup
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'capstone.project2022.2023@gmail.com';
+            $mail->Password   = 'nxnqxklsnggbkdtc';
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port       = 465;
 
-			$mail->setFrom($senderEmail, $senderName);
-			$mail->addAddress($email);
-		
-			$mail->isHTML(true);
-			$mail->Subject = 'OPT CODE';
-		
-		    $link = "https://madridejoscommunitycollege.com/step/students/login/index.php?verify=$randomNumber";
-			$mail->Body = "<h4>Madridejos Community College</h4>
-			                <p>Verification Link: $link</p>
-			";
-		
-			$mail->send();
+            $senderName = 'MCC - Verify Account';
+            $senderEmail = 'capstone.project2022.2023@gmail.com';
 
-		} catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            $mail->setFrom($senderEmail, $senderName);
+            $mail->addAddress($email);
+
+            $mail->isHTML(true);
+            $mail->Subject = 'OPT CODE';
+
+            $link = "https://madridejoscommunitycollege.com/step/students/login/index.php?verify=$randomNumber";
+            $mail->Body = "<h4>Madridejos Community College</h4>
+                           <p>Verification Link: $link</p>";
+
+            $mail->send();
+        } catch (Exception $e) {
+            $response['error'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+            header('HTTP/1.1 500 Internal Server Error');
         }
-		
-		
     } else {
-        echo json_encode(['isSave' => false]);
+        $response['error'] = 'Database insertion failed';
+        header('HTTP/1.1 500 Internal Server Error');
     }
 
-    // Close connections
+    // Close statement and connection
     $stmt->close();
     $conn->close();
+
+    // Return JSON response
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }
 ?>
