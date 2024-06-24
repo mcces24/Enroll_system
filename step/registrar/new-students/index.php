@@ -274,7 +274,7 @@ require '../../../database/regis3.php';
         })
     </script>
 
-    <?php //include('message.php'); ?>
+    <?php include('message.php'); ?>
     <?php include('edit_delete_modal.php'); ?>
 
     <!-- start: Sidebar -->

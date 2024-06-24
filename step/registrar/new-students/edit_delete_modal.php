@@ -1,8 +1,8 @@
 <style type="text/css">
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+    /* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
     option{
         font-family: 'Poppins', sans-serif;
-    }
+    } */
 </style>
 <div class="modal fade" id="addsection_<?php echo $student['id']; ?>" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
   <div class="modal-dialog">
