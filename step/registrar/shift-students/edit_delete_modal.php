@@ -49,9 +49,12 @@
                     <?php
         include_once '../../../database/config.php';
         include_once '../../../database/config2.php';
-            $year = $student['year_id'];
-          $query = "SELECT * FROM sections WHERE year_id = $year GROUP BY section_code ORDER BY sections ASC ";
-          $result = $db->query($query);
+        $year = $student['year_id'];
+        $query = "SELECT * FROM sections WHERE year_id = ? GROUP BY section_code ORDER BY section_code ASC";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param("i", $year);
+        $stmt->execute();
+        $result = $stmt->get_result();
           ?>
           <div class="form-group">
 
