@@ -195,18 +195,29 @@ if (mysqli_num_rows($query_run) > 0) {
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
+                        $id_number = $id_number;
                         $sel = "SELECT * FROM students WHERE id_number='$id_number'";
                         $query = mysqli_query($conn, $sel);
                         $resul = mysqli_fetch_assoc($query);
                         $display = !empty($resul['id_number']) ? true : false;
                         ?>
                         <span class="me-2 d-none d-sm-block">Hi! <?php echo $display ? $resul['id_number'] : 'Students' ?></span>
-                       
+                        <?php
+                        $id_number = $id_number;
+                        $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
+                        $query_run1 = mysqli_query($conn, $query1);
+
+                        if (mysqli_num_rows($query_run1) > 0) {
+                            $qrcode = mysqli_fetch_array($query_run1);
+                        ?>
+                            <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
+                        <?php
+                        } else { ?>
+                            <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                        <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <?php if($display): ?>
-                        <li style="text-align: center;"><span><?php echo  $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?></span></li>
-                        <?php endif; ?>
+                        
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
