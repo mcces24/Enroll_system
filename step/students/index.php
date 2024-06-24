@@ -215,7 +215,99 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
 
 
 
-                 
+                    <div class="col-12 col-md-12 col-xl-12">
+                        <div class="card border-0 shadow-sm h-100" x>
+                            <div class="card-header bg-white">
+                                Study Load
+                            </div>
+                            <div class="card-body" id="pdf">
+
+                                <div class="table-responsive load" id="invoice">
+                                    <div style=" margin: 0 auto; text-align: center;">
+                                        <img class="logo" src="mcc-back.png">
+                                    </div>
+                                    <table id="study" class="table study table-bordered" style="text-align: center;">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="7">Study Load</th>
+                                            </tr>
+                                            <tr>
+                                                <th>SUBJECT CODE</th>
+                                                <th>SUBJECT DESCRIPTION</th>
+                                                <th>UNITS</th>
+                                                <th>DAYS</th>
+                                                <th>TIME</th>
+                                                <th>ROOM</th>
+                                                <th>INSTRUCTOR</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+
+
+                                            require '../../database/regis.php';
+                                            // Create connection
+                                            $conn = new mysqli($servername, $username, $password, $dbname);
+                                            // Check connection
+                                            if ($conn->connect_error) {
+                                                die("Connection failed: " . $conn->connect_error);
+                                            }
+                                            $section_id1 = $student['section_id'];
+                                            $semester_id1 = $student['semester_id'];
+                                            if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
+                                                $id_number = $student['id_number'];
+                                                $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
+                                            } else {
+                                                $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
+                                            }
+
+                                            $result = $conn->query($sql);
+
+                                            if ($result->num_rows > 0) {
+                                                // output data of each row
+                                                while ($row = $result->fetch_assoc()) {
+                                            ?>
+
+
+                                                    <tr>
+                                                        <td><?php echo  $row["subject_code"] ?></td>
+                                                        <td><?php echo  $row["subject_name"] ?></td>
+                                                        <td><?php echo  $row["units"] ?></td>
+                                                        <td><?php echo  $row["days"] ?></td>
+                                                        <td><?php echo  $row["time_sched"] ?></td>
+                                                        <td><?php echo  $row["room"] ?></td>
+                                                        <td><?php echo  $row["instructor"] ?></td>
+                                                    </tr>
+
+
+
+
+                                            <?php  }
+                                            } else {
+                                                echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
+                                            }
+                                            ?>
+                                            <tr>
+
+                                            </tr>
+
+
+
+
+                                        </tbody>
+                                    </table>
+
+
+
+
+                                </div>
+                                <button id="btn-one" class="btn btn-success btn-sm">Download as PDF</button>
+                                <button id="dw_bt" class="btn btn-success btn-sm">Download a Image</button>
+
+                            </div>
+
+                        </div>
+                    </div>
                     <br>
 
 
