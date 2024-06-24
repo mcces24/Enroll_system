@@ -198,9 +198,12 @@ if (mysqli_num_rows($query_run) > 0) {
                         $id_number = $id_number;
                         $sel = "SELECT * FROM students WHERE id_number='$id_number'";
                         $query = mysqli_query($conn, $sel);
-                        $resul = mysqli_fetch_assoc($query);
+                        if (mysqli_num_rows($query) > 0) {
+                            $resul = mysqli_fetch_array($query);
                         ?>
                         <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?? 'students' ?></span>
+                        <?php
+                        } else { ?> <span class="me-2 d-none d-sm-block">Hi! students</span> <?php } ?>
                         <?php
                         $id_number = $id_number;
                         $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
