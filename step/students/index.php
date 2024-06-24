@@ -14,7 +14,7 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
     $checkuser = mysqli_query($conn, $sqlquery);
     if (mysqli_num_rows($checkuser) > 0) {
         $row = mysqli_fetch_assoc($checkuser);
-        if ($row) {
+        if ($row) { 
             $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
         }
     }
@@ -55,12 +55,13 @@ $semester = $rows111['semester_name'];
 $academic = "$start-$end";
 
 
-// $query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
-// $query_run = mysqli_query($conn, $query);
+$query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
+$query_run = mysqli_query($conn, $query);
 
-// if (mysqli_num_rows($query_run) > 0) {
-//     $student1 = mysqli_fetch_array($query_run);
-// }
+if (mysqli_num_rows($query_run) > 0) {
+    $student1 = mysqli_fetch_array($query_run);
+?><?php
+}
 
 
     ?>
@@ -194,31 +195,29 @@ $academic = "$start-$end";
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
+                        // Use the same id_number variable for both queries
                         $id_number = $id_number;
-                        $sel = "SELECT * FROM students WHERE id_number='$id_number'";
-                        $query = mysqli_query($conn, $sel);
-                        $resul = mysqli_fetch_assoc($query);
-                        ?>
-                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
-                        <?php
-                        $id_number = $id_number;
-                        $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
-                        $query_run1 = mysqli_query($conn, $query1);
 
-                        if (mysqli_num_rows($query_run1) > 0) {
-                            $qrcode = mysqli_fetch_array($query_run1);
+                        // Fetch student and QR code information in a single query
+                        $sel = "SELECT students.*, qrcode.picture AS qr_picture
+                                FROM students
+                                LEFT JOIN qrcode ON students.id_number = qrcode.student_id
+                                WHERE students.id_number = ?";
+                        $stmt = $conn->prepare($sel);
+                        $stmt->bind_param("s", $id_number);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        $resul = $result->fetch_assoc();
                         ?>
-                            <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
-                        <?php
-                        } else { ?>
-                            <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
-                        <?php } ?>
+                        <span class="me-2 d-none d-sm-block">Hi! <?php echo !empty($resul['id_number']) ? htmlspecialchars($resul['id_number'], ENT_QUOTES, 'UTF-8') : 'Students'; ?></span>
+                        <img class="navbar-profile-image" src="../id/uploads/<?php echo isset($resul['qr_picture']) ? htmlspecialchars($resul['qr_picture'], ENT_QUOTES, 'UTF-8') : 'picture.png'; ?>" alt="Image">
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
+                       
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
+
             </nav>
             <!-- end: Navbar -->
 
