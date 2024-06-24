@@ -146,9 +146,9 @@
                     include_once '../../../database/config2.php';
                     $year = $student['year_id'];
                     $query = "SELECT * FROM sections WHERE year_id = $year GROUP BY section_code ORDER BY sections ASC";
-                    $results= $db->query($query);
+                    //$result = $db->query($query);
                     ?>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
 
 
                         <label>Sections</label>
@@ -156,8 +156,8 @@
                         <select style="text-align: left;" name="section_id" id="section_id" class="form-control" required>
                             <option value="" disabled selected>Available Section</option>
                             <?php
-                            if ($results->num_rows > 0) {
-                                while ($rows = $results->fetch_assoc()) {
+                            if ($result->num_rows > 0) {
+                                while ($rows = $result->fetch_assoc()) {
 
 
 
@@ -190,10 +190,10 @@
                             $sem = $rowss1['semester_name'];
 
                             $sql = "SELECT section_id from students where semester_id = '$sem' and section_id = '$sec' and academic = '$aca-$aca1' ";
-                            $results1 = $conn->query($sql);
+                            $result1 = $conn->query($sql);
                             $count = 0;
-                            if ($results1->num_rows > 0) {
-                                while ($row1 = $results1->fetch_assoc()) {
+                            if ($result1->num_rows > 0) {
+                                while ($row1 = $result1->fetch_assoc()) {
 
                                     $count = $count + 1;
                                 }
@@ -211,7 +211,7 @@
                             ?>
                         </select>
 
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label class="form-group"> ID NUMBER </label>
