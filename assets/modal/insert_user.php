@@ -1,16 +1,17 @@
 <?php
 
-require '../../../phpmailer/src/Exception.php';
-require '../../../phpmailer/src/PHPMailer.php';
-require '../../../phpmailer/src/SMTP.php';
+require '../../phpmailer/phpmailer/src/Exception.php';
+require '../../phpmailer/phpmailer/src/PHPMailer.php';
+require '../../phpmailer/phpmailer/src/SMTP.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get form data
-    $email = $_POST["email"];
-    $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+
+    $requestData = json_decode(file_get_contents('php://input'), true);
+    $email = $requestData['email'];
+    $passwordHash = md5($requestData["password"]);
     $randomNumber = rand(100000, 999999);
 
     // Replace these credentials with your database connection details
@@ -26,10 +27,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepare and execute SQL statement to insert data
     $stmt = $conn->prepare("INSERT INTO student_acc (email, pass, verified_status) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $email, $password, $randomNumber);
+    $stmt->bind_param("sss", $email, $passwordHash, $randomNumber);
 
     if ($stmt->execute() === TRUE) {
-        echo "User registered successfully";
+        echo json_encode(['isSave' => true]);
         $mail = new PHPMailer(true);
 
 		try {
@@ -53,18 +54,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$mail->isHTML(true);
 			$mail->Subject = 'OPT CODE';
 		
-		    $link = "https://madridejoscommunitycollege.com/step/students/login/index.php?verify=$randomNumbe";
+		    $link = "https://madridejoscommunitycollege.com/step/students/login/index.php?verify=$randomNumber";
 			$mail->Body = "<h4>Madridejos Community College</h4>
 			                <p>Verification Link: $link</p>
 			";
 		
 			$mail->send();
 
-		} 
+		} catch (Exception $e) {
+            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
 		
 		
     } else {
-        echo "Error: " . $stmt->error;
+        echo json_encode(['isSave' => false]);
     }
 
     // Close connections

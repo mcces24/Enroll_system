@@ -15,17 +15,55 @@ var KTSignupGeneral = function () {
     var formElements = document.getElementById('kt_sign_up_form').elements;
 
     function submitForm(formData) {
-       
-        var xhrCheckEmail = new XMLHttpRequest();
-        xhrCheckEmail.open('POST', 'check_email.php', true);
-        xhrCheckEmail.setRequestHeader('Content-Type', 'application/json');
-        xhrCheckEmail.onreadystatechange = function () {
-            if (xhrCheckEmail.readyState == 4 && xhrCheckEmail.status == 200) {
-                var response = JSON.parse(xhrCheckEmail.responseText);
-                console.log('formData: ', formData);
-                if (response.emailExists) {
+        return new Promise((resolve, reject) => {
+            var xhrCheckEmail = new XMLHttpRequest();
+            xhrCheckEmail.open('POST', 'assets/modal/check_email.php', true);
+            xhrCheckEmail.setRequestHeader('Content-Type', 'application/json');
+            xhrCheckEmail.onreadystatechange = function () {
+                if (xhrCheckEmail.readyState == 4 && xhrCheckEmail.status == 200) {
+                    var response = JSON.parse(xhrCheckEmail.responseText);
+                    console.log('response: ', response);
+                    if (response.emailExists) {
+                        resolve("failed");
+                    } else {
+                        resolve("success");
+                        //submitFormData(formData);
+                    }
+                }
+            };
+            xhrCheckEmail.send(JSON.stringify({ email: formData.email }));
+        });
+    }
+
+    function submitFormData(formData) {
+        // Make an AJAX request to insert user data
+        var xhrInsertUser = new XMLHttpRequest();
+        xhrInsertUser.open('POST', 'assets/modal/insert_user.php', true);
+        xhrInsertUser.setRequestHeader('Content-Type', 'application/json');
+        xhrInsertUser.onreadystatechange = function () {
+            if (xhrInsertUser.readyState == 4 && xhrInsertUser.status == 200) {
+                var response = JSON.parse(xhrInsertUser.responseText);
+                if (response.isSave) {
                     Swal.fire({
-                        text: "Email already exists. Please use a different email address.",
+                        text: "Account created successfully. Please login.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Login Now",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function (result) {
+
+                        if (result.isConfirmed) {
+                            e.reset();
+                            s.reset();
+
+                            window.location.href = "./step/students/login/index.php";
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        text: "Internal error occurred. Please try again later.",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -33,23 +71,7 @@ var KTSignupGeneral = function () {
                             confirmButton: "btn btn-primary"
                         }
                     });
-                } else {
-                    submitFormData(formData);
                 }
-            }
-        };
-        xhrCheckEmail.send(JSON.stringify({ email: formData.email }));
-    }
-
-    function submitFormData(formData) {
-        // Make an AJAX request to insert user data
-        var xhrInsertUser = new XMLHttpRequest();
-        xhrInsertUser.open('POST', 'insert_user.php', true);
-        xhrInsertUser.setRequestHeader('Content-Type', 'application/json');
-        xhrInsertUser.onreadystatechange = function () {
-            if (xhrInsertUser.readyState == 4 && xhrInsertUser.status == 200) {
-                // Handle the response from the server if needed
-                console.log('formData: ', formData);
             }
         };
         xhrInsertUser.send(JSON.stringify(formData));
@@ -137,40 +159,36 @@ var KTSignupGeneral = function () {
                 a.revalidateField("password");
                 a.validate().then(function (validationStatus) {
                     if (validationStatus === "Valid") {
-                        
 
                         for (var i = 0; i < formElements.length; i++) {
                             formData[formElements[i].name] = formElements[i].value;
                         }
-
-                        submitForm(formData);
-
-                        t.setAttribute("data-kt-indicator", "on");
-                        t.disabled = true;
-                        setTimeout(function () {
-                            t.removeAttribute("data-kt-indicator");
-                            t.disabled = false;
-                            Swal.fire({
-                                text: "Account created success!!",
-                                icon: "success",
-                                buttonsStyling: false,
-                                confirmButtonText: "Login Now",
-                                customClass: {
-                                    confirmButton: "btn btn-primary"
-                                }
-                            }).then(function (result) {
-
-                                if (result.isConfirmed) {
-                                    e.reset();
-                                    s.reset();
-
-                                    window.location.href = "./step/students/login/index.php";
-                                }
-                            });
-                        }, 1500);
+                        
+                        submitForm(formData).then((response) => {
+                            console.log('response: ', response);
+                            if (response == 'success') {
+                                t.setAttribute("data-kt-indicator", "on");
+                                t.disabled = true;
+                                submitFormData(formData);
+                                
+                            } else {
+                                t.setAttribute("data-kt-indicator", "off");
+                                t.disabled = false;
+                                Swal.fire({
+                                    text: "Email already exists. Please use a different email address.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
+                            }
+                        });
+                        
                     } else {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "Please fill the required items.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
