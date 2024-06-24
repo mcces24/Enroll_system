@@ -10,14 +10,14 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
 } else {
     $user_id = $_SESSION['USER_ID'];
     $id_number = 0;
-    // $sqlquery = "SELECT * FROM new_user LEFT JOIN students ON new_user.Id = students.new_user_id WHERE new_user.Id = '$user_id'";
-    // $checkuser = mysqli_query($conn, $sqlquery);
-    // if (mysqli_num_rows($checkuser) > 0) {
-    //     $row = mysqli_fetch_assoc($checkuser);
-    //     if ($row) {
-    //         $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
-    //     }
-    // }
+    $sqlquery = "SELECT * FROM new_user LEFT JOIN students ON new_user.Id = students.new_user_id WHERE new_user.Id = '$user_id'";
+    $checkuser = mysqli_query($conn, $sqlquery);
+    if (mysqli_num_rows($checkuser) > 0) {
+        $row = mysqli_fetch_assoc($checkuser);
+        if ($row) {
+            $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
+        }
+    }
 }
 ?>
 
@@ -54,13 +54,13 @@ $semester = $rows111['semester_name'];
 
 $academic = "$start-$end";
 
-
+if ($id_number != 0) {
 $query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
 $query_run = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($query_run) > 0) {
     $student1 = mysqli_fetch_array($query_run);
-?><?php
+}
 }
 
 
@@ -195,7 +195,7 @@ if (mysqli_num_rows($query_run) > 0) {
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
-                        $id_number = $id_number;
+                       if ($id_number != 0) {
                         $sel = "SELECT * FROM students WHERE id_number='$id_number'";
                         $query = mysqli_query($conn, $sel);
                         $resul = mysqli_fetch_assoc($query);
@@ -213,7 +213,7 @@ if (mysqli_num_rows($query_run) > 0) {
                         <?php
                         } else { ?>
                             <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
-                        <?php } ?>
+                        <?php } } else { echo '<img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">'; } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li style="text-align: center;">
@@ -310,7 +310,7 @@ if (mysqli_num_rows($query_run) > 0) {
 
                                         <?php
 
-                                        $id1 =  $id_number;
+                                        $id1 =  $id_number != 0 ? $id_number : 0;
                                         $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
                                         $query_run = mysqli_query($conn, $query);
                                         $count = 0;
