@@ -10,61 +10,10 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
 } else {
     $user_id = $_SESSION['USER_ID'];
     $id_number = 0;
-    $sqlquery = "SELECT * FROM new_user LEFT JOIN students ON new_user.Id = students.new_user_id WHERE new_user.Id = '$user_id'";
-    $checkuser = mysqli_query($conn, $sqlquery);
-    if (mysqli_num_rows($checkuser) > 0) {
-        $row = mysqli_fetch_assoc($checkuser);
-        if ($row) { 
-            $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
-        }
-    }
+
 }
 ?>
 
-<?php
-
-require '../../database/config.php';
-
-$querys11 = "SELECT * FROM academic WHERE status='1'";
-$querys_run11 = mysqli_query($conn, $querys11);
-
-if (mysqli_num_rows($querys_run11) > 0) {
-
-    foreach ($querys_run11 as $rows11)
-?><?php
-}
-
-    ?>
-<?php
-
-require '../../database/config.php';
-$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
-$querys_run111 = mysqli_query($conn, $querys111);
-
-if (mysqli_num_rows($querys_run111) > 0) {
-    foreach ($querys_run111 as $rows111)
-?><?php
-}
-
-    ?>
-<?php
-$start = $rows11['academic_start'];
-$end = $rows11['academic_end'];
-$semester = $rows111['semester_name'];
-
-$academic = "$start-$end";
-
-
-$query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester'  ";
-$query_run = mysqli_query($conn, $query);
-
-if (mysqli_num_rows($query_run) > 0) {
-    $student1 = mysqli_fetch_array($query_run);
-?><?php
-}
-
-
-    ?>
 
 
 
