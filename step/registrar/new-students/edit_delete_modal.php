@@ -144,7 +144,7 @@
                     include_once '../../../database/config2.php';
                     $year = $student['year_id'];
                     $query = "SELECT * FROM sections WHERE year_id = $year GROUP BY section_code ORDER BY sections ASC ";
-                    $result = $db->query($query);
+                    //$result = $db->query($query);
                     ?>
                     
 
