@@ -142,76 +142,61 @@
                     </div>
 
                     <?php
-                    include_once '../../../database/config.php';
-                    include_once '../../../database/config2.php';
-                    $year = $student['year_id'];
-                    //$query = "SELECT * FROM sections WHERE year_id = $year GROUP BY section_code ORDER BY sections ASC";
-                    $result = $db->query("SELECT * FROM sections WHERE year_id = $year GROUP BY section_code ORDER BY sections ASC");
+                        include_once '../../../database/config.php';
+                        include_once '../../../database/config2.php';
+
+                        $year = $student['year_id'];
+                        $query = "SELECT * FROM sections WHERE year_id = ? GROUP BY section_code ORDER BY section_code ASC";
+                        $stmt = $db->prepare($query);
+                        $stmt->bind_param("i", $year);
+                        $stmt->execute();
+                        $result = $stmt->get_result();
+                        ?>
+                        <div class="form-group">
+                            <label>Sections</label>
+                            <select style="text-align: left;" name="section_id" id="section_id" class="form-control" required>
+                                <option value="" disabled selected>Available Section</option>
+                                <?php
+                                if ($result->num_rows > 0) {
+                                    while ($rows = $result->fetch_assoc()) {
+                                        $queryss = "SELECT * FROM academic WHERE status ='1' ORDER BY academic_id DESC LIMIT 1";
+                                        $queryss_run = $conn->query($queryss);
+                                        $queryss1 = "SELECT * FROM semester WHERE sem_status ='1' ORDER BY semester_id DESC LIMIT 1";
+                                        $queryss_run1 = $conn->query($queryss1);
+
+                                        $academic = $queryss_run->fetch_assoc();
+                                        $semester = $queryss_run1->fetch_assoc();
+
+                                        $sec = $rows['section_id'];
+                                        $aca = $academic['academic_start'];
+                                        $aca1 = $academic['academic_end'];
+                                        $sem = $semester['semester_name'];
+
+                                        $sql = "SELECT section_id FROM students WHERE semester_id = ? AND section_id = ? AND academic = ?";
+                                        $stmt1 = $conn->prepare($sql);
+                                        $academic_period = "$aca-$aca1";
+                                        $stmt1->bind_param("sis", $sem, $sec, $academic_period);
+                                        $stmt1->execute();
+                                        $result1 = $stmt1->get_result();
+                                        $count = $result1->num_rows;
+
+                                        if ($count < 45) {
+                                            ?>
+                                            <option value="<?php echo $rows['section_id'] ?>">
+                                                <?php echo $rows['section_code'] ?>&emsp;|&emsp;Total students in this section <?php echo $count ?> out of 45
+                                            </option>
+                                            <?php
+                                        }
+                                    }
+                                }
+                                ?>
+                            </select>
+                        </div>
+
+                        <?php
+                        $stmt->close();
+                        $conn->close();
                     ?>
-                    <!-- <div class="form-group">
-
-
-                        <label>Sections</label>
-
-                        <select style="text-align: left;" name="section_id" id="section_id" class="form-control" required>
-                            <option value="" disabled selected>Available Section</option>
-                            <?php
-                            if ($result->num_rows > 0) {
-                                while ($rows = $result->fetch_assoc()) {
-
-
-
-
-                                    $queryss = "SELECT * FROM academic WHERE status ='1' ORDER BY academic_id DESC LIMIT 1";
-                                    $queryss_run = mysqli_query($conn, $queryss);
-
-                                    $queryss1 = "SELECT * FROM semester WHERE sem_status ='1' ORDER BY semester_id DESC LIMIT 1";
-                                    $queryss_run1 = mysqli_query($conn, $queryss1);
-
-                                    if (mysqli_num_rows($queryss_run1) > 0) {
-                                        foreach ($queryss_run1 as $rowss1)
-                            ?>
-
-                                    <?php
-                                }
-
-                                if (mysqli_num_rows($queryss_run) > 0) {
-                                    foreach ($queryss_run as $rowss)
-                                    ?>
-
-                                    <?php
-                            }
-
-
-
-                            $sec = $rows['section_id'];
-                            $aca = $rowss['academic_start'];
-                            $aca1 = $rowss['academic_end'];
-                            $sem = $rowss1['semester_name'];
-
-                            $sql = "SELECT section_id from students where semester_id = '$sem' and section_id = '$sec' and academic = '$aca-$aca1' ";
-                            $result1 = $conn->query($sql);
-                            $count = 0;
-                            if ($result1->num_rows > 0) {
-                                while ($row1 = $result1->fetch_assoc()) {
-
-                                    $count = $count + 1;
-                                }
-                            }
-
-                                    ?>
-
-
-                                    <?php if ($count < 45) : ?>
-
-                                        <option value="<?php echo $rows['section_id'] ?>"><?php echo $rows['section_code'] ?>&emsp;|&emsp;Total students in this section <?php echo $count ?> out of 45</option>';
-                                    <?php endif ?>
-                            <?php   }
-                            }
-                            ?>
-                        </select>
-
-                    </div> -->
 
                     <div class="form-group">
                         <label class="form-group"> ID NUMBER </label>
