@@ -10,10 +10,61 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
 } else {
     $user_id = $_SESSION['USER_ID'];
     $id_number = 0;
-    
+    $sqlquery = "SELECT * FROM new_user LEFT JOIN students ON new_user.Id = students.new_user_id WHERE new_user.Id = '$user_id'";
+    $checkuser = mysqli_query($conn, $sqlquery);
+    if (mysqli_num_rows($checkuser) > 0) {
+        $row = mysqli_fetch_assoc($checkuser);
+        if ($row) { 
+            $id_number =  0;
+        }
+    }
 }
 ?>
 
+<?php
+
+require '../../database/config.php';
+
+$querys11 = "SELECT * FROM academic WHERE status='1'";
+$querys_run11 = mysqli_query($conn, $querys11);
+
+if (mysqli_num_rows($querys_run11) > 0) {
+
+    foreach ($querys_run11 as $rows11)
+?><?php
+}
+
+    ?>
+<?php
+
+require '../../database/config.php';
+$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
+$querys_run111 = mysqli_query($conn, $querys111);
+
+if (mysqli_num_rows($querys_run111) > 0) {
+    foreach ($querys_run111 as $rows111)
+?><?php
+}
+
+    ?>
+<?php
+$start = $rows11['academic_start'];
+$end = $rows11['academic_end'];
+$semester = $rows111['semester_name'];
+
+$academic = "$start-$end";
+
+
+$query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
+$query_run = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($query_run) > 0) {
+    $student1 = mysqli_fetch_array($query_run);
+?><?php
+}
+
+
+    ?>
 
 
 
@@ -130,10 +181,35 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
 
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                        <?php
+                        if ($id_number != 0) {
+                        $id_number = $id_number;
+                        $sel = "SELECT * FROM students WHERE id_number='$id_number'";
+                        $query = mysqli_query($conn, $sel);
+                        $resul = mysqli_fetch_assoc($query);
+                        ?>
+                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
+                        <?php
+                        $id_number = $id_number;
+                        $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
+                        $query_run1 = mysqli_query($conn, $query1);
+
+                        if (mysqli_num_rows($query_run1) > 0) {
+                            $qrcode = mysqli_fetch_array($query_run1);
+                        ?>
+                            <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
+                        <?php
+                        } else { ?>
+                            <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                        <?php } } else { ?>
+                            <span class="me-2 d-none d-sm-block">Hi! Students</span>
+                            <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                            <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                       
+                        <? if ($id_number != 0): ?>
+                        <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
+                        <? endif; ?>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
@@ -204,7 +280,126 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
                 <!-- start: Graph -->
                 <div class="row g-3 mt-2">
 
+                    <div class="col-12 col-md-12 col-xl-12">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-header bg-white">
+                                Personal Information
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
 
+
+
+                                    <table class="upper">
+                                        <?php if ($id_number != 0): ?>
+
+                                        <?php
+                                        
+                                        $id1 =  $id_number;
+                                        $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
+                                        $query_run = mysqli_query($conn, $query);
+                                        $count = 0;
+
+                                        if (mysqli_num_rows($query_run) > 0) {
+                                            foreach ($query_run as $student) {
+                                                $id = $student['id'];
+
+                                                $query1 = "SELECT * FROM qrcode WHERE student_id = '$id'  ";
+                                                $query_run1 = mysqli_query($conn, $query1);
+
+                                                if (mysqli_num_rows($query_run1) > 0) {
+                                                    $qrcode = mysqli_fetch_array($query_run1);
+                                        ?><?php
+                                                }
+                                            ?>
+
+
+
+
+
+
+
+                                        <form method="post" action="qrcode.php">
+                                            <tr>
+
+
+                                                <th colspan="4">ID Number</th>
+                                                <td colspan="1"><?= $student['id_number']; ?></td>
+
+                                                <th colspan="4">Course</th>
+                                                <td colspan="1"><?= $student['course_name']; ?></td>
+
+                                                <?php if ($student['status_type'] == "ID Done" or $student['status_type'] == "Picture Done" or $student['status_type'] == "Enroll New Students") : ?>
+
+
+                                            </tr>
+                                        <?php endif; ?>
+                                        <tr>
+                                            <th colspan="4">Student Name:</th>
+                                            <td colspan="1"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
+                                            <th colspan="4">Year Level</th>
+                                            <td colspan="1"><?= $student['year_name']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="4">Gender:</th>
+                                            <td colspan="1"><?= $student['gender']; ?></td>
+                                            <th colspan="4">Section</th>
+                                            <td colspan="1"><?= $student['sections']; ?></td>
+                                            <?php if ($student['status_type'] == "Enroll New Students") : ?>
+                                            <?php endif; ?>
+                                        </tr>
+
+
+
+
+
+                                        </tr>
+
+
+
+
+
+
+
+
+
+
+                                        </form>
+
+
+
+
+
+                                    <?php
+                                            }
+                                        } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;">You are not enroll!</td>
+                                    </tr>
+
+                                <?php
+                                        }
+
+
+                                ?>
+                            <?php else: ?>
+                                <tr>
+                                    <td colspan="6" style="text-align:center;">You are not enroll!</td>
+                                </tr>
+
+                            <?php endif; ?>
+
+
+                                    </table>
+
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
 
@@ -242,6 +437,7 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
                                             </tr>
                                         </thead>
                                         <tbody>
+                                        <?php if ($id_number != 0): ?>
                                             <?php
 
 
@@ -287,6 +483,11 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
                                                 echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
                                             }
                                             ?>
+                                            <?php else: ?>
+                                                <tr>
+                                                    <td colspan="7">Subject will show when you are already enroll</td>
+                                                </tr>
+                                            <?php endif; ?>
                                             <tr>
 
                                             </tr>
