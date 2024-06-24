@@ -14,7 +14,7 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
     $checkuser = mysqli_query($conn, $sqlquery);
     if (mysqli_num_rows($checkuser) > 0) {
         $row = mysqli_fetch_assoc($checkuser);
-        if ($row) { 
+        if ($row) {
             $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
         }
     }
@@ -55,13 +55,12 @@ $semester = $rows111['semester_name'];
 $academic = "$start-$end";
 
 
-$query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
-$query_run = mysqli_query($conn, $query);
+// $query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
+// $query_run = mysqli_query($conn, $query);
 
-if (mysqli_num_rows($query_run) > 0) {
-    $student1 = mysqli_fetch_array($query_run);
-?><?php
-}
+// if (mysqli_num_rows($query_run) > 0) {
+//     $student1 = mysqli_fetch_array($query_run);
+// }
 
 
     ?>
@@ -82,6 +81,7 @@ if (mysqli_num_rows($query_run) > 0) {
     <!-- start: CSS -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
+    <script type="text/javascript" src="chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- end: CSS -->
     <title>Students - Madridejos Community College</title>
@@ -89,15 +89,20 @@ if (mysqli_num_rows($query_run) > 0) {
     <link rel="icon" type="image" href="../../icon.png">
 
 
+    <script src="sweetalert.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.css">
+    <script src="sweetalert.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
     </script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 
+    <script type="text/javascript" src="asset/jquery.signature.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="asset/jquery.signature.css">
 
     <style>
         .kbw-signature {
@@ -188,10 +193,29 @@ if (mysqli_num_rows($query_run) > 0) {
 
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                        <?php
+                        $id_number = $id_number;
+                        $sel = "SELECT * FROM students WHERE id_number='$id_number'";
+                        $query = mysqli_query($conn, $sel);
+                        $resul = mysqli_fetch_assoc($query);
+                        ?>
+                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
+                        <?php
+                        $id_number = $id_number;
+                        $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
+                        $query_run1 = mysqli_query($conn, $query1);
+
+                        if (mysqli_num_rows($query_run1) > 0) {
+                            $qrcode = mysqli_fetch_array($query_run1);
+                        ?>
+                            <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
+                        <?php
+                        } else { ?>
+                            <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                        <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        
+                        <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
