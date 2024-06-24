@@ -15,7 +15,7 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
     if (mysqli_num_rows($checkuser) > 0) {
         $row = mysqli_fetch_assoc($checkuser);
         if ($row) { 
-            $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
+            $id_number = 0;
         }
     }
 }
@@ -200,7 +200,7 @@ if (mysqli_num_rows($query_run) > 0) {
                         $query = mysqli_query($conn, $sel);
                         $resul = mysqli_fetch_assoc($query);
                         ?>
-                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
+                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?? 'students' ?></span>
                         <?php
                         $id_number = $id_number;
                         $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
@@ -216,7 +216,15 @@ if (mysqli_num_rows($query_run) > 0) {
                         <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li style="text-align: center;"><span><?php echo $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?></span></li>
+                        <li style="text-align: center;">
+                            <span>
+                                <?php if(!empty($resul['lname']) && !empty($resul['fname']) ): ?>
+                                <?php echo $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?>|
+                                <?php else: ?>
+                                    Students
+                                <? endif; ?>
+                            </span>
+                        </li>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
