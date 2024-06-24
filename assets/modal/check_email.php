@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the database connection was successful
     if ($conn->connect_error) {
         header('HTTP/1.1 500 Internal Server Error');
-        echo json_encode(['error' => 'Database connection failed: ' . $conn->connect_error]);
+        echo json_encode(['emailExists' => false]);
         exit();
     }
 
