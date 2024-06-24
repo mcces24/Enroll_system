@@ -143,7 +143,7 @@
 
                     <?php
                     include_once '../../../database/config.php';
-                    include_once '../../../database/config2.php';
+                    //include_once '../../../database/config2.php';
                     include_once '../../../database/database_details.php';
                     $db_conn = new mysqli($host,$username,$pass,$db_name);
                     $year = $student['year_id'];
