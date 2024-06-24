@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // Prepare SQL query
-        $query = "SELECT COUNT(*) AS count FROM student_acc WHERE email = ?";
+        $query = "SELECT COUNT(*) AS count FROM new_user WHERE email = ?";
         $stmt = $conn->prepare($query);
         $stmt->bind_param("s", $email);
         $stmt->execute();
