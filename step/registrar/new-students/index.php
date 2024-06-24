@@ -226,7 +226,7 @@ require '../../../database/regis3.php';
 
     <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     <!-- end: CSS -->
-    <title>New Students | Registrar Office - Madridejos Community College</title>
+    <title>Test New Students | Registrar Office - Madridejos Community College</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
 
 
@@ -275,7 +275,7 @@ require '../../../database/regis3.php';
     </script> -->
 
     <?php //include('message.php'); ?>
-    <?php include('edit_delete_modal.php'); ?>
+    <?php //include('edit_delete_modal.php'); ?>
 
     <!-- start: Sidebar -->
     <?php include '../inc/navbar.php'  ?>
