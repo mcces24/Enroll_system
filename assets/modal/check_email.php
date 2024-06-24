@@ -1,17 +1,16 @@
 
 <?php
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-   
-    // include_once "../../database/conn.php";
-    // $conn = new mysqli($servername, $username, $password, $dbname);
-    // if ($conn->connect_error) {
-    //     die("Connection failed: " . $conn->connect_error);
-    // }
-
-     $requestData = json_decode(file_get_contents('php://input'), true);
-     $email = $requestData['email'];
-     echo $email;
-     echo json_encode(['emailExists' => true]);
+    
+    include_once "../../database/conn.php";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    echo json_encode(['emailExists' => false]);
+    // $requestData = json_decode(file_get_contents('php://input'), true);
+    // $email = $requestData['email'];
+      
     //  $query = "SELECT email FROM student_acc WHERE email = ?";
     //  $stmt = $conn->prepare($query);
     //  $stmt->bind_param("s", $email);
