@@ -15,7 +15,7 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
     if (mysqli_num_rows($checkuser) > 0) {
         $row = mysqli_fetch_assoc($checkuser);
         if ($row) { 
-            $id_number =  0;
+            $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
         }
     }
 }
