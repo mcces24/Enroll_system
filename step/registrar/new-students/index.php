@@ -263,20 +263,20 @@ require '../../../database/regis3.php';
     <div class="loader-wrapper" id="preloader">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
-    <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
     <script>
         var loader = document.getElementById("preloader");
         window.addEventListener("load", function() {
             loader.style.display = "none"
         })
-    </script>
+    </script> -->
 
-    <?php include('message.php'); ?>
-    <?php include('edit_delete_modal.php'); ?>
+    <?php //include('message.php'); ?>
+    <?php //include('edit_delete_modal.php'); ?>
 
     <!-- start: Sidebar -->
     <?php include '../inc/navbar.php'  ?>
-    <div class="sidebar-overlay"></div>
+    <!-- <div class="sidebar-overlay"></div> -->
     <!-- end: Sidebar -->
 
     <!-- start: Main -->
@@ -641,29 +641,29 @@ require '../../../database/regis3.php';
     <script src="../../assets/js/script.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $('.search-box input[type="text"]').on("keyup input", function() {
-                /* Get input value on change */
-                var inputVal = $(this).val();
-                var resultDropdown = $(this).siblings(".result");
-                if (inputVal.length) {
-                    $.get("backend-search.php", {
-                        term: inputVal
-                    }).done(function(data) {
-                        // Display the returned data in browser
-                        resultDropdown.html(data);
-                    });
-                } else {
-                    resultDropdown.empty();
-                }
-            });
+        // $(document).ready(function() {
+        //     $('.search-box input[type="text"]').on("keyup input", function() {
+        //         /* Get input value on change */
+        //         var inputVal = $(this).val();
+        //         var resultDropdown = $(this).siblings(".result");
+        //         if (inputVal.length) {
+        //             $.get("backend-search.php", {
+        //                 term: inputVal
+        //             }).done(function(data) {
+        //                 // Display the returned data in browser
+        //                 resultDropdown.html(data);
+        //             });
+        //         } else {
+        //             resultDropdown.empty();
+        //         }
+        //     });
 
-            // Set search input value on click of result item
-            $(document).on("click", ".result p", function() {
-                $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
-                $(this).parent(".result").empty();
-            });
-        });
+        //     // Set search input value on click of result item
+        //     $(document).on("click", ".result p", function() {
+        //         $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+        //         $(this).parent(".result").empty();
+        //     });
+        // });
     </script>
     <!-- end: JS -->
 
