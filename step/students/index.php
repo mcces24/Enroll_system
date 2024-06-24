@@ -55,7 +55,7 @@ $semester = $rows111['semester_name'];
 $academic = "$start-$end";
 
 
-$query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
+$query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester'  ";
 $query_run = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($query_run) > 0) {
