@@ -222,7 +222,6 @@ require '../../../database/regis3.php';
     <!-- start: CSS -->
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- end: CSS -->
     <title>Test New Students | Registrar Office - Madridejos Community College</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
