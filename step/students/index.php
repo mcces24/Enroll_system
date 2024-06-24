@@ -194,26 +194,11 @@ if (mysqli_num_rows($query_run) > 0) {
 
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        <?php
-                        // Use the same id_number variable for both queries
-                        $id_number = $id_number;
-
-                        // Fetch student and QR code information in a single query
-                        $sel = "SELECT students.*, qrcode.picture AS qr_picture
-                                FROM students
-                                LEFT JOIN qrcode ON students.id_number = qrcode.student_id
-                                WHERE students.id_number = ?";
-                        $stmt = $conn->prepare($sel);
-                        $stmt->bind_param("s", $id_number);
-                        $stmt->execute();
-                        $result = $stmt->get_result();
-                        $resul = $result->fetch_assoc();
-                        ?>
-                        <span class="me-2 d-none d-sm-block">Hi! <?php echo !empty($resul['id_number']) ? htmlspecialchars($resul['id_number'], ENT_QUOTES, 'UTF-8') : 'Students'; ?></span>
-                        <img class="navbar-profile-image" src="../id/uploads/<?php echo isset($resul['qr_picture']) ? htmlspecialchars($resul['qr_picture'], ENT_QUOTES, 'UTF-8') : 'picture.png'; ?>" alt="Image">
+                    
+                        <span class="me-2 d-none d-sm-block">Hi! Students</span>
+                        <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                       
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
