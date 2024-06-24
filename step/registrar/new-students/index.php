@@ -263,7 +263,7 @@ require '../../../database/regis3.php';
 </head>
 
 <body style="width: 100%;">
-    <div class="loader-wrapper" id="preloader">
+    <!-- <div class="loader-wrapper" id="preloader">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
     <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
@@ -272,7 +272,7 @@ require '../../../database/regis3.php';
         window.addEventListener("load", function() {
             loader.style.display = "none"
         })
-    </script>
+    </script> -->
 
     <?php //include('message.php'); ?>
     <?php include('edit_delete_modal.php'); ?>
