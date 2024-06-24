@@ -219,14 +219,14 @@ require '../../../database/regis3.php';
     <!-- start: Icons -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
     <!-- start: Icons -->
-    <!-- <script src="script.js"></script> -->
+    <script src="script.js"></script>
     <!-- start: CSS -->
     <link rel="stylesheet" href="../../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../assets/css/style.css">
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
+    <script type="text/javascript" src="chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- end: CSS -->
-    <title>Test New Students | Registrar Office - Madridejos Community College</title>
+    <title>New Students | Registrar Office - Madridejos Community College</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
 
 
@@ -263,7 +263,7 @@ require '../../../database/regis3.php';
 </head>
 
 <body style="width: 100%;">
-    <!-- <div class="loader-wrapper" id="preloader">
+    <div class="loader-wrapper" id="preloader">
         <span class="loader"><span class="loader-inner"></span></span>
     </div>
     <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
@@ -272,14 +272,14 @@ require '../../../database/regis3.php';
         window.addEventListener("load", function() {
             loader.style.display = "none"
         })
-    </script> -->
+    </script>
 
     <?php //include('message.php'); ?>
     <?php //include('edit_delete_modal.php'); ?>
 
     <!-- start: Sidebar -->
     <?php include '../inc/navbar.php'  ?>
-    <!-- <div class="sidebar-overlay"></div> -->
+    <div class="sidebar-overlay"></div>
     <!-- end: Sidebar -->
 
     <!-- start: Main -->
