@@ -10,14 +10,14 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
 } else {
     $user_id = $_SESSION['USER_ID'];
     $id_number = 0;
-    $sqlquery = "SELECT * FROM new_user LEFT JOIN students ON new_user.Id = students.new_user_id WHERE new_user.Id = '$user_id'";
-    $checkuser = mysqli_query($conn, $sqlquery);
-    if (mysqli_num_rows($checkuser) > 0) {
-        $row = mysqli_fetch_assoc($checkuser);
-        if ($row) {
-            $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
-        }
-    }
+    // $sqlquery = "SELECT * FROM new_user LEFT JOIN students ON new_user.Id = students.new_user_id WHERE new_user.Id = '$user_id'";
+    // $checkuser = mysqli_query($conn, $sqlquery);
+    // if (mysqli_num_rows($checkuser) > 0) {
+    //     $row = mysqli_fetch_assoc($checkuser);
+    //     if ($row) {
+    //         $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
+    //     }
+    // }
 }
 ?>
 
