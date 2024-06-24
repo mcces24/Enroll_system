@@ -230,7 +230,7 @@ require '../../../database/regis3.php';
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
 
 
-    <script src="sweetalert.js"></script>
+    <!-- <script src="sweetalert.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
         .result,
