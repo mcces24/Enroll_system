@@ -1,34 +1,45 @@
-
 <?php
-if($_SERVER["REQUEST_METHOD"] == "POST"){
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include_once "../../database/conn.php"; // Adjust the path as needed
     
-    include_once "../../database/conn.php";
-    // $conn = new mysqli($servername, $username, $password, $dbname);
-    // if ($conn->connect_error) {
-    //     die("Connection failed: " . $conn->connect_error);
-    // }
-
-    $requestData = json_decode(file_get_contents('php://input'), true);
-    $email = $requestData['email'];
-      
-     $query = "SELECT email FROM student_acc WHERE email = ?";
-     $stmt = $conn->prepare($query);
-     $stmt->bind_param("s", $email);
-     $stmt->execute();
-     $result = $stmt->get_result();
-     
-     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-         $existing_email = $row['email'];
-         
-         if ($existing_email == $email) {
-            echo json_encode(['emailExists' => true]);
-        } else {
-            echo json_encode(['emailExists' => false]);
-        }
-     } else {
-        echo json_encode(['emailExists' => false]);
-     }
+    // Check if the database connection was successful
+    if ($conn->connect_error) {
+        header('HTTP/1.1 500 Internal Server Error');
+        echo json_encode(['error' => 'Database connection failed: ' . $conn->connect_error]);
+        exit();
     }
-?> 
 
+    // Get JSON input
+    $requestData = json_decode(file_get_contents('php://input'), true);
+    $email = isset($requestData['email']) ? $requestData['email'] : '';
+
+    // Validate email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // Invalid email format
+        header('HTTP/1.1 400 Bad Request');
+        echo json_encode(['error' => 'Invalid email format']);
+        exit();
+    }
+
+    // Prepare SQL query
+    $query = "SELECT COUNT(*) AS count FROM student_acc WHERE email = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Check if email exists
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $emailExists = ($row['count'] > 0);
+        echo json_encode(['emailExists' => $emailExists]);
+    } else {
+        echo json_encode(['emailExists' => false]);
+    }
+
+    // Close statement and connection
+    $stmt->close();
+    $conn->close();
+}
+?>
