@@ -69,7 +69,7 @@ $msg = "";
 
 if (isset($_GET['verify']) && $_GET['verify']) {
     $ver = $_GET['verify'];
-    $query = mysqli_query($conn, "UPDATE student_acc SET verified_status = '1' WHERE verified_status='$ver'");
+    $query = mysqli_query($conn, "UPDATE new_user SET verified_status = '1' WHERE verified_status='$ver'");
     if ($query) {
         $msg = "<div class='alert alert-success'>Account verification has been successfully completed.</div>";
     } else {
@@ -81,12 +81,12 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $pass = mysqli_real_escape_string($conn, $_POST['password']);
 
-    $passwordHash = md5($pass);
+    $password = $password = md5($pass);
 
-    $sql = "SELECT * FROM student_acc WHERE email = '$email' AND pass = '$passwordHash'";
+    $sql = "SELECT * FROM new_user n LEFT JOIN students s ON n.Id = s.new_user_id WHERE n.email = '$email' AND n.password = '$password' OR s.id_number = '$email' AND n.password = '$password' ";
     $result = mysqli_query($conn, $sql);
 
-    if (mysqli_num_rows($result) > 0) {
+    if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
 
         if ($row) {

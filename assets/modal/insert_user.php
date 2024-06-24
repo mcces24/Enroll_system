@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare and execute SQL statement to insert data
-    $stmt = $conn->prepare("INSERT INTO student_acc (email, pass, verified_status) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO new_user (email, password, verified_status) VALUES (?, ?, ?)");
     $stmt->bind_param("sss", $email, $passwordHash, $randomNumber);
 
     if ($stmt->execute() === TRUE) {
