@@ -16,7 +16,7 @@ session_start();
     <link rel="profile" href="https://gmpg.org/xfn/11">
     <link rel="icon" type="image" href="../icon.png">
 
-    <title>About &#8211; Madridejos Community College</title>
+    <title>Test About &#8211; Madridejos Community College</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="alternate" type="application/rss+xml" title="Madridejos Community College &raquo; Feed"
