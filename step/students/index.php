@@ -198,12 +198,9 @@ if (mysqli_num_rows($query_run) > 0) {
                         $id_number = $id_number;
                         $sel = "SELECT * FROM students WHERE id_number='$id_number'";
                         $query = mysqli_query($conn, $sel);
-                        if (mysqli_num_rows($query) > 0) {
-                            $resul = mysqli_fetch_array($query);
+                        $resul = mysqli_fetch_assoc($query);
                         ?>
-                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?? 'students' ?></span>
-                        <?php
-                        } else { ?> <span class="me-2 d-none d-sm-block">Hi! students</span> <?php } ?>
+                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?? 'Students' ?></span>
                         <?php
                         $id_number = $id_number;
                         $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
@@ -219,10 +216,7 @@ if (mysqli_num_rows($query_run) > 0) {
                         <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li style="text-align: center;">
-                            <span>
-                            <?php echo $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?>|
-                            </span></li>
+                        <li style="text-align: center;"><span><?php echo $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?></span></li>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
