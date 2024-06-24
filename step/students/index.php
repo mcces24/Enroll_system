@@ -1,67 +1,74 @@
 <?php
-    session_start();
+session_start();
 
 
-    require '../../database/config.php';
+require '../../database/config.php';
 
-    if (!isset($_SESSION['SESSION_STUDENTS'])) {
-        header("Location: login/index.php");
-        die();
+if (!isset($_SESSION['SESSION_STUDENTS'])) {
+    header("Location: login/index.php");
+    die();
+} else {
+    $user_id = $_SESSION['USER_ID'];
+    $id_number = 0;
+    $sqlquery = "SELECT * FROM new_user LEFT JOIN students ON new_user.Id = students.new_user_id WHERE new_user.Id = '$user_id'";
+    $checkuser = mysqli_query($conn, $sqlquery);
+    if (mysqli_num_rows($checkuser) > 0) {
+        $row = mysqli_fetch_assoc($checkuser);
+        if ($row) {
+            $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
+        }
     }
-else{
-  $id_number = $_SESSION['SESSION_STUDENTS'];
 }
 ?>
 
- <?php
-                                
-                                    require '../../database/config.php';
-
-                                    $querys11 = "SELECT * FROM academic WHERE status='1'";
-                                    $querys_run11 = mysqli_query ($conn, $querys11);
-
-                                    if (mysqli_num_rows($querys_run11)>0) {
-                                        
-                                        foreach($querys_run11 as $rows11)
-                                            ?><?php
-                                    }
-                                                            
-                                    ?>
-                                    <?php
-                                                            
-                                    require '../../database/config.php';
-                                    $querys111 = "SELECT * FROM semester WHERE sem_status='1'";
-                                    $querys_run111 = mysqli_query ($conn, $querys111);
-
-                                    if (mysqli_num_rows($querys_run111)>0) {
-                                        foreach($querys_run111 as $rows111)
-                                            ?><?php
-                                    }
-                                                            
-                                    ?>
 <?php
-                            $start = $rows11['academic_start'];
-                            $end = $rows11['academic_end'];
-                            $semester = $rows111['semester_name'];
-                                       
-                            $academic = "$start-$end";
 
-                        
-                            $query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
-                            $query_run = mysqli_query($conn, $query);
+require '../../database/config.php';
 
-                            if(mysqli_num_rows($query_run) > 0)
-                            {
-                                $student1 = mysqli_fetch_array($query_run);
-                                ?><?php
-                            }
-                            
-                        
-?>  
+$querys11 = "SELECT * FROM academic WHERE status='1'";
+$querys_run11 = mysqli_query($conn, $querys11);
+
+if (mysqli_num_rows($querys_run11) > 0) {
+
+    foreach ($querys_run11 as $rows11)
+?><?php
+}
+
+    ?>
+<?php
+
+require '../../database/config.php';
+$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
+$querys_run111 = mysqli_query($conn, $querys111);
+
+if (mysqli_num_rows($querys_run111) > 0) {
+    foreach ($querys_run111 as $rows111)
+?><?php
+}
+
+    ?>
+<?php
+$start = $rows11['academic_start'];
+$end = $rows11['academic_end'];
+$semester = $rows111['semester_name'];
+
+$academic = "$start-$end";
 
 
-                    
-   
+$query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
+$query_run = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($query_run) > 0) {
+    $student1 = mysqli_fetch_array($query_run);
+?><?php
+}
+
+
+    ?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -75,14 +82,14 @@ else{
     <!-- start: CSS -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/style.css">
-    <script type="text/javascript" src="chart.js"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+    <script type="text/javascript" src="chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- end: CSS -->
     <title>Students - Madridejos Community College</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <link rel="icon" type="image" href="../../icon.png">
-    
-   
+
+
     <script src="sweetalert.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
@@ -91,16 +98,20 @@ else{
     <link rel="stylesheet" type="text/css" href="css/style.css/">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js">
     </script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> 
-    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet"> 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css" rel="stylesheet">
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-  
-<script type="text/javascript" src="asset/jquery.signature.min.js"></script>
+
+    <script type="text/javascript" src="asset/jquery.signature.min.js"></script>
     <link rel="stylesheet" type="text/css" href="asset/jquery.signature.css">
-  
+
     <style>
-        .kbw-signature { width: 400px; height: 200px;}
-        #sig canvas{
+        .kbw-signature {
+            width: 400px;
+            height: 200px;
+        }
+
+        #sig canvas {
             width: 100% !important;
             height: auto;
         }
@@ -109,18 +120,18 @@ else{
 
 </head>
 
-<body style="width: 100%;" >
+<body style="width: 100%;">
 
-	<div class="loader-wrapper" id="preloader">
-      <span class="loader"><span class="loader-inner"></span></span>
+    <div class="loader-wrapper" id="preloader">
+        <span class="loader"><span class="loader-inner"></span></span>
     </div>
-   <link rel="stylesheet" type="text/css" href="../../loader/styles.css" />
+    <link rel="stylesheet" type="text/css" href="../../loader/styles.css" />
     <script>
         var loader = document.getElementById("preloader");
-        window.addEventListener("load", function(){
-          loader.style.display = "none"
-        }) 
-    </script>	
+        window.addEventListener("load", function() {
+            loader.style.display = "none"
+        })
+    </script>
 
 
 
@@ -133,86 +144,87 @@ else{
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">
-            
+
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">System</li>
             <li class="sidebar-menu-item has-dropdown">
-                <li class="sidebar-menu-item">
+            <li class="sidebar-menu-item">
                 <a href="index.php">
                     <i class="ri-home-2-line sidebar-menu-item-icon"></i>
                     Home
                 </a>
-                </li>
             </li>
-             <li class="sidebar-menu-item has-dropdown">
-                <li class="sidebar-menu-item">
+            </li>
+            <li class="sidebar-menu-item has-dropdown">
+            <li class="sidebar-menu-item">
                 <a href="https://infotechmcc.com">
                     <i class="ri-numbers-line sidebar-menu-item-icon"></i>
                     Grades
                 </a>
-                </li>
             </li>
-             <li class="sidebar-menu-item has-dropdown">
-                <li class="sidebar-menu-item">
+            </li>
+            <li class="sidebar-menu-item has-dropdown">
+            <li class="sidebar-menu-item">
                 <a href="#">
                     <i class="ri-bar-chart-line sidebar-menu-item-icon"></i>
                     Evaluation
                 </a>
-                </li>
+            </li>
             </li>
 
-            
+
         </ul>
     </div>
     <div class="sidebar-overlay"></div>
     <!-- end: Sidebar -->
 
     <!-- start: Main -->
-    <main class="bg-light" >
+    <main class="bg-light">
         <div class="p-2" id="frame">
             <!-- start: Navbar -->
             <nav class="px-3 py-2 bg-white rounded shadow-sm">
                 <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
                 <h5 class="fw-bold mb-0 me-auto">Students Information | Study Load</h5>
-                
-                    
-                    
+
+
+
                 <div class="dropdown me-3 d-none d-sm-block">
-                    
-                    
+
+
                 </div>
-                
+
                 <div class="dropdown">
-                    <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <?php 
-            $id_number = $id_number;
-                $sel = "SELECT * FROM students WHERE id_number='$id_number'";
-                $query = mysqli_query($conn,$sel);
-                $resul = mysqli_fetch_assoc($query);
-            ?>
-                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
-                        <?php 
-                        $id_number=$id_number;
+                    <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <?php
+                        $id_number = $id_number;
+                        $sel = "SELECT * FROM students WHERE id_number='$id_number'";
+                        $query = mysqli_query($conn, $sel);
+                        $resul = mysqli_fetch_assoc($query);
+                        ?>
+                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?? 'students' ?></span>
+                        <?php
+                        $id_number = $id_number;
                         $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
                         $query_run1 = mysqli_query($conn, $query1);
 
-                            if(mysqli_num_rows($query_run1) > 0)
-                            {
-                                $qrcode = mysqli_fetch_array($query_run1);
-                                ?>
-                        <img class="navbar-profile-image"
-                            src="../id/uploads/<?php echo $qrcode['picture'] ?>"
-                            alt="Image">
-                            <?php
-                            }
-                            else{ ?>
-                              <img class="navbar-profile-image"
-                            src="../id/uploads/picture.png"
-                            alt="Image">
-                            <?php }?>
+                        if (mysqli_num_rows($query_run1) > 0) {
+                            $qrcode = mysqli_fetch_array($query_run1);
+                        ?>
+                            <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
+                        <?php
+                        } else { ?>
+                            <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                        <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
+                        <li style="text-align: center;">
+                            <span>
+                                <?php if (!empty($resul['lname']) && !empty($resul['fname'])) : ?>
+                                    <?php echo $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?>|
+                                <?php else : ?>
+                                    Students
+                                <? endif; ?>
+                            </span>
+                        </li>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
@@ -220,174 +232,184 @@ else{
             <!-- end: Navbar -->
 
             <!-- start: Content -->
-           
+
             <div class="py-4">
-                                             <style type="text/css">
-                                                    table tr th, table tr td{
-                                                        padding: 20px; 
-                                                    }
-                                                    @media (max-width: 600px) {
-                                                        table tr th, table tr td{
-                                                        font-size: 15px;
-                                                        padding: 5px;
-                                                        text-align: center;
-                                                    }
-                                                    .card-body table .btn{
-                                                        font-size: 15px;
-                                                    }
+                <style type="text/css">
+                    table tr th,
+                    table tr td {
+                        padding: 20px;
+                    }
 
-                                                    .card-header .btn{
-                                                        font-size: 15px;
-                                                    }
-                                                    .study  tr th, .study  tr td{
-                                                        font-size: 10px;
-                                                        padding: 0px;
-                                                    }
-                                                    .upper table, .upper thead, .upper tbody,.upper th,.upper td,.upper tr { 
-                                                        display: block; 
-                                                    }
-                                                    table .id{
-                                                        height: 100px;
-                                                        width: 100px;
-                                                    }
-                                                     .logo{
-                                                        width: 400px;
-                                                        height: auto;
-                                                    }
-                                                    #invoice img{
-                                                        height: 50px;
-                                                        width: 100%;
-                                                    }
-                                                    
-                                                    }
+                    @media (max-width: 600px) {
 
-                                                </style>
+                        table tr th,
+                        table tr td {
+                            font-size: 15px;
+                            padding: 5px;
+                            text-align: center;
+                        }
+
+                        .card-body table .btn {
+                            font-size: 15px;
+                        }
+
+                        .card-header .btn {
+                            font-size: 15px;
+                        }
+
+                        .study tr th,
+                        .study tr td {
+                            font-size: 10px;
+                            padding: 0px;
+                        }
+
+                        .upper table,
+                        .upper thead,
+                        .upper tbody,
+                        .upper th,
+                        .upper td,
+                        .upper tr {
+                            display: block;
+                        }
+
+                        table .id {
+                            height: 100px;
+                            width: 100px;
+                        }
+
+                        .logo {
+                            width: 400px;
+                            height: auto;
+                        }
+
+                        #invoice img {
+                            height: 50px;
+                            width: 100%;
+                        }
+
+                    }
+                </style>
                 <!-- start: Summary -->
-                
+
                 <!-- end: Summary -->
                 <!-- start: Graph -->
                 <div class="row g-3 mt-2">
-                    
+
                     <div class="col-12 col-md-12 col-xl-12">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white">
-                               Personal Information 
+                                Personal Information
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
-                                
-                                
-                             
-                        <table class="upper">
-                            
-                            
-                             <?php 
 
-                                  $id1 =  $id_number;
+
+
+                                    <table class="upper">
+
+
+                                        <?php
+
+                                        $id1 =  $id_number;
                                         $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
                                         $query_run = mysqli_query($conn, $query);
                                         $count = 0;
 
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $student)
-                                            {
-                                                $id=$student['id'];
-                                                
+                                        if (mysqli_num_rows($query_run) > 0) {
+                                            foreach ($query_run as $student) {
+                                                $id = $student['id'];
+
                                                 $query1 = "SELECT * FROM qrcode WHERE student_id = '$id'  ";
-                            $query_run1 = mysqli_query($conn, $query1);
+                                                $query_run1 = mysqli_query($conn, $query1);
 
-                            if(mysqli_num_rows($query_run1) > 0)
-                            {
-                                $qrcode = mysqli_fetch_array($query_run1);
-                                ?><?php
-                            }
-                              ?>
-                                                                       
-                        
-                                                    
-                                                
-                                                   
-                                                
-                                                
-                                                <form method="post" action="qrcode.php" >
-                                                    <tr>
-                                                        
-                                                       
-                                                        <th colspan="4">ID Number</th>
-                                                        <td colspan="1"><?= $student['id_number']; ?></td>
-                                                        
-                                                        <th colspan="4">Course</th>
-                                                        <td colspan="1"><?= $student['course_name']; ?></td>
-
-                                                        <?php if($student['status_type'] == "ID Done" OR $student['status_type'] == "Picture Done" OR $student['status_type'] == "Enroll New Students"): ?>
-                                                    
-
-                                                </tr>
-                                                <?php endif; ?>
-                                                    <tr>
-                                                        <th colspan="4">Student Name:</th>
-                                                        <td colspan="1"><?= $student['fname'];?> <?= $student['mname'];?> <?= $student['lname'];?></td>
-                                                        <th colspan="4">Year Level</th>
-                                                        <td colspan="1"><?= $student['year_name']; ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th colspan="4">Gender:</th>
-                                                        <td colspan="1"><?= $student['gender']; ?></td>
-                                                         <th colspan="4">Section</th>
-                                                        <td colspan="1"><?= $student['sections']; ?></td>
-                                                        <?php if($student['status_type'] == "Enroll New Students" ): ?>
-                                                <?php endif; ?>
-                                                    </tr>
-                                                   
-                                                   
-                                                    
-                                                    
-                                                    
-                                                </tr>
-                                                
-                                                 
-                                                 
-
-                                                
-                                                
-                                                
-
-                                           
-                                                
-                                                </form>
-                                               
-
-                                                
-                                              
-                                                
-                                                <?php
-                                            }
-                                        }
-                                        else
-                                        {
+                                                if (mysqli_num_rows($query_run1) > 0) {
+                                                    $qrcode = mysqli_fetch_array($query_run1);
+                                        ?><?php
+                                                }
                                             ?>
-                                                <tr>
-                                                    <td colspan="6" style="text-align:center;">You are not enroll!</td>
-                                                </tr>
-                                                
-                                            <?php
+
+
+
+
+
+
+
+                                        <form method="post" action="qrcode.php">
+                                            <tr>
+
+
+                                                <th colspan="4">ID Number</th>
+                                                <td colspan="1"><?= $student['id_number']; ?></td>
+
+                                                <th colspan="4">Course</th>
+                                                <td colspan="1"><?= $student['course_name']; ?></td>
+
+                                                <?php if ($student['status_type'] == "ID Done" or $student['status_type'] == "Picture Done" or $student['status_type'] == "Enroll New Students") : ?>
+
+
+                                            </tr>
+                                        <?php endif; ?>
+                                        <tr>
+                                            <th colspan="4">Student Name:</th>
+                                            <td colspan="1"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
+                                            <th colspan="4">Year Level</th>
+                                            <td colspan="1"><?= $student['year_name']; ?></td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="4">Gender:</th>
+                                            <td colspan="1"><?= $student['gender']; ?></td>
+                                            <th colspan="4">Section</th>
+                                            <td colspan="1"><?= $student['sections']; ?></td>
+                                            <?php if ($student['status_type'] == "Enroll New Students") : ?>
+                                            <?php endif; ?>
+                                        </tr>
+
+
+
+
+
+                                        </tr>
+
+
+
+
+
+
+
+
+
+
+                                        </form>
+
+
+
+
+
+                                    <?php
+                                            }
+                                        } else {
+                                    ?>
+                                    <tr>
+                                        <td colspan="6" style="text-align:center;">You are not enroll!</td>
+                                    </tr>
+
+                                <?php
                                         }
-                                    
+
 
                                 ?>
 
-                                
 
-                                
-                            
-                        </table>
-                        
-                    
 
-                    
+
+
+                                    </table>
+
+
+
+
+                                </div>
                             </div>
-                        </div>
                         </div>
                     </div>
 
@@ -400,110 +422,114 @@ else{
 
 
 
-                    <div class="col-12 col-md-12 col-xl-12" >
+                    <div class="col-12 col-md-12 col-xl-12">
                         <div class="card border-0 shadow-sm h-100" x>
                             <div class="card-header bg-white">
-                               Study Load
+                                Study Load
                             </div>
-                            <div class="card-body" id="pdf" >
+                            <div class="card-body" id="pdf">
 
                                 <div class="table-responsive load" id="invoice">
-                                     <div style=" margin: 0 auto; text-align: center;">
-                                <img class="logo" src="mcc-back.png">
-                            </div>
+                                    <div style=" margin: 0 auto; text-align: center;">
+                                        <img class="logo" src="mcc-back.png">
+                                    </div>
                                     <table id="study" class="table study table-bordered" style="text-align: center;">
-      <thead>
-        <tr>
-            <th colspan="7">Study Load</th>
-        </tr>
-        <tr>
-            <th>SUBJECT CODE</th>
-            <th>SUBJECT DESCRIPTION</th>
-            <th>UNITS</th>
-            <th>DAYS</th>
-            <th>TIME</th>
-            <th>ROOM</th>
-            <th>INSTRUCTOR</th>
-        </tr>
-      </thead>
-      <tbody>
-<?php
+                                        <thead>
+                                            <tr>
+                                                <th colspan="7">Study Load</th>
+                                            </tr>
+                                            <tr>
+                                                <th>SUBJECT CODE</th>
+                                                <th>SUBJECT DESCRIPTION</th>
+                                                <th>UNITS</th>
+                                                <th>DAYS</th>
+                                                <th>TIME</th>
+                                                <th>ROOM</th>
+                                                <th>INSTRUCTOR</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
 
 
-require '../../database/regis.php';
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-$section_id1 = $student['section_id'];
-$semester_id1 = $student['semester_id'];
-if ($student['type'] == 'Shift' OR $student['type'] == 'Irregular' OR $student['type'] == 'Transferee') {
-    $id_number = $student['id_number'];
-    $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
-}
-else{
-    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
-}
+                                            require '../../database/regis.php';
+                                            // Create connection
+                                            $conn = new mysqli($servername, $username, $password, $dbname);
+                                            // Check connection
+                                            if ($conn->connect_error) {
+                                                die("Connection failed: " . $conn->connect_error);
+                                            }
+                                            $section_id1 = $student['section_id'] ?? 0;
+                                            $semester_id1 = $student['semester_id'] ?? 0;
+                                            if (isset($student) && !empty($student)) {
+                                                if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
+                                                    $id_number = $student['id_number'];
+                                                    $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
+                                                } else {
+                                                    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
+                                                }
 
-$result = $conn->query($sql);
+                                                $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-  // output data of each row
-  while($row = $result->fetch_assoc()) {
-    ?>
+                                                if ($result->num_rows > 0) {
+                                                    // output data of each row
+                                                    while ($row = $result->fetch_assoc()) {
+                                            ?>
 
-    
-    <tr>
-      <td><?php echo  $row["subject_code"] ?></td>
-      <td><?php echo  $row["subject_name"] ?></td>
-      <td><?php echo  $row["units"] ?></td>
-      <td><?php echo  $row["days"] ?></td>
-      <td><?php echo  $row["time_sched"] ?></td>
-      <td><?php echo  $row["room"] ?></td>
-      <td><?php echo  $row["instructor"] ?></td>
-    </tr>
-    
 
-    
-    
-<?php  }
- }   else {
-  echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
-}
-?>
-<tr>
-        
-    </tr>
+                                                        <tr>
+                                                            <td><?php echo  $row["subject_code"] ?></td>
+                                                            <td><?php echo  $row["subject_name"] ?></td>
+                                                            <td><?php echo  $row["units"] ?></td>
+                                                            <td><?php echo  $row["days"] ?></td>
+                                                            <td><?php echo  $row["time_sched"] ?></td>
+                                                            <td><?php echo  $row["room"] ?></td>
+                                                            <td><?php echo  $row["instructor"] ?></td>
+                                                        </tr>
 
-                                
 
-                                
-                            </tbody>
-                        </table>
-                                
-                                
-                        
-                        
+
+
+                                            <?php  }
+                                                } else {
+                                                    echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
+                                                }
+                                            }
+                                            else {
+                                                echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
+                                            }
+                                            ?>
+                                            <tr>
+
+                                            </tr>
+
+
+
+
+                                        </tbody>
+                                    </table>
+
+
+
+
+                                </div>
+                                <button id="btn-one" class="btn btn-success btn-sm">Download as PDF</button>
+                                <button id="dw_bt" class="btn btn-success btn-sm">Download a Image</button>
+
+                            </div>
+
                         </div>
-                         <button id="btn-one" class="btn btn-success btn-sm">Download as PDF</button> 
-                         <button id="dw_bt" class="btn btn-success btn-sm">Download a Image</button>
-
-                        </div>
-
                     </div>
+                    <br>
+
+
+
+
+
+                    <!-- end: Graph -->
                 </div>
-                <br>
-
-                
-
-
-
-                <!-- end: Graph -->
+                <!-- end: Content -->
             </div>
-            <!-- end: Content -->
-        </div>
     </main>
 
 
@@ -524,33 +550,25 @@ if ($result->num_rows > 0) {
 
 </html>
 
-        
+
 <script type="text/javascript" src="dom-to-image.js"></script>
-    <script type="text/javascript">
-        var ticket = document.getElementsByClassName("load")[0];
-        var download_button = document.getElementById("dw_bt");
+<script type="text/javascript">
+    var ticket = document.getElementsByClassName("load")[0];
+    var download_button = document.getElementById("dw_bt");
 
-        download_button.addEventListener("click",()=>{
-                domtoimage.toPng(ticket).then((data)=>{
-                    var link = document.createElement("a");
-                    link.download = "class-schedule.png";
-                    link.href = data;
-                    link.click();
-                });
+    download_button.addEventListener("click", () => {
+        domtoimage.toPng(ticket).then((data) => {
+            var link = document.createElement("a");
+            link.download = "class-schedule.png";
+            link.href = data;
+            link.click();
         });
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
-            integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" integrity="sha512-BNaRQnYJYiPSqHHDb58B0yaPfCu+Wgds8Gp/gU33kqBtgNS4tSPHuGibyoeqMV/TJlSKda6FXzoEyYGjTe+vXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-        <script src="custom.js"></script>
-
-        
-     
+<script src="custom.js"></script>
