@@ -14,8 +14,8 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
     $checkuser = mysqli_query($conn, $sqlquery);
     if (mysqli_num_rows($checkuser) > 0) {
         $row = mysqli_fetch_assoc($checkuser);
-        if ($row) { 
-            $id_number = 0;
+        if ($row) {
+            $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
         }
     }
 }
@@ -54,13 +54,13 @@ $semester = $rows111['semester_name'];
 
 $academic = "$start-$end";
 
-
+if ($id_number != 0) {
 $query = "SELECT * FROM students INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id INNER JOIN course c ON students.course_id = c.course_id WHERE academic = '$academic' AND semester_id = '$semester' AND id_number='$id_number'  ";
 $query_run = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($query_run) > 0) {
     $student1 = mysqli_fetch_array($query_run);
-?><?php
+}
 }
 
 
@@ -195,12 +195,14 @@ if (mysqli_num_rows($query_run) > 0) {
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
-                        $id_number = $id_number;
+                       if ($id_number != 0) {
                         $sel = "SELECT * FROM students WHERE id_number='$id_number'";
                         $query = mysqli_query($conn, $sel);
-                        $resul = mysqli_fetch_assoc($query);
+                        if (mysqli_num_rows($query) > 0) {
+                            $resul = mysqli_fetch_array($query);
                         ?>
                         <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?? 'students' ?></span>
+                        <?php } ?>
                         <?php
                         $id_number = $id_number;
                         $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
@@ -213,14 +215,14 @@ if (mysqli_num_rows($query_run) > 0) {
                         <?php
                         } else { ?>
                             <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
-                        <?php } ?>
+                        <?php } } else { echo '<img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">'; } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li style="text-align: center;">
                             <span>
-                                <?php if(!empty($resul['lname']) && !empty($resul['fname']) ): ?>
-                                <?php echo $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?>|
-                                <?php else: ?>
+                                <?php if (!empty($resul['lname']) && !empty($resul['fname'])) : ?>
+                                    <?php echo $resul['lname'] ?? null ?>,<?php echo $resul['fname'] ?? null ?> <?php echo $resul['mname'] ?? null ?>|
+                                <?php else : ?>
                                     Students
                                 <? endif; ?>
                             </span>
@@ -310,7 +312,7 @@ if (mysqli_num_rows($query_run) > 0) {
 
                                         <?php
 
-                                        $id1 =  $id_number;
+                                        $id1 =  $id_number != 0 ? $id_number : 0;
                                         $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
                                         $query_run = mysqli_query($conn, $query);
                                         $count = 0;
@@ -324,16 +326,8 @@ if (mysqli_num_rows($query_run) > 0) {
 
                                                 if (mysqli_num_rows($query_run1) > 0) {
                                                     $qrcode = mysqli_fetch_array($query_run1);
-                                        ?><?php
                                                 }
                                             ?>
-
-
-
-
-
-
-
                                         <form method="post" action="qrcode.php">
                                             <tr>
 
@@ -422,99 +416,7 @@ if (mysqli_num_rows($query_run) > 0) {
 
 
 
-                    <div class="col-12 col-md-12 col-xl-12">
-                        <div class="card border-0 shadow-sm h-100" x>
-                            <div class="card-header bg-white">
-                                Study Load
-                            </div>
-                            <div class="card-body" id="pdf">
-
-                                <div class="table-responsive load" id="invoice">
-                                    <div style=" margin: 0 auto; text-align: center;">
-                                        <img class="logo" src="mcc-back.png">
-                                    </div>
-                                    <table id="study" class="table study table-bordered" style="text-align: center;">
-                                        <thead>
-                                            <tr>
-                                                <th colspan="7">Study Load</th>
-                                            </tr>
-                                            <tr>
-                                                <th>SUBJECT CODE</th>
-                                                <th>SUBJECT DESCRIPTION</th>
-                                                <th>UNITS</th>
-                                                <th>DAYS</th>
-                                                <th>TIME</th>
-                                                <th>ROOM</th>
-                                                <th>INSTRUCTOR</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
-
-
-                                            require '../../database/regis.php';
-                                            // Create connection
-                                            $conn = new mysqli($servername, $username, $password, $dbname);
-                                            // Check connection
-                                            if ($conn->connect_error) {
-                                                die("Connection failed: " . $conn->connect_error);
-                                            }
-                                            $section_id1 = $student['section_id'];
-                                            $semester_id1 = $student['semester_id'];
-                                            if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
-                                                $id_number = $student['id_number'];
-                                                $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
-                                            } else {
-                                                $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
-                                            }
-
-                                            $result = $conn->query($sql);
-
-                                            if ($result->num_rows > 0) {
-                                                // output data of each row
-                                                while ($row = $result->fetch_assoc()) {
-                                            ?>
-
-
-                                                    <tr>
-                                                        <td><?php echo  $row["subject_code"] ?></td>
-                                                        <td><?php echo  $row["subject_name"] ?></td>
-                                                        <td><?php echo  $row["units"] ?></td>
-                                                        <td><?php echo  $row["days"] ?></td>
-                                                        <td><?php echo  $row["time_sched"] ?></td>
-                                                        <td><?php echo  $row["room"] ?></td>
-                                                        <td><?php echo  $row["instructor"] ?></td>
-                                                    </tr>
-
-
-
-
-                                            <?php  }
-                                            } else {
-                                                echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
-                                            }
-                                            ?>
-                                            <tr>
-
-                                            </tr>
-
-
-
-
-                                        </tbody>
-                                    </table>
-
-
-
-
-                                </div>
-                                <button id="btn-one" class="btn btn-success btn-sm">Download as PDF</button>
-                                <button id="dw_bt" class="btn btn-success btn-sm">Download a Image</button>
-
-                            </div>
-
-                        </div>
-                    </div>
+                 
                     <br>
 
 
