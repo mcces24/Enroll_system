@@ -446,39 +446,43 @@ $(document).ready(function(){
                 } 
             });
         }
+        console.log(email_data);
 
-        $.ajax({
+            $.ajax({
             url:"send_mail.php",
             method:"POST",
             data:{email_data:email_data},
             beforeSend:function(){
                 $('#'+id).html('Accepting Request');
-                $('#'+id).addClass('btn-danger');
+                $('#'+id).addClass('btn-info');
             },
             success:function(data){
-                if(data == 'ok')
+                console.log(data);
+                if(data == 1)
                 {
                     $('#'+id).text('Accepted Successful');
                     $('#'+id).removeClass('btn-danger');
                     $('#'+id).removeClass('btn-info');
                     $('#'+id).addClass('btn-success');
                 }
-                else if (data == '') {
+                else if (data == null) {
                     $('#'+id).text(data);
                     $('#'+id).text('No Applicant Selected');
                     $('#'+id).removeClass('btn-danger');
                     $('#'+id).removeClass('btn-info');
                     $('#'+id).addClass('btn-info');
-                }
-                else
-                {
-                    $('#'+id).text(data);
-                    
+                } else {
+                    $('#'+id).text('No Applicant Selected');
+                    $('#'+id).removeClass('btn-danger');
+                    $('#'+id).removeClass('btn-info');
+                    $('#'+id).addClass('btn-info');
                 }
                 $('#'+id).attr('disabled', false);
 
             }
         })
+
+        
 
     });
 });
