@@ -56,11 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->addAddress($email);
 
             $mail->isHTML(true);
-            $mail->Subject = 'OPT CODE';
+            $mail->Subject = 'Madridejos Community College - Verify Account';
 
             $link = "https://madridejoscommunitycollege.com/step/students/login/index.php?verify=$randomNumber";
-            $mail->Body = "<h4>Madridejos Community College</h4>
-                           <p>Verification Link: $link</p>";
+            $mail->isHTML(true);
+            $mail->Body = file_get_contents('email_verification.html');
+            $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
 
             $mail->send();
         } catch (Exception $e) {
