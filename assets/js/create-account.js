@@ -137,12 +137,12 @@ var KTCreateAccount = function () {
 						KTUtil.scrollTop();
 					} else {
 						Swal.fire({
-							text: "Sorry, please try again.",
+							text: "Please fill the required items.",
 							icon: "error",
 							buttonsStyling: false,
 							confirmButtonText: "Ok, got it!",
 							customClass: {
-								confirmButton: "btn btn-light"
+								confirmButton: "btn btn-success"
 							}
 						}).then(function () {
 							// KTUtil.scrollTop();
