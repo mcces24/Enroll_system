@@ -37,18 +37,18 @@ if (isset($_POST['edit'])) {
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
-        $query2 = "SELECT * FROM student_acc WHERE id_number = '$id_number' ";
-        $query_run2 = mysqli_query($conn, $query2);
+        // $query2 = "SELECT * FROM student_acc WHERE id_number = '$id_number' ";
+        // $query_run2 = mysqli_query($conn, $query2);
 
-        if (mysqli_num_rows($query_run2) > 0) {
-            foreach ($query_run2 as $students) {
+        // if (mysqli_num_rows($query_run2) > 0) {
+        //     foreach ($query_run2 as $students) {
 
                 $_SESSION['message'] = "Applicant Enroll Successfully";
                 $_SESSION['message_icon'] = "success";
                 header('Location: ' . $_SERVER['HTTP_REFERER']);
                 exit(0);
-            }
-        } else {
+        //     }
+        // } else {
 
             // $pass = substr(str_shuffle(MD5(microtime())), 0, 10);
             // $query3 = "INSERT INTO student_acc (id_number, pass) VALUES ('$id_number', '$pass')";
@@ -91,10 +91,10 @@ if (isset($_POST['edit'])) {
             //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
             // }
 
-            $_SESSION['message'] = "Applicant Enroll Successfully";
-            $_SESSION['message_icon'] = "success";
-            header('Location: ' . $_SERVER['HTTP_REFERER']);
-            exit(0);
+            // $_SESSION['message'] = "Applicant Enroll Successfully";
+            // $_SESSION['message_icon'] = "success";
+            // header('Location: ' . $_SERVER['HTTP_REFERER']);
+            // exit(0);
         }
     } else {
         $_SESSION['message'] = "Error Enrolling";
