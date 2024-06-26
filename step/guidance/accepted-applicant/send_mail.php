@@ -42,8 +42,8 @@ if(isset($_POST['email_data']))
 		$mname = $student1['mname'];
 		$app1 = $student1['applicant_id'];
 
-		$text = "Hello! $lname, $fname $mname.";
-		$app = "$app1";
+		$text = "$lname, $fname $mname.";
+		$applicant_id = "$app1";
 
 		$mail = new PHPMailer;
 		$mail->IsSMTP();								//Sets Mailer to send message using SMTP
@@ -68,6 +68,8 @@ if(isset($_POST['email_data']))
 		$mail->isHTML(true);
 		$mail->Body = file_get_contents('accept_mail.html');
 		$mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
+		$mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
+		$mail->Body = str_replace('<?= $name ?>', $text, $mail->Body);
 
 		$result = $mail->Send();						//Send an Email. Return true on success or false on error
 
