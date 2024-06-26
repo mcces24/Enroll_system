@@ -58,6 +58,13 @@
         }
     </style>
 </head>
+
+"<h2>$text</h2> <br> $body
+					<p>Please Select a time schedule of your choice for your admission test</p>
+					$admission
+					<h3>Applicant Number: $app </h3>
+					<br>
+					<br> NOTE: Please secure a copy of your Applicant Number. Thank You.";
 <body>
     <div class="container">
         <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlaDGFVaOh7LEZmw-v9yBf_DmYdwOsUmkG5g&s" alt="">
@@ -69,7 +76,7 @@
             <p>Please Select a time schedule of your choice for your admission test</p>
             <h3><strong>Applicant Number:</strong> <?= $applicant_id ?></h3>
             <p>To proceed with your enrollment, please fill out the form using the link below:</p>
-            <p><a href="<?= $admission ?>" target="_blank">Fill Enrollment Form</a></p>
+            <p><a href="<?= $admission ?>" target="_blank"></a>Admission Test</p>
             <p><strong>NOTE:</strong> Please secure a copy of your Applicant Number.</p>
             <p>Thank you!</p>
         </div>
