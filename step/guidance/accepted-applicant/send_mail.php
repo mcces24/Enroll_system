@@ -79,7 +79,7 @@ if(isset($_POST['email_data']))
 	}
 	if($output)
 	{
-		echo 'ok';
+		echo true;
 		foreach($_POST['email_data'] as $rows){
 		$email=$rows["name"];
 		$code = 'Accept_form';
@@ -88,7 +88,7 @@ if(isset($_POST['email_data']))
 	}
 	else
 	{
-		echo 'Error Sending Mail';
+		echo false;
 	}
 }
 

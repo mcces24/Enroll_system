@@ -390,25 +390,26 @@ $(document).ready(function(){
                 $('#'+id).addClass('btn-danger');
             },
             success:function(data){
-                if(data == 'ok')
+                console.log(data);
+                if(data == 1)
                 {
                     $('#'+id).text('Email Sent');
                     $('#'+id).removeClass('btn-danger');
                     $('#'+id).removeClass('btn-info');
                     $('#'+id).addClass('btn-success');
                 }
-                else if (data == '') {
+                else if (data == null) {
                     $('#'+id).text(data);
                     $('#'+id).text('No Applicant Selected');
                     $('#'+id).removeClass('btn-danger');
                     $('#'+id).removeClass('btn-info');
                     $('#'+id).addClass('btn-info');
-                }
-                else
+                } else
                 {
                     $('#'+id).text(data);
                 }
                 $('#'+id).attr('disabled', false);
+
             }
         })
 
