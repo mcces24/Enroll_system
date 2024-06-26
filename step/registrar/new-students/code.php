@@ -95,7 +95,7 @@ if (isset($_POST['edit'])) {
             // $_SESSION['message_icon'] = "success";
             // header('Location: ' . $_SERVER['HTTP_REFERER']);
             // exit(0);
-        }
+        //}
     } else {
         $_SESSION['message'] = "Error Enrolling";
         $_SESSION['message_icon'] = "error";
