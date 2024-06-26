@@ -66,7 +66,7 @@ if(isset($_POST['email_data']))
 		$domain = $student['domain'];
 		$link = "$domain/guidance-step/index.php?applicant_id=$app";
 		$mail->isHTML(true);
-		$mail->Body = file_get_contents('accept_mail.html.html');
+		$mail->Body = file_get_contents('accept_mail.html');
 		$mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
 
 		$result = $mail->Send();						//Send an Email. Return true on success or false on error
