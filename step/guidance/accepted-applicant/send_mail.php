@@ -64,7 +64,7 @@ if(isset($_POST['email_data']))
 		
 
 		$domain = $student['domain'];
-		$link = "$domain/guidance-step/index.php?applicant_id=$app";
+		$link = "$domain/guidance-step/index.php?applicant_id=$applicant_id";
 		$mail->isHTML(true);
 		$mail->Body = file_get_contents('accept_mail.html');
 		$mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
