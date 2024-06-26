@@ -407,6 +407,10 @@ $(document).ready(function(){
                 } else
                 {
                     $('#'+id).text(data);
+                    $('#'+id).text('No Applicant Selected');
+                    $('#'+id).removeClass('btn-danger');
+                    $('#'+id).removeClass('btn-info');
+                    $('#'+id).addClass('btn-info');
                 }
                 $('#'+id).attr('disabled', false);
 
