@@ -1,6 +1,5 @@
 <?php
 
-include("../conn/conn.php");
 require '../database/config.php';
 
 
@@ -19,7 +18,8 @@ if(mysqli_num_rows($query_run) > 0)
         }
         else
         {
-        echo "<h4>No Such Id Found</h4>";
+			$student = [];
+			header("Location: index.php");
         }
 }
 
@@ -185,7 +185,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="fname" placeholder="Ex: Jose" value="<?php echo $student['fname'] ?>" disabled/>
+													name="fname" placeholder="Ex: Jose" value="<?php echo $student['fname'] ?? null ?>" disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -198,7 +198,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="mname" placeholder="Ex: Laurel" value="<?php echo $student['mname'] ?>" disabled/>
+													name="mname" placeholder="Ex: Laurel" value="<?php echo $student['mname'] ?? null  ?>" disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -211,7 +211,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="lname" placeholder="Ex: Dela Crus" value="<?php echo $student['lname'] ?>" disabled />
+													name="lname" placeholder="Ex: Dela Crus" value="<?php echo $student['lname'] ?? null  ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -265,7 +265,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!-- <input type="text" class="form-control" id="kt_datepicker_1" readonly placeholder="Select date"/> -->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $student['date_of_birth'] ?>" disabled/>
+													name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $student['date_of_birth'] ?? null  ?>" disabled/>
 													
 												<!--end::Input-->
 											</div>
@@ -277,7 +277,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="numeric" maxlength="2" pattern="[0-9\s]{13,19}"
 													class="form-control form-control-lg form-control-solid"
-													name="age" placeholder="24" value="<?php echo $student['age'] ?>" disabled/>
+													name="age" placeholder="24" value="<?php echo $student['age'] ?? null  ?>" disabled/>
 													<!-- <span class="form-text text-muted">Please enter only digits</span> -->
 												<!--end::Input-->
 											</div>
@@ -290,7 +290,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="pbirth" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['place_of_birth'] ?>" disabled/>
+													name="pbirth" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['place_of_birth'] ?? null  ?>" disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -316,7 +316,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="cadd" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['address'] ?>" />
+													name="cadd" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['address'] ?? null  ?>" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -328,7 +328,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="padd" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['address'] ?>" />
+													name="padd" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $student['address'] ?? null  ?>" />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -404,7 +404,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="religion" placeholder="Ex: Roman Catholic" value="<?php echo $student['religion'] ?>"  disabled/>
+													name="religion" placeholder="Ex: Roman Catholic" value="<?php echo $student['religion'] ?? null  ?>"  disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -427,7 +427,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $student['email'] ?>" disabled/>
+													name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $student['email'] ?? null  ?>" disabled/>
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1103,7 +1103,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="enameschool" placeholder="" value="<?php echo $student['elementary'] ?>" disabled />
+													name="enameschool" placeholder="" value="<?php echo $student['elementary'] ?? null  ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1115,7 +1115,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="eincdate" placeholder="" value="<?php echo $student['elem_year'] ?>" disabled />
+													name="eincdate" placeholder="" value="<?php echo $student['elem_year'] ?? null  ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
@@ -1156,7 +1156,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="hnameschool" placeholder="" value="<?php echo $student['high_school'] ?>" disabled />
+													name="hnameschool" placeholder="" value="<?php echo $student['high_school'] ?? null  ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<!--end::Col-->
@@ -1168,7 +1168,7 @@ License: For each use you must have a valid license purchased only from above li
 												<!--begin::Input-->
 												<input type="text"
 													class="form-control form-control-lg form-control-solid"
-													name="hincdate" placeholder="" value="<?php echo $student['high_year'] ?>" disabled />
+													name="hincdate" placeholder="" value="<?php echo $student['high_year'] ?? null  ?>" disabled />
 												<!--end::Input-->
 											</div>
 											<div class="col-4">
@@ -2541,7 +2541,7 @@ License: For each use you must have a valid license purchased only from above li
 		if (!$_GET['applicant_id']) { ?>
 			<script>
 			Swal.fire({
-				text: "No applicant found.",
+				text: "Applicant ID not found. Please try again.",
 				icon: "error",
 				buttonsStyling: false,
 				confirmButtonText: "Ok, got it!",
