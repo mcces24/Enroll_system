@@ -50,9 +50,9 @@ if (isset($_POST['edit'])) {
             }
         } else {
 
-            $pass = substr(str_shuffle(MD5(microtime())), 0, 10);
-            $query3 = "INSERT INTO student_acc (id_number, pass) VALUES ('$id_number', '$pass')";
-            $query_run3 = mysqli_query($conn, $query3);
+            // $pass = substr(str_shuffle(MD5(microtime())), 0, 10);
+            // $query3 = "INSERT INTO student_acc (id_number, pass) VALUES ('$id_number', '$pass')";
+            // $query_run3 = mysqli_query($conn, $query3);
 
             //Import PHPMailer classes into the global namespace
             //These must be at the top of your script, not inside a function
