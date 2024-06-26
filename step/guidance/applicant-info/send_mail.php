@@ -42,8 +42,8 @@ if(isset($_POST['email_data']))
 		$mname = $student1['mname'];
 		$app1 = $student1['applicant_id'];
 
-		$text = "Hello! $lname, $fname $mname.";
-		$app = "$app1";
+		$text = "$lname, $fname $mname.";
+		$applicant_id = "$app1";
 
 		$mail = new PHPMailer;
 		$mail->IsSMTP();								//Sets Mailer to send message using SMTP
@@ -64,14 +64,11 @@ if(isset($_POST['email_data']))
 		$body = $student['email_body'];
 		$domain = $student['domain'];
 		$admission = "$domain/admission-schedule.php?applicant_id=$app";
-		$mail->Body = "<h2>$text</h2> <br> $body
-					<p>Please Select a time schedule of your choice for your admission test</p>
-					$admission
-					<h3>Applicant Number: $app </h3>
-					<br>
-					<br> NOTE: Please secure a copy of your Applicant Number. Thank You.";
-
-		$mail->AltBody = '';
+		$mail->isHTML(true);
+		$mail->Body = file_get_contents('accept_mail.html');
+		$mail->Body = str_replace('<?= $admission ?>', $admission, $mail->Body);
+		$mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
+		$mail->Body = str_replace('<?= $name ?>', $text, $mail->Body);
 
 		$result = $mail->Send();						//Send an Email. Return true on success or false on error
 
@@ -84,7 +81,7 @@ if(isset($_POST['email_data']))
 	}
 	if($output)
 	{
-		echo 'ok';
+		echo true;
 		foreach($_POST['email_data'] as $rows){
 		$email=$rows["name"];
 		$code = 'Accept';
@@ -93,7 +90,7 @@ if(isset($_POST['email_data']))
 	}
 	else
 	{
-		echo 'Error Sending Mail';
+		echo false;
 	}
 }
 
