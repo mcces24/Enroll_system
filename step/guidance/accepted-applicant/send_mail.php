@@ -58,26 +58,22 @@ if(isset($_POST['email_data']))
 		$mail->FromName = ($student['email_name']);					//Sets the From name of the message
 		$mail->AddAddress($row["email"]);	//Adds a "To" address
 		$mail->WordWrap = 50;							//Sets word wrapping on the body of the message to a given number of characters
-		$mail->IsHTML(true);							//Sets message type to HTML
 		$mail->Subject = 'MCC Guidance Office Form'; //Sets the Subject of the message
 		//An HTML or plain text message body
 
-		$domain = $student['domain'];
-		$step = "$domain/guidance-step/index.php?applicant_id=$app";
-		$mail->Body = "<h2>$text</h2><p>Madridejos Community College accepted your pre enrollement request. Here is your applicant number</p><h3>Applicant Number: $app </h3><br>
-		To procced your enrollment. Please fill-up with this form. Link below. <br>
-		$step
-		<br>
-		<br> NOTE: Please secure a copy of your Applicant Number. Thank You.";
+		
 
-		$mail->AltBody = '';
+		$domain = $student['domain'];
+		$link = "$domain/guidance-step/index.php?applicant_id=$app";
+		$mail->isHTML(true);
+		$mail->Body = file_get_contents('accept_mail.html.html');
+		$mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
 
 		$result = $mail->Send();						//Send an Email. Return true on success or false on error
 
 		if($result)
 		{
 			$output .= html_entity_decode($result);
-
 		}
 
 	}
