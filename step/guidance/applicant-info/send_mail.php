@@ -65,7 +65,7 @@ if(isset($_POST['email_data']))
 		$domain = $student['domain'];
 		$admission = "$domain/admission-schedule.php?applicant_id=$applicant_id";
 		$mail->isHTML(true);
-		$mail->Body = file_get_contents('accept_mail.html');
+		$mail->Body = file_get_contents('email_admission.html');
 		$mail->Body = str_replace('<?= $admission ?>', $admission, $mail->Body);
 		$mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
 		$mail->Body = str_replace('<?= $name ?>', $text, $mail->Body);
