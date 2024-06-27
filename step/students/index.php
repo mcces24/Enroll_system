@@ -182,7 +182,7 @@ if (mysqli_num_rows($query_run) > 0) {
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
-                        if ($id_number != 0) {
+                        if (!$id_number) {
                             $id_number = $id_number;
                             $sel = "SELECT * FROM students WHERE id_number='$id_number'";
                             $query = mysqli_query($conn, $sel);
@@ -208,7 +208,7 @@ if (mysqli_num_rows($query_run) > 0) {
                         <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <? if ($id_number != 0) : ?>
+                        <? if (!$id_number) : ?>
                             <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
                         <? endif; ?>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
