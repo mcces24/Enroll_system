@@ -453,13 +453,13 @@ if (mysqli_num_rows($query_run) > 0) {
                                                 if ($conn->connect_error) {
                                                     die("Connection failed: " . $conn->connect_error);
                                                 }
-                                                $section_id1 = $student['section_id'];
-                                                $semester_id1 = $student['semester_id'];
+                                                //$section_id1 = $student['section_id'];
+                                                //$semester_id1 = $student['semester_id'];
                                                 if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
                                                     $id_number = $student['id_number'];
                                                     $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
                                                 } else {
-                                                    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
+                                                    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects ";
                                                 }
 
                                                 $result = $conn->query($sql);
