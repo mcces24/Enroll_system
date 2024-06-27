@@ -459,7 +459,7 @@ if (mysqli_num_rows($query_run) > 0) {
                                                 //     $id_number = $student['id_number'];
                                                 //     $sql = "SELECT * FROM selected_subject LEFT JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
                                                 // } else {
-                                                    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
+                                                    $sql = "SELECT * FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
                                                 // }
 
                                                $result = mysqli_query($conn, $sql);
