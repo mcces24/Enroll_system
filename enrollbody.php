@@ -4,7 +4,7 @@
 //    session_start();
 
       if (!isset($_SESSION['SESSION_STUDENTS'])) {
-         // header("Location: login/index.php");
+         // header("Location: login/index");
          $button1 = "Login";
          
             // echo '<script type="text/javascript"> $("#mlogin").modal("show")< /script>';

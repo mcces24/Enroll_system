@@ -4072,7 +4072,7 @@ flexibility(document.documentElement);
                                         data-section="title_tagline">
                                         <div class="site-branding ast-site-identity"
                                             itemtype="https://schema.org/Organization" itemscope="itemscope">
-                                            <span class="site-logo-img"><a href="./index.php" class="custom-logo-link"
+                                            <span class="site-logo-img"><a href="./index" class="custom-logo-link"
                                                     rel="home" aria-current="page"><img width="120" height="120"
                                                         src="./wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png"
                                                         class="custom-logo" alt="Madridejos Community College"
@@ -4101,19 +4101,19 @@ flexibility(document.documentElement);
                                                             class="main-header-menu ast-menu-shadow ast-nav-menu ast-flex  submenu-with-border stack-on-mobile">
                                                             <li id="menu-item-644"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-465 current_page_item menu-item-644">
-                                                                <a href="./index.php" aria-current="page"
+                                                                <a href="./index" aria-current="page"
                                                                     class="menu-link">Home</a></li>
                                                             <li id="menu-item-645"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-645">
-                                                                <a href="./academics/index.php"
+                                                                <a href="./academics/index"
                                                                     class="menu-link">Academics</a></li>
                                                             <li id="menu-item-647"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-647">
-                                                                <a href="./about/index.php" class="menu-link">About</a>
+                                                                <a href="./about/index" class="menu-link">About</a>
                                                             </li>
                                                             <li id="menu-item-648"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648">
-                                                                <a href="./contact/index.php"
+                                                                <a href="./contact/index"
                                                                     class="menu-link">Contact</a></li>
                                                             <li id="menu-item-649"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649">
@@ -4122,7 +4122,7 @@ flexibility(document.documentElement);
 
                                                             <li id="menu-item-650" name="button1"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650">
-                                                                <a href="./step/index.php"
+                                                                <a href="./step/index"
                                                                     class="menu-link"><?php echo $button1 ?></a></li>
                                                             <!-- <div class="d-flex ms-3">
 									
@@ -4200,7 +4200,7 @@ flexibility(document.documentElement);
                                     data-section="title_tagline">
                                     <div class="site-branding ast-site-identity"
                                         itemtype="https://schema.org/Organization" itemscope="itemscope">
-                                        <span class="site-logo-img"><a href="./index.php" class="custom-logo-link"
+                                        <span class="site-logo-img"><a href="./index" class="custom-logo-link"
                                                 rel="home" aria-current="page"><img width="120" height="120"
                                                     src="./wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png"
                                                     class="custom-logo" alt="Madridejos Community College"
@@ -4509,7 +4509,7 @@ flexibility(document.documentElement);
                                                         data-widget_type="button.default">
                                                         <div class="elementor-widget-container">
                                                             <div class="elementor-button-wrapper">
-                                                                <a href="./academics/index.php" style="margin-top: 10px"
+                                                                <a href="./academics/index" style="margin-top: 10px"
                                                                     class="elementor-button-link elementor-button elementor-size-sm"
                                                                     role="button">
                                                                     <span class="elementor-button-content-wrapper">
@@ -4948,18 +4948,18 @@ flexibility(document.documentElement);
                                                 class="main-header-menu ast-nav-menu ast-flex  submenu-with-border astra-menu-animation-fade  stack-on-mobile">
                                                 <li
                                                     class="page_item page-item-465 current-menu-item menu-item current-menu-item">
-                                                    <a href="./index.php" class="menu-link">Home</a></li>
+                                                    <a href="./index" class="menu-link">Home</a></li>
                                                 <li class="page_item page-item-152 menu-item"><a
-                                                        href="./about/index.php" class="menu-link">About</a></li>
+                                                        href="./about/index" class="menu-link">About</a></li>
                                                 <li class="page_item page-item-153 menu-item"><a
-                                                        href="./academics/index.php" class="menu-link">Academics</a>
+                                                        href="./academics/index" class="menu-link">Academics</a>
                                                 </li>
                                                 <li class="page_item page-item-155 menu-item"><a
-                                                        href="./contact/index.php" class="menu-link">Contact</a></li>
+                                                        href="./contact/index" class="menu-link">Contact</a></li>
                                                 <li class="page_item page-item-640 menu-item"><a
                                                         href="./enrollnow.php" class="menu-link">Enroll Now</a>
                                                 </li>
-                                                <li class="page_item page-item-640 menu-item"><a href="../step/index.php" class="menu-link"><?php echo $button1 ?></a></li>
+                                                <li class="page_item page-item-640 menu-item"><a href="../step/index" class="menu-link"><?php echo $button1 ?></a></li>
                                             </ul>
                                         </div>
                                     </nav>
