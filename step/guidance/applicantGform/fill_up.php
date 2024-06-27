@@ -20,9 +20,9 @@ if (mysqli_num_rows($querys_run) > 0) {
 
     foreach ($querys_run as $rows)
 ?><?php
-            }
+}
 
-                    ?>
+    ?>
         <?php
 
         require '../../database/config.php';
@@ -33,9 +33,9 @@ if (mysqli_num_rows($querys_run) > 0) {
         if (mysqli_num_rows($querys_run1) > 0) {
             foreach ($querys_run1 as $rows1)
         ?><?php
-            }
+    }
 
-                    ?>
+            ?>
         <?php
 
         require '../../database/config.php';
@@ -47,9 +47,9 @@ if (mysqli_num_rows($querys_run) > 0) {
 
             foreach ($querys_run11 as $rows11)
         ?><?php
-                                        }
+    }
 
-                                                ?>
+            ?>
                                     <?php
 
                                     require '../../database/config.php';
@@ -59,9 +59,9 @@ if (mysqli_num_rows($querys_run) > 0) {
                                     if (mysqli_num_rows($querys_run111) > 0) {
                                         foreach ($querys_run111 as $rows111)
                                     ?><?php
-                                        }
+                                }
 
-                                                ?>
+                                        ?>
 
 <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?> 
 
