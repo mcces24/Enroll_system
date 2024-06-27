@@ -4450,7 +4450,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
                                                       <!-- End of HappyForms Additional CSS -->
                                                       <div class=" happyforms-styles" id="happyforms-710">
                                                          <?php if ($enrolls['enroll_name'] == 'New Students') { ?>
-                                                            <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" id="happyforms-form-710" autocomplete="off">
+                                                            <form action="" method="post" id="happyforms-form-710" autocomplete="off">
                                                                <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                                <input type="hidden" name="action" value="happyforms_message">
                                                                <input type="hidden" name="client_referer" value="">
@@ -5033,7 +5033,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
                                                       <!-- End of HappyForms Additional CSS -->
                                                       <div class=" happyforms-styles" id="happyforms-710">
                                                       <?php } elseif ($enrolls['enroll_name'] == 'Transferee Students') { ?>
-                                                         <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" id="happyforms-form-710" autocomplete="off">
+                                                         <form action="" method="post" id="happyforms-form-710" autocomplete="off">
                                                             <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                             <input type="hidden" name="action" value="happyforms_message">
                                                             <input type="hidden" name="client_referer" value="">
@@ -5603,7 +5603,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
                                                       <!-- End of HappyForms Additional CSS -->
                                                       <div class=" happyforms-styles" id="happyforms-768">
                                                       <?php } elseif ($enrolls['enroll_name'] == 'Old Students') { ?>
-                                                         <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
+                                                         <form action="" method="post" autocomplete="off">
                                                             <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                             <input type="hidden" name="action" value="happyforms_message">
                                                             <input type="hidden" name="client_referer" value="">
@@ -6275,7 +6275,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
                                                             <!-- End of HappyForms Additional CSS -->
                                                             <div class=" happyforms-styles" id="happyforms-768">
                                                             <?php } elseif ($enrolls['enroll_name'] == 'Shift Students') { ?>
-                                                               <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
+                                                               <form action="" method="post" autocomplete="off">
                                                                   <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                                   <input type="hidden" name="action" value="happyforms_message">
                                                                   <input type="hidden" name="client_referer" value="">
@@ -6888,7 +6888,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
                                                          </div>
                                                       </div>
                                                    <?php } elseif ($enrolls['enroll_name'] == 'All') { ?>
-                                                      <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" id="happyforms-form-710" autocomplete="off">
+                                                      <form action="" method="post" id="happyforms-form-710" autocomplete="off">
                                                          <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                          <input type="hidden" name="action" value="happyforms_message">
                                                          <input type="hidden" name="client_referer" value="">
@@ -7471,7 +7471,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
                                                    <!-- End of HappyForms Additional CSS -->
                                                    <!-- TRANSFEREE START -->
                                                    <div class=" happyforms-styles" id="happyforms-710">
-                                                      <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" id="happyforms-form-710" autocomplete="off">
+                                                      <form action="" method="post" id="happyforms-form-710" autocomplete="off">
                                                          <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                          <input type="hidden" name="action" value="happyforms_message">
                                                          <input type="hidden" name="client_referer" value="">
@@ -8041,7 +8041,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
                                                    <!-- End of HappyForms Additional CSS -->
                                                    <!-- OLD STUDENTS -->
                                                    <div class=" happyforms-styles" id="happyforms-768">
-                                                      <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
+                                                      <form action="" method="post" autocomplete="off">
                                                          <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                          <input type="hidden" name="action" value="happyforms_message">
                                                          <input type="hidden" name="client_referer" value="">
@@ -8719,7 +8719,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
 
                                              <!-- SHIFT STUDENTS -->
                                              <div class=" happyforms-styles" id="happyforms-768">
-                                                <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" autocomplete="off">
+                                                <form action="" method="post" autocomplete="off">
                                                    <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                    <input type="hidden" name="action" value="happyforms_message">
                                                    <input type="hidden" name="client_referer" value="">
