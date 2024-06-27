@@ -448,25 +448,25 @@ if (mysqli_num_rows($query_run) > 0) {
 
                                                 require '../../database/regis.php';
                                                 // Create connection
-                                                $conn = new mysqli($servername, $username, $password, $dbname);
-                                                // Check connection
-                                                if ($conn->connect_error) {
-                                                    die("Connection failed: " . $conn->connect_error);
-                                                }
-                                                $section_id1 = $student['section_id'];
-                                                $semester_id1 = $student['semester_id'];
-                                                if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
-                                                    $id_number = $student['id_number'];
-                                                    $sql = "SELECT * FROM selected_subject LEFT JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
-                                                } else {
+                                                // $conn = new mysqli($servername, $username, $password, $dbname);
+                                                // // Check connection
+                                                // if ($conn->connect_error) {
+                                                //     die("Connection failed: " . $conn->connect_error);
+                                                // }
+                                                $section_id1 = $student['section_id'] ?? null;
+                                                $semester_id1 = $student['semester_id'] ?? null;
+                                                // if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
+                                                //     $id_number = $student['id_number'];
+                                                //     $sql = "SELECT * FROM selected_subject LEFT JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
+                                                // } else {
                                                     $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
-                                                }
+                                                // }
 
-                                                $result = $conn->query($sql);
+                                               $result = mysqli_query($conn, $sql);
 
-                                                if ($result->num_rows > 0) {
+                                               if (mysqli_num_rows($result) > 0) {
                                                     // output data of each row
-                                                    while ($row = $result->fetch_assoc()) {
+                                                    foreach ($result as $row) {
                                                 ?>
 
 
