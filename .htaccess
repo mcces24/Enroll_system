@@ -10,6 +10,10 @@
     RewriteCond %{THE_REQUEST} /index [NC]
     RewriteRule ^(.*)index$ /$1 [R=301,L]
 
+    # Remove .php from URL
+    RewriteCond %{THE_REQUEST} /.php [NC]
+    RewriteRule ^(.*).php$ /$1 [R=301,L]
+
     # Handle root and subdirectories recursively, appending .php if necessary
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
