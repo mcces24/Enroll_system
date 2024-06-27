@@ -274,6 +274,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
          $_SESSION['icon'] = "error";
       }
    }
+} else {
+   $_SESSION['statuss'] = "You have already submitted.";
+   $_SESSION['icon'] = "error";
+
 } 
 ?>
 <?php
