@@ -58,7 +58,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 <?php
 session_start();
 // if (isset($_SESSION['SESSION_STUDENTS'])) {
-//     header("Location: ../index.php");
+//     header("Location: ../");
 //     die();
 // }
 
@@ -98,8 +98,8 @@ if (isset($_POST['submit'])) {
 
                 $_SESSION['USER_ID'] = $USER_ID;
 
-                // header("Location: ../index.php?id_number=$id");
-                header("Location: ../../../enroll-now/index.php");
+                // header("Location: ../?id_number=$id");
+                header("Location: ../../../enroll-now/");
             }
         } else {
             $msg = "<div class='alert alert-info'>ID Number Is Not Yet Enroll In This Semester</div>";
@@ -174,7 +174,7 @@ if (isset($_POST['submit'])) {
                             <input type="password" class="password" name="password" placeholder="Enter Your Password" required>
 
 
-                            <p style="float: left;"><a href="../../../index.php" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
+                            <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
                             <!-- <p style="float: right ;"><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Sign Up</a></p> -->
                             <button name="submit" name="submit" class="btn" type="submit">Login</button>
                         </form>
