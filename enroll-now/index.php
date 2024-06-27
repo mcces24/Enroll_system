@@ -103,7 +103,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
    ?>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post" && isset($_POST["new"])) {
 
    $applicant_id = $_POST["applicant_id"];
    $fname = $_POST["fname"];
@@ -196,7 +196,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
 } 
 ?>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post" && isset($_POST["data"])) {
 
    $applicant_id = $_POST["applicant_id"];
    $fname = $_POST["fname"];
@@ -275,13 +275,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
       }
    }
 } else {
-   $_SESSION['statuss'] = "You have already submitted.";
+   $_SESSION['statuss'] = "Y123213";
    $_SESSION['icon'] = "error";
 
 } 
 ?>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post" && isset($_POST["shift"])) {
 
    $applicant_id = $_POST["applicant_id"];
    $fname = $_POST["fname"];
