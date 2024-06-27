@@ -13,7 +13,7 @@ require 'database/config.php';
     {
     $student1 = mysqli_fetch_array($query_run1);
     if ($student1['applicant_id'] = $applicant_id) {
-         header("Location: index.php");
+         header("Location: index");
      }
     }
     else
@@ -197,7 +197,7 @@ require 'database/config.php';
         													<div class="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
         										<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
         											<div class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope">
-        					<span class="site-logo-img"><a href="./index.php" class="custom-logo-link" rel="home"><img width="120" height="120" src="./wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png" class="custom-logo" alt="Madridejos Community College" srcset="./wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png 120w, ./wp-content/uploads/2022/10/mcc-removebg-preview-300x300.png 300w, ./wp-content/uploads/2022/10/mcc-removebg-preview-150x150.png 150w, ./wp-content/uploads/2022/10/mcc-removebg-preview.png 400w" sizes="(max-width: 120px) 100vw, 120px"></a></span>				</div>
+        					<span class="site-logo-img"><a href="./index" class="custom-logo-link" rel="home"><img width="120" height="120" src="./wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png" class="custom-logo" alt="Madridejos Community College" srcset="./wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png 120w, ./wp-content/uploads/2022/10/mcc-removebg-preview-300x300.png 300w, ./wp-content/uploads/2022/10/mcc-removebg-preview-150x150.png 150w, ./wp-content/uploads/2022/10/mcc-removebg-preview.png 400w" sizes="(max-width: 120px) 100vw, 120px"></a></span>				</div>
         			<!-- .site-branding -->
         					</div>
         									</div>
@@ -483,12 +483,12 @@ require 'database/config.php';
         					<div class="ast-mobile-popup-content">
         								<div class="ast-builder-menu-mobile ast-builder-menu ast-builder-menu-mobile-focus-item ast-builder-layout-element site-header-focus-item" data-section="section-header-mobile-menu">
         			<div class="ast-main-header-bar-alignment"><div class="main-header-bar-navigation"><nav class="site-navigation" id="ast-mobile-site-navigation" itemtype="https://schema.org/SiteNavigationElement" itemscope="itemscope" aria-label="Site Navigation"><div id="ast-hf-mobile-menu" class="main-navigation"><ul class="main-header-menu ast-nav-menu ast-flex  submenu-with-border astra-menu-animation-fade  stack-on-mobile">
-        <li class="page_item page-item-465 menu-item"><a href="./index.php" class="menu-link">Home</a></li>
-        <li class="page_item page-item-152 menu-item"><a href="./about/index.php" class="menu-link">About</a></li>
-        <li class="page_item page-item-153 menu-item"><a href="./academics/index.php" class="menu-link">Academics</a></li>
-        <li class="page_item page-item-155 menu-item"><a href="./contact/index.php" class="menu-link">Contact</a></li>
-        <li class="page_item page-item-640 current-menu-item menu-item current-menu-php"><a href="index.php" class="menu-link">Enroll Now</a></li>
-        <li class="page_item page-item-640 menu-item"><a href="step/index.php" class="menu-link">Login</a></li>
+        <li class="page_item page-item-465 menu-item"><a href="./index" class="menu-link">Home</a></li>
+        <li class="page_item page-item-152 menu-item"><a href="./about/index" class="menu-link">About</a></li>
+        <li class="page_item page-item-153 menu-item"><a href="./academics/index" class="menu-link">Academics</a></li>
+        <li class="page_item page-item-155 menu-item"><a href="./contact/index" class="menu-link">Contact</a></li>
+        <li class="page_item page-item-640 current-menu-item menu-item current-menu-php"><a href="index" class="menu-link">Enroll Now</a></li>
+        <li class="page_item page-item-640 menu-item"><a href="step/index" class="menu-link">Login</a></li>
         </ul></div></nav></div></div>		</div>
         				<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="section-hb-social-icons-1">
         			<div class="ast-header-social-1-wrap ast-header-social-wrap"><div class="header-social-inner-wrap element-social-inner-wrap social-show-label-false ast-social-color-type-custom ast-social-stack-none ast-social-element-style-filled">
