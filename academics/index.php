@@ -117,7 +117,7 @@ flexibility(document.documentElement);
 <li id="menu-item-645" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-153 current_page_item menu-item-645"><a href="./index" aria-current="page" class="menu-link">Academics</a></li>
 <li id="menu-item-647" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-647"><a href="./../about/index" class="menu-link">About</a></li>
 <li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><a href="./../contact/index" class="menu-link">Contact</a></li>
-<li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649"><a href="./../enrollnow.php" class="menu-link">Enroll Now</a></li>
+<li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649"><a href="./../enrollnow" class="menu-link">Enroll Now</a></li>
 <li id="menu-item-650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650"><a href="../step/index" class="menu-link"><?php echo $button1 ?></a></a></li>
 
 </ul></div></nav></div></div>		</div>
@@ -327,7 +327,7 @@ flexibility(document.documentElement);
 <li class="page_item page-item-152 menu-item"><a href="./../about/index" class="menu-link">About</a></li>
 <li class="page_item page-item-153 current-menu-item menu-item current-menu-item"><a href="./index" class="menu-link">Academics</a></li>
 <li class="page_item page-item-155 menu-item"><a href="./../contact/index" class="menu-link">Contact</a></li>
-<li class="page_item page-item-640 menu-item"><a href="./../enrollnow.php" class="menu-link">Enroll Now</a></li>
+<li class="page_item page-item-640 menu-item"><a href="./../enrollnow" class="menu-link">Enroll Now</a></li>
 <li class="page_item page-item-640 menu-item"><a href="../step/students/index" class="menu-link"><?php echo $button1 ?></a></li>
 </ul></div></nav></div></div>		</div>
 				<div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="section-hb-social-icons-1">

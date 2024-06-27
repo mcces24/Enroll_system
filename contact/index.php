@@ -4102,7 +4102,7 @@ flexibility(document.documentElement);
                                                                     class="menu-link">Contact</a></li>
                                                             <li id="menu-item-649"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649">
-                                                                <a href="./../enrollnow.php" class="menu-link">Enroll
+                                                                <a href="./../enrollnow" class="menu-link">Enroll
                                                                     Now</a></li>
                                                             <li id="menu-item-650"
                                                                 class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650">
@@ -4505,7 +4505,7 @@ flexibility(document.documentElement);
                                                     class="page_item page-item-155 current-menu-item menu-item current-menu-item">
                                                     <a href="./index" class="menu-link">Contact</a></li>
                                                 <li class="page_item page-item-640 menu-item"><a
-                                                        href="./../enrollnow.php" class="menu-link">Enroll Now</a></li>
+                                                        href="./../enrollnow" class="menu-link">Enroll Now</a></li>
                                                 <li class="page_item page-item-640 menu-item"><a
                                                         href="../step/index"
                                                         class="menu-link"><?php echo $button1 ?></a></li>
