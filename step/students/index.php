@@ -296,7 +296,7 @@ if (mysqli_num_rows($query_run) > 0) {
 
 
                                     <table class="upper">
-                                        <?php if ($id_number != 0) : ?>
+                                        <?php if ($id_number) : ?>
 
                                             <?php
 
@@ -442,7 +442,7 @@ if (mysqli_num_rows($query_run) > 0) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if ($id_number != 0) : ?>
+                                            <?php if ($id_number) : ?>
                                                 <?php
 
 
@@ -462,9 +462,8 @@ if (mysqli_num_rows($query_run) > 0) {
                                                     $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
                                                 }
 
-                                                $result = $conn->query($sql);
-
-                                                if ($result->num_rows > 0) {
+                                                $result = mysqli_query($conn, $sql);
+                                                if (mysqli_num_rows($result) > 0) {
                                                     // output data of each row
                                                     while ($row = $result->fetch_assoc()) {
                                                 ?>
