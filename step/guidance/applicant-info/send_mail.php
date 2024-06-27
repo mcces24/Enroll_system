@@ -64,6 +64,7 @@ if (isset($_POST['email_data'])) {
 		$mail->Body = file_get_contents('email_admission.html');
 		$mail->Body = str_replace('<?= $admission ?>', $admission, $mail->Body);
 		$mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
+		$mail->Body = str_replace('<?= $body ?>', $body, $mail->Body);
 		$mail->Body = str_replace('<?= $name ?>', $text, $mail->Body);
 
 		$result = $mail->Send();						//Send an Email. Return true on success or false on error
