@@ -312,7 +312,7 @@ if (mysqli_num_rows($query_run) > 0) {
                                                         $qrcode = mysqli_fetch_array($query_run1);
                                             ?><?php
                                                     }
-                                            ?>
+                                                ?>
 
 
 
@@ -449,8 +449,8 @@ if (mysqli_num_rows($query_run) > 0) {
                                                 if ($conn->connect_error) {
                                                     die("Connection failed: " . $conn->connect_error);
                                                 }
-                                                $section_id1 = 10;
-                                                $semester_id1 = 10;
+                                                $section_id1 = isset($student['section_id']) && !empty($student['section_id']) ? $student['section_id'] : 0;
+                                                $semester_id1 = isset($student['semester_id']) && !empty($student['semester_id']) ? $student['semester_id'] : 0;
                                                 if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
                                                     $id_number = $student['id_number'];
                                                     $sql = "SELECT * FROM selected_subject LEFT JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
