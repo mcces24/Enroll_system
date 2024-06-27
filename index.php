@@ -4051,7 +4051,7 @@ flexibility(document.documentElement);
                                                                 <a href="./contact/" class="menu-link">Contact</a>
                                                             </li>
                                                             <li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649">
-                                                                <a href="enrollnow.php" class="menu-link">Enroll Now</a>
+                                                                <a href="enrollnow" class="menu-link">Enroll Now</a>
                                                             </li>
 
                                                             <li id="menu-item-650" name="button1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650">
@@ -4728,7 +4728,7 @@ flexibility(document.documentElement);
                                                 <li class="page_item page-item-153 menu-item"><a href="./academics/" class="menu-link">Academics</a>
                                                 </li>
                                                 <li class="page_item page-item-155 menu-item"><a href="./contact/" class="menu-link">Contact</a></li>
-                                                <li class="page_item page-item-640 menu-item"><a href="./enrollnow.php" class="menu-link">Enroll Now</a>
+                                                <li class="page_item page-item-640 menu-item"><a href="./enrollnow" class="menu-link">Enroll Now</a>
                                                 </li>
                                                 <li class="page_item page-item-640 menu-item"><a href="../step/" class="menu-link"><?php echo $button1 ?></a></li>
                                             </ul>

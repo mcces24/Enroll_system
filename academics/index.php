@@ -4004,7 +4004,7 @@ flexibility(document.documentElement);
 															<li id="menu-item-645" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-153 current_page_item menu-item-645"><a href="./" aria-current="page" class="menu-link">Academics</a></li>
 															<li id="menu-item-647" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-647"><a href="./../about/" class="menu-link">About</a></li>
 															<li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><a href="./../contact/" class="menu-link">Contact</a></li>
-															<li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649"><a href="./../enrollnow.php" class="menu-link">Enroll Now</a></li>
+															<li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649"><a href="./../enrollnow" class="menu-link">Enroll Now</a></li>
 															<li id="menu-item-650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650"><a href="../step/" class="menu-link"><?php echo $button1 ?></a></a></li>
 
 														</ul>
@@ -4533,7 +4533,7 @@ flexibility(document.documentElement);
 												<li class="page_item page-item-152 menu-item"><a href="./../about/" class="menu-link">About</a></li>
 												<li class="page_item page-item-153 current-menu-item menu-item current-menu-item"><a href="./" class="menu-link">Academics</a></li>
 												<li class="page_item page-item-155 menu-item"><a href="./../contact/" class="menu-link">Contact</a></li>
-												<li class="page_item page-item-640 menu-item"><a href="./../enrollnow.php" class="menu-link">Enroll Now</a></li>
+												<li class="page_item page-item-640 menu-item"><a href="./../enrollnow" class="menu-link">Enroll Now</a></li>
 												<li class="page_item page-item-640 menu-item"><a href="../step/students/" class="menu-link"><?php echo $button1 ?></a></li>
 											</ul>
 										</div>
