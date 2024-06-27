@@ -90,7 +90,7 @@ server with default setting (user 'root' with no password) */
                     // Fetch result rows as an associative array
                     while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
     ?>
-                        <p><a href="./index.php?search=<?php echo $row["id_number"] ?>"><?php echo $row["id_number"] ?></a></p>
+                        <p><a href="./?search=<?php echo $row["id_number"] ?>"><?php echo $row["id_number"] ?></a></p>
     <?php
                     }
                 } else {
