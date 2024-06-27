@@ -182,7 +182,7 @@ if (mysqli_num_rows($query_run) > 0) {
                 <div class="dropdown">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
-                        if ($id_number) {
+                        if ($id_number != 0) {
                             $id_number = $id_number;
                             $sel = "SELECT * FROM students WHERE id_number='$id_number'";
                             $query = mysqli_query($conn, $sel);
@@ -190,30 +190,26 @@ if (mysqli_num_rows($query_run) > 0) {
                         ?>
                             <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
                             <?php
-                           // Prepare and execute the query
-                           $stmt = $conn->prepare("SELECT * FROM qrcode WHERE student_id = ?");
-                           $stmt->bind_param("s", $id_number);
-                           $stmt->execute();
-                           $result = $stmt->get_result();
-                           
-                           // Check if a record was found
-                           if ($result && $result->num_rows > 0) {
-                               $qrcode = $result->fetch_assoc();
-                               $imageSrc = "../id/uploads/" . $qrcode['picture'];
-                           } else {
-                               $imageSrc = "../id/uploads/picture.png";
-                           }
-                           $stmt->close();
-                           ?>
-                           <img class="navbar-profile-image" src="<?php echo htmlspecialchars($imageSrc, ENT_QUOTES, 'UTF-8'); ?>" alt="Image">
-                       <?php } else { ?>
+                            $id_number = $id_number;
+                            $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
+                            $query_run1 = mysqli_query($conn, $query1);
+
+                            if (mysqli_num_rows($query_run1) > 0) {
+                                $qrcode = mysqli_fetch_array($query_run1);
+                            ?>
+                                <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
+                            <?php
+                            } else { ?>
+                                <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                            <?php }
+                        } else { ?>
                             <span class="me-2 d-none d-sm-block">Hi! Students</span>
                             <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
                         <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <? if ($id_number) : ?>
-                            <!-- <li style="text-align: center;"><span><?php //echo $resul['lname'] ?>,<?php //echo $resul['fname'] ?> <?php //echo $resul['mname'] ?></span></li> -->
+                        <? if ($id_number != 0) : ?>
+                            <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
                         <? endif; ?>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
@@ -296,7 +292,7 @@ if (mysqli_num_rows($query_run) > 0) {
 
 
                                     <table class="upper">
-                                        <?php if ($id_number) : ?>
+                                        <?php if ($id_number != 0) : ?>
 
                                             <?php
 
@@ -442,7 +438,7 @@ if (mysqli_num_rows($query_run) > 0) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php if ($id_number) : ?>
+                                            <?php if ($id_number != 0) : ?>
                                                 <?php
 
 
@@ -453,13 +449,13 @@ if (mysqli_num_rows($query_run) > 0) {
                                                 if ($conn->connect_error) {
                                                     die("Connection failed: " . $conn->connect_error);
                                                 }
-                                                $section_id1 = $student['section_id'];
-                                                $semester_id1 = $student['semester_id'];
+                                                $section_id1 = 10;
+                                                $semester_id1 = 10;
                                                 if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
                                                     $id_number = $student['id_number'];
-                                                    $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
+                                                    $sql = "SELECT * FROM selected_subject LEFT JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
                                                 } else {
-                                                    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id = $section_id1 AND semester_id = '$semester_id1' ";
+                                                    $sql = "SELECT * FROM subjects WHERE section_id = $section_id1 AND semester_id = '$semester_id1' ";
                                                 }
 
                                                 $result = $conn->query($sql);
