@@ -3,12 +3,12 @@
     RewriteBase /
 
     # Remove index.php from URL
-    # RewriteCond %{THE_REQUEST} /index\.php [NC]
-    # RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
+    RewriteCond %{THE_REQUEST} /index\.php [NC]
+    RewriteRule ^(.*)index\.php$ /$1 [R=301,L]
 
     # Remove index from URL
-    # RewriteCond %{THE_REQUEST} /index [NC]
-    # RewriteRule ^(.*)index$ /$1 [R=301,L]
+    RewriteCond %{THE_REQUEST} /index [NC]
+    RewriteRule ^(.*)index$ /$1 [R=301,L]
 
     # Handle root and subdirectories recursively, appending .php if necessary
     RewriteCond %{REQUEST_FILENAME} !-f
