@@ -103,7 +103,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
    ?>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["new"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
 
    $applicant_id = $_POST["applicant_id"];
    $fname = $_POST["fname"];
@@ -199,7 +199,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["new"])) {
 }
 ?>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["data"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
 
    $applicant_id = $_POST["applicant_id"];
    $fname = $_POST["fname"];
@@ -283,7 +283,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["data"])) {
 }
 ?>
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["shift"])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
 
    $applicant_id = $_POST["applicant_id"];
    $fname = $_POST["fname"];
