@@ -5,7 +5,7 @@ session_start();
 require '../../database/config.php';
 
 if (!isset($_SESSION['SESSION_STUDENTS'])) {
-    header("Location: login/index.php");
+    header("Location: login/");
     die();
 } else {
     $user_id = $_SESSION['USER_ID'];
@@ -131,7 +131,7 @@ if (mysqli_num_rows($query_run) > 0) {
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
         <div class="d-flex align-items-center p-3">
             <img class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4" style="height: 50px; " src="../assets/mcc2.png">
-            <a href="index.php" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">Student</a>
+            <a href="./" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">Student</a>
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">
@@ -139,7 +139,7 @@ if (mysqli_num_rows($query_run) > 0) {
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">System</li>
             <li class="sidebar-menu-item has-dropdown">
             <li class="sidebar-menu-item">
-                <a href="index.php">
+                <a href="./">
                     <i class="ri-home-2-line sidebar-menu-item-icon"></i>
                     Home
                 </a>
