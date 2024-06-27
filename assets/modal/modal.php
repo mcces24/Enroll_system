@@ -41,7 +41,7 @@
                                         <button id="kt_sign_in_submit"
                                             class="btn btn-lg btn-primary w-100 mb-5">
                                          
-                                         <span class="indicator-label"><a href="./step/students/index.php">Continue</a></span>
+                                         <span class="indicator-label"><a href="./step/students/">Continue</a></span>
                                             <span class="indicator-progress">Please wait...
                                                 <span
                                                     class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -94,7 +94,7 @@
 								<!--end::Title-->
 								<!--begin::Link-->
 								<div class="text-gray-400 fw-bold fs-4">Already have an account?
-								<a href="./././step/students/login/index.php" class="link-primary fw-bolder">Sign in here</a></div>
+								<a href="./././step/students/login/" class="link-primary fw-bolder">Sign in here</a></div>
 								<!--end::Link-->
 							</div>
 							<!--begin::Input group-->

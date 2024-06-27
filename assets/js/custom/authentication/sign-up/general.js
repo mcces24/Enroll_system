@@ -58,7 +58,7 @@ var KTSignupGeneral = function () {
                             e.reset();
                             s.reset();
 
-                            window.location.href = "./step/students/login/index.php";
+                            window.location.href = "./step/students/login/";
                         }
                     });
                 } else {
