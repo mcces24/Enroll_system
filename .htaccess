@@ -1,6 +1,14 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
+    RewriteBase /
+
+    # Handle root and top-level URLs
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^([^/]+)$ $1.php [L,QSA]
+
+    # Handle URLs within subdirectories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^([^/]+)/([^/]+)$ $1/$2.php [L,QSA]
 </IfModule>
