@@ -322,7 +322,7 @@
                 <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">System</li>
                 <li class="sidebar-menu-item has-dropdown">
                 <li class="sidebar-menu-item">
-                    <a href="login/logout.php?id=<?php echo $resul['id'] ?>">
+                    <a href="../login/logout.php?id=<?php echo $resul['id'] ?>">
                         <i class="ri-logout-box-line sidebar-menu-item-icon"></i>
                         Logout
                     </a>
