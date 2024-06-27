@@ -446,7 +446,7 @@ if (mysqli_num_rows($query_run) > 0) {
                                                 <?php
 
 
-                                                require '../../database/regis.php';
+                                               // require '../../database/regis.php';
                                                 // Create connection
                                                 // $conn = new mysqli($servername, $username, $password, $dbname);
                                                 // // Check connection
