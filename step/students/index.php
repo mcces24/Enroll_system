@@ -301,7 +301,7 @@ if (mysqli_num_rows($query_run) > 0) {
                                             <?php
 
                                             $id1 =  $id_number;
-                                            $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
+                                            $query = "SELECT * FROM students LEFT JOIN course c ON students.course_id = c.course_id LEFT JOIN year_lvl y ON students.year_id = y.year_id LEFT JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
                                             $query_run = mysqli_query($conn, $query);
                                             $count = 0;
 
@@ -443,7 +443,51 @@ if (mysqli_num_rows($query_run) > 0) {
                                         </thead>
                                         <tbody>
                                             <?php if ($id_number) : ?>
-                                                <td colspan="7">Subject will show when you are already enroll12312</td>
+                                                <?php
+
+
+                                                require '../../database/regis.php';
+                                                // Create connection
+                                                $conn = new mysqli($servername, $username, $password, $dbname);
+                                                // Check connection
+                                                if ($conn->connect_error) {
+                                                    die("Connection failed: " . $conn->connect_error);
+                                                }
+                                                $section_id1 = $student['section_id'];
+                                                $semester_id1 = $student['semester_id'];
+                                                if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
+                                                    $id_number = $student['id_number'];
+                                                    $sql = "SELECT * FROM selected_subject LEFT JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
+                                                } else {
+                                                    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
+                                                }
+
+                                                $result = $conn->query($sql);
+
+                                                if ($result->num_rows > 0) {
+                                                    // output data of each row
+                                                    while ($row = $result->fetch_assoc()) {
+                                                ?>
+
+
+                                                        <tr>
+                                                            <td><?php echo  $row["subject_code"] ?></td>
+                                                            <td><?php echo  $row["subject_name"] ?></td>
+                                                            <td><?php echo  $row["units"] ?></td>
+                                                            <td><?php echo  $row["days"] ?></td>
+                                                            <td><?php echo  $row["time_sched"] ?></td>
+                                                            <td><?php echo  $row["room"] ?></td>
+                                                            <td><?php echo  $row["instructor"] ?></td>
+                                                        </tr>
+
+
+
+
+                                                <?php  }
+                                                } else {
+                                                    echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
+                                                }
+                                                ?>
                                             <?php else : ?>
                                                 <tr>
                                                     <td colspan="7">Subject will show when you are already enroll</td>
