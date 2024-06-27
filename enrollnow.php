@@ -4,7 +4,7 @@ include_once 'database/config.php';
 session_start();
 
 if (!isset($_SESSION['SESSION_STUDENTS'])) {
-    // header("Location: login/index");
+    // header("Location: login/");
 
     $button1 = "Login";
 
@@ -12,7 +12,7 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
 
 } else {
     $button1 = "Account";
-    header("Location: ./enroll-now/index");
+    header("Location: ./enroll-now/");
 }
 
 $querys = "SELECT * FROM academic GROUP BY status";
@@ -377,7 +377,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
         .site-header .site-description {
             font-size: 15px;
-            
+            font-size: 0.9375rem;
             display: none;
         }
 
@@ -986,7 +986,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
         body .elementor-button.elementor-size-xl,
         body .elementor-button {
             font-size: 15px;
-            
+            font-size: 0.9375rem;
         }
 
         .wp-block-button .wp-block-button__link:hover,
@@ -1016,7 +1016,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
             font-weight: 700;
             line-height: 1;
             font-size: 15px;
-            
+            font-size: 0.9375rem;
             border-radius: 4px;
             padding: 15px 30px;
         }
@@ -1091,7 +1091,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
             font-family: Georgia, Times, serif;
             font-weight: 700;
             font-size: 15px;
-            
+            font-size: 0.9375rem;
             line-height: 1;
         }
 
@@ -1679,7 +1679,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
         .ast-builder-menu-1 .menu-item>.menu-link {
             font-size: 15px;
-            
+            font-size: 0.9375rem;
             color: var(--ast-global-color-3);
         }
 
@@ -3175,9 +3175,9 @@ if (mysqli_num_rows($querys_run111) > 0) {
         }
 
         .ast-builder-menu-mobile .main-navigation .menu-item>.menu-link {
-            font-family: Georgia, Times, serif !important;
-            font-weight: 700 !important;
-            line-height: 1 !important;
+            font-family: Georgia, Times, serif;
+            font-weight: 700;
+            line-height: 1;
         }
 
         .ast-builder-menu-mobile .main-navigation .menu-item.menu-item-has-children>.ast-menu-toggle {
@@ -3214,9 +3214,9 @@ if (mysqli_num_rows($querys_run111) > 0) {
         }
 
         @media (max-width:921px) {
-            .ast-builder-menu-mobile .main-navigation a{
+            .ast-builder-menu-mobile .main-navigation {
                 font-size: 15px;
-                
+                font-size: 0.9375rem;
             }
 
             .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-item>.menu-link {
@@ -3964,7 +3964,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                 <div class="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
                                     <div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
                                         <div class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope">
-                                            <span class="site-logo-img"><a href="index" class="custom-logo-link" rel="home"><img width="120" height="120" src="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png" class="custom-logo" alt="Madridejos Community College" srcset="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png 120w, wp-content/uploads/2022/10/mcc-removebg-preview-300x300.png 300w, wp-content/uploads/2022/10/mcc-removebg-preview-150x150.png 150w, wp-content/uploads/2022/10/mcc-removebg-preview.png 400w" sizes="(max-width: 120px) 100vw, 120px"></a></span>
+                                            <span class="site-logo-img"><a href="" class="custom-logo-link" rel="home"><img width="120" height="120" src="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png" class="custom-logo" alt="Madridejos Community College" srcset="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png 120w, wp-content/uploads/2022/10/mcc-removebg-preview-300x300.png 300w, wp-content/uploads/2022/10/mcc-removebg-preview-150x150.png 150w, wp-content/uploads/2022/10/mcc-removebg-preview.png 400w" sizes="(max-width: 120px) 100vw, 120px"></a></span>
                                         </div>
                                         <!-- .site-branding -->
                                     </div>
@@ -3979,22 +3979,22 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                     <div class="main-navigation ast-inline-flex">
                                                         <ul id="ast-hf-menu-1" class="main-header-menu ast-menu-shadow ast-nav-menu ast-flex  submenu-with-border stack-on-mobile">
                                                             <li id="menu-item-644" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-644">
-                                                                <a href="index" class="menu-link">Home</a>
+                                                                <a href="" class="menu-link">Home</a>
                                                             </li>
                                                             <li id="menu-item-645" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-645">
-                                                                <a href="academics/index" class="menu-link">Academics</a>
+                                                                <a href="academics/" class="menu-link">Academics</a>
                                                             </li>
                                                             <li id="menu-item-647" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-647">
-                                                                <a href="about/index" class="menu-link">About</a>
+                                                                <a href="about/" class="menu-link">About</a>
                                                             </li>
                                                             <li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648">
-                                                                <a href="contact/index" class="menu-link">Contact</a>
+                                                                <a href="contact/" class="menu-link">Contact</a>
                                                             </li>
                                                             <li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-640 current_page_item menu-item-649">
                                                                 <a href="./enrollnow" aria-current="page" class="menu-link">Enroll Now</a>
                                                             </li>
                                                             <li id="menu-item-650" name="button1" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650">
-                                                                <a href="./step/index" class="menu-link"><?php echo $button1 ?></a>
+                                                                <a href="./step/" class="menu-link"><?php echo $button1 ?></a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -4052,7 +4052,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                             <div class="site-header-primary-section-left site-header-section ast-flex site-header-section-left">
                                 <div class="ast-builder-layout-element ast-flex site-header-focus-item" data-section="title_tagline">
                                     <div class="site-branding ast-site-identity" itemtype="https://schema.org/Organization" itemscope="itemscope">
-                                        <span class="site-logo-img"><a href="index" class="custom-logo-link" rel="home"><img width="120" height="120" src="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png" class="custom-logo" alt="Madridejos Community College" srcset="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png 120w, wp-content/uploads/2022/10/mcc-removebg-preview-300x300.png 300w, wp-content/uploads/2022/10/mcc-removebg-preview-150x150.png 150w, wp-content/uploads/2022/10/mcc-removebg-preview.png 400w" sizes="(max-width: 120px) 100vw, 120px"></a></span>
+                                        <span class="site-logo-img"><a href="" class="custom-logo-link" rel="home"><img width="120" height="120" src="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png" class="custom-logo" alt="Madridejos Community College" srcset="wp-content/uploads/2022/10/mcc-removebg-preview-120x120.png 120w, wp-content/uploads/2022/10/mcc-removebg-preview-300x300.png 300w, wp-content/uploads/2022/10/mcc-removebg-preview-150x150.png 150w, wp-content/uploads/2022/10/mcc-removebg-preview.png 400w" sizes="(max-width: 120px) 100vw, 120px"></a></span>
                                     </div>
                                     <!-- .site-branding -->
                                 </div>
@@ -4121,16 +4121,16 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                     <nav class="site-navigation" id="ast-mobile-site-navigation" itemtype="https://schema.org/SiteNavigationElement" itemscope="itemscope" aria-label="Site Navigation">
                                                         <div id="ast-hf-mobile-menu" class="main-navigation">
                                                             <ul class="main-header-menu ast-nav-menu ast-flex  submenu-with-border astra-menu-animation-fade  stack-on-mobile">
-                                                                <li class="page_item page-item-465 menu-item"><a href="./index" class="menu-link">Home</a></li>
+                                                                <li class="page_item page-item-465 menu-item"><a href="./" class="menu-link">Home</a></li>
                                                                 <li class="page_item page-item-152 current-menu-item menu-item current-menu-item">
-                                                                    <a href="./index" class="menu-link">About</a>
+                                                                    <a href="./" class="menu-link">About</a>
                                                                 </li>
-                                                                <li class="page_item page-item-153 menu-item"><a href="./academics/index" class="menu-link">Academics</a>
+                                                                <li class="page_item page-item-153 menu-item"><a href="./academics/" class="menu-link">Academics</a>
                                                                 </li>
-                                                                <li class="page_item page-item-155 menu-item"><a href="./contact/index" class="menu-link">Contact</a></li>
+                                                                <li class="page_item page-item-155 menu-item"><a href="./contact/" class="menu-link">Contact</a></li>
                                                                 <li class="page_item page-item-640 menu-item"><a href="./enrollnow" class="menu-link">Enroll Now</a></li>
 
-                                                                <li class="page_item page-item-640 menu-item"><a href="./step/index" class="menu-link"><?php echo $button1 ?></a></li>
+                                                                <li class="page_item page-item-640 menu-item"><a href="./step/" class="menu-link"><?php echo $button1 ?></a></li>
                                                             </ul>
                                                         </div>
                                                     </nav>

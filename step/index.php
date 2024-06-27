@@ -40,7 +40,7 @@
       <h2>Madridejos Community College</h2>
       <div class="radio-buttons">
         <label class="custom-radio">
-          <a href="students/index.php?id=0">
+          <a href="students/?id=0">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -52,7 +52,7 @@
           </a>
         </label>
         <label class="custom-radio">
-         <a href="guidance/home/index.php">
+         <a href="guidance/home/">
           <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -64,7 +64,7 @@
           </a>
         </label>
         <label class="custom-radio">
-          <a href="bsit/index.php">
+          <a href="bsit/">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -77,7 +77,7 @@
         </label>
 
         <label class="custom-radio">
-          <a href="bsba-fm/index.php">
+          <a href="bsba-fm/">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -90,7 +90,7 @@
         </label>
 
         <label class="custom-radio">
-          <a href="bshm/index.php">
+          <a href="bshm/">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -103,7 +103,7 @@
         </label>
 
         <label class="custom-radio">
-          <a href="beed/index.php">
+          <a href="beed/">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -116,7 +116,7 @@
         </label>
 
         <label class="custom-radio">
-         <a href="bsed/index.php">
+         <a href="bsed/">
           <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -129,7 +129,7 @@
         </label>
 
         <label class="custom-radio">
-         <a href="registrar/home/index.php">
+         <a href="registrar/home/">
           <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -142,7 +142,7 @@
         </label>
 
         <label class="custom-radio">
-          <a href="id/index.php">
+          <a href="id/">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -155,7 +155,7 @@
         </label>
 
         <label class="custom-radio">
-         <a href="cor/index.php">
+         <a href="cor/">
           <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -168,7 +168,7 @@
         </label>
 
         <label class="custom-radio">
-          <a href="../admin/index.php">
+          <a href="../admin/">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
@@ -181,7 +181,7 @@
         </label>
 
         <label class="custom-radio">
-          <a href="../index.php">
+          <a href="../">
             <input type="radio" name="radio" />
             <span class="radio-btn"
               ><i class="las la-check"></i>
