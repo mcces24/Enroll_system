@@ -9,9 +9,9 @@ if (mysqli_num_rows($querys_run) > 0) {
 
     foreach ($querys_run as $rows)
 ?><?php
-            }
+}
 
-                    ?>
+    ?>
 <?php
 
 require '../../../database/config.php';
@@ -22,9 +22,9 @@ $querys_run1 = mysqli_query($conn, $querys1);
 if (mysqli_num_rows($querys_run1) > 0) {
     foreach ($querys_run1 as $rows1)
 ?><?php
-            }
+}
 
-                    ?>
+    ?>
 
 <?php
 
@@ -37,9 +37,9 @@ if (mysqli_num_rows($querys_run11) > 0) {
 
     foreach ($querys_run11 as $rows11)
 ?><?php
-            }
+}
 
-                    ?>
+    ?>
 <?php
 
 require '../../../database/config.php';
@@ -49,9 +49,9 @@ $querys_run111 = mysqli_query($conn, $querys111);
 if (mysqli_num_rows($querys_run111) > 0) {
     foreach ($querys_run111 as $rows111)
 ?><?php
-            }
+}
 
-                    ?>
+    ?>
 
 
 
