@@ -209,7 +209,7 @@ if (mysqli_num_rows($query_run) > 0) {
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <? if ($id_number) : ?>
-                            <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
+                            <!-- <li style="text-align: center;"><span><?php //echo $resul['lname'] ?>,<?php //echo $resul['fname'] ?> <?php //echo $resul['mname'] ?></span></li> -->
                         <? endif; ?>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
