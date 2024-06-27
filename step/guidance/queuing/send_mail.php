@@ -1,21 +1,18 @@
 <?php
-                      
-                        require '../../../database/dbcon.php';
-                            
-                            $query = "SELECT * FROM mcc_es  ";
-                            $query_run = mysqli_query($conn, $query);
 
-                            if(mysqli_num_rows($query_run) > 0)
-                            {
-                                $student = mysqli_fetch_array($query_run);
-                                ?><?php
-                            }
-                            else
-                            {
-                                echo "<h4>No Such Id Found</h4>";
-                            }
-                        
-?>
+require '../../../database/dbcon.php';
+
+$query = "SELECT * FROM mcc_es  ";
+$query_run = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($query_run) > 0) {
+	$student = mysqli_fetch_array($query_run);
+?><?php
+								} else {
+									echo "<h4>No Such Id Found</h4>";
+								}
+
+									?>
 <?php
 //send_mail.php
 
@@ -25,14 +22,13 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+
 require 'vendor/autoload.php';
 include '../../../database/config1.php';
-if(isset($_POST['email_data']))
-{
+if (isset($_POST['email_data'])) {
 	require 'class/class.phpmailer.php';
 	$output = '';
-	foreach($_POST['email_data'] as $row)
-	{	
+	foreach ($_POST['email_data'] as $row) {
 		$student_id = $row["name"];
 		$query1 = "SELECT * FROM students WHERE id='$student_id'";
 		$query_run1 = mysqli_query($conn, $query1);
@@ -56,7 +52,7 @@ if(isset($_POST['email_data']))
 		$mail->Username = ($student['email_user']);					//Sets SMTP username
 		$mail->Password   = ($student['email_pass']);					//Sets SMTP password
 		$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                 							//Sets connection prefix. Options are "", "ssl" or "tls"
+		//Sets connection prefix. Options are "", "ssl" or "tls"
 		$mail->From = ($student['email_user']);			//Sets the From email address for the message
 		$mail->FromName = ($student['email_name']);					//Sets the From name of the message
 		$mail->AddAddress($row["email"]);	//Adds a "To" address
@@ -67,30 +63,23 @@ if(isset($_POST['email_data']))
 		$body = $student['email_enroll'];
 		$id = $row["name"];
 		$domain = $student['domain'];
-		$step = "$domain/step/guidance/endorse-applicant/enrollment-steps.php?id=$id";
+		$step = "$domain/step/guidance/endorse-applicant/enrollment-steps?id=$id";
 		$mail->Body = "<h2>$text</h2> <br> $body <br><h4>Your Entrance Exam Score</h4> <h4>Raw Score: $raw</h4><h4>Stanine Score: $stanine</h4><h4>Percentile Score: $percentile</h4><br>Please print this and present during enrollment: $step <h3>Applicant Number: $app </h3><br> NOTE: Please secure a copy of your Applicant Number. Thank You.";
 
 		$mail->AltBody = '';
 
 		$result = $mail->Send();						//Send an Email. Return true on success or false on error
 
-		if($result)
-		{
+		if ($result) {
 			$output .= html_entity_decode($result);
-
 		}
-
 	}
-	if($output)
-	{
+	if ($output) {
 		echo 'ok';
-		
-	}
-	else
-	{
+	} else {
 		echo 'erorr';
 	}
 }
 
-	
+
 ?>

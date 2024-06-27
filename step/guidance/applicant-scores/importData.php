@@ -4,25 +4,25 @@ include_once '../../../database/dbConfig.php';
 include_once '../../../database/dbcon.php';
 
 
-if(isset($_POST['importSubmit'])){
-    
+if (isset($_POST['importSubmit'])) {
+
     // Allowed mime types
     $csvMimes = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
-    
+
     // Validate whether selected file is a CSV file
-    if(!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)){
-        
+    if (!empty($_FILES['file']['name']) && in_array($_FILES['file']['type'], $csvMimes)) {
+
         // If the file is uploaded
-        if(is_uploaded_file($_FILES['file']['tmp_name'])){
-            
+        if (is_uploaded_file($_FILES['file']['tmp_name'])) {
+
             // Open uploaded CSV file with read-only mode
             $csvFile = fopen($_FILES['file']['tmp_name'], 'r');
-            
+
             // Skip the first line
             fgetcsv($csvFile);
-            
+
             // Parse data from CSV file line by line
-            while(($line = fgetcsv($csvFile)) !== FALSE){
+            while (($line = fgetcsv($csvFile)) !== FALSE) {
                 // Get row data
                 require '../../../database/dbcon.php';
                 $applicant_id   = $line[0];
@@ -47,38 +47,37 @@ if(isset($_POST['importSubmit'])){
                 $total_percen   = $line[19];
                 $total_cat   = $line[20];
                 $age   = $line[21];
-                
-                
+
+
                 $code = 'Applicant';
                 $query = mysqli_query($conn, "UPDATE students SET status_type='$code' WHERE applicant_id = '$line[0]'");
                 // Check whether member already exists in the database with the same email
                 $prevQuery = "SELECT admission_id FROM admission_score WHERE applicant_id = '$line[0]'";
                 $prevResult = $db->query($prevQuery);
 
-                
-                if($prevResult->num_rows > 0){
+
+                if ($prevResult->num_rows > 0) {
                     // Update member data in the database
                     $db->query("UPDATE admission_score SET comp = '$comp', com_cate = '$com_cate', reas = '$reas', reas_cat = '$reas_cat', verbal = '$verbal', verbal_stanine = '$verbal_stanine', verbal_percen = '$verbal_percen', verbal_cat = '$verbal_cat', quan = '$quan', quan_cat = '$quan_cat', figu = '$figu', figu_cat = '$figu_cat', nonver = '$nonver', nonver_stanine = '$nonver_stanine', nonver_percen = '$nonver_percen', nonver_cat = '$nonver_cat', total_raw = '$total_raw', total_stanine = '$total_stanine', total_percen = '$total_percen', total_cat = '$total_cat', age = '$age'  WHERE applicant_id = '$line[0]' ");
-                }else{
+                } else {
                     // Insert member data in the database
                     $db->query("INSERT INTO admission_score (applicant_id, comp, com_cate, reas, reas_cat, verbal, verbal_stanine, verbal_percen, verbal_cat, quan, quan_cat, figu, figu_cat, nonver, nonver_stanine, nonver_percen, nonver_cat, total_raw, total_stanine, total_percen, total_cat, age) VALUES ('$applicant_id', '$comp', '$com_cate', '$reas', '$reas_cat', '$verbal', '$verbal_stanine', '$verbal_percen', '$verbal_cat', '$quan', '$quan_cat', '$figu', '$figu_cat', '$nonver', '$nonver_stanine', '$nonver_percen', '$nonver_cat', '$total_raw', '$total_stanine', '$total_percen', '$total_cat', '$age')");
                 }
             }
-            
+
             // Close opened CSV file
             fclose($csvFile);
             $qstring = '?status=succ';
-            
-        }else{
+        } else {
             $qstring = '?status=err';
         }
-    }else{
+    } else {
         $qstring = '?status=invalid_file';
     }
-     header("Location: index.php".$qstring);
+    header("Location: ./" . $qstring);
 }
 
-if(isset($_POST['addscore'])){
+if (isset($_POST['addscore'])) {
     $applicant_id  = $_POST['applicant_id'];
     $comp = mysqli_real_escape_string($conn, $_POST['comp']);
     $com_cate = mysqli_real_escape_string($conn, $_POST['com_cate']);
@@ -104,25 +103,18 @@ if(isset($_POST['addscore'])){
 
     $checkID = "SELECT applicant_id FROM students WHERE applicant_id = '$applicant_id'";
     $results = $db->query($checkID);
-    if($results->num_rows > 0){
+    if ($results->num_rows > 0) {
         $checkApp = "SELECT applicant_id FROM admission_score WHERE applicant_id = '$applicant_id'";
         $checkResults = $db->query($checkApp);
-        if($checkResults->num_rows > 0){
+        if ($checkResults->num_rows > 0) {
             $qstring = '?status=exits';
-        }
-        else{
+        } else {
             $db->query("INSERT INTO admission_score (applicant_id, comp, com_cate, reas, reas_cat, verbal, verbal_stanine, verbal_percen, verbal_cat, quan, quan_cat, figu, figu_cat, nonver, nonver_stanine, nonver_percen, nonver_cat, total_raw, total_stanine, total_percen, total_cat, age) VALUES ('$applicant_id', '$comp', '$com_cate', '$reas', '$reas_cat', '$verbal', '$verbal_stanine', '$verbal_percen', '$verbal_cat', '$quan', '$quan_cat', '$figu', '$figu_cat', '$nonver', '$nonver_stanine', '$nonver_percen', '$nonver_cat', '$total_raw', '$total_stanine', '$total_percen', '$total_cat', '$age')");
             $qstring = '?status=addsuccess';
         }
-    }else{
+    } else {
         $qstring = '?status=notfound';
     }
 
-    header("Location: index.php".$qstring);
-
+    header("Location: ./" . $qstring);
 }
-
-
-?>
-
-

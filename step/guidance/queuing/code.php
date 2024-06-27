@@ -5,8 +5,7 @@ require '../../../database/config.php';
 
 
 
-if(isset($_POST['add']))
-{
+if (isset($_POST['add'])) {
     $student_id = mysqli_real_escape_string($conn, $_POST['id']);
     $queuing = mysqli_real_escape_string($conn, $_POST['queuing']);
     $date_created = date("Y/m/d");
@@ -17,35 +16,24 @@ if(isset($_POST['add']))
     if ($query_run1->num_rows > 0) {
         $_SESSION['message'] = "Students Already Have Queue Number";
         $_SESSION['message_icon'] = "warning";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-    }
-    else{
-    $query = "INSERT INTO que VALUES('','$student_id','$queuing','$date_created','') ";
-    $query_run = mysqli_query($conn, $query);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+        $query = "INSERT INTO que VALUES('','$student_id','$queuing','$date_created','') ";
+        $query_run = mysqli_query($conn, $query);
 
-    if($query_run)
-    {
-        $_SESSION['message'] = "Que Numbe Added Successfully";
-        $_SESSION['message_icon'] = "success";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-        
+        if ($query_run) {
+            $_SESSION['message'] = "Que Numbe Added Successfully";
+            $_SESSION['message_icon'] = "success";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            $_SESSION['message'] = "Error Adding Que Number";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
     }
-    else
-    {
-        $_SESSION['message'] = "Error Adding Que Number";
-        $_SESSION['message_icon'] = "error";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-        
-    }
-    }
-
-    
-    
-
 }
 
-if(isset($_POST['add_old']))
-{
+if (isset($_POST['add_old'])) {
     $student_id = mysqli_real_escape_string($conn, $_POST['id']);
     $queuing = mysqli_real_escape_string($conn, $_POST['queuing']);
     $status = mysqli_real_escape_string($conn, $_POST['status']);
@@ -57,34 +45,23 @@ if(isset($_POST['add_old']))
     if ($query_run1->num_rows > 0) {
         $_SESSION['message'] = "Students Already Have Queue Number";
         $_SESSION['message_icon'] = "warning";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-    }
-    else{
-    $query = "INSERT INTO que VALUES('','$student_id','$queuing','$date_created','3') ";
-    $query_run = mysqli_query($conn, $query);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+        $query = "INSERT INTO que VALUES('','$student_id','$queuing','$date_created','3') ";
+        $query_run = mysqli_query($conn, $query);
 
-    if($query_run)
-    {
-        $_SESSION['message'] = "Que Numbe Added Successfully";
-        $_SESSION['message_icon'] = "success";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-        
+        if ($query_run) {
+            $_SESSION['message'] = "Que Numbe Added Successfully";
+            $_SESSION['message_icon'] = "success";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        } else {
+            $_SESSION['message'] = "Error Adding Que Number";
+            $_SESSION['message_icon'] = "error";
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+        }
     }
-    else
-    {
-        $_SESSION['message'] = "Error Adding Que Number";
-        $_SESSION['message_icon'] = "error";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-        
-    }
-    }
-
-    
-    
-
 }
-if(isset($_POST['save']))
-{
+if (isset($_POST['save'])) {
     $student_id = mysqli_real_escape_string($conn, $_POST['id']);
     $fname = mysqli_real_escape_string($conn, $_POST['fname']);
     $mname = mysqli_real_escape_string($conn, $_POST['mname']);
@@ -117,21 +94,13 @@ if(isset($_POST['save']))
     $query = "UPDATE students SET course_id='$course_id',year_id='$year_id',fname='$fname',mname='$mname',lname='$lname',age='$age',address='$address',status='$status',place_of_birth='$place_of_birth',date_of_birth='$date_of_birth',gender='$gender',religion='$religion',contact='$contact',email='$email',guardian='$guardian',occupation='$high_school',guardian_address='$guardian_address',elementary='$elementary',elem_year='$elem_year',elem_address='$elem_address',occupation='$high_school',high_year='$high_year',high_address='$high_address',school_graduated='$school_graduated',school_year='$school_year',school_address='$school_address' WHERE id='$student_id' ";
     $query_run = mysqli_query($conn, $query);
 
-    if($query_run)
-    {
+    if ($query_run) {
         $_SESSION['message'] = "Changes saved";
         $_SESSION['message_icon'] = "success";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-        
-    }
-    else
-    {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
         $_SESSION['message'] = "Changes not saved";
         $_SESSION['message_icon'] = "error";
-        header('Location: '. $_SERVER['HTTP_REFERER']);
-        
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
-    
-
 }
-?>
