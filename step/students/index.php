@@ -14,7 +14,7 @@ if (!isset($_SESSION['SESSION_STUDENTS'])) {
     $checkuser = mysqli_query($conn, $sqlquery);
     if (mysqli_num_rows($checkuser) > 0) {
         $row = mysqli_fetch_assoc($checkuser);
-        if ($row) { 
+        if ($row) {
             $id_number = !empty($row['id_number']) ? $row['id_number'] : 0;
         }
     }
@@ -183,32 +183,33 @@ if (mysqli_num_rows($query_run) > 0) {
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <?php
                         if ($id_number != 0) {
-                        $id_number = $id_number;
-                        $sel = "SELECT * FROM students WHERE id_number='$id_number'";
-                        $query = mysqli_query($conn, $sel);
-                        $resul = mysqli_fetch_assoc($query);
+                            $id_number = $id_number;
+                            $sel = "SELECT * FROM students WHERE id_number='$id_number'";
+                            $query = mysqli_query($conn, $sel);
+                            $resul = mysqli_fetch_assoc($query);
                         ?>
-                        <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
-                        <?php
-                        $id_number = $id_number;
-                        $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
-                        $query_run1 = mysqli_query($conn, $query1);
+                            <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
+                            <?php
+                            $id_number = $id_number;
+                            $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
+                            $query_run1 = mysqli_query($conn, $query1);
 
-                        if (mysqli_num_rows($query_run1) > 0) {
-                            $qrcode = mysqli_fetch_array($query_run1);
-                        ?>
-                            <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
-                        <?php
+                            if (mysqli_num_rows($query_run1) > 0) {
+                                $qrcode = mysqli_fetch_array($query_run1);
+                            ?>
+                                <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
+                            <?php
+                            } else { ?>
+                                <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
+                            <?php }
                         } else { ?>
-                            <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
-                        <?php } } else { ?>
                             <span class="me-2 d-none d-sm-block">Hi! Students</span>
                             <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
-                            <?php } ?>
+                        <?php } ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <? if ($id_number != 0): ?>
-                        <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
+                        <? if ($id_number != 0) : ?>
+                            <li style="text-align: center;"><span><?php echo $resul['lname'] ?>,<?php echo $resul['fname'] ?> <?php echo $resul['mname'] ?></span></li>
                         <? endif; ?>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
@@ -291,26 +292,26 @@ if (mysqli_num_rows($query_run) > 0) {
 
 
                                     <table class="upper">
-                                        <?php if ($id_number != 0): ?>
+                                        <?php if ($id_number != 0) : ?>
 
-                                        <?php
-                                        
-                                        $id1 =  $id_number;
-                                        $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
-                                        $query_run = mysqli_query($conn, $query);
-                                        $count = 0;
+                                            <?php
 
-                                        if (mysqli_num_rows($query_run) > 0) {
-                                            foreach ($query_run as $student) {
-                                                $id = $student['id'];
+                                            $id1 =  $id_number;
+                                            $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id = y.year_id INNER JOIN sections s ON students.section_id = s.section_id WHERE id_number = '$id1' ORDER BY id DESC LIMIT 1  ";
+                                            $query_run = mysqli_query($conn, $query);
+                                            $count = 0;
 
-                                                $query1 = "SELECT * FROM qrcode WHERE student_id = '$id'  ";
-                                                $query_run1 = mysqli_query($conn, $query1);
+                                            if (mysqli_num_rows($query_run) > 0) {
+                                                foreach ($query_run as $student) {
+                                                    $id = $student['id'];
 
-                                                if (mysqli_num_rows($query_run1) > 0) {
-                                                    $qrcode = mysqli_fetch_array($query_run1);
-                                        ?><?php
-                                                }
+                                                    $query1 = "SELECT * FROM qrcode WHERE student_id = '$id'  ";
+                                                    $query_run1 = mysqli_query($conn, $query1);
+
+                                                    if (mysqli_num_rows($query_run1) > 0) {
+                                                        $qrcode = mysqli_fetch_array($query_run1);
+                                            ?><?php
+                                                    }
                                             ?>
 
 
@@ -319,76 +320,76 @@ if (mysqli_num_rows($query_run) > 0) {
 
 
 
-                                        <form method="post" action="qrcode.php">
+                                            <form method="post" action="qrcode.php">
+                                                <tr>
+
+
+                                                    <th colspan="4">ID Number</th>
+                                                    <td colspan="1"><?= $student['id_number']; ?></td>
+
+                                                    <th colspan="4">Course</th>
+                                                    <td colspan="1"><?= $student['course_name']; ?></td>
+
+                                                    <?php if ($student['status_type'] == "ID Done" or $student['status_type'] == "Picture Done" or $student['status_type'] == "Enroll New Students") : ?>
+
+
+                                                </tr>
+                                            <?php endif; ?>
                                             <tr>
+                                                <th colspan="4">Student Name:</th>
+                                                <td colspan="1"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
+                                                <th colspan="4">Year Level</th>
+                                                <td colspan="1"><?= $student['year_name']; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th colspan="4">Gender:</th>
+                                                <td colspan="1"><?= $student['gender']; ?></td>
+                                                <th colspan="4">Section</th>
+                                                <td colspan="1"><?= $student['sections']; ?></td>
+                                                <?php if ($student['status_type'] == "Enroll New Students") : ?>
+                                                <?php endif; ?>
+                                            </tr>
 
 
-                                                <th colspan="4">ID Number</th>
-                                                <td colspan="1"><?= $student['id_number']; ?></td>
 
-                                                <th colspan="4">Course</th>
-                                                <td colspan="1"><?= $student['course_name']; ?></td>
-
-                                                <?php if ($student['status_type'] == "ID Done" or $student['status_type'] == "Picture Done" or $student['status_type'] == "Enroll New Students") : ?>
 
 
                                             </tr>
-                                        <?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+                                            </form>
+
+
+
+
+
+                                        <?php
+                                                }
+                                            } else {
+                                        ?>
                                         <tr>
-                                            <th colspan="4">Student Name:</th>
-                                            <td colspan="1"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
-                                            <th colspan="4">Year Level</th>
-                                            <td colspan="1"><?= $student['year_name']; ?></td>
+                                            <td colspan="6" style="text-align:center;">You are not enroll!</td>
                                         </tr>
-                                        <tr>
-                                            <th colspan="4">Gender:</th>
-                                            <td colspan="1"><?= $student['gender']; ?></td>
-                                            <th colspan="4">Section</th>
-                                            <td colspan="1"><?= $student['sections']; ?></td>
-                                            <?php if ($student['status_type'] == "Enroll New Students") : ?>
-                                            <?php endif; ?>
-                                        </tr>
-
-
-
-
-
-                                        </tr>
-
-
-
-
-
-
-
-
-
-
-                                        </form>
-
-
-
-
 
                                     <?php
                                             }
-                                        } else {
+
+
                                     ?>
+                                <?php else : ?>
                                     <tr>
                                         <td colspan="6" style="text-align:center;">You are not enroll!</td>
                                     </tr>
 
-                                <?php
-                                        }
-
-
-                                ?>
-                            <?php else: ?>
-                                <tr>
-                                    <td colspan="6" style="text-align:center;">You are not enroll!</td>
-                                </tr>
-
-                            <?php endif; ?>
+                                <?php endif; ?>
 
 
                                     </table>
@@ -437,53 +438,53 @@ if (mysqli_num_rows($query_run) > 0) {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php if ($id_number != 0): ?>
-                                            <?php
+                                            <?php if ($id_number != 0) : ?>
+                                                <?php
 
 
-                                            require '../../database/regis.php';
-                                            // Create connection
-                                            $conn = new mysqli($servername, $username, $password, $dbname);
-                                            // Check connection
-                                            if ($conn->connect_error) {
-                                                die("Connection failed: " . $conn->connect_error);
-                                            }
-                                            $section_id1 = $student['section_id'];
-                                            $semester_id1 = $student['semester_id'];
-                                            if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
-                                                $id_number = $student['id_number'];
-                                                $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
-                                            } else {
-                                                $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
-                                            }
+                                                require '../../database/regis.php';
+                                                // Create connection
+                                                $conn = new mysqli($servername, $username, $password, $dbname);
+                                                // Check connection
+                                                if ($conn->connect_error) {
+                                                    die("Connection failed: " . $conn->connect_error);
+                                                }
+                                                $section_id1 = $student['section_id'];
+                                                $semester_id1 = $student['semester_id'];
+                                                if ($student['type'] == 'Shift' or $student['type'] == 'Irregular' or $student['type'] == 'Transferee') {
+                                                    $id_number = $student['id_number'];
+                                                    $sql = "SELECT * FROM selected_subject INNER JOIN subjects s ON selected_subject.subject_id=s.subject_id  WHERE id_number = '$id_number' ";
+                                                } else {
+                                                    $sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
+                                                }
 
-                                            $result = $conn->query($sql);
+                                                $result = $conn->query($sql);
 
-                                            if ($result->num_rows > 0) {
-                                                // output data of each row
-                                                while ($row = $result->fetch_assoc()) {
-                                            ?>
-
-
-                                                    <tr>
-                                                        <td><?php echo  $row["subject_code"] ?></td>
-                                                        <td><?php echo  $row["subject_name"] ?></td>
-                                                        <td><?php echo  $row["units"] ?></td>
-                                                        <td><?php echo  $row["days"] ?></td>
-                                                        <td><?php echo  $row["time_sched"] ?></td>
-                                                        <td><?php echo  $row["room"] ?></td>
-                                                        <td><?php echo  $row["instructor"] ?></td>
-                                                    </tr>
+                                                if ($result->num_rows > 0) {
+                                                    // output data of each row
+                                                    while ($row = $result->fetch_assoc()) {
+                                                ?>
 
 
+                                                        <tr>
+                                                            <td><?php echo  $row["subject_code"] ?></td>
+                                                            <td><?php echo  $row["subject_name"] ?></td>
+                                                            <td><?php echo  $row["units"] ?></td>
+                                                            <td><?php echo  $row["days"] ?></td>
+                                                            <td><?php echo  $row["time_sched"] ?></td>
+                                                            <td><?php echo  $row["room"] ?></td>
+                                                            <td><?php echo  $row["instructor"] ?></td>
+                                                        </tr>
 
 
-                                            <?php  }
-                                            } else {
-                                                echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
-                                            }
-                                            ?>
-                                            <?php else: ?>
+
+
+                                                <?php  }
+                                                } else {
+                                                    echo "<tr> <td colspan='7'>Subject will show when you are already enroll</td></tr>";
+                                                }
+                                                ?>
+                                            <?php else : ?>
                                                 <tr>
                                                     <td colspan="7">Subject will show when you are already enroll</td>
                                                 </tr>
