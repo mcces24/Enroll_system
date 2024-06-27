@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->isHTML(true);
             $mail->Subject = 'Madridejos Community College - Verify Account';
 
-            $link = "https://madridejoscommunitycollege.com/step/students/login/index?verify=$randomNumber";
+            $link = "https://madridejoscommunitycollege.com/step/students/login/?verify=$randomNumber";
             $mail->isHTML(true);
             $mail->Body = file_get_contents('email_verification.html');
             $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
