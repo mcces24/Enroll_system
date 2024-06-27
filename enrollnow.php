@@ -3979,7 +3979,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                     <div class="main-navigation ast-inline-flex">
                                                         <ul id="ast-hf-menu-1" class="main-header-menu ast-menu-shadow ast-nav-menu ast-flex  submenu-with-border stack-on-mobile">
                                                             <li id="menu-item-644" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-home menu-item-644">
-                                                                <a href="" class="menu-link">Home</a>
+                                                                <a href="./" class="menu-link">Home</a>
                                                             </li>
                                                             <li id="menu-item-645" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-645">
                                                                 <a href="academics/" class="menu-link">Academics</a>
