@@ -254,7 +254,7 @@ $chart_data = substr($chart_data, 0, -2);
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Students</li>
             <li class="sidebar-menu-item has-dropdown">
             <li class="sidebar-menu-item">
-                <a href="students/?academic">
+                <a href="students?academic">
                     <i class="ri-group-line sidebar-menu-item-icon"></i>
                     Enroll Students
                 </a>
@@ -266,7 +266,7 @@ $chart_data = substr($chart_data, 0, -2);
 
             <li class="sidebar-menu-item has-dropdown">
             <li class="sidebar-menu-item">
-                <a href="user/?user">
+                <a href="user?user">
                     <i class="ri-settings-3-line sidebar-menu-item-icon"></i>
                     User Setting
                 </a>
@@ -292,7 +292,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <?php if ($code != '') : ?>
                         <h5 class="p-3 bg-indigo text-light">Notification</h5>
                         <div class="list-group list-group-flush">
-                            <a href="user/?user" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <a href="user?user" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                                 <div class="me-auto">
                                     <div class="fw-semibold">Forgot Password Request</div>
                                     <span class="fs-7">User Forget Passwword : <?php echo $pass['username'] ?></span>
@@ -382,7 +382,7 @@ $chart_data = substr($chart_data, 0, -2);
                         </div>
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Information Technology&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BS in Information Technology&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-computer-line summary-icon bg-primary mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -391,7 +391,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Information Technology&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BS in Information Technology&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-computer-line summary-icon bg-indigo mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -400,7 +400,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Information Technology&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BS in Information Technology&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-computer-line summary-icon bg-success mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -409,7 +409,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Information Technology&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BS in Information Technology&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-computer-line summary-icon bg-danger mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -422,7 +422,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Business Administration Financial Management&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BS in Business Administration Financial Management&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-bank-line summary-icon bg-primary mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -431,7 +431,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Business Administration Financial Management&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BS in Business Administration Financial Management&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-bank-line  summary-icon bg-indigo mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -440,7 +440,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Business Administration Financial Management&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BS in Business Administration Financial Management&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-bank-line summary-icon bg-success mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -449,7 +449,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Business Administration Financial Management&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BS in Business Administration Financial Management&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-bank-line  summary-icon bg-danger mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -462,7 +462,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Secondary Education - Filipino&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=Bachelor of Secondary Education - Filipino&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-book-open-line summary-icon bg-primary mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -471,7 +471,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Secondary Education - Filipino&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=Bachelor of Secondary Education - Filipino&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-book-open-line summary-icon bg-indigo mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -480,7 +480,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Secondary Education - Filipino&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=Bachelor of Secondary Education - Filipino&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-book-open-line summary-icon bg-success mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -489,7 +489,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Secondary Education - Filipino&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=Bachelor of Secondary Education - Filipino&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-book-open-line summary-icon bg-danger mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -502,7 +502,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Elementary Education&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=Bachelor of Elementary Education&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-pencil-ruler-line summary-icon bg-primary mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -511,7 +511,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Elementary Education&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=Bachelor of Elementary Education&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-pencil-ruler-line summary-icon bg-indigo mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -520,7 +520,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Elementary Education&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=Bachelor of Elementary Education&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-pencil-ruler-line summary-icon bg-success mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -529,7 +529,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=Bachelor of Elementary Education&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=Bachelor of Elementary Education&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-pencil-ruler-line summary-icon bg-danger mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -542,7 +542,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Hospitality Management&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BS in Hospitality Management&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-shirt-line summary-icon bg-primary mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -551,7 +551,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Hospitality Management&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BS in Hospitality Management&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-shirt-line summary-icon bg-indigo mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -560,7 +560,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Hospitality Management&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BS in Hospitality Management&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-shirt-line summary-icon bg-success mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -569,7 +569,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BS in Hospitality Management&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BS in Hospitality Management&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-shirt-line summary-icon bg-danger mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -696,7 +696,7 @@ $chart_data = substr($chart_data, 0, -2);
 
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSIT&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BSIT&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-primary mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -705,7 +705,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSIT&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BSIT&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-indigo mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -714,7 +714,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSIT&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BSIT&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-success mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -723,7 +723,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSIT&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BSIT&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-danger mb-2"></i>
                                     <div>BSIT | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -736,7 +736,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSBA - FM&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BSBA - FM&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-primary mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -745,7 +745,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSBA - FM&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BSBA - FM&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-indigo mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -754,7 +754,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSBA - FM&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BSBA - FM&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-success mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -763,7 +763,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSBA - FM&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BSBA - FM&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-danger mb-2"></i>
                                     <div>BSBA | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -776,7 +776,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSED - Filipino&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BSED - Filipino&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-primary mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -785,7 +785,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSED - Filipino&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BSED - Filipino&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-indigo mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -794,7 +794,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSED - Filipino&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BSED - Filipino&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-success mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -803,7 +803,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSED - Filipino&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BSED - Filipino&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-danger mb-2"></i>
                                     <div>BSED | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -816,7 +816,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BEED&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BEED&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-primary mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -825,7 +825,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BEED&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BEED&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-indigo mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -834,7 +834,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BEED&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BEED&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-success mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -843,7 +843,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BEED&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BEED&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-danger mb-2"></i>
                                     <div>BEED | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>
@@ -856,7 +856,7 @@ $chart_data = substr($chart_data, 0, -2);
                     <div class="row g-3">
 
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSHM&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                            <a href="students?course=BSHM&year_name=1st Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-primary mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 1st Year</div>
@@ -865,7 +865,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSHM&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
+                            <a href="students?course=BSHM&year_name=2nd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-indigo">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-indigo mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 2nd Year</div>
@@ -874,7 +874,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSHM&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
+                            <a href="students?course=BSHM&year_name=3rd Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-success">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-success mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 3rd year</div>
@@ -883,7 +883,7 @@ $chart_data = substr($chart_data, 0, -2);
                             </a>
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3">
-                            <a href="students/?course=BSHM&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
+                            <a href="students?course=BSHM&year_name=4th Year" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-danger">
                                 <div>
                                     <i class="ri-shopping-cart-2-line summary-icon bg-danger mb-2"></i>
                                     <div>BSHM | <?php echo $academic ?> | <?php echo $semester ?> | 4th year</div>

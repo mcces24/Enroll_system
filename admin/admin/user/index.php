@@ -354,7 +354,7 @@ if (isset($_POST['submit'])) {
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Students</li>
             <li class="sidebar-menu-item has-dropdown">
             <li class="sidebar-menu-item">
-                <a href="../students/?academic">
+                <a href="../students?academic">
                     <i class="ri-group-line sidebar-menu-item-icon"></i>
                     Enroll Students
                 </a>
