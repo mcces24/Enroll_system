@@ -3,7 +3,7 @@
     require '../../../database/config.php';
 
     if (!isset($_SESSION['SESSION_BEED'])) {
-        header("Location: ../login/index.php");
+        header("Location: ../login/");
         die();
     }
 else{
@@ -128,7 +128,7 @@ foreach($result as $row)
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
         <div class="d-flex align-items-center p-3">
             <img class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4" style="height: 50px; " src="../../assets/mcc2.png">
-            <a href="index.php" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">BEED | Portal</a>
+            <a href="./" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">BEED | Portal</a>
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">
@@ -162,13 +162,13 @@ foreach($result as $row)
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Students</li>
             <li class="sidebar-menu-item has-dropdown">
                 <li class="sidebar-menu-item">
-                <a href="../index.php">
+                <a href="../">
                     <i class="ri-group-line sidebar-menu-item-icon"></i>
                     Search Applicant
                 </a>
                 </li>
                 <li class="sidebar-menu-item">
-                <a href="../shift-students/index.php">
+                <a href="../shift-students/">
                     <i class="ri-user-shared-line sidebar-menu-item-icon"></i>
                     Shift Students
                 </a>
@@ -178,7 +178,7 @@ foreach($result as $row)
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Study Load</li>
             <li class="sidebar-menu-item has-dropdown">
                 <li class="sidebar-menu-item">
-                <a href="index.php">
+                <a href="./">
                     <i class="ri-file-chart-line sidebar-menu-item-icon"></i>
                     Import Study Load
                 </a>
