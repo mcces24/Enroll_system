@@ -274,11 +274,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post"
          $_SESSION['icon'] = "error";
       }
    }
-} else {
-   $_SESSION['statuss'] = "Y123213";
-   $_SESSION['icon'] = "error";
-
-} 
+}
 ?>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" || $_SERVER["REQUEST_METHOD"] == "post" && isset($_POST["shift"])) {
