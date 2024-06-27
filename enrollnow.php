@@ -377,7 +377,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
         .site-header .site-description {
             font-size: 15px;
-            font-size: 0.9375rem;
+           
             display: none;
         }
 
@@ -986,7 +986,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
         body .elementor-button.elementor-size-xl,
         body .elementor-button {
             font-size: 15px;
-            font-size: 0.9375rem;
+           
         }
 
         .wp-block-button .wp-block-button__link:hover,
@@ -1016,7 +1016,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
             font-weight: 700;
             line-height: 1;
             font-size: 15px;
-            font-size: 0.9375rem;
+           
             border-radius: 4px;
             padding: 15px 30px;
         }
@@ -1091,7 +1091,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
             font-family: Georgia, Times, serif;
             font-weight: 700;
             font-size: 15px;
-            font-size: 0.9375rem;
+           
             line-height: 1;
         }
 
@@ -1679,7 +1679,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
         .ast-builder-menu-1 .menu-item>.menu-link {
             font-size: 15px;
-            font-size: 0.9375rem;
+           
             color: var(--ast-global-color-3);
         }
 
@@ -3216,7 +3216,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
         @media (max-width:921px) {
             .ast-builder-menu-mobile .main-navigation {
                 font-size: 15px;
-                font-size: 0.9375rem;
+               
             }
 
             .ast-builder-menu-mobile .main-navigation .main-header-menu .menu-item>.menu-link {

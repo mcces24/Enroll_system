@@ -629,7 +629,7 @@
                                              <li id="menu-item-645" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-645"><a href="./../academics/" class="menu-link">Academics</a></li>
                                              <li id="menu-item-647" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-647"><a href="./../about/" class="menu-link">About</a></li>
                                              <li id="menu-item-648" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-648"><a href="./../contact/" class="menu-link">Contact</a></li>
-                                             <li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-640 current_page_item menu-item-649"><a href="./../enrollnow.php" aria-current="page" class="menu-link">Enroll Now</a></li>
+                                             <li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-640 current_page_item menu-item-649"><a href="./../enrollnow" aria-current="page" class="menu-link">Enroll Now</a></li>
                                     
 
 
