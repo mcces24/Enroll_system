@@ -250,7 +250,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
             <li class="sidebar-menu-item has-dropdown">
             <li class="sidebar-menu-item">
-                <a href="../user/?user">
+                <a href="../user?user">
                     <i class="ri-settings-3-line sidebar-menu-item-icon"></i>
                     User Setting
                 </a>
@@ -276,7 +276,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                     <?php if ($code != "") : ?>
                         <h5 class="p-3 bg-indigo text-light">Notification</h5>
                         <div class="list-group list-group-flush">
-                            <a href="../user/?user" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                            <a href="../user?user" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                                 <div class="me-auto">
                                     <div class="fw-semibold">Forgot Password Request</div>
                                     <span class="fs-7">User Forget Passwword : <?php echo $pass['username'] ?></span>
