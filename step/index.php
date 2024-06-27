@@ -33,6 +33,7 @@
     })
   </script>
   <div class="main-container">
+    <img class="logo" src="../icon.png" alt="">
     <h2>Madridejos Community College</h2>
     <div class="radio-buttons">
       <label class="custom-radio">
