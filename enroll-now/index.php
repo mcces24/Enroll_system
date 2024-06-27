@@ -193,7 +193,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
          }
       }
    }
-}
+} 
 ?>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
@@ -274,7 +274,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
          $_SESSION['icon'] = "error";
       }
    }
-}
+} 
 ?>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
@@ -353,7 +353,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
          $_SESSION['icon'] = "error";
       }
    }
-
+} 
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
