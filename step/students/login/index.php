@@ -110,6 +110,9 @@ if (isset($_POST['submit'])) {
     } else {
         $msg = "<div class='alert alert-danger'>ID Number/Email Account Not Found OR Invalid</div>";
     }
+} else {
+    unset($_SESSION['email']);
+    unset($_SESSION['password']);
 }
 ?>
 
