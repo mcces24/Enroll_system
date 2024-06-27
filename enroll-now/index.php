@@ -193,9 +193,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
          }
       }
    }
-} else {
-   $_SESSION['statuss'] = "Something went wrong! Try Again.";
-   $_SESSION['icon'] = "error";
 }
 ?>
 <?php
@@ -277,9 +274,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
          $_SESSION['icon'] = "error";
       }
    }
-} else {
-   $_SESSION['statuss'] = "Something went wrong! Try Again.";
-   $_SESSION['icon'] = "error";
 }
 ?>
 <?php
@@ -359,10 +353,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
          $_SESSION['icon'] = "error";
       }
    }
-} else {
-   $_SESSION['statuss'] = "Something went wrong! Try Again.";
-   $_SESSION['icon'] = "error";
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
