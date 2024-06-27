@@ -19,7 +19,7 @@ if(mysqli_num_rows($query_run) > 0)
         else
         {
 			$student = [];
-			header("Location: index.php");
+			header("Location: index");
         }
 }
 
@@ -2409,7 +2409,7 @@ License: For each use you must have a valid license purchased only from above li
 									<!--end::Title-->
 									<!--begin::Notice-->
 									<div class="text-muted fw-bold fs-6">If you need more info, please
-										<!-- <a href="../index.php"
+										<!-- <a href="../index"
 											class="link-primary fw-bolder">Sign In</a>. -->
 									</div>
 									<div class="fs-6 text-gray-600 mb-5">Visit our Guidance Office
@@ -2549,7 +2549,7 @@ License: For each use you must have a valid license purchased only from above li
 					confirmButton: "btn btn-light"
 				}
 			}).then(function () {
-				window.location.href = '../index.php';
+				window.location.href = '../index';
 			});
 		</script>
 <?php }
@@ -2571,7 +2571,7 @@ License: For each use you must have a valid license purchased only from above li
 					confirmButton: "btn btn-light"
 				}
 			}).then(function () {
-				window.location.href = '../index.php';
+				window.location.href = '../index';
 			});
 		</script>
 

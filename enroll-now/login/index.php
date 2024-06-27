@@ -3,7 +3,7 @@
     session_start();
     
     if (isset($_SESSION['SESSION_STUDENTS'])) {
-        header("Location: ../index.php");
+        header("Location: ../index");
         die();
     }
 
@@ -22,7 +22,7 @@
                 $msg = "<div class='alert alert-success'>Account verification has been successfully completed.</div>";
             }
         } else {
-            header("Location: ../index.php");
+            header("Location: ../index");
         }
     }
 
@@ -39,8 +39,8 @@
 
             if ($row) {
                 $_SESSION['SESSION_STUDENTS'] = $email;
-                header("Location: ../index.php");
-                // header("Location: ../index.php?id_number=$id");
+                header("Location: ../index");
+                // header("Location: ../index?id_number=$id");
             } else {
                 $msg = "<div class='alert alert-info'>ID Number Is Not Yet Enroll In This Semester</div>";
             }
@@ -116,7 +116,7 @@
                             <input type="password" class="password" name="password" placeholder="Enter Your Password" required>
                             
                             
-                            <p style="float: left;"><a href="../../index.php" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
+                            <p style="float: left;"><a href="../../index" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
                             <p style="float: right ;"><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Sign Up</a></p>
                             <button name="submit" name="submit" class="btn" type="submit">Login</button>
                         </form>
