@@ -190,19 +190,23 @@ if (mysqli_num_rows($query_run) > 0) {
                         ?>
                             <span class="me-2 d-none d-sm-block">Hi! <?php echo $resul['id_number'] ?></span>
                             <?php
-                            $id_number = $id_number;
-                            $query1 = "SELECT * FROM qrcode WHERE student_id = '$id_number'  ";
-                            $query_run1 = mysqli_query($conn, $query1);
-
-                            if (mysqli_num_rows($query_run1) > 0) {
-                                $qrcode = mysqli_fetch_array($query_run1);
-                            ?>
-                                <img class="navbar-profile-image" src="../id/uploads/<?php echo $qrcode['picture'] ?>" alt="Image">
-                            <?php
-                            } else { ?>
-                                <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
-                            <?php }
-                        } else { ?>
+                           // Prepare and execute the query
+                           $stmt = $conn->prepare("SELECT * FROM qrcode WHERE student_id = ?");
+                           $stmt->bind_param("s", $id_number);
+                           $stmt->execute();
+                           $result = $stmt->get_result();
+                           
+                           // Check if a record was found
+                           if ($result && $result->num_rows > 0) {
+                               $qrcode = $result->fetch_assoc();
+                               $imageSrc = "../id/uploads/" . $qrcode['picture'];
+                           } else {
+                               $imageSrc = "../id/uploads/picture.png";
+                           }
+                           $stmt->close();
+                           ?>
+                           <img class="navbar-profile-image" src="<?php echo htmlspecialchars($imageSrc, ENT_QUOTES, 'UTF-8'); ?>" alt="Image">
+                       <?php } else { ?>
                             <span class="me-2 d-none d-sm-block">Hi! Students</span>
                             <img class="navbar-profile-image" src="../id/uploads/picture.png" alt="Image">
                         <?php } ?>
