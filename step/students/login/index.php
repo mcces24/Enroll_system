@@ -80,6 +80,9 @@ if (isset($_GET['verify']) && $_GET['verify']) {
 if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $pass = mysqli_real_escape_string($conn, $_POST['password']);
+    
+    $_SESSION['email'] = $email;
+    $_SESSION['password'] = $pass;
 
     $password = $password = md5($pass);
 
@@ -169,9 +172,9 @@ if (isset($_POST['submit'])) {
                         <?php echo $msg; ?>
 
                         <form action="" method="post">
-                            <input type="text" class="email" name="email" placeholder="Enter Your ID Number / Email" required>
+                            <input type="text" class="email" name="email" placeholder="Enter Your ID Number / Email" value="<?php echo $_SESSION['email'] ?? null ?>" required>
 
-                            <input type="password" class="password" name="password" placeholder="Enter Your Password" required>
+                            <input type="password" class="password" name="password" placeholder="Enter Your Password" value="<?php echo $_SESSION['password'] ?? null ?>" required>
 
 
                             <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
