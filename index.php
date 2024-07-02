@@ -1,22 +1,15 @@
+<?php
+include_once 'MainFunction.php';
+if (isStudentLogin()) {
+    $button1 = "Accounts";
+} else {
+    $button1 = "Login";
+}
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
-
-    <?php
-    session_start();
-    // $File = include("index copy.php");    
-    if (!isset($_SESSION['SESSION_STUDENTS'])) {
-        $button1 = "Log In";
-        // echo "<script type='text/javascript'>
-        // $(document).ready(function(){
-        // $('#kt_modal_create_app').modal('show');
-        // });
-        // </script>";  
-    } else {
-        $button1 = "Accounts";
-    }
-    ?>
     <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
     <script>
         window.OneSignal = window.OneSignal || [];

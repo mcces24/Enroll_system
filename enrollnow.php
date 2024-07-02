@@ -1,105 +1,12 @@
 <?php
-include_once 'database/config.php';
-// include 'capstone_final/header.php';
-session_start();
-
-if (!isset($_SESSION['SESSION_STUDENTS'])) {
-    // header("Location: login/");
-
-    $button1 = "Login";
-
-    // echo '<script type="text/javascript"> $("#mlogin").modal("show")< /script>';
-
-} else {
-    $button1 = "Account";
+include_once 'MainFunction.php';
+if (isStudentLogin()) {
+    $button1 = "Accounts";
     header("Location: ./enroll-now/");
+} else {
+    $button1 = "Login";
 }
-
-$querys = "SELECT * FROM academic GROUP BY status";
-$querys_run = mysqli_query($conn, $querys);
-
-if (mysqli_num_rows($querys_run) > 0) {
-
-    foreach ($querys_run as $rows)
 ?>
-<?php
-}
-
-?>
-<?php
-include_once 'database/config.php';
-
-$querys1 = "SELECT * FROM semester GROUP BY sem_status";
-$querys_run1 = mysqli_query($conn, $querys1);
-
-if (mysqli_num_rows($querys_run1) > 0) {
-    foreach ($querys_run1 as $rows1)
-?><?php
-        }
-
-                ?>
-<?php
-include_once 'database/config.php';
-
-$enrollee = "SELECT * FROM enroll WHERE status = 1";
-$enroll = mysqli_query($conn, $enrollee);
-
-if (mysqli_num_rows($enroll) > 0) {
-    foreach ($enroll as $enrolls)
-?><?php
-        } else {
-            $enrolls['enroll_name'] = 10;
-        }
-                ?>
-<?php
-require 'database/config.php';
-
-$querys = "SELECT * FROM academic GROUP BY status";
-$querys_run = mysqli_query($conn, $querys);
-
-if (mysqli_num_rows($querys_run) > 0) {
-
-    foreach ($querys_run as $rows)
-?><?php
-        }
-
-                ?>
-<?php
-require 'database/config.php';
-
-$querys1 = "SELECT * FROM semester GROUP BY sem_status";
-$querys_run1 = mysqli_query($conn, $querys1);
-
-if (mysqli_num_rows($querys_run1) > 0) {
-    foreach ($querys_run1 as $rows1)
-?><?php
-        }
-
-                ?>
-<?php
-require 'database/config.php';
-
-$querys11 = "SELECT * FROM academic WHERE status='1'";
-$querys_run11 = mysqli_query($conn, $querys11);
-
-if (mysqli_num_rows($querys_run11) > 0) {
-
-    foreach ($querys_run11 as $rows11)
-?><?php
-        }
-
-                ?>
-<?php
-require 'database/config.php';
-$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
-$querys_run111 = mysqli_query($conn, $querys111);
-
-if (mysqli_num_rows($querys_run111) > 0) {
-    foreach ($querys_run111 as $rows111)
-?><?php
-        }
-
-                ?>
 <!DOCTYPE html>
 <html lang="en-US">
 

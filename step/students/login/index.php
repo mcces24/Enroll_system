@@ -1,118 +1,8 @@
 <?php
-
-require '../../../database/config.php';
-
-$querys = "SELECT * FROM academic GROUP BY status";
-$querys_run = mysqli_query($conn, $querys);
-
-if (mysqli_num_rows($querys_run) > 0) {
-
-    foreach ($querys_run as $rows)
-?><?php
-}
-
-    ?>
-<?php
-
-require '../../../database/config.php';
-
-$querys1 = "SELECT * FROM semester GROUP BY sem_status";
-$querys_run1 = mysqli_query($conn, $querys1);
-
-if (mysqli_num_rows($querys_run1) > 0) {
-    foreach ($querys_run1 as $rows1)
-?><?php
-}
-
-    ?>
-
-<?php
-
-require '../../../database/config.php';
-
-$querys11 = "SELECT * FROM academic WHERE status='1'";
-$querys_run11 = mysqli_query($conn, $querys11);
-
-if (mysqli_num_rows($querys_run11) > 0) {
-
-    foreach ($querys_run11 as $rows11)
-?><?php
-}
-
-    ?>
-<?php
-
-require '../../../database/config.php';
-$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
-$querys_run111 = mysqli_query($conn, $querys111);
-
-if (mysqli_num_rows($querys_run111) > 0) {
-    foreach ($querys_run111 as $rows111)
-?><?php
-}
-
-    ?>
-
-
-
-<?php
-session_start();
-// if (isset($_SESSION['SESSION_STUDENTS'])) {
-//     header("Location: ../");
-//     die();
-// }
-
-include '../../../database/config.php';
-$msg = "";
-
-
-
-if (isset($_GET['verify']) && $_GET['verify']) {
-    $ver = $_GET['verify'];
-    $query = mysqli_query($conn, "UPDATE new_user SET verified_status = '1' WHERE verified_status='$ver'");
-    if ($query) {
-        $msg = "<div class='alert alert-success'>Account verification has been successfully completed.</div>";
-    } else {
-        $msg = "<div class='alert alert-danger'>Account has not been verified.</div>";
-    }
-}
-
-if (isset($_POST['submit'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $pass = mysqli_real_escape_string($conn, $_POST['password']);
-    
-    $_SESSION['email'] = $email;
-    $_SESSION['password'] = $pass;
-
-    $password = $password = md5($pass);
-
-    $sql = "SELECT * FROM new_user n LEFT JOIN students s ON n.Id = s.new_user_id WHERE n.email = '$email' AND n.password = '$password' OR s.id_number = '$email' AND n.password = '$password' ";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) === 1) {
-        $row = mysqli_fetch_assoc($result);
-
-        if ($row) {
-            if ($row['verified_status'] != '1') {
-                $msg = "<div class='alert alert-info'>Account is not yet verified, Please check you email to verified your account.</div>";
-            } else {
-                $USER_ID = $row['Id'];
-                $_SESSION['SESSION_STUDENTS'] = $email;
-
-                $_SESSION['USER_ID'] = $USER_ID;
-
-                // header("Location: ../?id_number=$id");
-                header("Location: ../../../enroll-now/");
-            }
-        } else {
-            $msg = "<div class='alert alert-info'>ID Number Is Not Yet Enroll In This Semester</div>";
-        }
-    } else {
-        $msg = "<div class='alert alert-danger'>ID Number/Email Account Not Found OR Invalid</div>";
-    }
-} else {
-    unset($_SESSION['email']);
-    unset($_SESSION['password']);
+include_once '../../../MainFunction.php';
+if (isStudentLogin()) {
+    header('Location: ../');
+    exit();
 }
 ?>
 
@@ -172,12 +62,12 @@ if (isset($_POST['submit'])) {
                         <h2>Login Now | Students</h2>
                         <p>Madridejos Community College </p>
 
-                        <?php echo $msg; ?>
+                        <div style="display: none;" class='alert'></div>
 
-                        <form action="" method="post">
-                            <input type="text" class="email" name="email" placeholder="Enter Your ID Number / Email" value="<?php echo $_SESSION['email'] ?? null ?>" required>
+                        <form id="loginForm">
+                            <input type="text" class="email" name="username" placeholder="Enter Your ID Number / Email" required>
 
-                            <input type="password" class="password" name="password" placeholder="Enter Your Password" value="<?php echo $_SESSION['password'] ?? null ?>" required>
+                            <input type="password" class="password" name="password" placeholder="Enter Your Password" required>
 
 
                             <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
@@ -194,11 +84,87 @@ if (isset($_POST['submit'])) {
     <!-- //form section start -->
 
     <script src="js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function(c) {
-            $('.alert-close').on('click', function(c) {
-                $('.main-mockup').fadeOut('slow', function(c) {
-                    $('.main-mockup').remove();
+        $(document).ready(function() {
+            var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
+            // console.log(BASE_PATH);
+            function getQueryParam(param) {
+                let urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+            let verifyParam = getQueryParam('verify');
+
+            if (verifyParam) {
+                
+                // Perform AJAX request
+                $.ajax({
+                    url: BASE_PATH + '/Master/POST/POST.php',
+                    method: 'POST',
+                    data: {
+                        type: 'verify',
+                        data: verifyParam 
+                    },
+                    success: function(response) {
+                        let jsonResponse = JSON.parse(response);
+                        console.log(jsonResponse);
+                        $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
+                        $('.alert').addClass(`alert-${jsonResponse.type}`);
+                        $('.alert').html(jsonResponse.message);
+                        $('.alert').prop('style', `display: block;`);
+                    },
+                    error: function(error) {
+                        console.log(error);
+                        $('#result').html('An error occurred');
+                    }
+                });
+            }
+
+            $('#loginForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                // Get form data
+                var formData = {
+                    username: $('input[name=username]').val(),
+                    password: $('input[name=password]').val()
+                };
+
+                // Send the AJAX request
+                $.ajax({
+                    url: BASE_PATH + '/Master/POST/POST.php',
+                    type: 'POST',
+                    data: {
+                        type: 'login',
+                        data: formData 
+                    },
+                    success: function(response) {
+                        // Handle the response from the server
+                        response = JSON.parse(response);
+                        console.log(response);
+                        $('.btn').prop('disabled', true);
+                        $('.btn').text('Logging in...');
+                        $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
+                        if (response.status == 'success') {
+                            console.log('Redirecting...');
+                            $('.alert').addClass(`alert-${response.type}`);
+                            $('.alert').html(response.message);
+                            $('.alert').prop('style', `display: block;`);
+                            $('.btn').text('Redirecting...');
+                            setTimeout(function() {
+                                console.log('Redirecting...');
+                                window.location.href = '../../../enroll-now/';
+                            }, 1000);
+                        } else {
+                            $('.alert').html(response.message);
+                            $('.alert').prop('style', `display: block;`);
+                            $('.alert').addClass(`alert-${response.type}`);
+                            $('.btn').prop('disabled', false);
+                            $('.btn').text('Login');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // Handle errors here
+                        console.log('Error: ' + textStatus, errorThrown);
+                    }
                 });
             });
         });
