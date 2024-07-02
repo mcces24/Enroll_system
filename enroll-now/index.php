@@ -6057,7 +6057,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   <input type="hidden" name="exam_remarks" value="Old Students">
                                                                </div>
                                                                <div>
-                                                                  <input type="hidden" name="status_type" value="New Applicant">
+                                                                  <input type="hidden" name="status_type" value="Pre Old Students">
                                                                </div>
                                                                <div>
                                                                   <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
