@@ -16,6 +16,15 @@
     RewriteRule ^(.+)$ $1.php [L,QSA]
 
     # Deny access to all URLs that do not end with .php
-    RewriteCond %{REQUEST_URI} !\.php$
+    RewriteCond %{REQUEST_URI} !\.php$ [NC]
+    RewriteCond %{REQUEST_URI} !\.(css|js|jpg|png|gif|ico|html|htm|xml)$ [NC]
     RewriteRule ^ - [F]
+
+    # Redirect to a custom 404 page if the file does not exist
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . /404.php [L]
 </IfModule>
+
+# Custom 404 error page
+ErrorDocument 404 /404.php
