@@ -25,6 +25,3 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule . /404.php [L]
 </IfModule>
-
-# Custom 404 error page
-ErrorDocument 404 /404.php
