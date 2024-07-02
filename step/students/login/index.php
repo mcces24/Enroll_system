@@ -128,6 +128,9 @@ if (isStudentLogin()) {
                     password: $('input[name=password]').val()
                 };
 
+                $('.btn').prop('disabled', true);
+                $('.btn').text('Logging in...');
+
                 // Send the AJAX request
                 $.ajax({
                     url: BASE_PATH + '/Master/POST/POST.php',
@@ -140,8 +143,6 @@ if (isStudentLogin()) {
                         // Handle the response from the server
                         response = JSON.parse(response);
                         console.log(response);
-                        $('.btn').prop('disabled', true);
-                        $('.btn').text('Logging in...');
                         $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
                         if (response.status == 'success') {
                             console.log('Redirecting...');
