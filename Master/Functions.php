@@ -1,5 +1,4 @@
-<?ph
-header("Access-Control-Allow-Origin: *");
+<?php
 session_start();
 
 //include Model
