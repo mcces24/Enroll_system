@@ -14,4 +14,8 @@
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.+)$ $1.php [L,QSA]
+
+    # Deny access to all URLs that do not end with .php
+    RewriteCond %{REQUEST_URI} !\.php$
+    RewriteRule ^ - [F]
 </IfModule>
