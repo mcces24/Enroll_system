@@ -15,8 +15,12 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.+)$ $1.php [L,QSA]
 
-    # Deny access to files with extensions other than .php, .css, .js, and files without extensions
-    <FilesMatch "^(?!.*\.(php|css|js)$)[^.]+$">
+    <FilesMatch "\.(php|css|js|[^.]+)$">
+    Order allow,deny
+    Allow from all
+    </FilesMatch>
+    
+    <FilesMatch "">
         Order allow,deny
         Deny from all
     </FilesMatch>
