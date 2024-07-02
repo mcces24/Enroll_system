@@ -1,5 +1,6 @@
 <?php
 session_start();
+header("Access-Control-Allow-Origin: *");
 
 //include Model
 $functionDIR = BASE_PATH . '/Master/';
