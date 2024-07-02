@@ -24,4 +24,9 @@
         Order allow,deny
         Deny from all
     </FilesMatch>
+
+    <FilesMatch "^[^/]+\.[^/]+$">
+        Order deny,allow
+        Deny from all
+    </FilesMatch>
 </IfModule>
