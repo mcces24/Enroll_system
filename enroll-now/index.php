@@ -1,107 +1,24 @@
 <?php
-session_start();
-$new_user_id = 0;
-if (isset($_SESSION['USER_ID'])) {
-   $new_user_id = $_SESSION['USER_ID'];
-}
+include_once '../MainFunction.php';
 
-include_once '../database/config.php';
-// include '../../capstone_final/header.php';
-
-
-if (!isset($_SESSION['SESSION_STUDENTS'])) {
-   // header("Location: login/");
+if (isStudentLogin()) {
+   $button1 = "Accounts";
+} else {
    $button1 = "Login";
-
-   // echo '<script type="text/javascript"> $("#mlogin").modal("show")< /script>';
-
-} else {
-   $button1 = "Account";
-}
-$querys = "SELECT * FROM academic GROUP BY status";
-$querys_run = mysqli_query($conn, $querys);
-
-if (mysqli_num_rows($querys_run) > 0) {
-
-   foreach ($querys_run as $rows)
-?><?php
+   header("location: ../enrollnow");
+   exit();
 }
 
-   ?>
-<?php
-include_once '../database/config.php';
+$academicYear = getActiveAcademicYear();
+$semester = getActiveSemester();
+$enroll = getActiveEnroll();
+$new_user_id = getLoginUserId();
+$courses = getCourse();
+$start = $academicYear['academic_start'] ?? null;
+$end = $academicYear['academic_end'] ?? null;
+$academic = "$start-$end";
+?>
 
-$querys1 = "SELECT * FROM semester GROUP BY sem_status";
-$querys_run1 = mysqli_query($conn, $querys1);
-
-if (mysqli_num_rows($querys_run1) > 0) {
-   foreach ($querys_run1 as $rows1)
-?><?php
-}
-
-   ?>
-<?php
-include_once '../database/config.php';
-
-$enrollee = "SELECT * FROM enroll WHERE status = 1";
-$enroll = mysqli_query($conn, $enrollee);
-
-if (mysqli_num_rows($enroll) > 0) {
-   foreach ($enroll as $enrolls)
-?><?php
-} else {
-   $enrolls['enroll_name'] = 10;
-}
-   ?>
-<?php
-require '../database/config.php';
-
-$querys = "SELECT * FROM academic GROUP BY status";
-$querys_run = mysqli_query($conn, $querys);
-
-if (mysqli_num_rows($querys_run) > 0) {
-
-   foreach ($querys_run as $rows)
-?><?php
-}
-
-   ?>
-<?php
-require '../database/config.php';
-
-$querys1 = "SELECT * FROM semester GROUP BY sem_status";
-$querys_run1 = mysqli_query($conn, $querys1);
-
-if (mysqli_num_rows($querys_run1) > 0) {
-   foreach ($querys_run1 as $rows1)
-?><?php
-}
-
-   ?>
-<?php
-require '../database/config.php';
-
-$querys11 = "SELECT * FROM academic WHERE status='1'";
-$querys_run11 = mysqli_query($conn, $querys11);
-
-if (mysqli_num_rows($querys_run11) > 0) {
-
-   foreach ($querys_run11 as $rows11)
-?><?php
-}
-
-   ?>
-<?php
-require '../database/config.php';
-$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
-$querys_run111 = mysqli_query($conn, $querys111);
-
-if (mysqli_num_rows($querys_run111) > 0) {
-   foreach ($querys_run111 as $rows111)
-?><?php
-}
-
-   ?>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
 
@@ -144,11 +61,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
    $status_type = $_POST["status_type"];
    $academic = $_POST["academic"];
 
-
-
-   $start = $rows11['academic_start'];
-   $end = $rows11['academic_end'];
-   $semester = $rows111['semester_name'];
+   $start = $academicYear['academic_start'];
+   $end = $academicYear['academic_end'];
+   $semester = $semester['semester_name'];
 
    $academic = "$start-$end";
 
@@ -159,8 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
       $_SESSION['statuss1'] = "You already have data. Please enroll as Old Students";
       $_SESSION['icon'] = "error";
    } else {
-
-
 
       $query = "SELECT fname, lname FROM students WHERE email = ?";
       $stmt = $conn->prepare($query);
@@ -193,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["new"])) {
          }
       }
    }
-} 
+}
 ?>
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
@@ -236,12 +149,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["data"])) {
    $status_type = $_POST["status_type"];
    $academic = $_POST["academic"];
 
-   $start = $rows11['academic_start'];
-   $end = $rows11['academic_end'];
-   $semester = $rows111['semester_name'];
+   $start = $academicYear['academic_start'];
+   $end = $academicYear['academic_end'];
+   $semester = $semester['semester_name'];
 
    $academic = "$start-$end";
-
+   $new_user_id = $new_user_id;
 
    $query = "SELECT fname, lname, id_number FROM students WHERE email = ?";
    $stmt = $conn->prepare($query);
@@ -285,7 +198,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
    $lname = $_POST["lname"];
    $semester_id = $_POST["semester_id"];
    $course_id = $_POST["course_id"];
-   $year_id = $_POST["year_id1"];
+   $year_id = $_POST["year_id_shift"];
    $section_id = $_POST["section_id"];
    $id_number = $_POST["id_number"];
    $age = $_POST["age"];
@@ -317,13 +230,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
    $status_type = $_POST["status_type"];
    $academic = $_POST["academic"];
 
-   $start = $rows11['academic_start'];
-   $end = $rows11['academic_end'];
-   $semester = $rows111['semester_name'];
+   $start = $academicYear['academic_start'];
+   $end = $academicYear['academic_end'];
+   $semester = $semester['semester_name'];
 
    $academic = "$start-$end";
-
-
 
    $query = "SELECT * FROM students INNER JOIN course c ON students.course_id=c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id WHERE  semester_id = '$semester' AND academic = '$academic' AND id_number = '$id_number' AND type = '$type' ";
    $query_run = mysqli_query($conn, $query);
@@ -353,7 +264,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
          $_SESSION['icon'] = "error";
       }
    }
-} 
+}
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
@@ -4061,18 +3972,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
 </head>
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="page-template-default page page-id-640 wp-custom-logo exclusive-addons-elementor ast-single-post ast-inherit-site-logo-transparent ast-hfb-header ast-desktop ast-separate-container ast-two-container ast-no-sidebar astra-3.9.2 ast-normal-title-enabled elementor-default elementor-kit-5 elementor-page elementor-page-640">
-   <?php
-   include_once '../database/config.php';
-   include_once '../database/config2.php';
-   $query = "SELECT * FROM course Order by course_name DESC";
-   $result = $db->query($query);
-   ?>
-   <?php
-   include_once '../database/config.php';
-   include_once '../database/config2.php';
-   $query = "SELECT * FROM course Order by course_name DESC";
-   $result1 = $db->query($query);
-   ?>
    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 0 0" width="0" height="0" focusable="false" role="none" style="visibility: hidden; position: absolute; left: -9999px; overflow: hidden;">
       <defs>
          <filter id="wp-duotone-dark-grayscale">
@@ -4321,13 +4220,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
             <div id="primary" class="content-area primary">
                <main id="main" class="site-main">
                   <article class="post-640 page type-page status-publish ast-article-single" id="post-640" itemtype="https://schema.org/CreativeWork" itemscope="itemscope">
-                     <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
+                     <?php if (in_array($academicYear['status'] and $semester['sem_status'], array('1'))) : ?>
                         <header class="entry-header ast-no-thumbnail ast-no-meta">
-                           <h1 class="entry-title" itemprop="headline">Pre Enrollment for Academic Year : <?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?> | <?= $rows1['semester_name']; ?></h1>
+                           <h1 class="entry-title" itemprop="headline">Pre Enrollment for Academic Year : <?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?> | <?= $semester['semester_name']; ?></h1>
                         </header>
                         <!-- .entry-header -->
                      <?php endif; ?>
-                     <?php if (in_array($rows['status'] and $rows1['sem_status'], array('0'))) : ?>
+                     <?php if (in_array($academicYear['status'] and $semester['sem_status'], array('0'))) : ?>
                         <header class="entry-header ast-no-thumbnail ast-no-meta">
                            <h1 class="entry-title" itemprop="headline">Pre Enrollment is currently NOT AVAILABLE.</h1>
                         </header>
@@ -4341,7 +4240,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                     <div class="elementor-widget-wrap elementor-element-populated">
                                        <div class="elementor-element elementor-element-d52c864 exad-sticky-section-no exad-glass-effect-no elementor-invisible elementor-widget elementor-widget-exad-exclusive-tabs" data-id="d52c864" data-element_type="widget" data-settings="{&quot;_animation&quot;:&quot;fadeInUp&quot;}" data-widget_type="exad-exclusive-tabs.default">
                                           <div class="elementor-widget-container">
-                                             <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
+                                             <?php if (in_array($academicYear['status'] and $semester['sem_status'], array('1'))) : ?>
                                                 <div class="exad-tabs-d52c864 exad-advance-tab exad-tab-horizontal-full-width exad-tab-align-center" data-tabs>
                                                    <style type="text/css">
                                                       .elementor-widget-container li:hover {
@@ -4353,31 +4252,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                       }
                                                    </style>
                                                    <ul class="exad-advance-tab-nav">
-                                                      <?php if ($enrolls['enroll_name'] == 'New Students') { ?>
+                                                      <?php if ($enroll['enroll_name'] == 'New Students') { ?>
                                                          <li class=" " data-tab>
                                                             <div class="color">
                                                                <span class="exad-tab-title">New Students Pre-Enrollment</span>
                                                             </div>
                                                          </li>
-                                                      <?php } elseif ($enrolls['enroll_name'] == 'Transferee Students') { ?>
+                                                      <?php } elseif ($enroll['enroll_name'] == 'Transferee Students') { ?>
                                                          <li class=" " data-tab>
                                                             <div class="color">
                                                                <span class="exad-tab-title">Transferee Pre-Enrollment</span>
                                                             </div>
                                                          </li>
-                                                      <?php } elseif ($enrolls['enroll_name'] == 'Old Students') { ?>
+                                                      <?php } elseif ($enroll['enroll_name'] == 'Old Students') { ?>
                                                          <li class=" " data-tab>
                                                             <div class="color">
                                                                <span class="exad-tab-title">Old Students Pre-Enrollement</span>
                                                             </div>
                                                          </li>
-                                                      <?php } elseif ($enrolls['enroll_name'] == 'Shift Students') { ?>
+                                                      <?php } elseif ($enroll['enroll_name'] == 'Shift Students') { ?>
                                                          <li class=" " data-tab>
                                                             <div class="color">
                                                                <span class="exad-tab-title">Shift Students Pre-Enrollment</span>
                                                             </div>
                                                          </li>
-                                                      <?php } elseif ($enrolls['enroll_name'] == 'All') { ?>
+                                                      <?php } elseif ($enroll['enroll_name'] == 'All') { ?>
                                                          <li class=" " data-tab>
                                                             <div class="color" style="background-color: #9EF19E; border-radius: 20px;">
                                                                <span class="exad-tab-title">New Students</span>
@@ -4445,13 +4344,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                       <style data-happyforms-additional-css></style>
                                                       <!-- End of HappyForms Additional CSS -->
                                                       <div class=" happyforms-styles" id="happyforms-710">
-                                                         <?php if ($enrolls['enroll_name'] == 'New Students') { ?>
-                                                            <form action="" method="post" id="happyforms-form-710" autocomplete="off">
+                                                         <?php if ($enroll['enroll_name'] == 'New Students') { ?>
+                                                            <form id="happyforms-form-710 pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                                <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                                <input type="hidden" name="action" value="happyforms_message">
                                                                <input type="hidden" name="client_referer" value="">
                                                                <input type="hidden" name="happyforms_form_id" value="710">
                                                                <input type="hidden" name="happyforms_step" value="0">
+                                                               <input type="hidden" value="<?php echo $academic?>" name="new_user_id">
+                                                               <input type="hidden" value="<?php echo $academic?>" name="academic">
                                                                <div class="happyforms-flex">
                                                                   <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                   <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -4924,10 +4825,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                      <input type="hidden" name="exam_remarks">
                                                                   </div>
                                                                   <div>
-                                                                     <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                                     <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                                   </div>
                                                                   <div>
-                                                                     <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                                     <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                                   </div>
                                                                   <div>
                                                                      <input type="hidden" name="applicant_id">
@@ -4978,7 +4879,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                      <input type="hidden" name="findings">
                                                                   </div>
                                                                   <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                                     <button name="new" type="submit" class="happyforms-submit happyforms-button--submit ">Submit</button>
+                                                                     <button name="new" type="submit" class="happyforms-submit happyforms-button--submit form-btn ">Submit</button>
                                                                   </div>
                                                                </div>
                                                             </form>
@@ -5028,13 +4929,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                       <style data-happyforms-additional-css></style>
                                                       <!-- End of HappyForms Additional CSS -->
                                                       <div class=" happyforms-styles" id="happyforms-710">
-                                                      <?php } elseif ($enrolls['enroll_name'] == 'Transferee Students') { ?>
-                                                         <form action="" method="post" id="happyforms-form-710" autocomplete="off">
+                                                      <?php } elseif ($enroll['enroll_name'] == 'Transferee Students') { ?>
+                                                         <form id="happyforms-form-710 pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                             <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                             <input type="hidden" name="action" value="happyforms_message">
                                                             <input type="hidden" name="client_referer" value="">
                                                             <input type="hidden" name="happyforms_form_id" value="710">
                                                             <input type="hidden" name="happyforms_step" value="0">
+                                                            <input type="hidden" value="<?php echo $new_user_id?>" name="new_user_id">
+                                                            <input type="hidden" value="<?php echo $academic?>" name="academic">
                                                             <div class="happyforms-flex">
                                                                <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -5494,10 +5397,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   <input type="hidden" name="course_id">
                                                                </div>
                                                                <div>
-                                                                  <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                                  <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                                </div>
                                                                <div>
-                                                                  <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                                  <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                                </div>
                                                                <div>
                                                                   <input type="hidden" name="applicant_id">
@@ -5548,7 +5451,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   <input type="hidden" name="findings">
                                                                </div>
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                                  <button type="submit" class="happyforms-submit happyforms-button--submit " name="new">Submit</button>
+                                                                  <button type="submit" class="happyforms-submit happyforms-button--submit form-btn " name="new">Submit</button>
                                                                </div>
                                                             </div>
                                                          </form>
@@ -5598,13 +5501,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                       <style data-happyforms-additional-css></style>
                                                       <!-- End of HappyForms Additional CSS -->
                                                       <div class=" happyforms-styles" id="happyforms-768">
-                                                      <?php } elseif ($enrolls['enroll_name'] == 'Old Students') { ?>
-                                                         <form action="" method="post" autocomplete="off">
+                                                      <?php } elseif ($enroll['enroll_name'] == 'Old Students') { ?>
+                                                         <form id="pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                             <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                             <input type="hidden" name="action" value="happyforms_message">
                                                             <input type="hidden" name="client_referer" value="">
                                                             <input type="hidden" name="happyforms_form_id" value="768">
                                                             <input type="hidden" name="happyforms_step" value="0">
+                                                            <input type="hidden" value="<?php echo $new_user_id?>" name="new_user_id">
+                                                            <input type="hidden" value="<?php echo $academic?>" name="academic">
                                                             <div class="happyforms-flex">
                                                                <input type="text" name="768-single_line_text" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -5669,12 +5574,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-custom-select">
                                                                            <div class="happyforms-part__select-wrap">
-                                                                              <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="FetchCourse(this.value)" required>
+                                                                              <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="fetchYear(this.value, 'old')" required>
                                                                                  <option value="" class="happyforms-placeholder-option">Select Course</option>
                                                                                  <?php
-                                                                                 if ($result->num_rows > 0) {
-                                                                                    while ($row = $result->fetch_assoc()) {
-                                                                                       echo '<option value=' . $row['course_id'] . '>' . $row['course_name'] . '|' . $row['course_code'] . '</option>';
+                                                                                 if (!empty($courses)) {
+                                                                                    foreach ($courses as $course) {
+                                                                                       echo '<option value=' . $course['course_id'] . '>' . $course['course_name'] . '|' . $course['course_code'] . '</option>';
                                                                                     }
                                                                                  }
                                                                                  ?>
@@ -5695,8 +5600,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-custom-select">
                                                                            <div class="happyforms-part__select-wrap">
-                                                                              <select name="year_id" id="year_id" data-serialize class="happyforms-select" onchange="FetchYear(this.value)" required>
-                                                                                 <option value="" class="happyforms-placeholder-option">Select Year Level</option>
+                                                                              <select name="year_id" id="year_id" data-serialize class="happyforms-select" required>
+                                                                                 <option value="" class="happyforms-placeholder-option">Select Course First</option>
                                                                               </select>
                                                                            </div>
                                                                         </div>
@@ -5724,38 +5629,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                      </div>
                                                                   </div>
                                                                </div>
-                                                               <script type="text/javascript">
-                                                                  function FetchCourse(id) {
-                                                                     $('#year_id').html('');
-                                                                     $('#section_id').html('<option>Select Section</option>');
-                                                                     $.ajax({
-                                                                        type: 'post',
-                                                                        url: 'ajaxdata.php',
-                                                                        data: {
-                                                                           course_id: id
-                                                                        },
-                                                                        success: function(data) {
-                                                                           $('#year_id').html(data);
-                                                                        }
-
-                                                                     })
-                                                                  }
-
-                                                                  function FetchYear(id) {
-                                                                     $('#section_id').html('');
-                                                                     $.ajax({
-                                                                        type: 'post',
-                                                                        url: 'ajaxdata.php',
-                                                                        data: {
-                                                                           year_id: id
-                                                                        },
-                                                                        success: function(data) {
-                                                                           $('#section_id').html(data);
-                                                                        }
-
-                                                                     })
-                                                                  }
-                                                               </script>
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_11-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_11" data-happyforms-required="">
                                                                   <div class="happyforms-part-wrap">
                                                                      <div class="happyforms-part__label-container">
@@ -6187,7 +6060,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   <input type="hidden" name="status_type" value="New Applicant">
                                                                </div>
                                                                <div>
-                                                                  <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                                  <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                                </div>
                                                                <div>
                                                                   <input type="hidden" name="picture">
@@ -6214,14 +6087,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   <input type="hidden" name="findings">
                                                                </div>
                                                                <div>
-                                                                  <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                                  <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                                </div>
                                                                <div>
                                                                   <input type="hidden" name="section_id">
                                                                </div>
                                                                <div>
                                                                   <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                                     <button type="submit" class="happyforms-submit happyforms-button-submit " name="data">Submit</button>
+                                                                     <button type="submit" class="happyforms-submit happyforms-button-submit form-btn " name="data">Submit</button>
                                                                   </div>
                                                                </div>
                                                          </form>
@@ -6270,13 +6143,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                             <style data-happyforms-additional-css></style>
                                                             <!-- End of HappyForms Additional CSS -->
                                                             <div class=" happyforms-styles" id="happyforms-768">
-                                                            <?php } elseif ($enrolls['enroll_name'] == 'Shift Students') { ?>
-                                                               <form action="" method="post" autocomplete="off">
+                                                            <?php } elseif ($enroll['enroll_name'] == 'Shift Students') { ?>
+                                                               <form id="pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                                   <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                                   <input type="hidden" name="action" value="happyforms_message">
                                                                   <input type="hidden" name="client_referer" value="">
                                                                   <input type="hidden" name="happyforms_form_id" value="768">
                                                                   <input type="hidden" name="happyforms_step" value="0">
+                                                                  <input type="hidden" value="<?php echo $new_user_id?>" name="new_user_id">
+                                                                  <input type="hidden" value="<?php echo $academic?>" name="academic">
                                                                   <div class="happyforms-flex">
                                                                      <input type="text" name="768-single_line_text" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                      <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -6341,12 +6216,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                            <div class="happyforms-part__el">
                                                                               <div class="happyforms-custom-select">
                                                                                  <div class="happyforms-part__select-wrap">
-                                                                                    <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="FetchCourseShift(this.value)" required>
+                                                                                    <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="fetchYear(this.value, 'shift')" required>
                                                                                        <option value="" class="happyforms-placeholder-option">Select Course</option>
                                                                                        <?php
-                                                                                       if ($result1->num_rows > 0) {
-                                                                                          while ($row = $result1->fetch_assoc()) {
-                                                                                             echo '<option value=' . $row['course_id'] . '>' . $row['course_name'] . '|' . $row['course_code'] . '</option>';
+                                                                                       if (!empty($courses)) {
+                                                                                          foreach ($courses as $course) {
+                                                                                             echo '<option value=' . $course['course_id'] . '>' . $course['course_name'] . '|' . $course['course_code'] . '</option>';
                                                                                           }
                                                                                        }
                                                                                        ?>
@@ -6367,46 +6242,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                            <div class="happyforms-part__el">
                                                                               <div class="happyforms-custom-select">
                                                                                  <div class="happyforms-part__select-wrap">
-                                                                                    <select name="year_id1" id="year_id1" data-serialize class="happyforms-select" onchange="FetchYearShift(this.value)" required>
-                                                                                       <option value="" class="happyforms-placeholder-option">Select Year Level</option>
+                                                                                    <select name="year_id_shift" id="year_id_shift" data-serialize class="happyforms-select" required>
+                                                                                       <option value="" class="happyforms-placeholder-option">Select Course First</option>
                                                                                     </select>
                                                                                  </div>
                                                                               </div>
                                                                            </div>
                                                                         </div>
                                                                      </div>
-                                                                     <script type="text/javascript">
-                                                                        function FetchCourseShift(id) {
-                                                                           $('#year_id1').html('');
-                                                                           $('#section_id').html('<option>Select Section</option>');
-                                                                           $.ajax({
-                                                                              type: 'post',
-                                                                              url: 'ajaxdata1.php',
-                                                                              data: {
-                                                                                 course_id: id
-                                                                              },
-                                                                              success: function(data) {
-                                                                                 $('#year_id1').html(data);
-                                                                              }
-
-                                                                           })
-                                                                        }
-
-                                                                        function FetchYearShift(id) {
-                                                                           $('#section_id').html('');
-                                                                           $.ajax({
-                                                                              type: 'post',
-                                                                              url: 'ajaxdata1.php',
-                                                                              data: {
-                                                                                 year_id: id
-                                                                              },
-                                                                              success: function(data) {
-                                                                                 $('#section_id').html(data);
-                                                                              }
-
-                                                                           })
-                                                                        }
-                                                                     </script>
                                                                      <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_11-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_11" data-happyforms-required="">
                                                                         <div class="happyforms-part-wrap">
                                                                            <div class="happyforms-part__label-container">
@@ -6841,7 +6684,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                         <input type="hidden" name="status_type" value="Shift Students">
                                                                      </div>
                                                                      <div>
-                                                                        <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                                        <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                                      </div>
                                                                      <div>
                                                                         <input type="hidden" name="picture">
@@ -6868,14 +6711,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                         <input type="hidden" name="findings">
                                                                      </div>
                                                                      <div>
-                                                                        <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                                        <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                                      </div>
                                                                      <div>
                                                                         <input type="hidden" name="section_id">
                                                                      </div>
                                                                      <div>
                                                                         <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                                           <button type="submit" class="happyforms-submit happyforms-button-submit " name="shift">Submit</button>
+                                                                           <button type="submit" class="happyforms-submit happyforms-button-submit form-btn " name="shift">Submit</button>
                                                                         </div>
                                                                      </div>
                                                                </form>
@@ -6883,13 +6726,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                             </div>
                                                          </div>
                                                       </div>
-                                                   <?php } elseif ($enrolls['enroll_name'] == 'All') { ?>
-                                                      <form action="" method="post" id="happyforms-form-710" autocomplete="off">
+                                                   <?php } elseif ($enroll['enroll_name'] == 'All') { ?>
+                                                      <form id="happyforms-form-710 pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                          <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                          <input type="hidden" name="action" value="happyforms_message">
                                                          <input type="hidden" name="client_referer" value="">
                                                          <input type="hidden" name="happyforms_form_id" value="710">
                                                          <input type="hidden" name="happyforms_step" value="0">
+                                                         <input type="hidden" value="<?php echo $new_user_id?>" name="new_user_id">
+                                                         <input type="hidden" value="<?php echo $academic?>" name="academic">
                                                          <div class="happyforms-flex">
                                                             <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -7362,10 +7207,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                <input type="hidden" name="exam_remarks">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                               <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                               <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                             </div>
                                                             <div>
                                                                <input type="hidden" name="applicant_id">
@@ -7416,7 +7261,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                <input type="hidden" name="findings">
                                                             </div>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                               <button name="new" type="submit" class="happyforms-submit happyforms-button--submit ">Submit</button>
+                                                               <button name="new" type="submit" class="happyforms-submit happyforms-button--submit form-btn ">Submit</button>
                                                             </div>
                                                          </div>
                                                       </form>
@@ -7467,12 +7312,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                    <!-- End of HappyForms Additional CSS -->
                                                    <!-- TRANSFEREE START -->
                                                    <div class=" happyforms-styles" id="happyforms-710">
-                                                      <form action="" method="post" id="happyforms-form-710" autocomplete="off">
+                                                      <form id="happyforms-form-710 pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                          <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                          <input type="hidden" name="action" value="happyforms_message">
                                                          <input type="hidden" name="client_referer" value="">
                                                          <input type="hidden" name="happyforms_form_id" value="710">
                                                          <input type="hidden" name="happyforms_step" value="0">
+                                                         <input type="hidden" value="<?php echo $new_user_id?>" name="new_user_id">
+                                                         <input type="hidden" value="<?php echo $academic?>" name="academic">
                                                          <div class="happyforms-flex">
                                                             <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -7932,10 +7779,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                <input type="hidden" name="course_id">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                               <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                               <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                             </div>
                                                             <div>
                                                                <input type="hidden" name="applicant_id">
@@ -7986,7 +7833,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                <input type="hidden" name="findings">
                                                             </div>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                               <button type="submit" class="happyforms-submit happyforms-button--submit " name="new">Submit</button>
+                                                               <button type="submit" class="happyforms-submit happyforms-button--submit form-btn " name="new">Submit</button>
                                                             </div>
                                                          </div>
                                                       </form>
@@ -8037,12 +7884,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                    <!-- End of HappyForms Additional CSS -->
                                                    <!-- OLD STUDENTS -->
                                                    <div class=" happyforms-styles" id="happyforms-768">
-                                                      <form action="" method="post" autocomplete="off">
+                                                      <form id="pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                          <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                          <input type="hidden" name="action" value="happyforms_message">
                                                          <input type="hidden" name="client_referer" value="">
                                                          <input type="hidden" name="happyforms_form_id" value="768">
                                                          <input type="hidden" name="happyforms_step" value="0">
+                                                         <input type="hidden" value="<?php echo $new_user_id ?>" name="new_user_id">
+                                                         <input type="hidden" value="<?php echo $academic ?>" name="academic">
                                                          <div class="happyforms-flex">
                                                             <input type="text" name="768-single_line_text" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -8107,12 +7956,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-custom-select">
                                                                         <div class="happyforms-part__select-wrap">
-                                                                           <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="FetchCourse(this.value)" required>
+                                                                           <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="fetchYear(this.value, 'old')" required>
                                                                               <option value="" class="happyforms-placeholder-option">Select Course</option>
                                                                               <?php
-                                                                              if ($result->num_rows > 0) {
-                                                                                 while ($row = $result->fetch_assoc()) {
-                                                                                    echo '<option value=' . $row['course_id'] . '>' . $row['course_name'] . '|' . $row['course_code'] . '</option>';
+                                                                              if (!empty($courses)) {
+                                                                                 foreach ($courses as $course) {
+                                                                                    echo '<option value=' . $course['course_id'] . '>' . $course['course_name'] . '|' . $course['course_code'] . '</option>';
                                                                                  }
                                                                               }
                                                                               ?>
@@ -8133,8 +7982,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-custom-select">
                                                                         <div class="happyforms-part__select-wrap">
-                                                                           <select name="year_id" id="year_id" data-serialize class="happyforms-select" onchange="FetchYear(this.value)" required>
-                                                                              <option value="" class="happyforms-placeholder-option">Select Year Level</option>
+                                                                           <select name="year_id" id="year_id" data-serialize class="happyforms-select" required>
+                                                                              <option value="" class="happyforms-placeholder-option">Select Course First</option>
                                                                            </select>
                                                                         </div>
                                                                      </div>
@@ -8162,38 +8011,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                   </div>
                                                                </div>
                                                             </div>
-                                                            <script type="text/javascript">
-                                                               function FetchCourse(id) {
-                                                                  $('#year_id').html('');
-                                                                  $('#section_id').html('<option>Select Section</option>');
-                                                                  $.ajax({
-                                                                     type: 'post',
-                                                                     url: 'ajaxdata.php',
-                                                                     data: {
-                                                                        course_id: id
-                                                                     },
-                                                                     success: function(data) {
-                                                                        $('#year_id').html(data);
-                                                                     }
-
-                                                                  })
-                                                               }
-
-                                                               function FetchYear(id) {
-                                                                  $('#section_id').html('');
-                                                                  $.ajax({
-                                                                     type: 'post',
-                                                                     url: 'ajaxdata.php',
-                                                                     data: {
-                                                                        year_id: id
-                                                                     },
-                                                                     success: function(data) {
-                                                                        $('#section_id').html(data);
-                                                                     }
-
-                                                                  })
-                                                               }
-                                                            </script>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_11-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_11" data-happyforms-required="">
                                                                <div class="happyforms-part-wrap">
                                                                   <div class="happyforms-part__label-container">
@@ -8625,7 +8442,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                <input type="hidden" name="status_type" value="Pre Old Students">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                               <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                             </div>
                                                             <div>
                                                                <input type="hidden" name="picture">
@@ -8652,14 +8469,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                                <input type="hidden" name="findings">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                               <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                             </div>
                                                             <div>
                                                                <input type="hidden" name="section_id">
                                                             </div>
                                                             <div>
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                                  <button type="submit" class="happyforms-submit happyforms-button-submit " name="data">Submit</button>
+                                                                  <button type="submit" class="happyforms-submit happyforms-button-submit form-btn " name="data">Submit</button>
                                                                </div>
                                                             </div>
                                                       </form>
@@ -8715,12 +8532,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
 
                                              <!-- SHIFT STUDENTS -->
                                              <div class=" happyforms-styles" id="happyforms-768">
-                                                <form action="" method="post" autocomplete="off">
+                                                <form id="pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                    <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                    <input type="hidden" name="action" value="happyforms_message">
                                                    <input type="hidden" name="client_referer" value="">
                                                    <input type="hidden" name="happyforms_form_id" value="768">
                                                    <input type="hidden" name="happyforms_step" value="0">
+                                                   <input type="hidden" value="<?php echo $new_user_id ?>" name="new_user_id">
+                                                   <input type="hidden" value="<?php echo $academic ?>" name="academic">
                                                    <div class="happyforms-flex">
                                                       <input type="text" name="768-single_line_text" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                       <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -8785,12 +8604,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                             <div class="happyforms-part__el">
                                                                <div class="happyforms-custom-select">
                                                                   <div class="happyforms-part__select-wrap">
-                                                                     <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="FetchCourseShift(this.value)" required>
+                                                                     <select name="course_id" id="course_id" data-serialize class="happyforms-select" onchange="fetchYear(this.value, 'shift')" required>
                                                                         <option value="" class="happyforms-placeholder-option">Select Course</option>
                                                                         <?php
-                                                                        if ($result1->num_rows > 0) {
-                                                                           while ($row = $result1->fetch_assoc()) {
-                                                                              echo '<option value=' . $row['course_id'] . '>' . $row['course_name'] . '|' . $row['course_code'] . '</option>';
+                                                                        if (!empty($courses)) {
+                                                                           foreach ($courses as $course) {
+                                                                              echo '<option value=' . $course['course_id'] . '>' . $course['course_name'] . '|' . $course['course_code'] . '</option>';
                                                                            }
                                                                         }
                                                                         ?>
@@ -8811,46 +8630,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                             <div class="happyforms-part__el">
                                                                <div class="happyforms-custom-select">
                                                                   <div class="happyforms-part__select-wrap">
-                                                                     <select name="year_id1" id="year_id1" data-serialize class="happyforms-select" onchange="FetchYearShift(this.value)" required>
-                                                                        <option value="" class="happyforms-placeholder-option">Select Year Level</option>
+                                                                     <select name="year_id_shift" id="year_id_shift" data-serialize class="happyforms-select" required>
+                                                                        <option value="" class="happyforms-placeholder-option">Select Course First</option>
                                                                      </select>
                                                                   </div>
                                                                </div>
                                                             </div>
                                                          </div>
                                                       </div>
-                                                      <script type="text/javascript">
-                                                         function FetchCourseShift(id) {
-                                                            $('#year_id1').html('');
-                                                            $('#section_id').html('<option>Select Section</option>');
-                                                            $.ajax({
-                                                               type: 'post',
-                                                               url: 'ajaxdata1.php',
-                                                               data: {
-                                                                  course_id: id
-                                                               },
-                                                               success: function(data) {
-                                                                  $('#year_id1').html(data);
-                                                               }
-
-                                                            })
-                                                         }
-
-                                                         function FetchYearShift(id) {
-                                                            $('#section_id').html('');
-                                                            $.ajax({
-                                                               type: 'post',
-                                                               url: 'ajaxdata1.php',
-                                                               data: {
-                                                                  year_id: id
-                                                               },
-                                                               success: function(data) {
-                                                                  $('#section_id').html(data);
-                                                               }
-
-                                                            })
-                                                         }
-                                                      </script>
                                                       <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_11-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_11" data-happyforms-required="">
                                                          <div class="happyforms-part-wrap">
                                                             <div class="happyforms-part__label-container">
@@ -9285,7 +9072,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                          <input type="hidden" name="status_type" value="Shift Students">
                                                       </div>
                                                       <div>
-                                                         <input type="hidden" name="academic" value="<?= $rows['academic_start']; ?>-<?= $rows['academic_end']; ?>">
+                                                         <input type="hidden" name="academic" value="<?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?>">
                                                       </div>
                                                       <div>
                                                          <input type="hidden" name="picture">
@@ -9312,14 +9099,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
                                                          <input type="hidden" name="findings">
                                                       </div>
                                                       <div>
-                                                         <input type="hidden" name="semester_id" value="<?= $rows1['semester_name']; ?>">
+                                                         <input type="hidden" name="semester_id" value="<?= $semester['semester_name']; ?>">
                                                       </div>
                                                       <div>
                                                          <input type="hidden" name="section_id">
                                                       </div>
                                                       <div>
                                                          <div class="happyforms-form__part happyforms-part happyforms-part--submit">
-                                                            <button type="submit" class="happyforms-submit happyforms-button-submit " name="shift">Submit</button>
+                                                            <button type="submit" class="happyforms-submit happyforms-button-submit form-btn " name="shift">Submit</button>
                                                          </div>
                                                       </div>
                                                 </form>
@@ -9774,7 +9561,106 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["shift"])) {
       unset($_SESSION['statuss1']);
    }
    ?>
+   <script type="text/javascript">
+      function fetchYear(id, fetchType) {
+         var fetchType = fetchType == 'old' ? '#year_id' : '#year_id_shift';
+         $(fetchType).html('');
+         $.ajax({
+            type: 'post',
+            url: '../Master/POST/POST.php',
+            data: {
+               type: 'fetchYear',
+               data: {
+                  course_id: id
+               }
+            },
+            success: function(data) {
+               // console.log(data);
+               $(fetchType).append('<option value="">Select Year Level</option>');
+               Object.keys(data).forEach(function(key) {
+                  var key = data[key];
+                  //console.log(data[key]);
+                  $(fetchType).append('<option value="' + key.year_id + '">' + key.year_name + '</option>');
+               });
+            }
 
+         })
+      }
+      function preEnrol(form) {
+         $('.form-btn ').prop('disabled', true);
+         $('.form-btn ').text('Sending request...');
+         // Prevent form submission (optional, depending on your needs)
+         event.preventDefault();
+
+         // Serialize form data using FormData API
+         var formData = new FormData(form)
+
+         // Display form data (for demonstration)
+         var data = {};
+         for (var pair of formData.entries()) {
+            data[pair[0]] = pair[1];
+         }
+
+         if (data) {
+            $.ajax({
+                  type: 'POST',
+                  url: '../Master/POST/POST.php', // Replace with your PHP script handling the form submission
+                  data: {
+                     type: 'preEnroll',
+                     data: data
+                  },
+                  success: function(response) {
+                     // Handle success response
+                     console.log('Form submitted successfully');
+                     console.log(response);
+                     if (response.isPreEnroll) {
+                        swal({
+                           title: response.message,
+                           text: "Visit MCC FB Page, for more info and guidelines",
+                           icon: response.type,
+                           button: "Okay Thanks!",
+                        })
+                        .then((value) => {
+                           swal({
+                              title: "Thank you for your request!",
+                              text: "MCC receive and procces your request.",
+                              icon: "success",
+                              button: "Done!",
+                           })
+                           .then((value) => {
+                              window.location.href = '../';
+                           });
+                        });
+                     } else {
+                        swal({
+                           title: response.message,
+                           text: "Visit MCC FB Page, for more info and guidelines",
+                           icon: response.type,
+                           button: "Okay",
+                        })
+                        .then((value) => {
+                           $('.form-btn ').prop('disabled', false);
+                           $('.form-btn ').text('Submit');
+                        });
+                     }
+                  },
+                  error: function(error) {
+                     $('.form-btn ').prop('disabled', false);
+                     $('.form-btn ').text('Submit');
+                     // Handle error
+                     console.error('Error submitting form:', error);
+                     // Optionally, you can display an error message to the user
+                     swal({
+                        title: "Internal Error.",
+                        text: 'Error submitting form:', error,
+                        icon: 'error',
+                        button: "Okay",
+                     });
+                  }
+            });
+         }
+      }
+   </script>
 </body>
 
 </html>

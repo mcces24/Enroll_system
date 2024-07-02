@@ -1,10 +1,9 @@
-<!--
-  @project    Pure CSS Radio Button Tiles
-  @author     Jamshid Elmi
-  @created    2022-09-18 13:19:39
-  @modified   2022-09-18 13:19:39
-  @tutorial   https://youtu.be/UShd9wHTR-o
--->
+<?php
+include_once '../MainFunction.php';
+if (isStudentLogin()) {
+  header("Location: ./students/");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

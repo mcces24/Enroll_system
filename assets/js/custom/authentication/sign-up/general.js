@@ -15,9 +15,12 @@ var KTSignupGeneral = function () {
     var formElements = document.getElementById('kt_sign_up_form').elements;
 
     function submitForm(formData) {
+        var datas = {
+            email: formData.email
+        }
         return new Promise((resolve, reject) => {
             var xhrCheckEmail = new XMLHttpRequest();
-            xhrCheckEmail.open('POST', 'assets/modal/check_email.php', true);
+            xhrCheckEmail.open('POST', 'Master/POST/POST.php', true);
             xhrCheckEmail.setRequestHeader('Content-Type', 'application/json');
             xhrCheckEmail.onreadystatechange = function () {
                 if (xhrCheckEmail.readyState == 4 && xhrCheckEmail.status == 200) {
@@ -31,14 +34,15 @@ var KTSignupGeneral = function () {
                     }
                 }
             };
-            xhrCheckEmail.send(JSON.stringify({ email: formData.email }));
+            var data = { type: 'check_email', data: datas }; // Assuming `data` is your email data
+            xhrCheckEmail.send(JSON.stringify(data));
         });
     }
 
     function submitFormData(formData) {
         // Make an AJAX request to insert user data
         var xhrInsertUser = new XMLHttpRequest();
-        xhrInsertUser.open('POST', 'assets/modal/insert_user.php', true);
+        xhrInsertUser.open('POST', 'Master/POST/POST.php', true);
         xhrInsertUser.setRequestHeader('Content-Type', 'application/json');
         xhrInsertUser.onreadystatechange = function () {
             if (xhrInsertUser.readyState == 4 && xhrInsertUser.status == 200) {
@@ -74,7 +78,8 @@ var KTSignupGeneral = function () {
                 }
             }
         };
-        xhrInsertUser.send(JSON.stringify(formData));
+        var data = { type: 'register', data: formData }; // Assuming `data` is your email data
+        xhrInsertUser.send(JSON.stringify(data));
     }
     
 

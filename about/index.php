@@ -1,15 +1,15 @@
+<?php
+include_once '../MainFunction.php';
+if (isStudentLogin()) {
+    $button1 = "Accounts";
+} else {
+    $button1 = "Login";
+}
+?>
 <!DOCTYPE html>
 <html lang="en-US">
 
 <head>
-    <?php
-    session_start();
-    if (!isset($_SESSION['SESSION_STUDENTS'])) {
-        $button1 = "Log In";
-    } else {
-        $button1 = "Account";
-    }
-    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">

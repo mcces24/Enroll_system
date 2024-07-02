@@ -1,5 +1,5 @@
 <?php
-
+include_once '../../MainFunction.php';
 require '../../phpmailer/phpmailer/src/Exception.php';
 require '../../phpmailer/phpmailer/src/PHPMailer.php';
 require '../../phpmailer/phpmailer/src/SMTP.php';
@@ -11,32 +11,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Get JSON input
     $requestData = json_decode(file_get_contents('php://input'), true);
     $email = $requestData['email'];
-    $passwordHash = md5($requestData["password"]);
+    $passwordHash = $requestData["password"];
     $randomNumber = rand(100000, 999999);
 
-    // Include database connection
-    include_once "../../database/conn.php";
+    $params = [
+        'email' => $email,
+        'password' => $passwordHash,
+        'verified_status' => $randomNumber
+    ];
 
-    // Initialize response array
-    $response = ['isSave' => false];
+    header('Content-Type: application/json');
+    $response = json_encode(createNewUser($params));
 
-    // Create a database connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
-    if ($conn->connect_error) {
-        header('HTTP/1.1 500 Internal Server Error');
-        $response['error'] = 'Database connection failed';
-        echo json_encode($response);
-        exit();
-    }
-
-    // Prepare and execute SQL statement to insert data
-    $stmt = $conn->prepare("INSERT INTO new_user (email, password, verified_status) VALUES (?, ?, ?)");
-    $stmt->bind_param("sss", $email, $passwordHash, $randomNumber);
-
-    if ($stmt->execute() === TRUE) {
-        $response['isSave'] = true;
+    if ($response) {
         $mail = new PHPMailer(true);
 
         try {
@@ -68,17 +56,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $response['error'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
             header('HTTP/1.1 500 Internal Server Error');
         }
-    } else {
-        $response['error'] = 'Database insertion failed';
-        header('HTTP/1.1 500 Internal Server Error');
-    }
-
-    // Close statement and connection
-    $stmt->close();
-    $conn->close();
-
+    } 
     // Return JSON response
     header('Content-Type: application/json');
-    echo json_encode($response);
+    echo $response;
 }
 ?>
