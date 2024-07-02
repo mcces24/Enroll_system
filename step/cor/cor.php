@@ -684,7 +684,7 @@ if ($result->num_rows > 0) {
         window.print();
     }
     window.addEventListener('DOMContentLoaded', (event) => {
-        //PrintPage()
-        //setTimeout(function(){ window.close() },750)
+        PrintPage()
+        setTimeout(function(){ window.close() },750)
     });
 </script>
