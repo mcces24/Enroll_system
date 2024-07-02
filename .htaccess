@@ -15,11 +15,4 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.+)$ $1.php [L,QSA]
 
-<FilesMatch "\.(png|jpg|jpeg|gif)$">
-    Order deny,allow
-    Deny from all
-</FilesMatch>
-
-
-    
 </IfModule>
