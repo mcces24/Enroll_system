@@ -66,9 +66,11 @@ class NewUserController extends NewUser {
                     } else {
                         $_SESSION['SESSION_STUDENTS'] = $username;
                         $_SESSION['USER_ID'] = $row['Id'];
+                        $responseData['isRegistered'] = isset($_SESSION['isRegistered']) ? $_SESSION['isRegistered'] : false;
                         $responseData['status'] = 'success';
                         $responseData['message'] = 'Login successfully.';
                         $responseData['type'] = 'success';
+                        unset($_SESSION['isRegistered']);
                     }
                 } else {
                     $responseData['status'] = 'failed';
@@ -123,6 +125,7 @@ class NewUserController extends NewUser {
     
             if ($stmt) {
                 $response = ['isSave' => true];
+                $_SESSION['isRegistered'] = true;
                 return $response; 
             } else {
                 $response = ['isSave' => false];

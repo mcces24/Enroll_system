@@ -162,6 +162,8 @@ var KTSignupGeneral = function () {
             t.addEventListener("click", function (r) {
                 r.preventDefault();
                 a.revalidateField("password");
+                t.setAttribute("data-kt-indicator", "on");
+                t.disabled = true;
                 a.validate().then(function (validationStatus) {
                     if (validationStatus === "Valid") {
 
@@ -172,13 +174,8 @@ var KTSignupGeneral = function () {
                         submitForm(formData).then((response) => {
                             console.log('response: ', response);
                             if (response == 'success') {
-                                t.setAttribute("data-kt-indicator", "on");
-                                t.disabled = true;
                                 submitFormData(formData);
-                                
                             } else {
-                                t.setAttribute("data-kt-indicator", "off");
-                                t.disabled = false;
                                 Swal.fire({
                                     text: "Email already exists. Please use a different email address.",
                                     icon: "error",
@@ -187,6 +184,9 @@ var KTSignupGeneral = function () {
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
+                                }).then(function (result) {
+                                    t.setAttribute("data-kt-indicator", "off");
+                                    t.disabled = false;
                                 });
                             }
                         });
@@ -200,6 +200,9 @@ var KTSignupGeneral = function () {
                             customClass: {
                                 confirmButton: "btn btn-primary"
                             }
+                        }).then(function (result) {
+                            t.setAttribute("data-kt-indicator", "off");
+                            t.disabled = false;
                         });
                     }
                 });

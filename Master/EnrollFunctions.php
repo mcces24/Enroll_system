@@ -19,11 +19,11 @@ function getActiveEnroll() {
         return $activeEnroll[0];
     } catch (PDOException $e) {
         // Handle PDOException (database connection issues, etc.)
-        echo "PDOException in getActiveEnroll(): " . $e->getMessage();
+        //echo "PDOException in getActiveEnroll(): " . $e->getMessage();
         return false; // or handle the error in another way
     } catch (Exception $e) {
         // Handle other exceptions
-        echo "Exception in getActiveEnroll(): " . $e->getMessage();
+        //echo "Exception in getActiveEnroll(): " . $e->getMessage();
         return false; // or handle the error in another way
     }
 }

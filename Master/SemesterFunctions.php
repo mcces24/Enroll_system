@@ -21,11 +21,11 @@ function getActiveSemester() {
         return $activeSemester[0];
     } catch (PDOException $e) {
         // Handle PDOException (database connection issues, etc.)
-        echo "PDOException in getActiveSemester(): " . $e->getMessage();
+        //echo "PDOException in getActiveSemester(): " . $e->getMessage();
         return false; // or handle the error in another way
     } catch (Exception $e) {
         // Handle other exceptions
-        echo "Exception in getActiveSemester(): " . $e->getMessage();
+        //echo "Exception in getActiveSemester(): " . $e->getMessage();
         return false; // or handle the error in another way
     }
 }

@@ -151,8 +151,12 @@ if (isStudentLogin()) {
                             $('.alert').prop('style', `display: block;`);
                             $('.btn').text('Redirecting...');
                             setTimeout(function() {
-                                console.log('Redirecting...');
-                                window.location.href = '../../../enroll-now/';
+                                if (response.isRegistered) {
+                                    window.location.href = '../../../enroll-now/';
+                                } else {
+                                    window.location.href = '../';
+                                }
+                                
                             }, 1000);
                         } else {
                             $('.alert').html(response.message);

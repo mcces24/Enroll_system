@@ -44,9 +44,6 @@ if (isStudentLogin()) {
             "ext": ".png",
             "svgUrl": "https:\/\/s.w.org\/images\/core\/emoji\/14.0.0\/svg\/",
             "svgExt": ".svg",
-            "source": {
-                "concatemoji": ".\/wp-includes\/js\/wp-emoji-release.min.js?ver=6.0.3"
-            }
         };
         /*! This file is auto-generated */
         ! function(e, a, t) {
@@ -4392,7 +4389,7 @@ if (isStudentLogin()) {
                                 .test(t.tagName) || (t.tabIndex = -1), t.focus())
                         }, !1);
                 </script>
-                <script src="sweetalert.js"></script>
+                <script src="assets/sweetalert.js"></script>
                 <?php
                 if (isset($_SESSION['statuss']) && $_SESSION['statuss'] != '') {
                 ?>
@@ -4437,7 +4434,7 @@ if (isStudentLogin()) {
                 </script>
                 <!--begin::Javascript-->
                 <!--begin::Global Javascript Bundle(used by all pages)-->
-                <script src="./assets/plugins/global/plugins.bundle.js"></script>
+                <!-- <script src="./assets/plugins/global/plugins.bundle.js"></script> -->
                 <script src="./assets/js/scripts.bundle.js"></script>
                 <!--end::Global Javascript Bundle-->
                 <!--begin::Page Custom Javascript(used by this page)-->

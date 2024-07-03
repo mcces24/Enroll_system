@@ -18,11 +18,11 @@ function getYearLevel() {
         return $yearLevel;
     } catch (PDOException $e) {
         // Handle PDOException (database connection issues, etc.)
-        echo "PDOException in getActiveAcademicYear(): " . $e->getMessage();
+        // echo "PDOException in getActiveAcademicYear(): " . $e->getMessage();
         return false; // or handle the error in another way
     } catch (Exception $e) {
         // Handle other exceptions
-        echo "Exception in getActiveAcademicYear(): " . $e->getMessage();
+        // echo "Exception in getActiveAcademicYear(): " . $e->getMessage();
         return false; // or handle the error in another way
     }
 }
@@ -42,11 +42,11 @@ function getYearLevelByCourseId($courseId) {
         return $yearLevel;
     } catch (PDOException $e) {
         // Handle PDOException (database connection issues, etc.)
-        echo "PDOException in getActiveAcademicYear(): " . $e->getMessage();
+        // echo "PDOException in getActiveAcademicYear(): " . $e->getMessage();
         return false; // or handle the error in another way
     } catch (Exception $e) {
         // Handle other exceptions
-        echo "Exception in getActiveAcademicYear(): " . $e->getMessage();
+        // echo "Exception in getActiveAcademicYear(): " . $e->getMessage();
         return false; // or handle the error in another way
     }
 }

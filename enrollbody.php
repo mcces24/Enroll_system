@@ -37,16 +37,16 @@ $enroll = getActiveEnroll();
                             <!--begin::Heading-->
                             <div class="card-px text-center pt-20 pb-5">
                                 <!--begin::Title-->
-                                <?php if (in_array($academicYear['status'] and $semester['sem_status'], array('1'))) : ?>
+                                <?php if (!empty($academicYear) && !empty($semester) && in_array($academicYear['status'] and $semester['sem_status'], array('1'))) : ?>
                                     <header class="entry-header ast-no-thumbnail ast-no-meta">
                                         <h1 class="entry-title" itemprop="headline">Pre Enrollment for
                                             Academic Year :
                                             <?= $academicYear['academic_start']; ?>-<?= $academicYear['academic_end']; ?> |
-                                            <?= $semester['semester_name']; ?> for</h1>
+                                            <?= $semester['semester_name']; ?></h1>
                                     </header>
                                     <!-- .entry-header -->
                                 <?php endif; ?>
-                                <?php if (in_array($academicYear['status'] and $semester['sem_status'], array('0'))) : ?>
+                                <?php if (!empty($academicYear) && !empty($semester) && in_array($academicYear['status'] and $semester['sem_status'], array('0'))) : ?>
                                     <header class="entry-header ast-no-thumbnail ast-no-meta">
                                         <h1 class="entry-title" itemprop="headline">Pre Enrollment is
                                             currently NOT AVAILABLE.</h1>
@@ -54,67 +54,52 @@ $enroll = getActiveEnroll();
                                     <!-- .entry-header -->
                                 <?php endif; ?>
 
-                                <?php if ($enroll['enroll_name'] == 'New Students') { ?>
+                                <?php if (!empty($enroll) && $enroll['enroll_name'] == 'New Students') { ?>
 
                                     <div class="color">
                                         <h2 class="fs-2x fw-bolder mb-0">New Students</h2>
-                                        </br></br></br>
+                                        </br>
                                         <h5 class="fs-2x fw-bolder mb-0">Is now ongoing..</h5>
                                         <!-- <span class="exad-tab-title">New Students Pre-Enrollment</span> -->
                                     </div>
 
-                                <?php } elseif ($enroll['enroll_name'] == 'Transferee Students') { ?>
+                                <?php } elseif (!empty($enroll) && $enroll['enroll_name'] == 'Transferee Students') { ?>
 
                                     <div class="color">
                                         <h2 class="fs-2x fw-bolder mb-0">Transferee Students</h2>
-                                        </br></br></br>
+                                        </br>
                                         <h5 class="fs-2x fw-bolder mb-0">Is now ongoing..</h5>
                                     </div>
 
-                                <?php } elseif ($enroll['enroll_name'] == 'Old Students') { ?>
+                                <?php } elseif (!empty($enroll) && $enroll['enroll_name'] == 'Old Students') { ?>
 
                                     <div class="color">
                                         <h2 class="fs-2x fw-bolder mb-0">Old Students</h2>
-                                        </br></br></br>
+                                        </br>
                                         <h5 class="fs-2x fw-bolder mb-0">Is now ongoing..</h5>
                                     </div>
 
-                                <?php } elseif ($enroll['enroll_name'] == 'Shift Students') { ?>
+                                <?php } elseif (!empty($enroll) && $enroll['enroll_name'] == 'Shift Students') { ?>
 
                                     <div class="color">
                                         <h2 class="fs-2x fw-bolder mb-0">Shift Students </h2>
-                                        </br></br></br>
+                                        </br>
                                         <h5 class="fs-2x fw-bolder mb-0">Is now ongoing..</h5>
                                     </div>
 
-                                <?php } elseif ($enroll['enroll_name'] == 'All') { ?>
-
-                                    <div class="color" style="background-color: #9EF19E; border-radius: 20px;">
-                                        <h3 class="fs-2x fw-bolder mb-0">New Students</h3>
+                                <?php } elseif (!empty($enroll) && $enroll['enroll_name'] == 'All') { ?>
+                                    <div class="color">
+                                        <h2 class="fs-2x fw-bolder mb-0">For All Students</h2>
+                                        </br>
+                                        <h5 class="fs-2x fw-bolder mb-0">Is now ongoing..</h5>
                                     </div>
-
-                                    <div class="color" style="background-color: #B4DBF5; border-radius: 20px;">
-                                        <h3 class="fs-2x fw-bolder mb-0">Transferee</h3>
-                                    </div>
-
-                                    <div class="color" style="background-color: #FAFDC1; border-radius: 20px;">
-                                        <h3 class="fs-2x fw-bolder mb-0">Old Students</h3>
-                                    </div>
-
-                                    <div class="color" style="background-color: #FBCCAE; border-radius: 20px;">
-                                        <h3 class="fs-2x fw-bolder mb-0">Shift Students</h3>
-                                    </div>
-                                    </li>
-                                    </br></br></br>
-                                    <h5 class="fs-2x fw-bolder mb-0">Is now ongoing..</h5>
                                 <?php } else { ?>
-                                    <?php if ($academicYear['status'] == '1' && $semester['sem_status'] == '1') : ?>
-                                        </br></br></br>
-                                        <h1 class="entry-title" itemprop="headline">Loading Pre-enrollment form. Please wait</h1>
-                                    <?php elseif ($academicYear['status'] == '0' && $semester['sem_status'] == '0') : ?>
-                                        </br></br></br>
-                                        <h5 class="fs-2x fw-bolder mb-0">Is now ongoing..</h5>
-                                        <!-- .entry-header -->
+                                    <?php if (!empty($academicYear) && !empty($semester) && $academicYear['status'] == '1' && $semester['sem_status'] == '1') : ?>
+                                        <h1 class="entry-title" itemprop="headline">Pre-enrollment is not yet started. Please wait for the announcement.</h1>
+                                    <?php elseif (!empty($academicYear) && !empty($semester) && $academicYear['status'] == '0' && $semester['sem_status'] == '0') : ?>
+                                        <h5 class="fs-2x fw-bolder mb-0">Pre-enrollment is currently NOT AVAILABLE.</h5>
+                                    <?php else: ?>
+                                        <h5 class="fs-2x fw-bolder mb-0">Pre-enrollment is currently NOT AVAILABLE.</h5>
                                     <?php endif; ?>
 
                                 <?php } ?>
@@ -127,9 +112,9 @@ $enroll = getActiveEnroll();
                                 <!--end::Description-->
 
                                 <!--begin::Action-->
-
-                                <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_login">Pre-Enroll
-                                    Now</a>
+                                <?php if(!empty($academicYear) && !empty($semester) && !empty($enroll)): ?>
+                                    <a href="#" class="btn btn-primary er fs-6 px-8 py-4" data-bs-toggle="modal" data-bs-target="#kt_modal_login">Pre-Enroll Now</a>
+                                <?php endif; ?>
                                 <!--end::Action-->
                             </div>
                             <!--end::Heading-->
