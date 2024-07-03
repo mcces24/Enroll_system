@@ -1,4 +1,5 @@
-<?php 
+<?php
+header("Access-Control-Allow-Origin: *");
 $db = db_conn();
 // Assuming $db is your PDO database connection
 $newUserController = new NewUserController($db);
