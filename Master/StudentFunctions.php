@@ -16,3 +16,15 @@ function preEnrollStudents($data) {
         return false; // or handle the error in another way
     }
 }
+
+function getStudentLists() {
+    global $studentController; 
+    try {
+        $getVerifiedData = $studentController->getStudents();
+        return isset($getVerifiedData) ? $getVerifiedData : array();
+    } catch (Exception $e) {
+        // Handle other exceptions
+        //echo "Exception in createNewUser(): " . $e->getMessage();
+        return false; // or handle the error in another way
+    }
+}

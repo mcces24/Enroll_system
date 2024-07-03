@@ -13,6 +13,7 @@ $academicYear = getActiveAcademicYear();
 $semester = getActiveSemester();
 $enroll = getActiveEnroll();
 $new_user_id = getLoginUserId();
+$email = getLoginEmail();
 $courses = getCourse();
 $start = !empty($academicYear) && $academicYear['academic_start'] ? $academicYear['academic_start'] : null;
 $end = !empty($academicYear) && $academicYear['academic_end'] ? $academicYear['academic_end'] : null;
@@ -4326,7 +4327,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                         <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                         <div class="happyforms-part__el">
                                                                            <div class="happyforms-input">
-                                                                              <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                              <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                            </div>
                                                                         </div>
                                                                      </div>
@@ -4892,7 +4893,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                           <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5543,7 +5544,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                           <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -6161,7 +6162,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                            <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                            <div class="happyforms-part__el">
                                                                               <div class="happyforms-input">
-                                                                                 <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                                 <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                               </div>
                                                                            </div>
                                                                         </div>
@@ -6696,7 +6697,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7262,7 +7263,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7913,7 +7914,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                        <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -8537,7 +8538,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                             <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                             <div class="happyforms-part__el">
                                                                <div class="happyforms-input">
-                                                                  <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $_SESSION['SESSION_STUDENTS'] ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                  <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                </div>
                                                             </div>
                                                          </div>

@@ -1,12 +1,12 @@
 <?php
-class CourseController extends Course {
-    public function getCourse($params = array()) {
+class SectionController extends Section {
+    public function getSection($params = array()) {
         try {
             if (!empty($params)) {
-                if (isset($params['course_id'])) {
-                    $course_id = $params['course_id'];
+                if (isset($params['section_id'])) {
+                    $section_id = $params['section_id'];
                     $condition = [
-                        'WHERE' => "course_id = $course_id"
+                        'WHERE' => "section_id = $section_id"
                     ];
                 } else {
                     $condition = [];
@@ -15,17 +15,17 @@ class CourseController extends Course {
                 $condition = [];
             }
             
-            $course = $this->read($condition);
-            if ($course === false) {
+            $sections = $this->read($condition);
+            if ($sections === false) {
                 throw new Exception("Failed to fetch active academic year");
             }
     
-            $courses = [];
-            while ($row = $course->fetch(PDO::FETCH_ASSOC)) {
-                $courses[] = $row;
+            $responseSections = [];
+            while ($row = $sections->fetch(PDO::FETCH_ASSOC)) {
+                $responseSections[] = $row;
             }
     
-            return $courses;
+            return $responseSections;
         } catch (PDOException $e) {
             // Handle PDOException (database connection issues, etc.)
             echo "PDOException in getActiveAcademicYear(): " . $e->getMessage();

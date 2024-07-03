@@ -1,12 +1,15 @@
 <?php
-class CourseController extends Course {
-    public function getCourse($params = array()) {
+class SubjectController extends Subject {
+    public function getSubject($params = array()) {
         try {
             if (!empty($params)) {
-                if (isset($params['course_id'])) {
+                if (isset($params['id_number'])) {
+                    $semester_id = $params['semester_id'];
                     $course_id = $params['course_id'];
+                    $year_id = $params['year_id'];
+                    $section_id = $params['section_id'];
                     $condition = [
-                        'WHERE' => "course_id = $course_id"
+                        'WHERE' => "semester_id = '$semester_id' AND course_id = $course_id AND year_id = $year_id AND section_id = $section_id",
                     ];
                 } else {
                     $condition = [];
@@ -15,24 +18,24 @@ class CourseController extends Course {
                 $condition = [];
             }
             
-            $course = $this->read($condition);
-            if ($course === false) {
+            $subject = $this->read($condition);
+            if ($subject === false) {
                 throw new Exception("Failed to fetch active academic year");
             }
     
-            $courses = [];
-            while ($row = $course->fetch(PDO::FETCH_ASSOC)) {
-                $courses[] = $row;
+            $responseSubject = [];
+            while ($row = $subject->fetch(PDO::FETCH_ASSOC)) {
+                $responseSubject[] = $row;
             }
     
-            return $courses;
+            return $responseSubject;
         } catch (PDOException $e) {
             // Handle PDOException (database connection issues, etc.)
-            echo "PDOException in getActiveAcademicYear(): " . $e->getMessage();
+            echo "PDOException in getSubject(): " . $e->getMessage();
             return false; // or handle the error in another way
         } catch (Exception $e) {
             // Handle other exceptions
-            echo "Exception in getActiveAcademicYear(): " . $e->getMessage();
+            echo "Exception in getSubject(): " . $e->getMessage();
             return false; // or handle the error in another way
         }
     }
