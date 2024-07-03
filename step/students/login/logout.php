@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-session_unset();
-session_destroy();
+setcookie('USER_LOGIN_AUTH', '', time() - 3600, '/');
 
 header("Location: ./");

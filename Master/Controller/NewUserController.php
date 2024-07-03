@@ -2,9 +2,8 @@
 class NewUserController extends NewUser {
     
     public function getLoginUserId() {
-        if (isset($_COOKIE['COOKIE_STUDENTS']) && !empty($_COOKIE['COOKIE_STUDENTS'])) {
-            $userAuth = $_COOKIE['COOKIE_STUDENTS'];
-            $userId = $userAuth['Id'];
+        if (isset($_COOKIE['USER_LOGIN_AUTH']) && !empty($_COOKIE['USER_LOGIN_AUTH'])) {
+            $userId = $_COOKIE['USER_LOGIN_AUTH'];
         } else {
             $userId = 0;
         }
@@ -12,7 +11,7 @@ class NewUserController extends NewUser {
     }
 
     public function isStudentLogin() {
-        if (isset($_COOKIE['COOKIE_STUDENTS']) && !empty($_COOKIE['COOKIE_STUDENTS'])) {
+        if (isset($_COOKIE['USER_LOGIN_AUTH']) && !empty($_COOKIE['USER_LOGIN_AUTH'])) {
             return true;
         } else {
             return false;
@@ -65,7 +64,7 @@ class NewUserController extends NewUser {
                         $responseData['message'] = 'Account is not yet verified, Please check your email to verify your account.';
                         $responseData['type'] = 'info';
                     } else {
-                        setcookie('USER_LOGIN_AUTH', $row, time() + (86400 * 30), '/');
+                        setcookie('USER_LOGIN_AUTH', $row['Id'], time() + (86400 * 30), '/');
                         // $_SESSION['SESSION_STUDENTS'] = $username;
                         // $_SESSION['USER_ID'] = $row['Id'];
                         $responseData['isRegistered'] = isset($_COOKIE['isRegistered']) ? $_COOKIE['isRegistered'] : false;
