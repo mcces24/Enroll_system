@@ -2,8 +2,9 @@
 class NewUserController extends NewUser {
     
     public function getLoginUserId() {
-        if (isset($_SESSION['USER_ID'])) {
-            $userId = $_SESSION['USER_ID'];
+        if (isset($_COOKIE['COOKIE_STUDENTS']) && !empty($_COOKIE['COOKIE_STUDENTS'])) {
+            $userAuth = $_COOKIE['COOKIE_STUDENTS'];
+            $userId = $userAuth['Id'];
         } else {
             $userId = 0;
         }
@@ -11,7 +12,7 @@ class NewUserController extends NewUser {
     }
 
     public function isStudentLogin() {
-        if (isset($_SESSION['SESSION_STUDENTS']) && $_SESSION['SESSION_STUDENTS']) {
+        if (isset($_COOKIE['COOKIE_STUDENTS']) && !empty($_COOKIE['COOKIE_STUDENTS'])) {
             return true;
         } else {
             return false;
@@ -64,13 +65,14 @@ class NewUserController extends NewUser {
                         $responseData['message'] = 'Account is not yet verified, Please check your email to verify your account.';
                         $responseData['type'] = 'info';
                     } else {
-                        $_SESSION['SESSION_STUDENTS'] = $username;
-                        $_SESSION['USER_ID'] = $row['Id'];
-                        $responseData['isRegistered'] = isset($_SESSION['isRegistered']) ? $_SESSION['isRegistered'] : false;
+                        setcookie('USER_LOGIN_AUTH', $row, time() + (86400 * 30), '/');
+                        // $_SESSION['SESSION_STUDENTS'] = $username;
+                        // $_SESSION['USER_ID'] = $row['Id'];
+                        $responseData['isRegistered'] = isset($_COOKIE['isRegistered']) ? $_COOKIE['isRegistered'] : false;
                         $responseData['status'] = 'success';
                         $responseData['message'] = 'Login successfully.';
                         $responseData['type'] = 'success';
-                        unset($_SESSION['isRegistered']);
+                        setcookie('isRegistered', false, time() - 3600, '/');
                     }
                 } else {
                     $responseData['status'] = 'failed';
@@ -125,7 +127,7 @@ class NewUserController extends NewUser {
     
             if ($stmt) {
                 $response = ['isSave' => true];
-                $_SESSION['isRegistered'] = true;
+                setcookie('isRegistered', true, time() + (86400 * 30), '/');
                 return $response; 
             } else {
                 $response = ['isSave' => false];
