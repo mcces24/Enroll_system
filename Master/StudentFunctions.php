@@ -12,7 +12,7 @@ function preEnrollStudents($data) {
         return $getVerifiedData;
     } catch (Exception $e) {
         // Handle other exceptions
-        echo "Exception in createNewUser(): " . $e->getMessage();
+        //echo "Exception in createNewUser(): " . $e->getMessage();
         return false; // or handle the error in another way
     }
 }
