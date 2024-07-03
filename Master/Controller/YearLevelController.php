@@ -1,19 +1,28 @@
 <?php
 class YearLevelController extends YearLevel {
-    public function getYearLevel() {
+    public function getYearLevel($params = array()) {
         try {
-            $yearLevel = $this->read();
+            if (!empty($params)) {
+                if (isset($params['course_id'])) {
+                    $course_id = $params['course_id'];
+                    $condition = [
+                        'WHERE' => "course_id = $course_id"
+                    ];
+                } else {
+                    $condition = [];
+                }
+            } else {
+                $condition = [];
+            }
+            
+            $yearLevel = $this->read($condition);
             if ($yearLevel === false) {
                 throw new Exception("Failed to fetch active academic year");
             }
     
             $yearLevels = [];
             while ($row = $yearLevel->fetch(PDO::FETCH_ASSOC)) {
-                $yearLevels[] = [
-                    'year_id' => $row['year_id'],
-                    'year_name' => $row['year_name'],
-                    'course_id' => $row['course_id']
-                ];
+                $yearLevels[] = $row;
             }
     
             return $yearLevels;

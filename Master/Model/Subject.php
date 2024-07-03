@@ -1,7 +1,7 @@
 <?php
-class Course {
+class Subject {
     private $conn;
-    private $table = 'course';
+    private $table = 'subjects';
 
     // Constructor to initialize the database connection
     public function __construct($db) {
@@ -28,7 +28,7 @@ class Course {
             $field  = $params['FIELDS'];
         } else {
             $field = '*';
-        }
+        }  
 
         $query = 'SELECT ' . $field  . '  FROM ' . $this->table . $conditions;
         $stmt = $this->conn->prepare($query);

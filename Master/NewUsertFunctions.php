@@ -11,6 +11,13 @@ function getLoginUserId() {
     return $userId;
 }
 
+function getLoginEmail() {
+    global $newUserController; // Use global to access the variable declared outside the function
+    $userId = $newUserController->getLoginEmail();
+    // Process $isLogin or return whatever logic you need
+    return $userId;
+}
+
 // Function to check if a student is logged in
 function isStudentLogin() {
     global $newUserController; // Use global to access the variable declared outside the function

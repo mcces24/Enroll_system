@@ -1,7 +1,7 @@
 <?php
-class Course {
+class Section {
     private $conn;
-    private $table = 'course';
+    private $table = 'sections';
 
     // Constructor to initialize the database connection
     public function __construct($db) {

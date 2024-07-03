@@ -1,7 +1,7 @@
 <?php
-class Course {
+class Qrcode {
     private $conn;
-    private $table = 'course';
+    private $table = 'qrcode';
 
     // Constructor to initialize the database connection
     public function __construct($db) {
@@ -9,7 +9,7 @@ class Course {
     }
 
     // Method to read course from the database
-    public function read($params = array()) {
+    public function getData($params = array()) {
         $conditions = '';
         
         if (!empty($params['JOIN'])) {

@@ -1,5 +1,41 @@
 <?php
 class NewUserController extends NewUser {
+
+    function getNewUserData($params = array()) {
+        try {
+            if (!empty($params)) {
+                if (isset($params['userId'])) {
+                    $userId = $params['userId'];
+                    $condition = [
+                        'WHERE' => "Id = $userId"
+                    ];
+                } else {
+                    $condition = [];
+                }
+            } else {
+                $condition = [];
+            }
+            $qrCode = $this->read($condition);
+            if ($qrCode === false) {
+                throw new Exception("Failed to fetch active academic year");
+            }
+    
+            $qrCodeList = [];
+            while ($row = $qrCode->fetch(PDO::FETCH_ASSOC)) {
+                $qrCodeList[] = $row;
+            }
+    
+            return $qrCodeList;
+        } catch (PDOException $e) {
+            // Handle PDOException (database connection issues, etc.)
+            echo "PDOException in getQrcodeData(): " . $e->getMessage();
+            return false; // or handle the error in another way
+        } catch (Exception $e) {
+            // Handle other exceptions
+            echo "Exception in getQrcodeData(): " . $e->getMessage();
+            return false; // or handle the error in another way
+        }
+    }
     
     public function getLoginUserId() {
         if (isset($_COOKIE['USER_LOGIN_AUTH']) && !empty($_COOKIE['USER_LOGIN_AUTH'])) {
@@ -8,6 +44,20 @@ class NewUserController extends NewUser {
             $userId = 0;
         }
         return $userId;
+    }
+
+    public function getLoginEmail() {
+        $userId = $this->getLoginUserId();
+        $params = [
+            "userId" => $userId,
+        ];
+        $newUser = $this->getNewUserData($params);
+        if (!empty($newUser)) {
+            $email = $newUser[0]['email'];
+        } else {
+            $email = null;
+        }
+        return $email;
     }
 
     public function isStudentLogin() {
