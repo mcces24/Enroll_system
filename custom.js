@@ -2,9 +2,9 @@ jQuery(document).ready(function () {
 
 
 
-	
-      
-        
+
+
+
 
 	$('#download').click(function () {
 		html2canvas(document.querySelector('#invoice')).then((canvas) => {
@@ -17,8 +17,8 @@ jQuery(document).ready(function () {
 	});
 
 
-     
-      
+
+
 	//////////////
 	//////////////
 	$('#btn-print').click(function () {

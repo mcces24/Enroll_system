@@ -30,3 +30,4 @@ database/dbConfig.php
 database/regis.php
 database/regis2.php
 database/regis3.php
+env.php
