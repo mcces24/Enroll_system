@@ -4034,8 +4034,7 @@ flexibility(document.documentElement);
                                                                 <a href="./" aria-current="page" class="menu-link">Contact</a>
                                                             </li>
                                                             <li id="menu-item-649" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-649">
-                                                                <a href="./../enrollnow" class="menu-link">Enroll
-                                                                    Now</a>
+                                                                <a href="./../enrollnow" class="menu-link">Enroll Now</a>
                                                             </li>
                                                             <li id="menu-item-650" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-650">
                                                                 <a href="../step/" class="menu-link"><?php echo $button1 ?></a>

@@ -6,6 +6,7 @@ if (isStudentLogin()) {
     $button1 = "Login";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -4723,7 +4724,7 @@ flexibility(document.documentElement);
                                                 <li class="page_item page-item-155 menu-item"><a href="./contact/" class="menu-link">Contact</a></li>
                                                 <li class="page_item page-item-640 menu-item"><a href="./enrollnow" class="menu-link">Enroll Now</a>
                                                 </li>
-                                                <li class="page_item page-item-640 menu-item"><a href="../step/" class="menu-link"><?php echo $button1 ?></a></li>
+                                                <li class="page_item page-item-640 menu-item"><a href="./step/" class="menu-link"><?php echo $button1 ?></a></li>
                                             </ul>
                                         </div>
                                     </nav>
