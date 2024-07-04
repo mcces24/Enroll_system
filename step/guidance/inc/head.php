@@ -17,7 +17,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image" href="../../../icon.png">
     <style type="text/css">
-      <?php include 'navbar.php';  ?>
     
     .result, .result1{
         width: 100%;
