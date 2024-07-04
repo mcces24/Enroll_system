@@ -143,7 +143,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
     </script>
 
     <!-- start: Sidebar -->
-    <?php include '../inc/navbar.php';  ?>
+    <?php //include '../inc/navbar.php';  ?>
     <div class="sidebar-overlay"></div>
     <!-- end: Sidebar -->
 
