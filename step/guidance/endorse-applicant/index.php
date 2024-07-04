@@ -123,8 +123,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
     $count_accept = 0;
     ?>
 <?php endif; ?>
-<!DOCTYPE html>
-<html lang="en">
 
 
 <?php require '../inc/head.php';  ?>
@@ -655,5 +653,3 @@ if (mysqli_num_rows($querys_run111) > 0) {
         });
     </script>
 </body>
-
-</html>
