@@ -346,6 +346,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                 } else {
                                                     echo "<td>$slot_count / <span class='available_slot-$sched_time_id'>$available_slot</span>
                                                     <span class='badge rounded-pill bg-danger'>Over Slot</span>
+                                                    <a href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
                                                     </td>";
                                                 }
                                                
