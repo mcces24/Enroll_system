@@ -1,14 +1,3 @@
-<?php
-session_start();
-require '../../../database/config.php';
-
-if (!isset($_SESSION['SESSION_GUIDANCE'])) {
-    header("Location: ../login/");
-    die();
-} else {
-    $username = $_SESSION['SESSION_GUIDANCE'];
-}
-?>
 
 
 <?php
@@ -128,32 +117,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 <html lang="en">
 
 <head>
-    <style type="text/css">
-        .result,
-        .result1 {
-            width: 73%;
-            position: absolute;
-            z-index: 999;
-            top: 100%;
-            left: 0;
-        }
-
-        /* Formatting result items */
-        .result p,
-        .result1 p {
-            margin: 0;
-            padding: 5px 5px;
-            border: 1px solid #CCCCCC;
-            border-top: none;
-            cursor: pointer;
-            background-color: white;
-        }
-
-        .result p:hover,
-        .result1 p:hover {
-            background: #f2f2f2;
-        }
-    </style>
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -172,6 +136,8 @@ if (mysqli_num_rows($querys_run111) > 0) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" type="image" href="../../../icon.png">
 </head>
+
+<?php include '../inc/head.php' ?>
 
 <body style="width: 100%;">
     <?php include('message.php'); ?>
@@ -822,10 +788,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/script.js"></script>
-    <script src="script.js"></script>
-    <script src="new_script.js"></script>
-    <script src="enroll.js"></script>
-    <script src="total.js"></script>
     <!-- end: JS -->
 
     <script>

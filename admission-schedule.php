@@ -10,53 +10,55 @@ if (isset($_GET['applicant_id'])) {
   $query_run1 = mysqli_query($conn, $query1);
 
   if (mysqli_num_rows($query_run1) > 0) {
-    $student1 = mysqli_fetch_array($query_run1);
-    if ($student1['applicant_id'] = $applicant_id) {
-      header("Location: index");
-    }
+    $_SESSION['statuss'] = "You have already scheduled an admission test.";
+    $_SESSION['icon'] = "error";
   } else {
-    $applicant_id = mysqli_real_escape_string($conn, $_GET['applicant_id']);
     $query = "SELECT * FROM students WHERE applicant_id='$applicant_id' ";
     $query_run = mysqli_query($conn, $query);
-
     if (mysqli_num_rows($query_run) > 0) {
-      $student = mysqli_fetch_array($query_run);
-?><?php
-        } else {
-          echo "<h4>No Such Id Found</h4>";
-        }
-      }
+      $row = mysqli_fetch_assoc($query_run);
+      $student_id = $row['id'];
+
+    } else {
+      $_SESSION['statuss'] = "Applicant not found!";
+      $_SESSION['icon'] = "error";
     }
-          ?>
+  }
+} else {
+  $_SESSION['statuss'] = "Applicant not found!";
+  $_SESSION['icon'] = "error";
+}
+?>
 
 <?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["submit"])) {
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
 
-  $applicant_id = $_POST["applicant_id"];
+  $applicant_id = $_GET['applicant_id'];
 
   $sched_date = $_POST["sched_date"];
   $sched_time = $_POST["sched_time"];
   $wish_course = $_POST["wish_course"];
-  $student_id = $_POST["student_id"];
+  $student_id = $student_id;
+
+  echo $applicant_id;
+  echo $sched_date;
+  echo $sched_time;
+  echo $wish_course;
+  echo $student_id;
 
 
-  $result = $conn->query("SELECT * from admission_list where sched_date = '$sched_date' AND sched_time = '$sched_time' ");
-  $count = $result->num_rows;
-  if ($count <= 50) {
-    $query1 = "INSERT INTO admission_list VALUES('', '$applicant_id', '$sched_date', '$sched_time', '$wish_course', '$student_id')";
-    $run = mysqli_query($conn, $query1);
 
-    if ($run) {
-      $_SESSION['statuss'] = "Admission Test Schedule Added";
-      $_SESSION['icon'] = "success";
-    } else {
-      $_SESSION['statuss'] = "Something went wrong! Try Again.";
-      $_SESSION['icon'] = "error";
-    }
+  $query1 = "INSERT INTO admission_list VALUES(null, '$applicant_id', '$sched_date', '$sched_time', '$wish_course', '$student_id')";
+  $run = mysqli_query($conn, $query1);
+
+  if ($run) {
+    $_SESSION['statuss'] = "Admission Test Schedule Added";
+    $_SESSION['icon'] = "success";
   } else {
-    $_SESSION['statuss1'] = "Date and Time is at Maximum Students";
-    $_SESSION['icon1'] = "error";
+    // echo "Error: " . $query1 . "<br>" . mysqli_error($conn);
+    $_SESSION['statuss'] = "Something went wrong! Try Again.";
+    $_SESSION['icon'] = "error";
   }
 }
 
@@ -3999,14 +4001,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["submit"])) {
                                   <!-- End of HappyForms Additional CSS -->
                                   <div class=" happyforms-styles" id="happyforms-710">
 
-                                    <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="post" id="happyforms-form-710" autocomplete="off">
+                                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . '?applicant_id=' . $applicant_id . ''; ?>" method="post" id="happyforms-form-710" autocomplete="off">
                                       <input type="hidden" name="happyforms_random_seed" value="3639626543">
 
                                       <input type="hidden" name="action" value="happyforms_message">
                                       <input type="hidden" name="client_referer" value="">
                                       <input type="hidden" name="happyforms_form_id" value="710">
                                       <input type="hidden" name="happyforms_step" value="0">
-                                      <input type="hidden" name="applicant_id" value="<?= $student['applicant_id']; ?>">
 
                                       <div class="happyforms-flex">
                                         <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
@@ -4016,15 +4017,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["submit"])) {
                                           <h5 style="text-align: center;">Please select a date and time of your choice</h5>
                                         </div>
 
-
-
-
-
-
-
-
-                                        <input hidden id="happyforms-710_single_line_text_2" type="text" name="applicant_id" value="<?= $student['applicant_id'] ?>" placeholder="Fathers date of birth" autocomplete="off" spellcheck="false" readonly>
-                                        <input hidden id="happyforms-710_single_line_text_2" type="text" name="student_id" value="<?= $student['id'] ?>" placeholder="Fathers date of birth" autocomplete="off" spellcheck="false" readonly>
+                                        <?php
+                                        $querySched = "SELECT * FROM admission_sched ORDER BY sched_date";
+                                        $querySchedRun = mysqli_query($conn, $querySched);
+                                        $schedules = [];
+                                        if (mysqli_num_rows($querySchedRun) > 0) {
+                                          while ($sched = mysqli_fetch_assoc($querySchedRun)) {
+                                            $schedules[] = $sched;
+                                          }
+                                        }
+                                        ?>
                                         <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-710_single_line_text_3-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_3" data-happyforms-required="">
                                           <div class="happyforms-part-wrap">
 
@@ -4035,23 +4037,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["submit"])) {
                                               </label>
                                             </div>
                                             <div class="happyforms-part__el">
-
-
                                               <div class="happyforms-custom-select">
                                                 <div class="happyforms-part__select-wrap">
-                                                  <?php
-                                                  $query = "SELECT * FROM admission_sched WHERE status = 1 Order by sched_date ASC";
-                                                  $result = $db->query($query);
-                                                  ?>
-
-
-                                                  <select name="sched_date" id="sched_date" data-serialize class="happyforms-select" onchange="FetchCourse(this.value)" required>
+                                                  <select name="sched_date" id="sched_date" data-serialize class="happyforms-select" required>
                                                     <option value="" class="happyforms-placeholder-option" selected disabled>Select Date</option>
                                                     <?php
-                                                    if ($result->num_rows > 0) {
-                                                      while ($row = $result->fetch_assoc()) {
-                                                        echo '<option value=' . $row['sched_date'] . '>' . date("M d, Y", strtotime($row['sched_date'])) . '</option>';
-                                                      }
+                                                    foreach ($schedules as $schedule) {
+                                                      echo '<option value=' . $schedule['sched_date'] . '>' . date("M d, Y", strtotime($schedule['sched_date'])) . '</option>';
                                                     }
                                                     ?>
                                                   </select>
@@ -4060,7 +4052,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["submit"])) {
                                             </div>
                                           </div>
                                         </div>
-
                                         <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-710_single_line_text_3-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_3" data-happyforms-required="">
                                           <div class="happyforms-part-wrap">
 
@@ -4075,20 +4066,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["submit"])) {
 
                                               <div class="happyforms-custom-select">
                                                 <div class="happyforms-part__select-wrap">
-                                                  <?php
-                                                  $query = "SELECT * FROM admission_time WHERE status = 1 Order by sched_time_start ASC";
-                                                  $result = $db->query($query);
-                                                  ?>
-
-                                                  <select name="sched_time" id="sched_time" data-serialize class="happyforms-select" onchange="FetchCourse(this.value)" required>
-                                                    <option value="" class="happyforms-placeholder-option" selected disabled>Select time</option>
-                                                    <?php
-                                                    if ($result->num_rows > 0) {
-                                                      while ($row = $result->fetch_assoc()) {
-                                                        echo '<option value=' . $row['sched_time_start'] . '-' . $row['sched_time_stop'] . '>' . $row['sched_time_start'] . '-' . $row['sched_time_stop'] . '</option>';
-                                                      }
-                                                    }
-                                                    ?>
+                                                  <select name="sched_time" id="sched_time" data-serialize class="happyforms-select" required>
+                                                    <option value="" class="happyforms-placeholder-option" selected disabled>Select Date First</option>
                                                   </select>
                                                 </div>
                                               </div>
@@ -4464,30 +4443,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") if (isset($_POST["submit"])) {
       /^[A-z0-9_-]+$/.test(e) && (t = document.getElementById(e)) && (/^(?:a|select|input|button|textarea)$/i.test(t.tagName) || (t.tabIndex = -1), t.focus())
     }, !1);
   </script>
-  <script src="sweetalert.js"></script>
+  <script src="assets/sweetalert.js"></script>
+
+  <script>
+    document.getElementById('sched_date').addEventListener('change', function() {
+      var sched_date = document.getElementById('sched_date').value;
+      $.ajax({
+        url: 'code.php',
+        type: 'POST',
+        data: {
+          'sched_date': sched_date,
+        },
+        success: function(response) {
+
+          $('#sched_time').html('');
+          if (response.status = 'success') {
+            returnData = response.returnData;
+            var html = '<option value="" class="happyforms-placeholder-option" selected disabled>' + response.message + '</option>';
+            returnData.forEach(function(time) {
+              html += '<option value="' + time.sched_time + '">' + time.sched_time + ' Slot Available: ' + time.available_slot + '</option>';
+            });
+            $('#sched_time').html(html);
+          }
+          console.log(response.status);
+        },
+        error: function(xhr, status, error) {
+          console.error("AJAX Error:", status + error);
+        }
+      });
+    });
+  </script>
 
   <?php
   if (isset($_SESSION['statuss']) && $_SESSION['statuss'] != '') {
   ?>
 
     <script>
-      swal({
-          title: "Admission Schedule Set Success",
-          text: "Thank you for choosing MCC",
-          icon: "success",
-          button: "Done!",
-        })
-        .then((value) => {
           swal({
             title: "<?php echo $_SESSION['statuss'] ?>",
             text: "Returning Home",
             icon: "<?php echo $_SESSION['icon'] ?>",
             button: "Okay Thanks!",
           }).then(function() {
-            window.location = "step-3.php?applicant_id=<?php echo $applicant_id  ?>";
+            window.location = "./";
           });
-
-        });
     </script>
   <?php
     unset($_SESSION['statuss']);

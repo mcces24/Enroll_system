@@ -1,14 +1,4 @@
-<?php
-session_start();
-require '../../../database/config.php';
 
-if (!isset($_SESSION['SESSION_GUIDANCE'])) {
-    header("Location: ../login/");
-    die();
-} else {
-    $username = $_SESSION['SESSION_GUIDANCE'];
-}
-?>
 
 <?php
 
@@ -126,7 +116,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
 <!DOCTYPE html>
 <html lang="en">
 
-
 <?php require '../inc/head.php';  ?>
 
 <body style="width: 100%;">
@@ -154,41 +143,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
             <nav class="px-3 py-2 bg-white rounded shadow-sm">
                 <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
                 <h5 class="fw-bold mb-0 me-auto">Endorse Applicant</h5>
-                <div class="dropdown me-3  d-sm-block">
-                    <div class="cursor-pointer dropdown-toggle navbar-link" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="ri-notification-line"><span style="font-size: 10px; float: right;"><span id="total"></span></i>
-                    </div>
-
-                    <div class="dropdown-menu fx-dropdown-menu">
-                        <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
-                            <h5 class="p-3 bg-indigo text-light">Notification</h5>
-                            <div class="list-group list-group-flush">
-                                <a href="../new-applicant/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                                    <div class="me-auto">
-                                        <div class="fw-semibold">Pre-Enrolled Applicant</div>
-                                        <span class="fs-7">For Academic <?php echo $academic; ?>, <?php echo $semester; ?></span>
-                                    </div>
-                                    <span class="badge bg-primary rounded-pill"><span id="accept"></span></span>
-                                </a>
-                                <a href="../applicant-info/" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                                    <div class="me-auto">
-                                        <div class="fw-semibold">Applicant Form</div>
-                                        <span class="fs-7">Total Number of New Applicant who filled the form</span>
-                                    </div>
-                                    <span class="badge bg-primary rounded-pill"><span id="enroll"></span></span>
-                                </a>
-                            </div>
-                        <?php else : ?>
-                            <h5 class="p-3 bg-indigo text-light">No Notification</h5>
-                        <?php endif; ?>
-                    </div>
-
-                </div>
-
-
-                <div class="dropdown me-3 d-none d-sm-block">
-
-                </div>
                 <?php include '../inc/dropdown.php' ?>
             </nav>
 
@@ -565,10 +519,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/script.js"></script>
-    <script src="script.js"></script>
-    <script src="new_script.js"></script>
-    <script src="enroll.js"></script>
-    <script src="total.js"></script>
     <!-- end: JS -->
 
     <script>
