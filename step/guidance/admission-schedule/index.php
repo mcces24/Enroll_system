@@ -118,6 +118,28 @@ if (mysqli_num_rows($querys_run111) > 0) {
 <?php include '../inc/head.php';  ?>
 
 <body style="width: 100%;">
+        <style>
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        .input-group .btn {
+            padding: 0 10px;
+            height: 30px;
+        }
+
+        .input-group .form-control {
+            text-align: center;
+            height: 30px;
+        }
+    </style>
     <?php include('message.php'); ?>
     <div class="loader-wrapper" id="preloader">
         <span class="loader"><span class="loader-inner"></span></span>
@@ -264,8 +286,16 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                                 <?= $student['sched_time_start']; ?> - <?= $student['sched_time_stop']; ?>
                                                             </span>
                                                         </td>
-                                                        <td colspan="2" style="width: 100px">
-                                                            <input style="height: 30px;" type="number" min="0" data-sched_time_id="<?= $student['sched_time_id'] ?>" class="form-control text-center available_slot" value="<?= $student['available_slot']; ?>">
+                                                        <td colspan="2" style="width: 100px" >
+                                                            <div class="input-group text-center" style="display: flex; align-items: center;">
+                                                                <div class="input-group-prepend">
+                                                                    <button style="height: 30px;" class="btn btn-outline-secondary" type="button" id="button-minus" onclick="changeValue(this, -1)">-</button>
+                                                                </div>
+                                                                <input style="height: 30px;" type="number" min="0" data-sched_time_id="<?= $student['sched_time_id'] ?>" class="form-control text-center available_slot" value="<?= $student['available_slot']; ?>">
+                                                                <div class="input-group-append">
+                                                                    <button style="height: 30px;" class="btn btn-outline-secondary" type="button" id="button-plus" onclick="changeValue(this, 1)">+</button>
+                                                                </div>
+                                                            </div>
                                                         </td>
 
                                                         <td colspan="2">
@@ -349,7 +379,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                     <a href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
                                                     </td>";
                                                 }
-                                               
                                             }
                                             echo "</tr>";
                                         }
@@ -389,7 +418,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         sched_time_id: sched_time_id
                     },
                     success: function(data) {
-                       $('.available_slot-' + sched_time_id).text(available_slot);
+                        $('.available_slot-' + sched_time_id).text(available_slot);
                     }
                 });
             });
@@ -481,6 +510,18 @@ if (mysqli_num_rows($querys_run111) > 0) {
                 });
             }
         }
+
+        function changeValue(button, delta) {
+            var input = button.parentNode.parentNode.querySelector('input');
+            var currentValue = parseInt(input.value);
+            var newValue = currentValue + delta;
+
+            if (newValue >= parseInt(input.min)) {
+                input.value = newValue;
+                $(input).trigger('change'); // Trigger change event if using jQuery
+            }
+        }
+
     </script>
 </body>
 
