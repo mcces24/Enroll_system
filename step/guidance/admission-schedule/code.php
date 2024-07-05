@@ -1,5 +1,4 @@
 <?php
-session_start();
 require '../../../database/dbcon.php';
 
 if (isset($_GET['sched_id'])) {
