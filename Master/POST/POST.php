@@ -47,6 +47,16 @@ function getPostData($POST) {
             $data = $POST['data'] ?? null;
             preEnroll($data);
             break;
+        case 'guidance_login':
+            $data = $POST['data'] ?? null;
+            guidanceLogin($data);
+            break;
+        case 'getNotification':
+            getNotification();
+            break;
+        case 'guidanceLogout':
+            guidanceLogout();
+        break;    
         default:
             break;
     }
@@ -71,10 +81,19 @@ function verifiedUser($verify) {
 }
 
 function login($data) {
-    $username = $data['username'];
-    $password = $data['password'];
+    $username = isset($data['username']) ? $data['username'] : null;
+    $password = isset($data['password']) ? $data['password'] : null;
 
     $verifiedData = getLoginUser($username, $password);
+    
+    echo json_encode($verifiedData);
+}
+
+function guidanceLogin($data) {
+    $username = isset($data['username']) ? $data['username'] : null;
+    $password = isset($data['password']) ? $data['password'] : null;
+
+    $verifiedData = loginGuidanceUser($username, $password);
     
     echo json_encode($verifiedData);
 }
@@ -150,4 +169,16 @@ function preEnroll($data) {
     $preEnrollStudents = preEnrollStudents($data);
     header('Content-Type: application/json');
     echo json_encode($preEnrollStudents);
+}
+
+function getNotification() {
+    $notification = getNotifications();
+    header('Content-Type: application/json');
+    echo json_encode($notification);
+}
+
+function guidanceLogout() {
+    $response = guidanceLogoutNow();
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }

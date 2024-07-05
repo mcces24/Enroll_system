@@ -50,7 +50,7 @@ if(isset($_POST['email_data']))
 	}
 	if($query_run1)
 	{
-		echo 'ok';
+		echo true;
 		foreach($_POST['email_data'] as $rows){
 
 				require '../../../database/conn.php';
@@ -81,7 +81,7 @@ if(isset($_POST['email_data']))
 	}
 	else
 	{
-		echo 'Error Accepting Applicant';
+		echo false;
 	}
 }
 

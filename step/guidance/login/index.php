@@ -1,49 +1,8 @@
-<!-- Code by Brave Coder - https://youtube.com/BraveCoder -->
-
 <?php
-session_start();
-if (isset($_SESSION['SESSION_GUIDANCE'])) {
-    header("Location: ../home/");
-    die();
-}
-
-include '../../../database/config.php';
-$msg = "";
-
-if (isset($_GET['verification'])) {
-    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE code='{$_GET['verification']}'")) > 0) {
-        $query = mysqli_query($conn, "UPDATE users SET code='' WHERE code='{$_GET['verification']}'");
-
-        if ($query) {
-            $msg = "<div class='alert alert-success'>Account verification has been successfully completed.</div>";
-        }
-    } else {
-        header("Location: ../");
-    }
-}
-
-if (isset($_POST['submit'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
-
-    $sql = "SELECT * FROM users WHERE username='{$email}' AND password='{$password}'";
-    $result = mysqli_query($conn, $sql);
-
-    if (mysqli_num_rows($result) === 1) {
-        $row = mysqli_fetch_assoc($result);
-
-        if ($row['role'] == "Guidance Office") {
-            $id = $row['id'];
-            $query = "UPDATE users SET online='1' WHERE id='$id' ";
-            $result1 = mysqli_query($conn, $query);
-            $_SESSION['SESSION_GUIDANCE'] = $email;
-            header("Location: ../home/");
-        } else {
-            $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
-        }
-    } else {
-        $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
-    }
+include_once '../../../MainFunction.php';
+if (isGuidanceLogin()) {
+    header('Location: ../home/');
+    exit();
 }
 ?>
 
@@ -103,9 +62,9 @@ if (isset($_POST['submit'])) {
                     <div class="content-wthree">
                         <h2>Login Now | Guidance Office</h2>
                         <p>Madridejos Community College </p>
-                        <?php echo $msg; ?>
-                        <form action="" method="post">
-                            <input type="email" class="email" name="email" placeholder="Enter Your Email" required>
+                        <div style="display: none;" class='alert'></div>
+                        <form id="loginForm">
+                            <input type="email" class="username" name="username" placeholder="Enter Your Email" required>
                             <input type="password" class="password" name="password" placeholder="Enter Your Password" style="margin-bottom: 2px;" required>
                             <p style="float: right ;"><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
                             <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
@@ -121,11 +80,56 @@ if (isset($_POST['submit'])) {
     <!-- //form section start -->
 
     <script src="js/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        $(document).ready(function(c) {
-            $('.alert-close').on('click', function(c) {
-                $('.main-mockup').fadeOut('slow', function(c) {
-                    $('.main-mockup').remove();
+        $(document).ready(function(event) {
+            var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
+            $('#loginForm').on('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+                // Get form data
+                var formData = {
+                    username: $('input[name=username]').val(),
+                    password: $('input[name=password]').val()
+                };
+
+                console.log(formData);
+
+                // Send the AJAX request
+                $.ajax({
+                    url: BASE_PATH + '/Master/POST/POST.php',
+                    type: 'POST',
+                    data: {
+                        type: 'guidance_login',
+                        data: formData 
+                    },
+                    success: function(response) {
+                        // Handle the response from the server
+                        response = JSON.parse(response);
+                        console.log(response);
+                        $('.btn').prop('disabled', true);
+                        $('.btn').text('Logging in...');
+                        $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
+                        if (response.status == 'success') {
+                            console.log('Redirecting...');
+                            $('.alert').addClass(`alert-${response.type}`);
+                            $('.alert').html(response.message);
+                            $('.alert').prop('style', `display: block;`);
+                            $('.btn').text('Redirecting...');
+                            setTimeout(function() {
+                                window.location.href = '../';
+                            }, 1000);
+                        } else {
+                            $('.alert').html(response.message);
+                            $('.alert').prop('style', `display: block;`);
+                            $('.alert').addClass(`alert-${response.type}`);
+                            $('.btn').prop('disabled', false);
+                            $('.btn').text('Login');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        // Handle errors here
+                        console.log('Error: ' + textStatus, errorThrown);
+                    }
                 });
             });
         });

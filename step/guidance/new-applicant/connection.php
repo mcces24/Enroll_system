@@ -1,14 +1,4 @@
-<?php
-session_start();
-require '../../../database/config.php';
 
-if (!isset($_SESSION['SESSION_GUIDANCE'])) {
-    header("Location: ../login/");
-    die();
-} else {
-    $username = $_SESSION['SESSION_GUIDANCE'];
-}
-?>
 
         <?php
 

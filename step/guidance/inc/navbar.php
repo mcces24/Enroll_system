@@ -1,5 +1,4 @@
 <?php
-
 // Define the current page
 $current_page = $_SERVER['PHP_SELF'];
 
@@ -18,6 +17,11 @@ function isFocused($page)
 <style>
     .sidebar-menu-item.has-dropdown .sidebar-dropdown-menu {
         display: block !important; 
+    }
+    .disabled-link {
+        pointer-events: none;
+        text-decoration: none; /* Remove underline if desired */
+        cursor: default; /* Change cursor to default */
     }
 </style>
 <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
@@ -46,7 +50,7 @@ function isFocused($page)
         <li class="sidebar-menu-item <?php echo isActive('/new-applicant/index'); ?>">
             <a href="../new-applicant/">
                 <i class="ri-account-pin-box-line sidebar-menu-item-icon"></i>
-                New Applicant<span class="badge bg-primary rounded-pill"><span id="noti_number1"></span></span>
+                New Applicant<span style="margin-left: 5px;"  class="badge bg-primary rounded-pill"><span id="new-applicant-side"></span></span>
             </a>
         </li>
         </li>
@@ -54,7 +58,7 @@ function isFocused($page)
         <li class="sidebar-menu-item <?php echo isActive('/accepted-applicant/index'); ?>">
             <a href="../accepted-applicant/">
                 <i class="ri-user-received-line sidebar-menu-item-icon"></i>
-                Send Form <span class="badge bg-primary rounded-pill"><span id="accept"></span></span>
+                Accepted Applicant <span style="margin-left: 5px;" class="badge bg-primary rounded-pill"><span id="accept-applicant-side"></span></span>
             </a>
         </li>
         </li>
@@ -62,7 +66,7 @@ function isFocused($page)
         <li class="sidebar-menu-item <?php echo isActive('/applicant-info/index'); ?>">
             <a href="../applicant-info/">
                 <i class="ri-account-pin-box-line sidebar-menu-item-icon"></i>
-                Send Admission<span class="badge bg-primary rounded-pill"><span id="enroll"></span></span>
+                Applicant Admission<span style="margin-left: 5px;"  class="badge bg-primary rounded-pill"><span id="form-done-side"></span></span>
             </a>
         </li>
         </li>
@@ -93,7 +97,7 @@ function isFocused($page)
         </li>
         <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Admission</li>
         <li class="sidebar-menu-item has-dropdown <?php echo isFocused('/admission-schedule/index'); ?> <?php echo isFocused('/admission-list/index'); ?>">
-            <a href="">
+            <a href="" class="disabled-link">
                 <i class="ri-calendar-todo-line sidebar-menu-item-icon"></i>
                 Manage Admission
                 <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
@@ -112,7 +116,7 @@ function isFocused($page)
             </ul>
         </li>
         <li class="sidebar-menu-item has-dropdown <?php echo isFocused('/passed-and-enroll/index'); ?> <?php echo isFocused('/passed-not-enroll/index'); ?> <?php echo isFocused('/not-pass/index'); ?>">
-            <a href="#">
+            <a href="" class="disabled-link">
                 <i class="ri-article-line sidebar-menu-item-icon"></i>
                 Admission Test
                 <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>
@@ -128,7 +132,7 @@ function isFocused($page)
                         Passed but not Enrolled
                     </a>
                 </li>
-                <li class="sidebar-dropdown-menu-item" <?php echo isFocused('/not-pass/index'); ?>>
+                <li class="sidebar-dropdown-menu-item <?php echo isFocused('/not-pass/index'); ?>">
                     <a href="../not-pass/">
                         Not Passed
                     </a>
@@ -138,7 +142,7 @@ function isFocused($page)
         </li>
         <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">System</li>
         <li class="sidebar-menu-item has-dropdown <?php echo isFocused('/mail-entrance-exam/index'); ?>">
-            <a href="#">
+            <a href="" class="disabled-link">
                 <i class="ri-mail-line sidebar-menu-item-icon"></i>
                 Email
                 <i class="ri-arrow-down-s-line sidebar-menu-item-accordion ms-auto"></i>

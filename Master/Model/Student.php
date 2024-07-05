@@ -21,6 +21,9 @@ class Student {
         if (!empty($params['ORDER'])) {
             $conditions .= ' ORDER ' . $params['ORDER'];
         }
+        if (!empty($params['GROUP BY'])) {
+            $conditions .= ' GROUP BY ' . $params['GROUP BY'];
+        }
         if (!empty($params['LIMIT'])) {
             $conditions .= ' LIMIT ' . $params['LIMIT'];
         }

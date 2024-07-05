@@ -31,3 +31,16 @@ if (isset($_GET['sched_id'])) {
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     }
 }
+
+if (isset($_GET['available_slot']) && isset($_GET['sched_time_id'])) {
+    $available_slot = $_GET['available_slot'];
+    $sched_time_id = $_GET['sched_time_id'];
+    $update = "UPDATE admission_time SET available_slot = $available_slot WHERE sched_time_id = $sched_time_id";
+    $query_run = mysqli_query($conn, $update);
+
+    if ($query_run) {
+        return true;
+    } else {
+        return false;
+    }
+}
