@@ -127,15 +127,21 @@ function register($data) {
         try {
             // PHPMailer setup
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'capstone.project2022.2023@gmail.com';
-            $mail->Password   = 'nxnqxklsnggbkdtc';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
+            //$mail->Host       = 'smtp.gmail.com';
+            $mail->Host       = 'smtp.hostinger.com';
+            //$mail->SMTPAuth   = true;
+            //$mail->Username   = 'capstone.project2022.2023@gmail.com';
+            //$mail->Password   = 'nxnqxklsnggbkdtc';
+            //$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            //$mail->Port       = 465;
+
+            $mail->Username   = 'no-reply@madridejoscommunitycollege.com'; // Your Hostinger email address
+            $mail->Password   = 'MCCes@2024'; // Your Hostinger email password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also possible for port 465
+            $mail->Port       = 587; // TCP port to connect to, 587 for STARTTLS, 465 for SMTPS
 
             $senderName = 'MCC - Verify Account';
-            $senderEmail = 'capstone.project2022.2023@gmail.com';
+            $senderEmail = 'no-reply@madridejoscommunitycollege.com';
 
             $mail->setFrom($senderEmail, $senderName);
             $mail->addAddress($email);
