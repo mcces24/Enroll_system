@@ -25,31 +25,44 @@ function loginGuidanceUser($username, $password) {
 
 function getGuidanceLoginData(){
     global $guidanceController; // Use global to access the variable declared outside the function
-    $isLogin = $guidanceController->getGuidanceLoginData();
+    $response = $guidanceController->getGuidanceLoginData();
     // Process $isLogin or return whatever logic you need
-    return $isLogin;
+    return $response;
 }
-
 
 function getNotifications() {
     global $guidanceController; // Use global to access the variable declared outside the function
-    $notification = $guidanceController->getNotifications();
+    $response = $guidanceController->getNotifications();
     // Process $isLogin or return whatever logic you need
-    return $notification;
-}
-
-function home() {
-    global $guidanceController; // Use global to access the variable declared outside the function
-    $home = $guidanceController->home();
-    // Process $isLogin or return whatever logic you need
-    return $home;
+    return $response;
 }
 
 function guidanceLogoutNow() {
     global $guidanceController; // Use global to access the variable declared outside the function
-    $home = $guidanceController->logout();
+    $response = $guidanceController->logout();
     // Process $isLogin or return whatever logic you need
-    return $home;
+    return $response;
+}
+
+function home() {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->home();
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function newApplicant() {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->newApplicant();
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function acceptNewApplicantFunction($data) {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->acceptNewApplicantController($data);
+    // Process $isLogin or return whatever logic you need
+    return $response;
 }
 
 

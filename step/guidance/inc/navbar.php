@@ -24,6 +24,9 @@ function isFocused($page)
         cursor: default; /* Change cursor to default */
     }
 </style>
+<?php
+require_once('loader.php');
+?>
 <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
     <div class="d-flex align-items-center p-3">
         <img class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4" style="height: 50px; " src="../../assets/mcc2.png">

@@ -50,9 +50,9 @@
 <script>
     var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
     $(document).ready(function(event) {
-        // setInterval(() => {
-        //     getNotification();
-        // }, 2000);
+        setInterval(() => {
+            getNotification();
+        }, 2000);
 
         $('#logout').click(function() {
             $.ajax({
