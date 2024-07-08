@@ -65,6 +65,40 @@ function acceptNewApplicantFunction($data) {
     return $response;
 }
 
+function acceptedApplicantFunction() {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->acceptedApplicantController();
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function sendGuidanceFormFunction($data) {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->sendGuidanceFormController($data);
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function getAppicantByApplicantIdFunction($applicantId) {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->getAppicantByApplicantIdController($applicantId);
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function saveApplicantGuidanceRecordFunction($data) {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->saveApplicantGuidanceRecordController($data);
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function updateApplicantStatusFunction($data) {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->updateApplicantStatusController($data);
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
 
 
 

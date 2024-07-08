@@ -21,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     getPostData($requestData);
 }
 
-function getPostData($POST) {
+function getPostData($POST)
+{
     switch ($POST['type']) {
         case 'verify':
             verifiedUser($POST['data'] ?? null);
@@ -59,13 +60,26 @@ function getPostData($POST) {
         case 'acceptNewApplicant':
             $data = $POST['data'] ?? null;
             acceptNewApplicant($data);
-        break;    
+            break;
+        case 'sendGuidanceForm':
+            $data = $POST['data'] ?? null;
+            sendGuidanceForm($data);
+            break;
+        case 'saveApplicantGuidanceRecord':
+            $data = $POST['data'] ?? null;
+            saveApplicantGuidanceRecord($data);
+            break;
+        case 'updateApplicantStatus':
+            $data = $POST['data'] ?? null;
+            updateApplicantStatus($data);
+            break;
         default:
             break;
     }
 }
 
-function verifiedUser($verify) {
+function verifiedUser($verify)
+{
     $verifiedData = getVerifiedData($verify);
     if (is_array($verifiedData)) {
         if ($verifiedData['status'] == 'success') {
@@ -83,25 +97,28 @@ function verifiedUser($verify) {
     echo json_encode($response);
 }
 
-function login($data) {
+function login($data)
+{
     $username = isset($data['username']) ? $data['username'] : null;
     $password = isset($data['password']) ? $data['password'] : null;
 
     $verifiedData = getLoginUser($username, $password);
-    
+
     echo json_encode($verifiedData);
 }
 
-function guidanceLogin($data) {
+function guidanceLogin($data)
+{
     $username = isset($data['username']) ? filter_var($data['username'], FILTER_SANITIZE_STRING) : null;
     $password = isset($data['password']) ? filter_var($data['password'], FILTER_SANITIZE_STRING) : null;
 
     $verifiedData = loginGuidanceUser($username, $password);
-    
+
     echo json_encode($verifiedData);
 }
 
-function checkEmail($data) {
+function checkEmail($data)
+{
     $email = $data['email'];
     if (!empty($email)) {
         header('Content-Type: application/json');
@@ -111,7 +128,8 @@ function checkEmail($data) {
     }
 }
 
-function register($data) {
+function register($data)
+{
     $email = $data['email'];
     $password = $data['password'];
     $randomNumber = rand(100000, 999999);
@@ -137,7 +155,7 @@ function register($data) {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
 
-            $senderName = 'MCC - Verify Account';
+            $senderName = 'Verify Account - Madridejos Community College';
             $senderEmail = 'capstone.project2022.2023@gmail.com';
 
             $mail->setFrom($senderEmail, $senderName);
@@ -156,38 +174,119 @@ function register($data) {
             $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
             header('HTTP/1.1 500 Internal Server Error');
         }
-    } 
+    }
     header('Content-Type: application/json');
     echo json_encode($response);
 }
 
-function fetchYear($data) {
+function fetchYear($data)
+{
     $course_id = $data['course_id'];
     $yearLevelByCourse = getYearLevelByCourseId($course_id);
     header('Content-Type: application/json');
     echo json_encode($yearLevelByCourse);
 }
 
-function preEnroll($data) {
+function preEnroll($data)
+{
     $preEnrollStudents = preEnrollStudents($data);
     header('Content-Type: application/json');
     echo json_encode($preEnrollStudents);
 }
 
-function getNotification() {
+function getNotification()
+{
     $notification = getNotifications();
     header('Content-Type: application/json');
     echo json_encode($notification);
 }
 
-function guidanceLogout() {
+function guidanceLogout()
+{
     $response = guidanceLogoutNow();
     header('Content-Type: application/json');
     echo json_encode($response);
 }
 
-function acceptNewApplicant($data) {
-    $response = acceptNewApplicantFunction($data);
+function acceptNewApplicant($data)
+{
+    foreach ($data as $key => $value) {
+        if (empty($value)) {
+            $response['message'] = "Requirments not met";
+            $response['type'] = "danger";
+            echo json_encode($response);
+            return;
+        }
+
+        $response = acceptNewApplicantFunction($value);
+        $return[] = $response;
+    }
+    header('Content-Type: application/json');
+    echo json_encode($return);
+}
+
+function sendGuidanceForm($data)
+{
+    foreach ($data as $key => $value) {
+        if (empty($value)) {
+            $response['message'] = "Requirments not met";
+            $response['type'] = "danger";
+            echo json_encode($response);
+            return;
+        }
+        $email = $value['email'];
+        $applicant_id = $value['applicant_id'];
+        $name = $value['name'];
+
+        $response = sendGuidanceFormFunction($value);
+        $responseJson = json_decode($response, true);
+        if ($responseJson['status'] = 'success') {
+            $mail = new PHPMailer(true);
+            try {
+                // PHPMailer setup
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = 'nxnqxklsnggbkdtc';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port       = 465;
+
+                $senderName = 'Guidance Office - Madridejos Community College';
+                $senderEmail = 'capstone.project2022.2023@gmail.com';
+
+                $mail->setFrom($senderEmail, $senderName);
+                $mail->addAddress($email);
+                $mail->Subject = 'MCC Guidance Office Form';
+
+                $link = "https://madridejoscommunitycollege.com/guidance-step/?applicant_id=$applicant_id";
+
+                $mail->isHTML(true);
+                $mail->Body = file_get_contents('Layout/accept_mail.html');
+                $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
+                $mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
+                $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
+
+                $mail->send();
+            } catch (Exception $e) {
+                $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                header('HTTP/1.1 500 Internal Server Error');
+            }
+        }
+        $return[] = $response;
+    }
+    header('Content-Type: application/json');
+    echo json_encode($return);   
+}
+
+function saveApplicantGuidanceRecord($data) {
+    $response = saveApplicantGuidanceRecordFunction($data);
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+function updateApplicantStatus($data) {
+    $response = updateApplicantStatusFunction($data);
     header('Content-Type: application/json');
     echo json_encode($response);
 }

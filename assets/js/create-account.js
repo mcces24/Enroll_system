@@ -22,48 +22,29 @@ var KTCreateAccount = function () {
 
 	 const selectedValues = Array.from(document.getElementById('kt_select2_9').selectedOptions).map(option => option.value);
 
-        // Add the selected values to the form data
-        const formData = new FormData(document.getElementById('kt_create_account_form'));
-        formData.append('acafail', selectedValues);
-
-        // Send the form data to your backend using fetch or another method
-        fetch('/your-backend-endpoint', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Handle the response from the backend
-            console.log(data);
-        })
-        .catch(error => {
-            // Handle errors
-            console.error(error);
-        });
+	// Add the selected values to the form data
+	const formData = new FormData(document.getElementById('kt_create_account_form'));
+	formData.append('acafail', selectedValues);
 
 	function saveFormDataToDatabaseStep1(formData) {
 		// Make an AJAX request to the PHP script
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', './assets/js/saveFormData.php', true);
+		xhr.open('POST', '../Master/POST/POST.php', true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
-
-
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == 4 && xhr.status == 200) {
-				// Handle the response from the server if needed
 				console.log(formData);
 			}
 		};
-
-		xhr.send(JSON.stringify(formData));
+		var data = { type: 'saveApplicantGuidanceRecord', data: formData };
+		xhr.send(JSON.stringify(data));
 	}
 
 	function submitForm(formData) {
 		// Make an AJAX request to the PHP script
 		var xhr = new XMLHttpRequest();
-		xhr.open('POST', './assets/js/submitForm.php', true);
+		xhr.open('POST', '../Master/POST/POST.php', true);
 		xhr.setRequestHeader('Content-Type', 'application/json');
-
 
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == 4 && xhr.status == 200) {
@@ -71,8 +52,8 @@ var KTCreateAccount = function () {
 				console.log(formData);
 			}
 		};
-
-		xhr.send(JSON.stringify(formData));
+		var data = { type: 'updateApplicantStatus', data: formData };
+		xhr.send(JSON.stringify(data));
 	}
 	// Private Functions
 	var initStepper = function () {
