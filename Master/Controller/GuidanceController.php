@@ -315,44 +315,40 @@ class GuidanceController extends Student {
         return $responseData;
     }
 
-    public function acceptNewApplicantController($datas) {
+    public function acceptNewApplicantController($data) {
         global $db;
-        $responseData = [];
-        $request = json_decode($datas, true);
-
+        
         try {
-            foreach ($request as $data) {
-                $lastApplicantId = $this->getLastApplicantId();
-                $lastApplicantId = $lastApplicantId['lastApplicantId'];
-                //return $lastApplicantId;
-                $id = $data['id'];
+            $lastApplicantId = $this->getLastApplicantId();
+            $lastApplicantId = $lastApplicantId['lastApplicantId'];
+            //return $lastApplicantId;
+            $id = $data['id'];
 
-                $query = [
-                    'SET' => "status_type = 'Accept Applicant', applicant_id = '$lastApplicantId'",
-                    'WHERE' => "id = '$id'",
-                ];
+            $query = [
+                'SET' => "status_type = 'Accept Applicant', applicant_id = '$lastApplicantId'",
+                'WHERE' => "id = '$id'",
+            ];
 
-                $studendModel = new Student($db);
-                $update = $studendModel->update($query);
+            $studendModel = new Student($db);
+            $update = $studendModel->update($query);
 
-                if ($update) {
-                    $query = "INSERT INTO documents VALUES(null, '$lastApplicantId', '', '', '', '', '', '')";
-                    $stmt = $db->prepare($query);
-                    $stmt->execute();
-                    $return[] = array(
-                        'status' => 'success',
-                        'message' => 'Applicant accepted successfully.',
-                        'type' => 'success',
-                        'id' => $id
-                    );
-                } else {
-                    $return[] = array(
-                        'status' => 'failed',
-                        'message' => 'Failed to accept applicant.',
-                        'type' => 'error',
-                        'id' => $id
-                    );
-                }
+            if ($update) {
+                $query = "INSERT INTO documents VALUES(null, '$lastApplicantId', '', '', '', '', '', '')";
+                $stmt = $db->prepare($query);
+                $stmt->execute();
+                $return = array(
+                    'status' => 'success',
+                    'message' => 'Applicant accepted successfully.',
+                    'type' => 'success',
+                    'id' => $id
+                );
+            } else {
+                $return = array(
+                    'status' => 'failed',
+                    'message' => 'Failed to accept applicant.',
+                    'type' => 'error',
+                    'id' => $id
+                );
             }
             return json_encode($return);
         } catch (PDOException $e) {

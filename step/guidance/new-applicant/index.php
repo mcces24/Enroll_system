@@ -51,30 +51,28 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                                             </thead>
                                             <tbody>
                                                 <?php
-
                                                 if (!empty($newApplicatTableData)) {
                                                     foreach ($newApplicatTableData as $applicant) {
                                                 ?>      
-                                                        <tr style="text-align: center;" id="table-row-<?= $applicant["id"] ?>">
-                                                            <td style="text-align:left"><?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?></td>
-                                                            <td><?= $applicant['address']; ?></td>
-                                                            <td><?= $applicant['school_graduated']; ?></td>
-                                                            <td><?= $applicant['type']; ?></td>
-                                                            <td>
+                                                    <tr style="text-align: center;" id="table-row-<?= $applicant["id"] ?>">
+                                                        <td style="text-align:left"><?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?></td>
+                                                        <td><?= $applicant['address']; ?></td>
+                                                        <td><?= $applicant['school_graduated']; ?></td>
+                                                        <td><?= $applicant['type']; ?></td>
+                                                        <td>
+                                                            <?php
+                                                            echo '<input type="checkbox" onclick="return myfun()" id="' . $applicant["id"] . '" name="single_select" class="single_select" data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" />';
+                                                            ?>
+                                                        </td>
+                                                        <td>
+                                                            <form action="" method="post">
+                                                                <input type="hidden" class="email" name="email" value="<?= $applicant['email']; ?>">
                                                                 <?php
-                                                                echo '<input type="checkbox" onclick="return myfun()" id="' . $applicant["id"] . '" name="single_select" class="single_select" data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" />';
+                                                                echo '<button type="button" name="accept_button" class="btn btn-info btn-sm accept_button" id="id-' . $applicant["id"] . '" data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" data-app="' . $applicant["id"] . '" data-action="single">Accept Request</button>';
                                                                 ?>
-                                                            </td>
-                                                            <td>
-                                                                <form action="" method="post">
-                                                                    <input type="hidden" class="email" name="email" value="<?= $applicant['email']; ?>">
-                                                                    <?php
-                                                                    echo '<button type="button" name="accept_button" class="btn btn-info btn-sm accept_button" id="id-' . $applicant["id"] . '" data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" data-app="' . $applicant["id"] . '" data-action="single">Accept Request</button>';
-                                                                    ?>
-                                                                </form>
-                                                            </td>
-                                                        </tr>
-
+                                                            </form>
+                                                        </td>
+                                                    </tr>
                                                 <?php
                                                     }
                                                 } else {
@@ -83,7 +81,6 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                                                 ?>
                                             </tbody>
                                         </table>
-
                                     </div>
                                 <?php else : ?>
                                     <h2>Pre-Enrollemnt is currently not Available</h2>
@@ -113,7 +110,7 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
         jQuery(document).ready(function() {
             jQuery("#Mytableid").DataTable({
                 "pageLength": 50,
-                "ordering": false
+                "ordering": false, 
             });
         });
     </script>
@@ -141,27 +138,31 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                     });
                 }
                 if (data.length > 0) {
-                    $.ajax({
-                        url: BASE_PATH + '/Master/POST/POST.php',
-                        method: "POST",
-                        data: {
-                            type: 'acceptNewApplicant',
-                            data: JSON.stringify(data)
-                        },
-                        beforeSend: function() {
-                            $('#' + id).text('Accepting Selected');
-                            $('#' + id).addClass('btn-info');
-                            $('#' + id).prop('disabled', true);
-                        },
-                        success: function(data) {
-                           
-                            var response = JSON.parse(data);
-                            console.log(response);
-                            $.each(response, function(key, value) {
-                                var id = value.id
-                                var message = value.message;
-                                var type = value.type;
-                                var status = value.status;
+                    $.each(data, function(key, value) {
+                        data = {
+                            email: value.email,
+                            id: value.id
+                        };
+                        $.ajax({
+                            dataType: 'json',
+                            url: BASE_PATH + '/Master/POST/POST.php',
+                            method: "POST",
+                            data: {
+                                type: 'acceptNewApplicant',
+                                data: data
+                            },
+                            beforeSend: function() {
+                                $('#' + id).text('Accepting...');
+                                $('#' + id).addClass('btn-info');
+                                $('#' + id).prop('disabled', true);
+                            },
+                            success: function(data) {
+                                var response = JSON.parse(data);
+                                console.log(response);
+                                var id = response.id
+                                var message = response.message;
+                                var type = response.type;
+                                var status = response.status;
                                 console.log(id);
                                 console.log(message);
                                 console.log(type);
@@ -187,29 +188,29 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                                     $('#id-' + id).addClass('btn-info');
                                 }
                                 $('#id-' + id).attr('disabled', false);
-                            });
-                            if (action != 'single') {
-                                $('#' + id).text('Selected Accepted');
-                                $('#' + id).addClass('btn-success');
+                            }, 
+                            error: function(xhr, status, error) {
+                                console.error("Error: " + error);
+                                console.error("Status: " + status);
+                                console.error("Response: " + xhr.responseText);
+                                $('#' + id).html("Cannot Accept Request");
                                 $('#' + id).removeClass('btn-info');
-                                setTimeout(function() {
-                                    $('#' + id).text('Accept Selected');
-                                    $('#' + id).addClass('btn-info');
-                                    $('#' + id).removeClass('btn-success');
-                                    $('#' + id).prop('disabled', false);
-                                }, 2000);
+                                $('#' + id).addClass('btn-danger');
+                                $('#' + id).prop('disabled', false);
                             }
-                        }, 
-                        error: function(xhr, status, error) {
-                            console.error("Error: " + error);
-                            console.error("Status: " + status);
-                            console.error("Response: " + xhr.responseText);
-                            $('#' + id).html("Cannot Accept Request");
-                            $('#' + id).removeClass('btn-info');
-                            $('#' + id).addClass('btn-danger');
+                        });
+                    });
+                    if (action != 'single') {
+                        $('#' + id).text('Selected Accepted');
+                        $('#' + id).addClass('btn-success');
+                        $('#' + id).removeClass('btn-info');
+                        setTimeout(function() {
+                            $('#' + id).text('Accept Selected');
+                            $('#' + id).addClass('btn-info');
+                            $('#' + id).removeClass('btn-success');
                             $('#' + id).prop('disabled', false);
-                        }
-                    })
+                        }, 2000);
+                    }
                 } else {
                     alert("Please Select atleast one checkbox");
                     $(this).prop('disabled', false);
