@@ -1,5 +1,5 @@
 <?php
-	 $connect = mysqli_connect("localhost", "root", "", "mcc_es"); 
+	 $connect = mysqli_connect("localhost", "u510162695_mcces", "MccAdmin1", "u510162695_mcc_es"); 
 	  
-	  $db = mysqli_connect("localhost","root","","mcc_es");  
+	  $db = mysqli_connect("localhost","u510162695_mcces","MccAdmin1","u510162695_mcc_es");  
 ?>
