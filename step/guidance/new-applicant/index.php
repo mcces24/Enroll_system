@@ -1,25 +1,12 @@
-<?php include "connection.php"  ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include '../inc/head.php';  ?>
+<?php
+include '../inc/head.php';
+$data = newApplicant();
+$newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantData'] : [];
+?>
 
 <body style="width: 100%;">
-    <?php include('message.php'); ?>
-    <div class="loader-wrapper" id="preloader">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div>
-    <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
-    <script>
-        var loader = document.getElementById("preloader");
-        window.addEventListener("load", function() {
-            loader.style.display = "none"
-        })
-    </script>
-
     <!-- start: Sidebar -->
     <?php include '../inc/navbar.php';  ?>
-    <script src="script.js"></script>
     <div class="sidebar-overlay"></div>
     <!-- end: Sidebar -->
 
@@ -32,15 +19,11 @@
                 <h5 class="fw-bold mb-0 me-auto">New Applicant</h5>
                 <?php include '../inc/dropdown.php' ?>
             </nav>
-
             <!-- end: Navbar -->
 
             <!-- start: Content -->
             <div class="py-4">
-                <!-- start: Summary -->
-
-                <!-- end: Summary -->
-                <!-- start: Graph -->
+                <!-- start: Table -->
                 <div class="row g-3 mt-2">
                     <div class="col-12 col-md-12 col-xl-12" style="width: 100%;">
                         <div class="card border-0 shadow-sm h-100">
@@ -48,12 +31,12 @@
                                 List of New Applicant
 
                                 <div style="float: right;">
-                                    <button type="button" name="bulk_email" class="btn btn-sm float-end btn-info email_button" id="bulk_email" data-action="bulk">Accept Selected</button>
+                                    <button type="button" name="accept_button" class="btn btn-sm float-end btn-info accept_button" id="accept_button" data-action="bulk">Accept Selected</button>
                                 </div>
                             </div>
 
                             <div class="card-body">
-                                <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
+                                <?php if (!empty($academic) && !empty($semester)) : ?>
                                     <div class="table-responsive">
                                         <table id="Mytableid">
                                             <thead style="text-align: center;">
@@ -62,60 +45,31 @@
                                                     <th width="20%">Address</th>
                                                     <th width="20%">School Graduated</th>
                                                     <th width="10%">Status</th>
-                                                    <th width="10%">Select All <input type="checkbox" onclick="select_all()" id="delete" /></th>
+                                                    <th width="10%" for="checkALl">Select All <input type="checkbox" name="checkALl" onclick="select_all()" id="delete" /></th>
                                                     <th width="20%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $start = $rows11['academic_start'];
-                                                $end = $rows11['academic_end'];
-                                                $semester = $rows111['semester_name'];
 
-                                                $academic = "$start-$end";
-
-                                                $query1 = "SELECT * FROM students where status_type='New Applicant' AND academic = '$academic' AND semester_id = '$semester' ORDER BY id ASC";
-
-                                                $query_run1 = mysqli_query($conn, $query1);
-                                                $count = 0;
-
-                                                if (mysqli_num_rows($query_run1) > 0) {
-                                                    while ($student = mysqli_fetch_array($query_run1)) {
-
-                                                ?>
-                                                        <tr style="text-align: center;">
-
-                                                            <td style="text-align:left"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
-
-                                                            <td><?= $student['address']; ?></td>
-                                                            <td><?= $student['school_graduated']; ?></td>
-                                                            <td><?= $student['type']; ?></td>
+                                                if (!empty($newApplicatTableData)) {
+                                                    foreach ($newApplicatTableData as $applicant) {
+                                                ?>      
+                                                        <tr style="text-align: center;" id="table-row-<?= $applicant["id"] ?>">
+                                                            <td style="text-align:left"><?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?></td>
+                                                            <td><?= $applicant['address']; ?></td>
+                                                            <td><?= $applicant['school_graduated']; ?></td>
+                                                            <td><?= $applicant['type']; ?></td>
                                                             <td>
                                                                 <?php
-                                                                echo '
-                            <input type="checkbox" onclick="return myfun()" id="' . $student["id"] . '" name="single_select" class="single_select" data-email="' . $student["email"] . '" data-name="' . $student["id"] . '" />
-                        
-                                                    ';
-                                                                ?></td>
-
+                                                                echo '<input type="checkbox" onclick="return myfun()" id="' . $applicant["id"] . '" name="single_select" class="single_select" data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" />';
+                                                                ?>
+                                                            </td>
                                                             <td>
                                                                 <form action="" method="post">
-                                                                    <input type="hidden" class="email" name="email" value="<?= $student['email']; ?>" required>
-                                                                    <input type="hidden" class="code" name="code" value="try" required>
-
-
+                                                                    <input type="hidden" class="email" name="email" value="<?= $applicant['email']; ?>">
                                                                     <?php
-
-
-                                                                    $count = $count + 1;
-                                                                    echo '
-                                                            
-                                                                
-                                                                <button type="button" name="email_button" class="btn btn-info btn-sm email_button" id="' . $count . '" data-email="' . $student["email"] . '" data-name="' . $student["id"] . '" data-app="' . $student["id"] . '" data-action="single">Accept Request</button>
-                                                                
-                                                            
-                                                            ';
-
+                                                                    echo '<button type="button" name="accept_button" class="btn btn-info btn-sm accept_button" id="id-' . $applicant["id"] . '" data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" data-app="' . $applicant["id"] . '" data-action="single">Accept Request</button>';
                                                                     ?>
                                                                 </form>
                                                             </td>
@@ -127,26 +81,12 @@
                                                     echo "<h5> No Record Found </h5>";
                                                 }
                                                 ?>
-
-
                                             </tbody>
-
                                         </table>
 
                                     </div>
-                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                                    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-                                    <script>
-                                        jQuery(document).ready(function() {
-                                            jQuery("#Mytableid").DataTable({
-                                                "pageLength": 50
-                                            });
-                                        });
-                                    </script>
-                                <?php endif; ?>
-                                <?php if (in_array($rows['status'] and $rows1['sem_status'], array('0'))) : ?>
+                                <?php else : ?>
                                     <h2>Pre-Enrollemnt is currently not Available</h2>
-
                                 <?php endif; ?>
 
                             </div>
@@ -155,7 +95,7 @@
                 </div>
 
             </div>
-            <!-- end: Graph -->
+            <!-- end: Table -->
         </div>
         <!-- end: Content -->
         </div>
@@ -167,80 +107,116 @@
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/js/script.js"></script>
-    <script src="script.js"></script>
-    <script src="new_script.js"></script>
-    <script src="enroll.js"></script>
-    <script src="total.js"></script>
-    <!-- end: JS -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        jQuery(document).ready(function() {
+            jQuery("#Mytableid").DataTable({
+                "pageLength": 50,
+                "ordering": false
+            });
+        });
+    </script>
     <script>
         $(document).ready(function() {
-            $('.email_button').click(function() {
-                $(this).attr('disabled', 'disabled');
+            var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
+            $('.accept_button').click(function() {
+                $(this).prop('disabled', true);
                 var id = $(this).attr("id");
                 var action = $(this).data("action");
-                var email_data = [];
+                var data = [];
                 if (action == 'single') {
-                    email_data.push({
+                    data.push({
                         email: $(this).data("email"),
-                        name: $(this).data("name")
-
+                        id: $(this).data('id')
                     });
                 } else {
                     $('.single_select').each(function() {
                         if ($(this).prop("checked") == true) {
-                            email_data.push({
+                            data.push({
                                 email: $(this).data("email"),
-                                name: $(this).data('name')
-
+                                id: $(this).data('id')
                             });
                         }
                     });
                 }
-
-                $.ajax({
-                    url: "send_mail.php",
-                    method: "POST",
-                    data: {
-                        email_data: email_data
-                    },
-                    beforeSend: function() {
-                        $('#' + id).html('Accepting Request');
-                        $('#' + id).addClass('btn-danger');
-                    },
-                    success:function(data){
-                        console.log(data);
-                        if(data == 1)
-                        {
-                            $('#'+id).text('Accepted Successful');
-                            $('#'+id).removeClass('btn-danger');
-                            $('#'+id).removeClass('btn-info');
-                            $('#'+id).addClass('btn-success');
+                if (data.length > 0) {
+                    $.ajax({
+                        url: BASE_PATH + '/Master/POST/POST.php',
+                        method: "POST",
+                        data: {
+                            type: 'acceptNewApplicant',
+                            data: JSON.stringify(data)
+                        },
+                        beforeSend: function() {
+                            $('#' + id).text('Accepting Selected');
+                            $('#' + id).addClass('btn-info');
+                            $('#' + id).prop('disabled', true);
+                        },
+                        success: function(data) {
+                           
+                            var response = JSON.parse(data);
+                            console.log(response);
+                            $.each(response, function(key, value) {
+                                var id = value.id
+                                var message = value.message;
+                                var type = value.type;
+                                var status = value.status;
+                                console.log(id);
+                                console.log(message);
+                                console.log(type);
+                                console.log(status);
+                                if (status == 'success') {
+                                    $('#id-' + id).text(message);
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).addClass('btn-' + type);
+                                    $('#table-row-' + id).fadeOut(2000, function() {
+                                        $(this).html('');
+                                    });
+                                } else if (status == 'failed') {
+                                    $('#id-' + id).text(message);
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).removeClass('btn-success');
+                                    $('#id-' + id).addClass('btn-' + type);
+                                } else {
+                                    $('#id-' + id).text('Cannot Accept Request');
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).addClass('btn-info');
+                                }
+                                $('#id-' + id).attr('disabled', false);
+                            });
+                            if (action != 'single') {
+                                $('#' + id).text('Selected Accepted');
+                                $('#' + id).addClass('btn-success');
+                                $('#' + id).removeClass('btn-info');
+                                setTimeout(function() {
+                                    $('#' + id).text('Accept Selected');
+                                    $('#' + id).addClass('btn-info');
+                                    $('#' + id).removeClass('btn-success');
+                                    $('#' + id).prop('disabled', false);
+                                }, 2000);
+                            }
+                        }, 
+                        error: function(xhr, status, error) {
+                            console.error("Error: " + error);
+                            console.error("Status: " + status);
+                            console.error("Response: " + xhr.responseText);
+                            $('#' + id).html("Cannot Accept Request");
+                            $('#' + id).removeClass('btn-info');
+                            $('#' + id).addClass('btn-danger');
+                            $('#' + id).prop('disabled', false);
                         }
-                        else if (data == null) {
-                            $('#'+id).text(data);
-                            $('#'+id).text('No Applicant Selected');
-                            $('#'+id).removeClass('btn-danger');
-                            $('#'+id).removeClass('btn-info');
-                            $('#'+id).addClass('btn-info');
-                        } else {
-                            $('#'+id).text('No Applicant Selected');
-                            $('#'+id).removeClass('btn-danger');
-                            $('#'+id).removeClass('btn-info');
-                            $('#'+id).addClass('btn-info');
-                        }
-                        $('#'+id).attr('disabled', false);
-
-                    }
-                })
-
+                    })
+                } else {
+                    alert("Please Select atleast one checkbox");
+                    $(this).prop('disabled', false);
+                }
             });
         });
-    </script>
-
-
-    <script>
+        
         function select_all() {
             if (jQuery('#delete').prop("checked")) {
                 jQuery('input[type=checkbox]').each(function() {
@@ -252,25 +228,8 @@
                 });
             }
         }
-
-        function delete_all() {
-            var check = confirm("Are you sure?");
-            if (check == true) {
-                jQuery.ajax({
-                    url: 'delete.php',
-                    type: 'post',
-                    data: jQuery('#frm').serialize(),
-                    success: function(result) {
-                        jQuery('input[type=checkbox]').each(function() {
-                            if (jQuery('#' + this.id).prop("checked")) {
-                                jQuery('#box' + this.id).remove();
-                            }
-                        });
-                    }
-                });
-            }
-        }
     </script>
+    <!-- end: JS -->
 </body>
 
 </html>

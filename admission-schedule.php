@@ -41,14 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submit"])) {
   $wish_course = $_POST["wish_course"];
   $student_id = $student_id;
 
-  echo $applicant_id;
-  echo $sched_date;
-  echo $sched_time;
-  echo $wish_course;
-  echo $student_id;
-
-
-
   $query1 = "INSERT INTO admission_list VALUES(null, '$applicant_id', '$sched_date', '$sched_time', '$wish_course', '$student_id')";
   $run = mysqli_query($conn, $query1);
 

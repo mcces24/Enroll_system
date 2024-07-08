@@ -1,5 +1,4 @@
 <?php
-header("Access-Control-Allow-Origin: *");
 
 include_once '../../MainFunction.php';
 require './phpmailer/src/Exception.php';
@@ -56,6 +55,9 @@ function getPostData($POST) {
             break;
         case 'guidanceLogout':
             guidanceLogout();
+        case 'acceptNewApplicant':
+            $data = $POST['data'] ?? null;
+            acceptNewApplicant($data);
         break;    
         default:
             break;
@@ -90,8 +92,8 @@ function login($data) {
 }
 
 function guidanceLogin($data) {
-    $username = isset($data['username']) ? $data['username'] : null;
-    $password = isset($data['password']) ? $data['password'] : null;
+    $username = isset($request['username']) ? filter_var($request['username'], FILTER_SANITIZE_STRING) : null;
+    $password = isset($request['password']) ? filter_var($request['password'], FILTER_SANITIZE_STRING) : null;
 
     $verifiedData = loginGuidanceUser($username, $password);
     
@@ -135,7 +137,7 @@ function register($data) {
             $mail->Port       = 465;
 
             $senderName = 'MCC - Verify Account';
-            $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+            $senderEmail = 'capstone.project2022.2023@gmail.com';
 
             $mail->setFrom($senderEmail, $senderName);
             $mail->addAddress($email);
@@ -179,6 +181,12 @@ function getNotification() {
 
 function guidanceLogout() {
     $response = guidanceLogoutNow();
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+function acceptNewApplicant($data) {
+    $response = acceptNewApplicantFunction($data);
     header('Content-Type: application/json');
     echo json_encode($response);
 }
