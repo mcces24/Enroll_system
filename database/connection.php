@@ -1,8 +1,9 @@
 <?php
+include '../env.php';
 Class Connection{
-  
+    
     private $server = "mysql:host=localhost;dbname=u510162695_mcc_es";
-    private $username = "u510162695_mcc_es";
+    private $username = "u510162695_mcces";
     private $password = "McAdmin1";
     private $options  = array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,);
     protected $conn;
@@ -27,14 +28,10 @@ Class Connection{
 
 <?php
 
-$conn = new PDO('mysql:host=localhost; dbname=u510162695_mcc_es','u510162695_mcc_es', 'McAdmin1'); 
+$conn = new PDO('mysql:host=' . $host . '; dbname=' .$db_name . '',' ' . $username . '', '' . $password . ''); 
 
-$server = "localhost";
-$username = "u510162695_mcc_es";
-$password = "MccAdmin1";
-$database = "u510162695_mcc_es";
-$connection = mysqli_connect("$server","$username","$password");
-$select_db = mysqli_select_db($connection, $database);
+$connection = mysqli_connect("$host","$username","$password");
+$select_db = mysqli_select_db($connection, $db_name);
 if(!$select_db)
 {
     echo("connection terminated");

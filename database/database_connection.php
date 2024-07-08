@@ -1,8 +1,8 @@
 
 <?php
-
+include '../env.php';
 //database_connection.php
 
-$connect = new PDO("mysql:host=localhost;dbname=u510162695_mcc_es", "u510162695_mcc_es", "McAdmin1");
+$connect = new PDO("mysql:host=$host;dbname=$db_name", "$username", "$password");
 
 ?>
