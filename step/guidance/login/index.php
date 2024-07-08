@@ -102,12 +102,15 @@ if (isGuidanceLogin()) {
                         type: 'guidance_login',
                         data: formData 
                     },
+                    beforeSend: function() {
+                        // Show the loading spinner
+                        $('.btn').prop('disabled', true);
+                        $('.btn').text('Loading...');
+                    },
                     success: function(response) {
                         // Handle the response from the server
                         response = JSON.parse(response);
                         console.log(response);
-                        $('.btn').prop('disabled', true);
-                        $('.btn').text('Logging in...');
                         $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
                         if (response.status == 'success') {
                             console.log('Redirecting...');
