@@ -5,7 +5,6 @@ $home = home();
 $category = isset($home['dashboardData']['barGraph']) ? $home['dashboardData']['barGraph'] : [];
 ?>
 
-
 <body style="width: 100%;">
     <!-- start: Sidebar -->
     <?php include '../inc/navbar.php';  ?>

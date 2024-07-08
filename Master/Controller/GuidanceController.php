@@ -338,15 +338,79 @@ class GuidanceController extends Student {
                 $stmt->execute();
                 $return = array(
                     'status' => 'success',
-                    'message' => 'Applicant accepted successfully.',
+                    'message' => 'Accepted.',
                     'type' => 'success',
                     'id' => $id
                 );
             } else {
                 $return = array(
                     'status' => 'failed',
-                    'message' => 'Failed to accept applicant.',
-                    'type' => 'error',
+                    'message' => 'Failed to accept.',
+                    'type' => 'danger',
+                    'id' => $id
+                );
+            }
+            return json_encode($return);
+        } catch (PDOException $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "PDOException in acceptNewApplicantController(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        } catch (Exception $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "Exception in acceptNewApplicantController(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        }
+        return $responseData;
+    }
+    
+    public function acceptedApplicantController() {
+        $getAcademicAndSemester = $this->getAcademicAndSemester();
+        $academic = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['academic'] : null;
+        $semester = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['semester'] : null;
+
+        $params = [
+            'newApplicantData' => [
+                'WHERE' => "status_type = 'Accept Applicant' AND academic = '$academic' AND semester_id = '$semester'",
+                'ORDER' => "id ASC"
+            ],
+        ];
+
+        $acceptedApplicant = $this->getStudentList($params['newApplicantData']);
+        $acceptedApplicantData = $acceptedApplicant->fetchAll(PDO::FETCH_ASSOC);
+
+        $return = array(
+            'acceptedApplicantData' => $acceptedApplicantData
+        );
+        return $return;
+    }
+
+    public function sendGuidanceFormController($data) {
+        global $db;
+        
+        try {
+            //return $lastApplicantId;
+            $id = $data['id'];
+
+            $query = [
+                'SET' => "status_type = 'Accept_form'",
+                'WHERE' => "id = '$id'",
+            ];
+
+            $studendModel = new Student($db);
+            $update = $studendModel->update($query);
+
+            if ($update) {
+                $return = array(
+                    'status' => 'success',
+                    'message' => 'Form sent.',
+                    'type' => 'success',
+                    'id' => $id
+                );
+            } else {
+                $return = array(
+                    'status' => 'failed',
+                    'message' => 'Failed to send form.',
+                    'type' => 'danger',
                     'id' => $id
                 );
             }
@@ -363,4 +427,106 @@ class GuidanceController extends Student {
         return $responseData;
     }
 
+    public function getAppicantByApplicantIdController($applicantId) {
+
+        $params = [
+            'applicantWithOutRecord' => [
+                'WHERE' => "applicant_id = '$applicantId'",
+            ],
+            'applicantWithRecord' => [
+                'WHERE' => "status_type != 'Accept_form' AND applicant_id = '$applicantId'",
+            ],
+        ];
+
+        $applicantWithOutRecord = $this->getStudentList($params['applicantWithOutRecord']);
+        $applicantWithOutRecordData = $applicantWithOutRecord->fetchAll(PDO::FETCH_ASSOC);
+
+        $applicantWithRecord = $this->getStudentList($params['applicantWithRecord']);
+        $applicantWithRecordData = $applicantWithRecord->fetchAll(PDO::FETCH_ASSOC);
+
+        $return = array(
+            'applicantWithOutRecordData' => $applicantWithOutRecordData,
+            'applicantWithRecordData' => $applicantWithRecordData
+        );
+        return $return;
+    }
+
+    public function isGuidanceRecord($applicantId) {
+        global $db;
+        $guidanceRecord = new GuidanceRecord($db);
+        $params = [
+            'WHERE' => "applicant_id = '$applicantId'",
+        ];
+        $checkRecord = $guidanceRecord->read($params);
+        $checkRecordData = $checkRecord->fetchAll(PDO::FETCH_ASSOC);
+        return $checkRecordData;
+    }
+
+    public function saveApplicantGuidanceRecordController($data) {
+        global $db;
+
+        $applicant_id = $data['applicant_id'];
+        $record = json_encode($data);
+      
+        $guidanceRecord = new GuidanceRecord($db);
+
+        $isGuidanceRecord = $this->isGuidanceRecord($applicant_id);
+        if (empty($isGuidanceRecord)) {
+            $params = [
+                'FIELDS' => "record, applicant_id",
+                'VALUES' => "'$record', '$applicant_id'"
+            ];
+            $saveRecord = $guidanceRecord->create($params);
+        } else {
+            $params = [
+                'SET' => "record = '$record'",
+                'WHERE' => "applicant_id = '$applicant_id'",
+            ];
+            $saveRecord = $guidanceRecord->update($params);
+        }
+
+        if ($saveRecord) {
+            $return = array(
+                'status' => 'success',
+                'message' => 'Data updated successfully.',
+                'type' => 'success',
+            );
+        } else {
+            $return = array(
+                'status' => 'failed',
+                'message' => 'Failed to update data.',
+                'type' => 'danger',
+            );
+        }
+
+        return json_encode($return);
+    }
+
+    public function updateApplicantStatusController($data) {
+        global $db;
+        $applicant_id = $data['applicant_id'];
+
+        $query = [
+            'SET' => "status_type = 'Form Done'",
+            'WHERE' => "applicant_id = '$applicant_id'",
+        ];
+
+        $update = $this->update($query);
+        
+        if ($update) {
+            $return = array(
+                'status' => 'success',
+                'message' => 'Data updated successfully.',
+                'type' => 'success',
+            );
+        } else {
+            $return = array(
+                'status' => 'failed',
+                'message' => 'Failed to update data.',
+                'type' => 'danger',
+            );
+        }
+
+        return json_encode($return);
+    }
 }

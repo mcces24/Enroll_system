@@ -1,126 +1,12 @@
-
 <?php
+include '../inc/head.php';
+$data = acceptedApplicantFunction();
+$acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['acceptedApplicantData'] : [];
 
-require '../../../database/config.php';
-
-$querys = "SELECT * FROM academic GROUP BY status";
-$querys_run = mysqli_query($conn, $querys);
-
-if (mysqli_num_rows($querys_run) > 0) {
-
-    foreach ($querys_run as $rows)
-?><?php
-            }
-
-                    ?>
-<?php
-
-require '../../../database/config.php';
-
-$querys1 = "SELECT * FROM semester GROUP BY sem_status";
-$querys_run1 = mysqli_query($conn, $querys1);
-
-if (mysqli_num_rows($querys_run1) > 0) {
-    foreach ($querys_run1 as $rows1)
-?><?php
-            }
-
-                    ?>
-<?php
-
-require '../../../database/config.php';
-
-$querys11 = "SELECT * FROM academic WHERE status='1'";
-$querys_run11 = mysqli_query($conn, $querys11);
-
-if (mysqli_num_rows($querys_run11) > 0) {
-
-    foreach ($querys_run11 as $rows11)
-?><?php
-                                        }
-
-                                                ?>
-<?php
-
-require '../../../database/config.php';
-$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
-$querys_run111 = mysqli_query($conn, $querys111);
-
-if (mysqli_num_rows($querys_run111) > 0) {
-    foreach ($querys_run111 as $rows111)
-?><?php
-                                        }
-
-                                                ?>
-<?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
-
-    <?php
-    $start = $rows11['academic_start'];
-    $end = $rows11['academic_end'];
-    $semester = $rows111['semester_name'];
-
-    $academic = "$start-$end";
-    $sql = "SELECT * from students  WHERE status_type='New Applicant' AND academic = '$academic' AND semester_id = '$semester'";
-    $result = $conn->query($sql);
-    $count = 0;
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-
-            $count = $count + 1;
-        }
-    }
-
-
-    $sql = "SELECT * from students  WHERE status_type='Enroll New Students' AND academic = '$academic' AND semester_id = '$semester'";
-    $result = $conn->query($sql);
-    $count_new = 0;
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-
-            $count_new = $count_new + 1;
-        }
-    }
-
-    ?>
-    <?php
-    $start = $rows11['academic_start'];
-    $end = $rows11['academic_end'];
-    $semester = $rows111['semester_name'];
-
-    $academic = "$start-$end";
-    $sql = "SELECT * from students  WHERE status_type='Accept Applicant' AND academic = '$academic' AND semester_id = '$semester'";
-    $result = $conn->query($sql);
-    $count_accept = 0;
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-
-            $count_accept = $count_accept + 1;
-        }
-    }
-
-    ?>
-
-
-<?php endif; ?>
-
-
-<?php if (in_array($rows['status'] and $rows1['sem_status'], array('0'))) : ?>
-
-    <?php
-    $count_new = 0;
-    $count = 0;
-    $count_accept = 0;
-    ?>
-
-<?php endif; ?>
-<!DOCTYPE html>
-<html lang="en">
-
-<?php include '../inc/head.php';  ?>
+// print_r($acceptedApplicantData);
+?>
 
 <body style="width: 100%;">
-    <?php include('message.php'); ?>
-
     <!-- start: Sidebar -->
     <?php include '../inc/navbar.php';  ?>
     <div class="sidebar-overlay"></div>
@@ -135,14 +21,10 @@ if (mysqli_num_rows($querys_run111) > 0) {
                 <h5 class="fw-bold mb-0 me-auto">Accepted Applicant's</h5>
                 <?php include '../inc/dropdown.php' ?>
             </nav>
-
             <!-- end: Navbar -->
 
             <!-- start: Content -->
             <div class="py-4">
-                <!-- start: Summary -->
-
-                <!-- end: Summary -->
                 <!-- start: Graph -->
                 <div class="row g-3 mt-2">
                     <div class="col-12 col-md-7 col-xl-8" style="width: 100%;">
@@ -151,72 +33,56 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                 List of Pre-enrolled Applicant | Send Guidance Form
 
                                 <div style="float: right;">
-                                    <button type="button" name="bulk_email" class="btn btn-sm float-end btn-info email_button" id="bulk_email" data-action="bulk">Send Selected</button>
+                                    <button type="button" name="bulk_send" class="btn btn-sm float-end btn-info send_button" id="bulk_send" data-action="bulk">
+                                        Send Selected
+                                    </button>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
+                                <?php if (!empty($academic) && !empty($semester)) : ?>
                                     <div class="table-responsive">
                                         <table id="Mytableid">
                                             <thead style="text-align: center;">
                                                 <tr>
-                                                    <th width="15%">App Number</th>
-                                                    <th width="20%">Full Name</th>
-                                                    <th width="20%">Address</th>
-                                                    <th width="20%">School Graduated</th>
-                                                    <th width="10%">Select All <input type="checkbox" onclick="select_all()" id="delete" /></th>
-                                                    <th width="25%">Action</th>
+                                                    <th>App Number</th>
+                                                    <th>Full Name</th>
+                                                    <th>Email</th>
+                                                    <th>Address</th>
+                                                    <th>Gender</th>
+                                                    <th>Age</th>
+                                                    <th>Select All <input type="checkbox" onclick="select_all()" id="select-all" /></th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php
-                                                $start = $rows11['academic_start'];
-                                                $end = $rows11['academic_end'];
-                                                $semester = $rows111['semester_name'];
-
-                                                $academic = "$start-$end";
-
-                                                $query1 = "SELECT * FROM students where status_type='Accept Applicant' AND academic = '$academic' AND semester_id = '$semester'";
-
-                                                $query_run1 = mysqli_query($conn, $query1);
-                                                $count = 0;
-
-                                                if (mysqli_num_rows($query_run1) > 0) {
-                                                    while ($student = mysqli_fetch_array($query_run1)) {
-
+                                                if (!empty($acceptedApplicantData)) {
+                                                    foreach ($acceptedApplicantData as $applicant) {
                                                 ?>
-                                                        <tr style="text-align: center;">
-                                                            <td><?= $student['applicant_id']; ?></td>
-                                                            <td style="text-align:left"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
-
-                                                            <td><?= $student['address']; ?></td>
-                                                            <td><?= $student['school_graduated']; ?></td>
+                                                        <tr style="text-align: center;" id="table-row-<?= $applicant["id"] ?>">
+                                                            <td><?= $applicant['applicant_id']; ?></td>
+                                                            <td style="text-align:left"><?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?></td>
+                                                            <td><?= $applicant['email']; ?></td>
+                                                            <td><?= $applicant['address']; ?></td>
+                                                            <td><?= $applicant['gender']; ?></td>
+                                                            <td><?= $applicant['age']; ?></td>
                                                             <td>
                                                                 <?php
-                                                                echo '
-                            <input type="checkbox" onclick="return myfun()" id="' . $student["id"] . '" name="single_select" class="single_select" data-email="' . $student["email"] . '" data-name="' . $student["id"] . '" />
-                        
-                                                    ';
+                                                                echo '<input type="checkbox" id="' . $applicant["id"] . '" name="single_select" class="single_select" 
+                                                                data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" data-name="' . $applicant['fname'] . ' ' . $applicant['mname'] . ' ' . $applicant['lname']. '"
+                                                                data-applicant-id="' . $applicant["applicant_id"] . '"
+                                                                />';
                                                                 ?></td>
-
                                                             <td>
                                                                 <form action="" method="post">
-                                                                    <input type="hidden" class="email" name="email" value="<?= $student['email']; ?>" required>
+                                                                    <input type="hidden" class="email" name="email" value="<?= $applicant['email']; ?>" required>
                                                                     <input type="hidden" class="code" name="code" value="try" required>
-
-
                                                                     <?php
-
-
-                                                                    $count = $count + 1;
-                                                                    echo '
-                                                            
-                                                                
-                                                                <button type="button" name="email_button" class="btn btn-info btn-sm email_button" id="' . $count . '" data-email="' . $student["email"] . '" data-name="' . $student["id"] . '" data-app="' . $student["id"] . '" data-action="single">Send Form</button>
-                                                                
-                                                            
-                                                            ';
-
+                                                                    echo '<button type="button" name="send_button" class="btn btn-info btn-sm send_button" 
+                                                                        id="id-' . $applicant["id"] . '" data-email="' . $applicant["email"] . '" data-applicant-id="' . $applicant["applicant_id"] . '" 
+                                                                        data-id="' . $applicant["id"] . '" data-action="single" data-name="' . $applicant['fname'] . ' ' . $applicant['mname'] . ' ' . $applicant['lname']. '">
+                                                                        Send Form
+                                                                        </button>';
                                                                     ?>
                                                                 </form>
                                                             </td>
@@ -228,28 +94,12 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                     echo "<h5> No Record Found </h5>";
                                                 }
                                                 ?>
-
-
                                             </tbody>
-
                                         </table>
-
                                     </div>
-                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                                    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-                                    <script>
-                                        jQuery(document).ready(function() {
-                                            jQuery("#Mytableid").DataTable({
-                                                "pageLength": 50
-                                            });
-                                        });
-                                    </script>
-                                <?php endif; ?>
-                                <?php if (in_array($rows['status'] and $rows1['sem_status'], array('0'))) : ?>
+                                <?php else : ?>
                                     <h2>Pre-Enrollemnt is currently not Available</h2>
-
                                 <?php endif; ?>
-
                             </div>
                         </div>
                     </div>
@@ -267,75 +117,136 @@ if (mysqli_num_rows($querys_run111) > 0) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
     <script src="../../assets/js/script.js"></script>
-    <!-- end: JS -->
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.email_button').click(function() {
-                $(this).attr('disabled', 'disabled');
+        jQuery(document).ready(function() {
+            jQuery("#Mytableid").DataTable({
+                "pageLength": 50,
+                "ordering": false,
+            });
+        });
+    </script>
+    <script>
+         $(document).ready(function() {
+            var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
+            $('.send_button').click(function() {
+                $(this).prop('disabled', true);
                 var id = $(this).attr("id");
                 var action = $(this).data("action");
-                var email_data = [];
+                var data = [];
                 if (action == 'single') {
-                    email_data.push({
+                    data.push({
                         email: $(this).data("email"),
-                        name: $(this).data("name")
-
+                        id: $(this).data('id'),
+                        applicant_id: $(this).data('applicant-id'),
+                        name: $(this).data('name')
                     });
                 } else {
                     $('.single_select').each(function() {
                         if ($(this).prop("checked") == true) {
-                            email_data.push({
+                            data.push({
                                 email: $(this).data("email"),
+                                id: $(this).data('id'),
+                                applicant_id: $(this).data('applicant-id'),
                                 name: $(this).data('name')
                             });
                         }
                     });
                 }
-
-                $.ajax({
-                    url: "send_mail.php",
-                    method: "POST",
-                    data: {
-                        email_data: email_data
-                    },
-                    beforeSend: function() {
-                        $('#' + id).html('Sending Email ');
-                        $('#' + id).addClass('btn-danger');
-                    },
-                    success: function(data) {
+                console.log(data);
+                if (data.length > 0) {
+                    // $.each(data, function(key, value) {
+                    //     data = {
+                    //         email: value.email,
+                    //         id: value.id,
+                    //         name: value.name,
+                    //         applicant_id: value.applicant_id
+                    //     };
                         console.log(data);
-                        if (data == 1) {
-                            $('#' + id).text('Email Sent');
-                            $('#' + id).removeClass('btn-danger');
-                            $('#' + id).removeClass('btn-info');
-                            $('#' + id).addClass('btn-success');
-                        } else if (data == null) {
-                            $('#' + id).text(data);
-                            $('#' + id).text('No Applicant Selected');
-                            $('#' + id).removeClass('btn-danger');
-                            $('#' + id).removeClass('btn-info');
-                            $('#' + id).addClass('btn-info');
-                        } else {
-                            $('#' + id).text(data);
-                            $('#' + id).text('Email Sent Failed');
-                            $('#' + id).removeClass('btn-danger');
-                            $('#' + id).removeClass('btn-info');
-                            $('#' + id).addClass('btn-danger');
-                        }
-                        $('#' + id).attr('disabled', false);
-
-                    }
-                })
-
+                        $.ajax({
+                            dataType: 'json',
+                            url: BASE_PATH + '/Master/POST/POST.php',
+                            method: "POST",
+                            data: {
+                                type: 'sendGuidanceForm',
+                                data: data
+                            },
+                            beforeSend: function() {
+                                $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
+                                $('#' + id).addClass('btn-info');
+                                $('#' + id).prop('disabled', true);
+                                $.each(data, function(key, value) {
+                                    var id = value.id
+                                    $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
+                                    $('#id-' + id).addClass('btn-info');
+                                    $('#id-' + id).prop('disabled', true);
+                                });
+                            },
+                            success: function(data) {
+                                $.each(data, function(key, value) {
+                                    var response = JSON.parse(value);
+                                    console.log(response);
+                                    var id = response.id
+                                    var message = response.message;
+                                    var type = response.type;
+                                    var status = response.status;
+                                    if (status == 'success') {
+                                        $('#id-' + id).text(message);
+                                        $('#id-' + id).removeClass('btn-danger');
+                                        $('#id-' + id).removeClass('btn-info');
+                                        $('#id-' + id).addClass('btn-' + type);
+                                        $('#table-row-' + id).fadeOut(2000, function() {
+                                            $(this).html('');
+                                        });
+                                    } else if (status == 'failed') {
+                                        $('#id-' + id).text(message);
+                                        $('#id-' + id).removeClass('btn-danger');
+                                        $('#id-' + id).removeClass('btn-info');
+                                        $('#id-' + id).removeClass('btn-success');
+                                        $('#id-' + id).addClass('btn-' + type);
+                                    } else {
+                                        $('#id-' + id).text('Cannot Send Email');
+                                        $('#id-' + id).removeClass('btn-danger');
+                                        $('#id-' + id).removeClass('btn-info');
+                                        $('#id-' + id).addClass('btn-info');
+                                    }
+                                    $('#id-' + id).attr('disabled', false);
+                                });
+                                if (action != 'single') {
+                                    $('#' + id).text('Selected Sent');
+                                    $('#' + id).addClass('btn-success');
+                                    $('#' + id).removeClass('btn-info');
+                                    $('#' + id).removeClass('btn-danger');
+                                    setTimeout(function() {
+                                        $('#' + id).text('Send Selected');
+                                        $('#' + id).addClass('btn-info');
+                                        $('#' + id).removeClass('btn-success');
+                                        $('#' + id).prop('disabled', false);
+                                    }, 2000);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error: " + error);
+                                console.error("Status: " + status);
+                                console.error("Response: " + xhr.responseText);
+                                $('#' + id).html("Cannot Send Email");
+                                $('#' + id).removeClass('btn-info');
+                                $('#' + id).addClass('btn-danger');
+                                $('#' + id).prop('disabled', false);
+                            }
+                        });
+                    // });
+                    
+                } else {
+                    alert("Please Select atleast one checkbox");
+                    $(this).prop('disabled', false);
+                }
             });
         });
-    </script>
-
-
-    <script>
+        
         function select_all() {
-            if (jQuery('#delete').prop("checked")) {
+            if (jQuery('#select-all').prop("checked")) {
                 jQuery('input[type=checkbox]').each(function() {
                     jQuery('#' + this.id).prop('checked', true);
                 });
@@ -345,25 +256,8 @@ if (mysqli_num_rows($querys_run111) > 0) {
                 });
             }
         }
-
-        function delete_all() {
-            var check = confirm("Are you sure?");
-            if (check == true) {
-                jQuery.ajax({
-                    url: 'delete.php',
-                    type: 'post',
-                    data: jQuery('#frm').serialize(),
-                    success: function(result) {
-                        jQuery('input[type=checkbox]').each(function() {
-                            if (jQuery('#' + this.id).prop("checked")) {
-                                jQuery('#box' + this.id).remove();
-                            }
-                        });
-                    }
-                });
-            }
-        }
     </script>
+    <!-- end: JS -->
 </body>
 
 </html>
