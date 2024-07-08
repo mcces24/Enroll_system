@@ -52,7 +52,7 @@
     $(document).ready(function(event) {
         setInterval(() => {
             getNotification();
-        }, 2000);
+        }, 10000);
 
         $('#logout').click(function() {
             $.ajax({
