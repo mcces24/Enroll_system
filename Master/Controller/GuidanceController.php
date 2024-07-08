@@ -184,7 +184,7 @@ class GuidanceController extends Student {
         return $responseData;
     }
 
-    public function home() {
+    public function getAcademicAndSemester() {
         global $db;
         $academic = new AcademicController($db);
         $academicYear = $academic->getActiveAcademicYear();
@@ -196,6 +196,18 @@ class GuidanceController extends Student {
         $start = !empty($academicYear) ? $academicYear[0]['academic_start'] : null;
         $end = !empty($academicYear)? $academicYear[0]['academic_end']: null;
         $academic = !empty($academicYear) ? "$start-$end" : null;
+
+        return array(
+            'academic' => $academic,
+            'semester' => $semester
+        );
+    }
+
+    public function home() {
+
+        $getAcademicAndSemester = $this->getAcademicAndSemester();
+        $academic = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['academic'] : null;
+        $semester = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['semester'] : null;
 
         $params = [
             'totalAcceptedApplicant' => [
@@ -248,6 +260,111 @@ class GuidanceController extends Student {
             ]
         );
         return $return;
+    }
+
+    public function newApplicant() {
+        $getAcademicAndSemester = $this->getAcademicAndSemester();
+        $academic = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['academic'] : null;
+        $semester = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['semester'] : null;
+
+        $params = [
+            'newApplicantData' => [
+                'WHERE' => "status_type = 'New Applicant' AND academic = '$academic' AND semester_id = '$semester'",
+                'ORDER' => "id ASC"
+            ],
+        ];
+
+        $newApplicantData = $this->getStudentList($params['newApplicantData']);
+        $newApplicantData = $newApplicantData->fetchAll(PDO::FETCH_ASSOC);
+
+        $return = array(
+            'newApplicantData' => $newApplicantData
+        );
+        return $return;
+    }
+
+    public function getLastApplicantId() {
+        global $db;
+        $responseData = [];
+        try {
+            $query = "SELECT * FROM students order by applicant_id desc limit 1";
+            $stmt = $db->prepare($query);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_ASSOC);
+            $last_id = $row['applicant_id'];
+            if ($last_id == "") {
+                $applicant_id = "APP10000001";
+            } else {
+                $applicant_id = substr($last_id, 3);
+                $applicant_id = intval($applicant_id);
+                $applicant_id = "APP" . ($applicant_id + 1);
+            }
+            $return = array(
+                'lastApplicantId' => $applicant_id
+            );
+            return $return;
+        } catch (PDOException $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "PDOException in getLastApplicantId(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        } catch (Exception $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "Exception in getLastApplicantId(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        }
+        return $responseData;
+    }
+
+    public function acceptNewApplicantController($datas) {
+        global $db;
+        $responseData = [];
+        $request = json_decode($datas, true);
+
+        try {
+            foreach ($request as $data) {
+                $lastApplicantId = $this->getLastApplicantId();
+                $lastApplicantId = $lastApplicantId['lastApplicantId'];
+                //return $lastApplicantId;
+                $id = $data['id'];
+
+                $query = [
+                    'SET' => "status_type = 'Accept Applicant', applicant_id = '$lastApplicantId'",
+                    'WHERE' => "id = '$id'",
+                ];
+
+                $studendModel = new Student($db);
+                $update = $studendModel->update($query);
+
+                if ($update) {
+                    $query = "INSERT INTO documents VALUES(null, '$lastApplicantId', '', '', '', '', '', '')";
+                    $stmt = $db->prepare($query);
+                    $stmt->execute();
+                    $return[] = array(
+                        'status' => 'success',
+                        'message' => 'Applicant accepted successfully.',
+                        'type' => 'success',
+                        'id' => $id
+                    );
+                } else {
+                    $return[] = array(
+                        'status' => 'failed',
+                        'message' => 'Failed to accept applicant.',
+                        'type' => 'error',
+                        'id' => $id
+                    );
+                }
+            }
+            return json_encode($return);
+        } catch (PDOException $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "PDOException in acceptNewApplicantController(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        } catch (Exception $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "Exception in acceptNewApplicantController(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        }
+        return $responseData;
     }
 
 }

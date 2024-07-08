@@ -19,7 +19,7 @@ class Student {
             $conditions .= ' WHERE ' . $params['WHERE'];
         }
         if (!empty($params['ORDER'])) {
-            $conditions .= ' ORDER ' . $params['ORDER'];
+            $conditions .= ' ORDER BY ' . $params['ORDER'];
         }
         if (!empty($params['GROUP BY'])) {
             $conditions .= ' GROUP BY ' . $params['GROUP BY'];
@@ -38,6 +38,24 @@ class Student {
         $stmt->execute();
         return $stmt;
     }
+    
+    public function update($params = array()){
+        $conditions = '';
+        $set = '';
+        
+        if (!empty($params['SET'])) {
+            $set .= ' SET ' . $params['SET'];
+        }
+        if (!empty($params['WHERE'])) {
+            $conditions .= ' WHERE ' . $params['WHERE'];
+        }
+
+        $query = 'UPDATE ' . $this->table . $set . $conditions;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
 
     //Method to create a new user
     public function createPreEnroll($data) {
