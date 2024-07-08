@@ -48,10 +48,6 @@ else{
                                 
         ?>
 
-<?php include '../../../database/dbcon.php'; ?>
-<?php include '../../../database/regis.php'; ?>
-<?php include '../../../database/regis2.php'; ?>
-<?php include '../../../database/regis3.php'; ?>
 
         <?php
                                 
@@ -612,7 +608,7 @@ $chart_data = substr($chart_data, 0, -2);
           <?php
             
             $query = "SELECT * FROM academic GROUP BY academic_id ";
-            $result = $db->query($query);
+            $result = $conn->query($query);
             ?>
                         
                         <select style="width: 80%;" style=" text-align: center;" name="academic" id="academic" class="font-weight-bold btn-info btn-sm" required>
@@ -631,7 +627,7 @@ $chart_data = substr($chart_data, 0, -2);
                               <?php
                                 
                                 $query = "SELECT * FROM semester GROUP BY semester_id ";
-                                $result = $db->query($query);
+                                $result = $conn->query($query);
                                 ?>
                         
                         <select style="width: 80%;" name="semester" id="semester" class="font-weight-bold btn-info btn-sm" required>
