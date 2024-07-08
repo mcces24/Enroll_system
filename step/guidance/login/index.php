@@ -116,7 +116,7 @@ if (isGuidanceLogin()) {
                             $('.alert').prop('style', `display: block;`);
                             $('.btn').text('Redirecting...');
                             setTimeout(function() {
-                                window.location.href = '../home/';
+                                window.location.href = './home/';
                             }, 1000);
                         } else {
                             $('.alert').html(response.message);
