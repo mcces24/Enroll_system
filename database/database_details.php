@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$username = 'root';
-$pass = '';
-$db_name = 'mcc_es';
+$username = 'u510162695_mcc_es';
+$pass = 'McAdmin1';
+$db_name = 'u510162695_mcc_es';
 ?>
