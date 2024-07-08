@@ -1,6 +1,5 @@
 <?php
-include '../env.php';
-	 $connect = mysqli_connect($host, $username, $password, $db_name);
+	 $connect = mysqli_connect("localhost", "u510162695_mcces", "MccAdmin1", "u510162695_mcc_es"); 
 	  
-	  $db = mysqli_connect($host, $username, $password, $db_name);
+	  $db = mysqli_connect("localhost","u510162695_mcces","MccAdmin1","u510162695_mcc_es");  
 ?>
