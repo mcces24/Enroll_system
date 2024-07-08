@@ -1,3 +1,4 @@
 <?php 
-$conn = new PDO('mysql:host=localhost; dbname=u510162695_mcc_es','u510162695_mcc_es', 'McAdmin1'); 
+include '../env.php';
+$conn =  new PDO("mysql:host=$host;dbname=$db_name", "$username", "$password");
 ?>

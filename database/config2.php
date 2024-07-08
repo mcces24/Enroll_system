@@ -1,10 +1,8 @@
 <?php 
-	$host = 'localhost';
-$username = 'u510162695_mcc_es';
-$pass = 'MccAdmin1';
-$db = 'u510162695_mcc_es';
 
-$db = new mysqli($host,$username,$pass,$db);
+include '../env.php';
+
+$db = new mysqli($host,$username,$password,$db_name);
 
 if ($db->connect_error) {
      die("Connection Failed". $db->connect_error);
