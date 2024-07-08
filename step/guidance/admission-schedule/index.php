@@ -141,16 +141,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
         }
     </style>
     <?php include('message.php'); ?>
-    <div class="loader-wrapper" id="preloader">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div>
-    <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
-    <script>
-        var loader = document.getElementById("preloader");
-        window.addEventListener("load", function() {
-            loader.style.display = "none"
-        })
-    </script>
 
     <?php include('add_modal.php'); ?>
 

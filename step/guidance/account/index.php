@@ -205,16 +205,7 @@ require '../../../database/regis3.php';
 
 <body style="width: 100%;">
     <?php include('message.php'); ?>
-    <div class="loader-wrapper" id="preloader">
-        <span class="loader"><span class="loader-inner"></span></span>
-    </div>
-    <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
-    <script>
-        var loader = document.getElementById("preloader");
-        window.addEventListener("load", function() {
-            loader.style.display = "none"
-        })
-    </script>
+
 
     <!-- start: Sidebar -->
     <?php include '../inc/navbar.php';  ?>
