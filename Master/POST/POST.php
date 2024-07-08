@@ -55,6 +55,7 @@ function getPostData($POST) {
             break;
         case 'guidanceLogout':
             guidanceLogout();
+            break;
         case 'acceptNewApplicant':
             $data = $POST['data'] ?? null;
             acceptNewApplicant($data);
@@ -92,8 +93,8 @@ function login($data) {
 }
 
 function guidanceLogin($data) {
-    $username = isset($request['username']) ? filter_var($request['username'], FILTER_SANITIZE_STRING) : null;
-    $password = isset($request['password']) ? filter_var($request['password'], FILTER_SANITIZE_STRING) : null;
+    $username = isset($data['username']) ? filter_var($data['username'], FILTER_SANITIZE_STRING) : null;
+    $password = isset($data['password']) ? filter_var($data['password'], FILTER_SANITIZE_STRING) : null;
 
     $verifiedData = loginGuidanceUser($username, $password);
     
