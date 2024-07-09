@@ -72,7 +72,8 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                                                                 data-email="' . $applicant["email"] . '" data-id="' . $applicant["id"] . '" data-name="' . $applicant['fname'] . ' ' . $applicant['mname'] . ' ' . $applicant['lname']. '"
                                                                 data-applicant-id="' . $applicant["applicant_id"] . '"
                                                                 />';
-                                                                ?></td>
+                                                                ?>
+                                                            </td>
                                                             <td>
                                                                 <form action="" method="post">
                                                                     <input type="hidden" class="email" name="email" value="<?= $applicant['email']; ?>" required>
@@ -128,7 +129,7 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
         });
     </script>
     <script>
-         $(document).ready(function() {
+        $(document).ready(function() {
             var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
             $('.send_button').click(function() {
                 $(this).prop('disabled', true);
@@ -156,88 +157,79 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                 }
                 console.log(data);
                 if (data.length > 0) {
-                    // $.each(data, function(key, value) {
-                    //     data = {
-                    //         email: value.email,
-                    //         id: value.id,
-                    //         name: value.name,
-                    //         applicant_id: value.applicant_id
-                    //     };
-                        console.log(data);
-                        $.ajax({
-                            dataType: 'json',
-                            url: BASE_PATH + '/Master/POST/POST.php',
-                            method: "POST",
-                            data: {
-                                type: 'sendGuidanceForm',
-                                data: data
-                            },
-                            beforeSend: function() {
-                                $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
-                                $('#' + id).addClass('btn-info');
-                                $('#' + id).prop('disabled', true);
-                                $.each(data, function(key, value) {
-                                    var id = value.id
-                                    $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
+                    console.log(data);
+                    $.ajax({
+                        dataType: 'json',
+                        url: BASE_PATH + '/Master/POST/POST.php',
+                        method: "POST",
+                        data: {
+                            type: 'sendGuidanceForm',
+                            data: data
+                        },
+                        beforeSend: function() {
+                            $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
+                            $('#' + id).addClass('btn-info');
+                            $('#' + id).prop('disabled', true);
+                            $.each(data, function(key, value) {
+                                var id = value.id
+                                $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
+                                $('#id-' + id).addClass('btn-info');
+                                $('#id-' + id).prop('disabled', true);
+                            });
+                        },
+                        success: function(data) {
+                            $.each(data, function(key, value) {
+                                var response = JSON.parse(value);
+                                console.log(response);
+                                var id = response.id
+                                var message = response.message;
+                                var type = response.type;
+                                var status = response.status;
+                                if (status == 'success') {
+                                    $('#id-' + id).text(message);
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).addClass('btn-' + type);
+                                    $('#table-row-' + id).fadeOut(2000, function() {
+                                        $(this).html('');
+                                    });
+                                } else if (status == 'failed') {
+                                    $('#id-' + id).text(message);
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).removeClass('btn-success');
+                                    $('#id-' + id).addClass('btn-' + type);
+                                } else {
+                                    $('#id-' + id).text('Cannot Send Email');
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
                                     $('#id-' + id).addClass('btn-info');
-                                    $('#id-' + id).prop('disabled', true);
-                                });
-                            },
-                            success: function(data) {
-                                $.each(data, function(key, value) {
-                                    var response = JSON.parse(value);
-                                    console.log(response);
-                                    var id = response.id
-                                    var message = response.message;
-                                    var type = response.type;
-                                    var status = response.status;
-                                    if (status == 'success') {
-                                        $('#id-' + id).text(message);
-                                        $('#id-' + id).removeClass('btn-danger');
-                                        $('#id-' + id).removeClass('btn-info');
-                                        $('#id-' + id).addClass('btn-' + type);
-                                        $('#table-row-' + id).fadeOut(2000, function() {
-                                            $(this).html('');
-                                        });
-                                    } else if (status == 'failed') {
-                                        $('#id-' + id).text(message);
-                                        $('#id-' + id).removeClass('btn-danger');
-                                        $('#id-' + id).removeClass('btn-info');
-                                        $('#id-' + id).removeClass('btn-success');
-                                        $('#id-' + id).addClass('btn-' + type);
-                                    } else {
-                                        $('#id-' + id).text('Cannot Send Email');
-                                        $('#id-' + id).removeClass('btn-danger');
-                                        $('#id-' + id).removeClass('btn-info');
-                                        $('#id-' + id).addClass('btn-info');
-                                    }
-                                    $('#id-' + id).attr('disabled', false);
-                                });
-                                if (action != 'single') {
-                                    $('#' + id).text('Selected Sent');
-                                    $('#' + id).addClass('btn-success');
-                                    $('#' + id).removeClass('btn-info');
-                                    $('#' + id).removeClass('btn-danger');
-                                    setTimeout(function() {
-                                        $('#' + id).text('Send Selected');
-                                        $('#' + id).addClass('btn-info');
-                                        $('#' + id).removeClass('btn-success');
-                                        $('#' + id).prop('disabled', false);
-                                    }, 2000);
                                 }
-                            },
-                            error: function(xhr, status, error) {
-                                console.error("Error: " + error);
-                                console.error("Status: " + status);
-                                console.error("Response: " + xhr.responseText);
-                                $('#' + id).html("Cannot Send Email");
+                                $('#id-' + id).attr('disabled', false);
+                            });
+                            if (action != 'single') {
+                                $('#' + id).text('Selected Sent');
+                                $('#' + id).addClass('btn-success');
                                 $('#' + id).removeClass('btn-info');
-                                $('#' + id).addClass('btn-danger');
-                                $('#' + id).prop('disabled', false);
+                                $('#' + id).removeClass('btn-danger');
+                                setTimeout(function() {
+                                    $('#' + id).text('Send Selected');
+                                    $('#' + id).addClass('btn-info');
+                                    $('#' + id).removeClass('btn-success');
+                                    $('#' + id).prop('disabled', false);
+                                }, 2000);
                             }
-                        });
-                    // });
-                    
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Error: " + error);
+                            console.error("Status: " + status);
+                            console.error("Response: " + xhr.responseText);
+                            $('#' + id).html("Cannot Send Email");
+                            $('#' + id).removeClass('btn-info');
+                            $('#' + id).addClass('btn-danger');
+                            $('#' + id).prop('disabled', false);
+                        }
+                    });
                 } else {
                     alert("Please Select atleast one checkbox");
                     $(this).prop('disabled', false);

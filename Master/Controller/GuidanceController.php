@@ -197,10 +197,24 @@ class GuidanceController extends Student {
         $end = !empty($academicYear)? $academicYear[0]['academic_end']: null;
         $academic = !empty($academicYear) ? "$start-$end" : null;
 
-        return array(
+        $return = array(
             'academic' => $academic,
-            'semester' => $semester
+            'semester' => $semester 
         );
+
+       return !empty($academicYear) && !empty($semesterData) ? $return : array();
+        
+    }
+
+    public function getSystemData() {
+        global $db;
+        $system = new System($db);
+        $params = [
+            'WHERE' => "system_id = 1",
+        ];
+        $systemData = $system->read($params);
+        $systemData = $systemData->fetchAll(PDO::FETCH_ASSOC);
+        return $systemData;
     }
 
     public function home() {
@@ -386,6 +400,7 @@ class GuidanceController extends Student {
 
     public function sendGuidanceFormController($data) {
         global $db;
+        $systemData = $this->getSystemData();
         
         try {
             //return $lastApplicantId;
@@ -401,6 +416,7 @@ class GuidanceController extends Student {
 
             if ($update) {
                 $return = array(
+                    'system' => $systemData,
                     'status' => 'success',
                     'message' => 'Form sent.',
                     'type' => 'success',
@@ -528,5 +544,70 @@ class GuidanceController extends Student {
         }
 
         return json_encode($return);
+    }
+
+    public function applicantAdmissionController() {
+        $getAcademicAndSemester = $this->getAcademicAndSemester();
+        $academic = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['academic'] : null;
+        $semester = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['semester'] : null;
+
+        $params = [
+            'applicantAdmissionData' => [
+                'WHERE' => "status_type = 'Form Done' AND academic = '$academic' AND semester_id = '$semester'",
+                'ORDER' => "id ASC"
+            ],
+        ];
+
+        $applicantAdmission = $this->getStudentList($params['applicantAdmissionData']);
+        $applicantAdmissionData = $applicantAdmission->fetchAll(PDO::FETCH_ASSOC);
+
+        $return = array(
+            'applicantAdmissionData' => $applicantAdmissionData
+        );
+        return $return;
+    }
+
+    public function sendAdmissionController($data) {
+        global $db;
+        $systemData = $this->getSystemData();
+        try {
+
+            $id = $data['id'];
+
+            $query = [
+                'SET' => "status_type = 'Accept'",
+                'WHERE' => "id = '$id'",
+            ];
+
+            $studendModel = new Student($db);
+            $update = $studendModel->update($query);
+
+            if ($update) {
+                $return = array(
+                    'system' => $systemData,
+                    'status' => 'success',
+                    'message' => 'Admission sent.',
+                    'type' => 'success',
+                    'id' => $id
+                );
+            } else {
+                $return = array(
+                    'status' => 'failed',
+                    'message' => 'Failed to send Admission.',
+                    'type' => 'danger',
+                    'id' => $id
+                );
+            }
+            return json_encode($return);
+        } catch (PDOException $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "PDOException in sendAdmissionController(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        } catch (Exception $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "Exception in sendAdmissionController(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        }
+        return $responseData;
     }
 }

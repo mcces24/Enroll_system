@@ -41,62 +41,48 @@ require_once('loader.php');
             </a>
         </li>
         <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Applicant</li>
-        <li class="sidebar-menu-item has-dropdown">
-        <li class="sidebar-menu-item <?php echo isActive('/endorse-applicant/index'); ?>">
-            <a href="../endorse-applicant/">
-                <i class="ri-group-line sidebar-menu-item-icon"></i>
-                Endorse Applicant
-            </a>
-        </li>
-        </li>
-        <li class="sidebar-menu-item has-dropdown">
         <li class="sidebar-menu-item <?php echo isActive('/new-applicant/index'); ?>">
             <a href="../new-applicant/">
                 <i class="ri-account-pin-box-line sidebar-menu-item-icon"></i>
                 New Applicant<span style="margin-left: 5px;"  class="badge bg-primary rounded-pill"><span id="new-applicant-side"></span></span>
             </a>
         </li>
-        </li>
-        <li class="sidebar-menu-item has-dropdown">
         <li class="sidebar-menu-item <?php echo isActive('/accepted-applicant/index'); ?>">
             <a href="../accepted-applicant/">
                 <i class="ri-user-received-line sidebar-menu-item-icon"></i>
                 Accepted Applicant <span style="margin-left: 5px;" class="badge bg-primary rounded-pill"><span id="accept-applicant-side"></span></span>
             </a>
         </li>
-        </li>
-        <li class="sidebar-menu-item has-dropdown">
         <li class="sidebar-menu-item <?php echo isActive('/applicant-info/index'); ?>">
             <a href="../applicant-info/">
                 <i class="ri-account-pin-box-line sidebar-menu-item-icon"></i>
                 Applicant Admission<span style="margin-left: 5px;"  class="badge bg-primary rounded-pill"><span id="form-done-side"></span></span>
             </a>
         </li>
-        </li>
-        <li class="sidebar-menu-item has-dropdown">
         <li class="sidebar-menu-item <?php echo isActive('/applicantGform/index'); ?>">
             <a href="../applicantGform/">
                 <i class="ri-account-pin-box-line sidebar-menu-item-icon"></i>
                 Guidance Form Record</span></span>
             </a>
         </li>
-        </li>
-        <li class="sidebar-menu-item has-dropdown">
         <li class="sidebar-menu-item <?php echo isActive('/applicant-scores/index'); ?>">
             <a href="../applicant-scores/">
                 <i class="ri-draft-line sidebar-menu-item-icon"></i>
                 Applicant Score<span class="badge bg-primary rounded-pill"></span>
             </a>
         </li>
-        </li>
         <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Queuing</li>
-        <li class="sidebar-menu-item has-dropdown">
+        <li class="sidebar-menu-item <?php echo isActive('/endorse-applicant/index'); ?>">
+            <a href="../endorse-applicant/">
+                <i class="ri-group-line sidebar-menu-item-icon"></i>
+                Endorse Applicant
+            </a>
+        </li>
         <li class="sidebar-menu-item <?php echo isActive('/queuing/index'); ?>">
             <a href="../queuing/">
                 <i class="ri-loader-2-line sidebar-menu-item-icon"></i>
                 Que Students
             </a>
-        </li>
         </li>
         <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Admission</li>
         <li class="sidebar-menu-item has-dropdown <?php echo isFocused('/admission-schedule/index'); ?> <?php echo isFocused('/admission-list/index'); ?>">
