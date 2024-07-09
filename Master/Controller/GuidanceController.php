@@ -443,27 +443,46 @@ class GuidanceController extends Student {
         return $responseData;
     }
 
-    public function getAppicantByApplicantIdController($applicantId) {
+    public function getAppicantByApplicantIdController($applicantId, $params = array()) {
+        global $db;
+        if  (isset($params['type'])) {
+            if ($params['type'] == 'guidanceRecord') {
+                $query = [
+                    'guidanceRecord' => [
+                        'JOIN' => 'INNER JOIN students ON guidance_record.applicant_id = students.applicant_id',
+                        'WHERE' => "students.applicant_id='$applicantId'",
+                    ],
+                ];
+                $guidanceRecordModel = new GuidanceRecord($db);
+                $guidanceRecord = $guidanceRecordModel->read($query['guidanceRecord']);
+                $guidanceRecordData = $guidanceRecord->fetchAll(PDO::FETCH_ASSOC);
 
-        $params = [
-            'applicantWithOutRecord' => [
-                'WHERE' => "applicant_id = '$applicantId'",
-            ],
-            'applicantWithRecord' => [
-                'WHERE' => "status_type != 'Accept_form' AND applicant_id = '$applicantId'",
-            ],
-        ];
-
-        $applicantWithOutRecord = $this->getStudentList($params['applicantWithOutRecord']);
-        $applicantWithOutRecordData = $applicantWithOutRecord->fetchAll(PDO::FETCH_ASSOC);
-
-        $applicantWithRecord = $this->getStudentList($params['applicantWithRecord']);
-        $applicantWithRecordData = $applicantWithRecord->fetchAll(PDO::FETCH_ASSOC);
-
-        $return = array(
-            'applicantWithOutRecordData' => $applicantWithOutRecordData,
-            'applicantWithRecordData' => $applicantWithRecordData
-        );
+                $return = array(
+                    'guidanceRecordData' => $guidanceRecordData,
+                );
+            }
+        } else {
+            $query = [
+                'applicantWithOutRecord' => [
+                    'WHERE' => "applicant_id = '$applicantId'",
+                ],
+                'applicantWithRecord' => [
+                    'WHERE' => "status_type != 'Accept_form' AND applicant_id = '$applicantId'",
+                ],
+            ];
+    
+            $applicantWithOutRecord = $this->getStudentList($query['applicantWithOutRecord']);
+            $applicantWithOutRecordData = $applicantWithOutRecord->fetchAll(PDO::FETCH_ASSOC);
+    
+            $applicantWithRecord = $this->getStudentList($query['applicantWithRecord']);
+            $applicantWithRecordData = $applicantWithRecord->fetchAll(PDO::FETCH_ASSOC);
+    
+            $return = array(
+                'applicantWithOutRecordData' => $applicantWithOutRecordData,
+                'applicantWithRecordData' => $applicantWithRecordData
+            );
+        }
+        
         return $return;
     }
 
@@ -609,5 +628,28 @@ class GuidanceController extends Student {
             $responseData['type'] = 'danger';
         }
         return $responseData;
+    }
+
+    public function applicantGuidanceFormDataController() {
+        $getAcademicAndSemester = $this->getAcademicAndSemester();
+        $academic = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['academic'] : null;
+        $semester = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['semester'] : null;
+
+        $params = [
+            'applicantGuidanceFormData' => [
+                'WHERE' => "academic = '$academic' AND semester_id = '$semester'",
+                'JOIN' => 'INNER JOIN guidance_record g ON students.applicant_id = g.applicant_id',
+                'ORDER' => "students.id ASC"
+            ],
+        ];
+
+        $applicantGuidanceForm = $this->getStudentList($params['applicantGuidanceFormData']);
+        $applicantGuidanceFormData = $applicantGuidanceForm->fetchAll(PDO::FETCH_ASSOC);
+
+        $return = array(
+            'applicantGuidanceFormData' => $applicantGuidanceFormData
+        );
+
+        return $return;
     }
 }

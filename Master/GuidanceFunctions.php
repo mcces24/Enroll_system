@@ -79,9 +79,9 @@ function sendGuidanceFormFunction($data) {
     return $response;
 }
 
-function getAppicantByApplicantIdFunction($applicantId) {
+function getAppicantByApplicantIdFunction($applicantId, $params = array()) {
     global $guidanceController; // Use global to access the variable declared outside the function
-    $response = $guidanceController->getAppicantByApplicantIdController($applicantId);
+    $response = $guidanceController->getAppicantByApplicantIdController($applicantId, $params);
     // Process $isLogin or return whatever logic you need
     return $response;
 }
@@ -110,6 +110,13 @@ function applicantAdmissionFunction() {
 function sendAdmissionFunction($data) {
     global $guidanceController; // Use global to access the variable declared outside the function
     $response = $guidanceController->sendAdmissionController($data);
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function applicantGuidanceFormDataFunction() {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->applicantGuidanceFormDataController();
     // Process $isLogin or return whatever logic you need
     return $response;
 }
