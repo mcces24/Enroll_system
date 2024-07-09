@@ -73,6 +73,10 @@ function getPostData($POST)
             $data = $POST['data'] ?? null;
             updateApplicantStatus($data);
             break;
+        case 'sendAdmission':
+            $data = $POST['data'] ?? null;
+            sendAdmission($data);
+            break;
         default:
             break;
     }
@@ -241,14 +245,15 @@ function sendGuidanceForm($data)
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
         if ($responseJson['status'] = 'success') {
+            $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
                 // PHPMailer setup
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'capstone.project2022.2023@gmail.com';
-                $mail->Password   = 'nxnqxklsnggbkdtc';
+                $mail->Username   = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = isset($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port       = 465;
 
@@ -259,7 +264,8 @@ function sendGuidanceForm($data)
                 $mail->addAddress($email);
                 $mail->Subject = 'MCC Guidance Office Form';
 
-                $link = "https://madridejoscommunitycollege.com/guidance-step/?applicant_id=$applicant_id";
+                $domain = isset($system['domain']) ? $system['domain'] : '';
+                $link = "$domain/guidance-step/?applicant_id=$applicant_id";
 
                 $mail->isHTML(true);
                 $mail->Body = file_get_contents('Layout/accept_mail.html');
@@ -289,4 +295,62 @@ function updateApplicantStatus($data) {
     $response = updateApplicantStatusFunction($data);
     header('Content-Type: application/json');
     echo json_encode($response);
+}
+
+function sendAdmission($data)
+{
+    foreach ($data as $key => $value) {
+        if (empty($value)) {
+            $response['message'] = "Requirments not met";
+            $response['type'] = "danger";
+            echo json_encode($response);
+            return;
+        }
+        $email = $value['email'];
+        $applicant_id = $value['applicant_id'];
+        $name = $value['name'];
+
+        $response = sendAdmissionFunction($value);
+        $responseJson = json_decode($response, true);
+        if ($responseJson['status'] = 'success') {
+            $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
+            $mail = new PHPMailer(true);
+            try {
+                // PHPMailer setup
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = isset($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port       = 465;
+
+                $senderName = 'Guidance Office - Madridejos Community College';
+                $senderEmail = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+
+                $mail->setFrom($senderEmail, $senderName);
+                $mail->addAddress($email);
+                $mail->Subject = isset($system['email_subject']) ? $system['email_subject'] : '';
+                
+                $domain = isset($system['domain']) ? $system['domain'] : '';
+                $admission = "$domain/admission-schedule?applicant_id=$applicant_id";
+                $body = isset($system['email_body']) ? $system['email_body'] : '';
+
+                $mail->isHTML(true);
+                $mail->Body = file_get_contents('Layout/email_admission.html');
+                $mail->Body = str_replace('<?= $admission ?>', $admission, $mail->Body);
+                $mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
+                $mail->Body = str_replace('<?= $body ?>', $body, $mail->Body);
+                $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
+
+                $mail->send();
+            } catch (Exception $e) {
+                $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                header('HTTP/1.1 500 Internal Server Error');
+            }
+        }
+        $return[] = $response;
+    }
+    header('Content-Type: application/json');
+    echo json_encode($return);   
 }

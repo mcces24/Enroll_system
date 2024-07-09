@@ -100,6 +100,20 @@ function updateApplicantStatusFunction($data) {
     return $response;
 }
 
+function applicantAdmissionFunction() {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->applicantAdmissionController();
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
+function sendAdmissionFunction($data) {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->sendAdmissionController($data);
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
 
 
 

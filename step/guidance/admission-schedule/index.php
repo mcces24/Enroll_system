@@ -118,7 +118,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 <?php include '../inc/head.php';  ?>
 
 <body style="width: 100%;">
-        <style>
+    <style>
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
             -webkit-appearance: none;
@@ -174,7 +174,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
 
 
-                    <div class="col-12 col-md-7 col-xl-6">
+                    <div class="col-12 col-md-12 col-xl-6">
                         <form action="code.php" method="POST">
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-header bg-white">
@@ -223,7 +223,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
                                                         </td>
 
-                                                        <td colspan="2"><a class="btn btn-warning btn-sm" href='delete.php?sched_id=<?= $student['sched_id']; ?>'><span class="ri-delete-bin-line"></span></a></td>
+                                                        <td colspan="2"><a class="btn btn-danger btn-sm" href='delete.php?sched_id=<?= $student['sched_id']; ?>'><span class="ri-delete-bin-line"></span></a></td>
                                                     </tr>
                                             <?php
                                                 }
@@ -238,7 +238,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                 </div>
                             </div>
                     </div>
-                    <div class="col-12 col-md-7 col-xl-6">
+                    <div class="col-12 col-md-12 col-xl-6">
                         <form action="code.php" method="POST">
                             <div class="card border-0 shadow-sm h-100">
                                 <div class="card-header bg-white">
@@ -276,7 +276,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                                 <?= $student['sched_time_start']; ?> - <?= $student['sched_time_stop']; ?>
                                                             </span>
                                                         </td>
-                                                        <td colspan="2" style="width: 100px" >
+                                                        <td colspan="2" style="width: 100px">
                                                             <div class="input-group text-center" style="display: flex; align-items: center;">
                                                                 <div class="input-group-prepend">
                                                                     <button style="height: 30px;" class="btn btn-outline-secondary" type="button" id="button-minus" onclick="changeValue(this, -1)">-</button>
@@ -323,31 +323,31 @@ if (mysqli_num_rows($querys_run111) > 0) {
                             <div class="card-body">
                                 <table class="table table-bordered table-striped" style="text-align: center;">
                                     <tr>
-                                        <th>TIME</th>
+                                        <th>DATE</th>
                                         <?php
-                                        $querySched = "SELECT * FROM admission_sched ORDER BY sched_date";
-                                        $querySchedRun = mysqli_query($conn, $querySched);
-                                        $schedules = [];
-                                        if (mysqli_num_rows($querySchedRun) > 0) {
-                                            while ($sched = mysqli_fetch_assoc($querySchedRun)) {
-                                                $schedules[] = $sched;
-                                                echo "<th>" . date("M d, Y", strtotime($sched['sched_date'])) . "</th>";
+                                        $queryTime = "SELECT * FROM admission_time ORDER BY sched_time_start";
+                                        $queryTimeRun = mysqli_query($conn, $queryTime);
+                                        $times = [];
+                                        if (mysqli_num_rows($queryTimeRun) > 0) {
+                                            while ($time = mysqli_fetch_assoc($queryTimeRun)) {
+                                                $times[] = $time;
+                                                echo "<th>" . date("H:i", strtotime($time['sched_time_start'])) . " - " . date("H:i", strtotime($time['sched_time_stop'])) . "</th>";
                                             }
                                         }
                                         ?>
                                     </tr>
 
                                     <?php
-                                    $queryTime = "SELECT * FROM admission_time ORDER BY sched_time_start";
-                                    $queryTimeRun = mysqli_query($conn, $queryTime);
-                                    if (mysqli_num_rows($queryTimeRun) > 0) {
-                                        while ($time = mysqli_fetch_assoc($queryTimeRun)) {
+                                    $querySched = "SELECT * FROM admission_sched ORDER BY sched_date";
+                                    $querySchedRun = mysqli_query($conn, $querySched);
+                                    if (mysqli_num_rows($querySchedRun) > 0) {
+                                        while ($sched = mysqli_fetch_assoc($querySchedRun)) {
                                             echo "<tr>";
-                                            echo "<td>" . date("H:i", strtotime($time['sched_time_start'])) . " - " . date("H:i", strtotime($time['sched_time_stop'])) . "</td>";
-                                            $start = $time['sched_time_start'];
-                                            $stop = $time['sched_time_stop'];
-                                            $sched_time = "$start-$stop";
-                                            foreach ($schedules as $sched) {
+                                            echo "<td>" . date("M d, Y", strtotime($sched['sched_date'])) . "</td>";
+                                            foreach ($times as $time) {
+                                                $start = $time['sched_time_start'];
+                                                $stop = $time['sched_time_stop'];
+                                                $sched_time = "$start-$stop";
                                                 $queryCountSlot = "SELECT COUNT(*) AS slot_count FROM admission_list LEFT JOIN students ON admission_list.student_id = students.id WHERE sched_date = '" . $sched['sched_date'] . "' AND sched_time = '$sched_time' AND academic='$academic' AND semester_id = '$semester'";
                                                 $queryCountSlotRun = mysqli_query($conn, $queryCountSlot);
                                                 $slot_count = $queryCountSlotRun ? mysqli_fetch_assoc($queryCountSlotRun)['slot_count'] : 0;
@@ -356,17 +356,17 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                 if ($slot_count < $available_slot) {
                                                     echo "<td>$slot_count / <span class='available_slot-$sched_time_id'>$available_slot</span>
                                                     <span class='badge rounded-pill bg-success'>Available</span>
-                                                    <a href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
+                                                    <a target='_blank' href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
                                                     </td>";
                                                 } else if ($slot_count == $available_slot) {
                                                     echo "<td>$slot_count / <span class='available_slot-$sched_time_id'>$available_slot</span>
                                                     <span class='badge rounded-pill bg-warning'>Slot Full</span>
-                                                    <a href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
+                                                    <a target='_blank' href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
                                                     </td>";
                                                 } else {
                                                     echo "<td>$slot_count / <span class='available_slot-$sched_time_id'>$available_slot</span>
                                                     <span class='badge rounded-pill bg-danger'>Over Slot</span>
-                                                    <a href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
+                                                    <a target='_blank' href='../admission-list?sched_date=" . $sched['sched_date'] . "&sched_time=$sched_time' class='badge rounded-pill bg-primary'>View</a>
                                                     </td>";
                                                 }
                                             }
@@ -375,6 +375,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                     }
                                     ?>
                                 </table>
+
                             </div>
                         </div>
                     </div>
@@ -511,7 +512,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
                 $(input).trigger('change'); // Trigger change event if using jQuery
             }
         }
-
     </script>
 </body>
 
