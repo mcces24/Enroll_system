@@ -1,10 +1,10 @@
 <?php
 // Define the base directory path
 define('BASE_PATH', dirname(__FILE__));
-define('BASE_PATH_URL', 'https://madridejoscommunitycollege.com');
+define('BASE_PATH_URL', 'http://localhost/mcces/');
 
 // Define Database Constants
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'u510162695_mcc_es');
-define('DB_USER', 'u510162695_mcces');
-define('DB_PASSWORD', 'MccAdmin1');
+define('DB_NAME', 'mcc_es');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
