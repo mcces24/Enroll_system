@@ -42,7 +42,7 @@
                             <?php
         include_once '../../../database/config.php';
         include_once '../../../database/config2.php';
-        $year = $student['year_id'];
+        $year = $row['year_id'];
         $query = "SELECT * FROM sections WHERE year_id = ? GROUP BY section_code ORDER BY section_code ASC";
         $stmt = $db->prepare($query);
         $stmt->bind_param("i", $year);

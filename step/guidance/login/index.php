@@ -67,7 +67,7 @@ if (isGuidanceLogin()) {
                             <input type="email" class="username" name="username" placeholder="Enter Your Email" required>
                             <input type="password" class="password" name="password" placeholder="Enter Your Password" style="margin-bottom: 2px;" required>
                             <p style="float: right ;"><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
-                            <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
+                            <p style="float: left;"><a href="../../" style="margin-bottom: 15px; display: block; text-align: right;">Back</a></p>
                             <button name="submit" name="submit" class="btn" type="submit">Login</button>
                         </form>
 
