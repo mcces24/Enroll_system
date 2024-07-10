@@ -684,4 +684,53 @@ class GuidanceController extends Student {
 
         return $return;
     }
+
+    public function addApplicantScoresController($datas) {
+        global $db;
+
+        $fields = '';
+        $values = '';
+        foreach ($datas as $key => $data) {
+            // Concatenate keys into $fields
+            $fields .= $key;
+        
+            // Check if current iteration is not the last element
+            if ($key !== array_key_last($datas)) {
+                $fields .= ", ";
+            }
+        
+            // Concatenate values into $values
+            $values .= "'" . $data . "'";
+        
+            // Check if current iteration is not the last element
+            if ($key !== array_key_last($datas)) {
+                $values .= ", ";
+            }
+        }
+        $applicant_id = isset($datas['applicant_id']) ? $datas['applicant_id'] : '';
+        $addmissionScore = new AdmissionScore($db);
+
+        $params = [
+            'FIELDS' => $fields,
+            'VALUES' => $values
+        ];
+        $saveScore = $addmissionScore->create($params);
+        if ($saveScore) {
+            $return = array(
+                'status' => 'success',
+                'message' => 'Score added successfully.',
+                'type' => 'success',
+                'text' => "For " . $applicant_id
+            );
+        } else {
+            $return = array(
+                'status' => 'failed',
+                'message' => 'Feiled to add score.',
+                'type' => 'danger',
+                'text' => "For " . $applicant_id
+            );
+        }
+        
+        return json_encode($return);
+    }
 }
