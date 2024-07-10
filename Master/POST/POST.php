@@ -77,6 +77,10 @@ function getPostData($POST)
             $data = $POST['data'] ?? null;
             sendAdmission($data);
             break;
+        case 'addApplicantScores':
+            $data = $POST['data'] ?? null;
+            addApplicantScores($data);
+            break;
         default:
             break;
     }
@@ -353,4 +357,10 @@ function sendAdmission($data)
     }
     header('Content-Type: application/json');
     echo json_encode($return);   
+}
+
+function addApplicantScores($data) {
+    $response = addApplicantScoresFunction($data);
+    header('Content-Type: application/json');
+    echo json_encode($response);
 }

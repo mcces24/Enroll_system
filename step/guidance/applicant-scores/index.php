@@ -98,7 +98,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
             <div class="modal-header">
                <h5 class="modal-title" id="exampleModalLabel">Admission Test Score </h5>
             </div>
-            <form action="importData.php" method="post" enctype="multipart/form-data">
+            <form id="addScoreForm">
                <div class="modal-body">
                   <div class="input-group mb-3">
                      <div style="float: left;" class="col-12">
@@ -107,13 +107,13 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                         </label>
                         <select id="applicant_id" name="applicant_id" autocomplete="off" required>
                            <option value="">Select Applicant...</option>
-                           <?php if (!empty($applicantListData)): ?>
+                           <?php if (!empty($applicantListData)) : ?>
                               <?php foreach ($applicantListData as $applicant) : ?>
-                                 <option value="<?= $applicant['applicant_id']; ?>" data-age="<?= $applicant['age']; ?>"><?= $applicant['applicant_id']; ?> | 
-                                 <?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?>
-                              </option>
+                                 <option value="<?= $applicant['applicant_id']; ?>" data-age="<?= $applicant['age']; ?>"><?= $applicant['applicant_id']; ?> |
+                                    <?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?>
+                                 </option>
                               <?php endforeach; ?>
-                           <?php else: ?>
+                           <?php else : ?>
                               <option disabled>No Applicant Found</option>
                            <?php endif; ?>
                         </select>
@@ -234,7 +234,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                         <label class="mb-1">
                            <h6>Figural Category:</h6>
                         </label>
-                        <select name="figu_cat" id="figu_cat" required> 
+                        <select name="figu_cat" id="figu_cat" required>
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -328,7 +328,9 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                   </div>
                </div>
                <div class="modal-footer">
-                  <input type="submit" class="btn btn-sm btn-primary" name="addscore" value="SAVE / UPDATE">
+                  <button class="btn btn-sm btn-success addScoreBtn">
+                     SAVE SCORE
+                  </button>
                </div>
             </form>
 
@@ -362,7 +364,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                               <button name="push_notification" type="submit" style="margin-left: 20px;" class="btn btn-sm btn-primary">Send Score to Applicant's</button>
                            </form>
                         </div>
-                        <button class="btn btn-sm float-end btn-success editbtn1" style="margin-left: 20px;">Import Scores</button>
+                        <button class="btn btn-sm float-end btn-success emportScore" style="margin-left: 20px;">Import Scores</button>
                         <button class="btn btn-sm float-end btn-warning addScore">Add Applicant Score</button>
                      </div>
                      <div class="card-body">
@@ -384,7 +386,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                                  <tbody>
                                     <?php
                                     if (!empty($applicantScoresData)) {
-                                          foreach ($applicantScoresData as $applicant) {
+                                       foreach ($applicantScoresData as $applicant) {
                                     ?>
                                           <tr style="text-align: center;">
                                              <td><?= $applicant['applicant_id']; ?></td>
@@ -403,7 +405,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                                  </tbody>
                               </table>
                            </div>
-                        <?php else: ?>
+                        <?php else : ?>
                            <h2>Pre-Enrollemnt is currently not Available</h2>
                         <?php endif; ?>
                      </div>
@@ -424,10 +426,57 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
    <script>
       $(document).ready(function() {
+         var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
+         $('#addScoreForm').on('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Get form data
+            var formDataArray = $(this).serializeArray();
+    
+            // Convert formDataArray to a plain object if needed
+            var formDataObject = {};
+            $.each(formDataArray, function(index, field) {
+               formDataObject[field.name] = field.value;
+            });
+            console.log(formDataObject);
+
+            // Send the AJAX request
+            $.ajax({
+               url: BASE_PATH + '/Master/POST/POST.php',
+               type: 'POST',
+               data: {
+                  type: 'addApplicantScores',
+                  data: formDataObject
+               },
+               beforeSend: function() {
+                  // Show the loading spinner
+                  $('.addScoreBtn').prop('disabled', true);
+                  $('.addScoreBtn').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Adding...');
+               },
+               success: function(response) {
+                  // Handle the response from the server
+                  response = JSON.parse(response);
+                  console.log(response);
+                  swal({
+                     title: response.message,
+                     icon: response.type,
+                     text: response.text,
+                     button: "Close",
+                  }).then((value) => {
+                     location.reload();
+                  });
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                  // Handle errors here
+                  console.log('Error: ' + textStatus, errorThrown);
+               }
+            });
+         });
+
+         //Tom Select
          ['#applicant_id', '#com_cate', '#reas_cat', '#verbal_cat', '#quan_cat', '#figu_cat', '#nonver_cat', '#total_cat'].forEach(function(id) {
             new TomSelect(id, {
-                  allowEmptyOption: false,
-                  maxOptions: 10
+               allowEmptyOption: false,
+               maxOptions: 10
             });
          });
 
@@ -436,11 +485,12 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
             var age = selectedOption.data('age');
             $('#age').val(age);
          });
+
       });
       jQuery(document).ready(function() {
          jQuery("#Mytableid").DataTable({
-               "pageLength": 50,
-               "ordering": false,
+            "pageLength": 50,
+            "ordering": false,
          });
       });
    </script>
@@ -448,7 +498,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
    <script type="text/javascript">
       $(document).ready(function() {
 
-         $('.editbtn1').on('click', function() {
+         $('.emportScore').on('click', function() {
 
             $('#editmodal1').modal('show');
 
@@ -469,20 +519,8 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
    </script>
    <script type="text/javascript">
       $(document).ready(function() {
-
          $('.addScore').on('click', function() {
-
             $('#addScoremodal').modal('show');
-
-            $tr = $(this).closest('tr');
-
-            var data = $tr.children("td").map(function() {
-               return $(this).text();
-            }).get();
-
-            console.log(data);
-
-
          });
       });
    </script>
