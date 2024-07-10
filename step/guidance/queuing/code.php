@@ -47,7 +47,7 @@ if (isset($_POST['add_old'])) {
         $_SESSION['message_icon'] = "warning";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else {
-        $query = "INSERT INTO que VALUES('','$student_id','$queuing','$date_created','3') ";
+        $query = "INSERT INTO que VALUES(null,'$student_id','$queuing','$date_created','3') ";
         $query_run = mysqli_query($conn, $query);
 
         if ($query_run) {
