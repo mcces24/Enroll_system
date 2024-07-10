@@ -121,6 +121,13 @@ function applicantGuidanceFormDataFunction() {
     return $response;
 }
 
+function applicantScoresFunction() {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->applicantScoresController();
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
 
 
 

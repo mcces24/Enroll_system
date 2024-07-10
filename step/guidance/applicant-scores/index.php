@@ -1,114 +1,15 @@
-
 <?php
-require '../../../database/config.php';
+include '../inc/head.php';
+$data = applicantScoresFunction();
+$applicantScoresData = isset($data['applicantScoresData']) ? $data['applicantScoresData'] : [];
+$applicantListData = isset($data['applicantListData']) ? $data['applicantListData'] : [];
 
-$querys = "SELECT * FROM academic GROUP BY status";
-$querys_run = mysqli_query($conn, $querys);
-
-if (mysqli_num_rows($querys_run) > 0) {
-
-   foreach ($querys_run as $rows)
-?><?php
-         }
-
-               ?>
-<?php
-require '../../../database/config.php';
-
-$querys1 = "SELECT * FROM semester GROUP BY sem_status";
-$querys_run1 = mysqli_query($conn, $querys1);
-
-if (mysqli_num_rows($querys_run1) > 0) {
-   foreach ($querys_run1 as $rows1)
-?><?php
-         }
-
-               ?>
-<?php
-require '../../../database/config.php';
-
-$querys11 = "SELECT * FROM academic WHERE status='1'";
-$querys_run11 = mysqli_query($conn, $querys11);
-
-if (mysqli_num_rows($querys_run11) > 0) {
-
-   foreach ($querys_run11 as $rows11)
-?><?php
-         }
-
-               ?>
-<?php
-require '../../../database/config.php';
-$querys111 = "SELECT * FROM semester WHERE sem_status='1'";
-$querys_run111 = mysqli_query($conn, $querys111);
-
-if (mysqli_num_rows($querys_run111) > 0) {
-   foreach ($querys_run111 as $rows111)
-?><?php
-         }
-
-               ?>
-<?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
-   <?php
-   $start = $rows11['academic_start'];
-   $end = $rows11['academic_end'];
-   $semester = $rows111['semester_name'];
-
-   $academic = "$start-$end";
-   $sql = "SELECT * from students  WHERE status_type='New Applicant' AND academic = '$academic' AND semester_id = '$semester'";
-   $result = $conn->query($sql);
-   $count = 0;
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-
-         $count = $count + 1;
-      }
-   }
-
-
-   $sql = "SELECT * from students  WHERE status_type='Form Done' AND academic = '$academic' AND semester_id = '$semester'";
-   $result = $conn->query($sql);
-   $count_new = 0;
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-
-         $count_new = $count_new + 1;
-      }
-   }
-
-   ?>
-   <?php
-   $start = $rows11['academic_start'];
-   $end = $rows11['academic_end'];
-   $semester = $rows111['semester_name'];
-
-   $academic = "$start-$end";
-   $sql = "SELECT * from students  WHERE status_type='Accept Applicant' AND academic = '$academic' AND semester_id = '$semester'";
-   $result = $conn->query($sql);
-   $count_accept = 0;
-   if ($result->num_rows > 0) {
-      while ($row = $result->fetch_assoc()) {
-
-         $count_accept = $count_accept + 1;
-      }
-   }
-
-   ?>
-<?php endif; ?>
-<?php if (in_array($rows['status'] and $rows1['sem_status'], array('0'))) : ?>
-   <?php
-   $count_new = 0;
-   $count = 0;
-   $count_accept = 0;
-   ?>
-<?php endif; ?>
-<!DOCTYPE html>
-<html lang="en">
+// print_r($applicantListData);
+?>
 
 <?php include '../inc/head.php';  ?>
 
 <body style="width: 100%;">
-   <?php include 'message.php'  ?>
    <?php
    // Load the database configuration file
    include_once '../../../database/dbConfig.php';
@@ -167,7 +68,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
    <?php } ?>
    <!-- start: Sidebar -->
    <?php include '../inc/navbar.php';  ?>
-   <script src="script.js"></script>
 
    <div class="sidebar-overlay"></div>
    <!-- end: Sidebar -->
@@ -175,7 +75,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
       <div class="modal-dialog" role="document">
          <div class="modal-content">
             <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel"> IMPORT STUDY LOAD </h5>
+               <h5 class="modal-title" id="exampleModalLabel"> IMPORT APPLICANT SCORE </h5>
             </div>
             <form action="importData.php" method="post" enctype="multipart/form-data">
                <div class="modal-body">
@@ -188,38 +88,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                   </div>
                </div>
             </form>
-            <script type="text/javascript">
-               function FetchCourse(id) {
-                  $('#year_id').html('');
-                  $('#section_id').html('<option>Select Section</option>');
-                  $.ajax({
-                     type: 'post',
-                     url: 'ajaxdata.php',
-                     data: {
-                        course_id: id
-                     },
-                     success: function(data) {
-                        $('#year_id').html(data);
-                     }
 
-                  })
-               }
-
-               function FetchYear(id) {
-                  $('#section_id').html('');
-                  $.ajax({
-                     type: 'post',
-                     url: 'ajaxdata.php',
-                     data: {
-                        year_id: id
-                     },
-                     success: function(data) {
-                        $('#section_id').html(data);
-                     }
-
-                  })
-               }
-            </script>
          </div>
       </div>
    </div>
@@ -234,9 +103,20 @@ if (mysqli_num_rows($querys_run111) > 0) {
                   <div class="input-group mb-3">
                      <div style="float: left;" class="col-12">
                         <label class="mb-1">
-                           <h6>Applicant ID</h6>
+                           <h6>Applicant</h6>
                         </label>
-                        <input required style="width: 90%;" class="form-control" type="text" name="applicant_id" value="">
+                        <select id="applicant_id" name="applicant_id" autocomplete="off" required>
+                           <option value="">Select Applicant...</option>
+                           <?php if (!empty($applicantListData)): ?>
+                              <?php foreach ($applicantListData as $applicant) : ?>
+                                 <option value="<?= $applicant['applicant_id']; ?>" data-age="<?= $applicant['age']; ?>"><?= $applicant['applicant_id']; ?> | 
+                                 <?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?>
+                              </option>
+                              <?php endforeach; ?>
+                           <?php else: ?>
+                              <option disabled>No Applicant Found</option>
+                           <?php endif; ?>
+                        </select>
                      </div>
                   </div>
                   <div class="input-group mb-3">
@@ -244,13 +124,13 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <label class="mb-1">
                            <h6>Comprehension Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="comp" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="comp" min="0" required>
                      </div>
                      <div style="float: left;" class="col-6">
                         <label class="mb-1">
                            <h6>Comprehension Category:</h6>
                         </label>
-                        <select style="width: 90%;" class="form-control" name="com_cate">
+                        <select id="com_cate" name="com_cate" required>
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -267,13 +147,13 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <label class="mb-1">
                            <h6>Reasoning Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="reas" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="reas" min="0" required>
                      </div>
                      <div style="float: left;" class="col-6">
                         <label class="mb-1">
                            <h6>Reasoning Category:</h6>
                         </label>
-                        <select style="width: 90%;" class="form-control" name="reas_cat">
+                        <select id="reas_cat" name="reas_cat" required>
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -291,25 +171,25 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <label class="mb-1">
                            <h6>Verbal Total Raw Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="verbal" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="verbal" min="0" required>
                      </div>
                      <div style="float: left;" class="col-6">
                         <label class="mb-1">
                            <h6>Verbal Stanine:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="verbal_stanine" value="">
+                        <input class="form-control" type="number" name="verbal_stanine" min="0" required>
                      </div>
                      <div style="float: left;" class="col-6">
                         <label class="mb-1">
                            <h6>Verbal Percentile:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="verbal_percen" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="verbal_percen" min="0" required>
                      </div>
                      <div style="float: left;" class="col-6">
                         <label class="mb-1">
                            <h6>Verbal Category:</h6>
                         </label>
-                        <select style="width: 90%;" class="form-control" name="verbal_cat">
+                        <select id="verbal_cat" name="verbal_cat" required>
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -327,13 +207,13 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <label class="mb-1">
                            <h6>Quantitative Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="quan" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="quan" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Quantitative Category:</h6>
                         </label>
-                        <select style="width: 90%;" class="form-control" name="quan_cat">
+                        <select style="width: 90%;" id="quan_cat" name="quan_cat" required>
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -348,13 +228,13 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <label class="mb-1">
                            <h6>Figural Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="figu" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="figu" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Figural Category:</h6>
                         </label>
-                        <select style="width: 90%;" class="form-control" name="figu_cat">
+                        <select name="figu_cat" id="figu_cat" required> 
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -372,25 +252,25 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <label class="mb-1">
                            <h6>Non-verbal Total Raw Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="nonver" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="nonver" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Non-verbal Stanine:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="nonver_stanine" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="nonver_stanine" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Non-verbal Percentile:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="nonver_percen" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="nonver_percen" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Non-verbal Category:</h6>
                         </label>
-                        <select style="width: 90%;" class="form-control" name="nonver_cat">
+                        <select id="nonver_cat" name="nonver_cat" required>
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -408,25 +288,25 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <label class="mb-1">
                            <h6>Total Raw Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="total_raw" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="total_raw" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Total Stanine:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="total_stanine" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="total_stanine" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Total Percentile:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="total_percen" value="">
+                        <input style="width: 90%;" class="form-control" type="number" name="total_percen" min="0" required>
                      </div>
                      <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                         <label class="mb-1">
                            <h6>Overall Category:</h6>
                         </label>
-                        <select style="width: 90%;" class="form-control" name="total_cat">
+                        <select id="total_cat" name="total_cat" required>
                            <option disabled>Select Catergory</option>
                            <option value="Superior">Superior</option>
                            <option value="Above Average">Above Average</option>
@@ -438,12 +318,12 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         </select>
                      </div>
                   </div>
-                  <div class="input-group mb-3">
-                     <div hidden style="float: left;" class="col-12">
+                  <div hidden class="input-group mb-3">
+                     <div style="float: left;" class="col-12">
                         <label class="mb-1">
                            <h6>Age:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="text" name="age" value="">
+                        <input style="width: 90%;" class="form-control" type="number" id="age" name="age" min="0">
                      </div>
                   </div>
                </div>
@@ -486,7 +366,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                         <button class="btn btn-sm float-end btn-warning addScore">Add Applicant Score</button>
                      </div>
                      <div class="card-body">
-                        <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
+                        <?php if (!empty($academic) && !empty($semester)) : ?>
                            <div class="table-responsive">
                               <table id="Mytableid">
                                  <thead style="text-align: center;">
@@ -503,68 +383,68 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                  </thead>
                                  <tbody>
                                     <?php
-                                    $start = $rows11['academic_start'];
-                                    $end = $rows11['academic_end'];
-                                    $semester = $rows111['semester_name'];
-
-                                    $academic = "$start-$end";
-
-                                    $query1 = "SELECT * FROM students s INNER JOIN admission_score a ON s.applicant_id=a.applicant_id where academic = '$academic' AND semester_id = '$semester' ORDER BY admission_id DESC";
-
-                                    $query_run1 = mysqli_query($conn, $query1);
-                                    $count = 0;
-
-                                    if (mysqli_num_rows($query_run1) > 0) {
-                                       while ($student = mysqli_fetch_array($query_run1)) {
-
+                                    if (!empty($applicantScoresData)) {
+                                          foreach ($applicantScoresData as $applicant) {
                                     ?>
                                           <tr style="text-align: center;">
-                                             <td><?= $student['applicant_id']; ?></td>
-                                             <td><?= $student['nonver_cat']; ?></td>
-                                             <td><?= $student['com_cate']; ?></td>
-                                             <td><?= $student['reas_cat']; ?></td>
-                                             <td><?= $student['verbal_cat']; ?></td>
-                                             <td><?= $student['quan_cat']; ?></td>
-                                             <td><?= $student['figu_cat']; ?></td>
-                                             <td><?= $student['total_cat']; ?></td>
+                                             <td><?= $applicant['applicant_id']; ?></td>
+                                             <td><?= $applicant['nonver_cat']; ?></td>
+                                             <td><?= $applicant['com_cate']; ?></td>
+                                             <td><?= $applicant['reas_cat']; ?></td>
+                                             <td><?= $applicant['verbal_cat']; ?></td>
+                                             <td><?= $applicant['quan_cat']; ?></td>
+                                             <td><?= $applicant['figu_cat']; ?></td>
+                                             <td><?= $applicant['total_cat']; ?></td>
                                           </tr>
                                     <?php
                                        }
-                                    } else {
                                     }
                                     ?>
                                  </tbody>
                               </table>
                            </div>
-                           <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-                           <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-                           <script>
-                              jQuery(document).ready(function() {
-                                 jQuery("#Mytableid").DataTable();
-                              });
-                           </script>
-                        <?php endif; ?>
-                        <?php if (in_array($rows['status'] and $rows1['sem_status'], array('0'))) : ?>
+                        <?php else: ?>
                            <h2>Pre-Enrollemnt is currently not Available</h2>
                         <?php endif; ?>
                      </div>
                   </div>
                </div>
             </div>
-
-            <!-- end: Graph -->
          </div>
          <!-- end: Content -->
       </div>
    </main>
    <!-- end: Main -->
    <!-- start: JS -->
-   <script src="../assets/js/jquery.min.js"></script>
-   <script src="../../assets/js/script.js"></script>
-   <!-- end: JS -->
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
-   <script src="../../assets/js/bootstrap.bundle.min.js"></script>
-   <!-- end: JS -->
+   <script src="../../assets/js/bootstrap.bundle.min.js"></script>|
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+   <script>
+      $(document).ready(function() {
+         ['#applicant_id', '#com_cate', '#reas_cat', '#verbal_cat', '#quan_cat', '#figu_cat', '#nonver_cat', '#total_cat'].forEach(function(id) {
+            new TomSelect(id, {
+                  allowEmptyOption: false,
+                  maxOptions: 10
+            });
+         });
+
+         $("#applicant_id").change(function() {
+            var selectedOption = $(this).find('option:selected');
+            var age = selectedOption.data('age');
+            $('#age').val(age);
+         });
+      });
+      jQuery(document).ready(function() {
+         jQuery("#Mytableid").DataTable({
+               "pageLength": 50,
+               "ordering": false,
+         });
+      });
+   </script>
+
    <script type="text/javascript">
       $(document).ready(function() {
 
@@ -606,39 +486,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
          });
       });
    </script>
-
-
-   <script>
-      function select_all() {
-         if (jQuery('#delete').prop("checked")) {
-            jQuery('input[type=checkbox]').each(function() {
-               jQuery('#' + this.id).prop('checked', true);
-            });
-         } else {
-            jQuery('input[type=checkbox]').each(function() {
-               jQuery('#' + this.id).prop('checked', false);
-            });
-         }
-      }
-
-      function delete_all() {
-         var check = confirm("Are you sure?");
-         if (check == true) {
-            jQuery.ajax({
-               url: 'delete.php',
-               type: 'post',
-               data: jQuery('#frm').serialize(),
-               success: function(result) {
-                  jQuery('input[type=checkbox]').each(function() {
-                     if (jQuery('#' + this.id).prop("checked")) {
-                        jQuery('#box' + this.id).remove();
-                     }
-                  });
-               }
-            });
-         }
-      }
-   </script>
+   <!-- end: JS -->
 </body>
 
 </html>

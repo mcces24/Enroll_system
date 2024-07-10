@@ -652,4 +652,36 @@ class GuidanceController extends Student {
 
         return $return;
     }
+
+    public function applicantScoresController() {
+        $getAcademicAndSemester = $this->getAcademicAndSemester();
+        $academic = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['academic'] : null;
+        $semester = !empty($getAcademicAndSemester) ? $getAcademicAndSemester['semester'] : null;
+
+        $params = [
+            'applicantScoresData' => [
+                'WHERE' => "academic = '$academic' AND semester_id = '$semester'",
+                'JOIN' => 'INNER JOIN admission_score ON students.applicant_id=admission_score.applicant_id',
+                'ORDER' => "admission_id ASC"
+            ],
+            'applicantList' =>  [
+                'FIELDS' => "students.applicant_id, students.fname, students.mname, students.lname, students.age",
+                'WHERE' => "academic = '$academic' AND semester_id = '$semester' AND admission_score.applicant_id IS NULL AND students.applicant_id != ''",
+                'JOIN' => 'LEFT JOIN admission_score ON students.applicant_id = admission_score.applicant_id',
+            ],
+        ];
+
+        $applicantScores = $this->getStudentList($params['applicantScoresData']);
+        $applicantScoresData = $applicantScores->fetchAll(PDO::FETCH_ASSOC);
+
+        $applicantList = $this->getStudentList($params['applicantList']);
+        $applicantListData = $applicantList->fetchAll(PDO::FETCH_ASSOC);
+
+        $return = array(
+            'applicantScoresData' => $applicantScoresData,
+            'applicantListData' => $applicantListData
+        );
+
+        return $return;
+    }
 }
