@@ -17,8 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $requestData = json_decode(file_get_contents('php://input'), true) ?? [];
     }
-    //print_r($requestData);
+    if (isset($_FILES['data']) && $_FILES['data']['error'] === UPLOAD_ERR_OK) {
+        $tempFile = $_FILES['data']['tmp_name'];
+        $requestData['data'] = $_FILES['data'];
+    } 
+    // print_r($requestData);
     getPostData($requestData);
+} else {
+    echo 'Invalid request!!!!';
 }
 
 function getPostData($POST)
@@ -80,6 +86,10 @@ function getPostData($POST)
         case 'addApplicantScores':
             $data = $POST['data'] ?? null;
             addApplicantScores($data);
+            break;
+        case 'importCSVScore':
+            $data = $POST['data'] ?? null;
+            importCSVScore($data);
             break;
         default:
             break;
@@ -361,6 +371,12 @@ function sendAdmission($data)
 
 function addApplicantScores($data) {
     $response = addApplicantScoresFunction($data);
+    header('Content-Type: application/json');
+    echo json_encode($response);
+}
+
+function importCSVScore($data) {
+    $response = importCSVScoreFunction($data);
     header('Content-Type: application/json');
     echo json_encode($response);
 }

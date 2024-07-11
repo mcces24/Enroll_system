@@ -6,7 +6,11 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
 
 // print_r($applicantListData);
 ?>
-
+<style>
+   .swal-modal {
+    width: 650px; /* Adjust the width as needed */
+  }
+</style>
 <?php include '../inc/head.php';  ?>
 
 <body style="width: 100%;">
@@ -76,27 +80,29 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
          <div class="modal-content">
             <div class="modal-header">
                <h5 class="modal-title" id="exampleModalLabel"> IMPORT APPLICANT SCORE </h5>
+               <button class="btn btn-success btn-sm" id="downloadCSVTemplate">Download Template</button>
             </div>
-            <form action="importData.php" method="post" enctype="multipart/form-data">
+            <form id="importCSVScore">
                <div class="modal-body">
                   <div class="form-group">
                      <label> CSV Files | Admission Test Score </label>
-                     <input class="form-control" type="file" name="file" />
+                     <input class="form-control" type="file" name="CSVScore" accept=".csv" />
                   </div>
                   <div class="modal-footer">
-                     <input type="submit" class="btn btn-sm btn-primary" name="importSubmit" value="IMPORT/UPDATE">
+                     <button class="btn btn-sm btn-success importCSVScoreBtn">
+                        IMPORT SCORE
+                     </button>
                   </div>
                </div>
             </form>
-
          </div>
       </div>
    </div>
    <div class="modal fade" id="addScoremodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-md" role="document">
          <div class="modal-content">
             <div class="modal-header">
-               <h5 class="modal-title" id="exampleModalLabel">Admission Test Score </h5>
+               <h5 class="modal-title" id="exampleModalLabel">Add Applicant Admission Score</h5>
             </div>
             <form id="addScoreForm">
                <div class="modal-body">
@@ -120,216 +126,17 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                      </div>
                   </div>
                   <div class="input-group mb-3">
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Comprehension Score:</h6>
+                     <div style="float: left;" class="col-12 col-md-12 col-xl-12">
+                        <label class="mb-1" for="admission_score">
+                           <h6>Admission Score:</h6>
                         </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="comp" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Comprehension Category:</h6>
-                        </label>
-                        <select id="com_cate" name="com_cate" required>
-                           <option disabled>Select Catergory</option>
-                           <option value="Superior">Superior</option>
-                           <option value="Above Average">Above Average</option>
-                           <option value="High Average">High Average</option>
-                           <option value="Average">Average</option>
-                           <option value="Low Average">Low Average</option>
-                           <option value="Below Average">Below Average</option>
-                           <option value="Low">Low</option>
-                        </select>
-                     </div>
-                  </div>
-                  <div class="input-group mb-3">
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Reasoning Score:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="reas" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Reasoning Category:</h6>
-                        </label>
-                        <select id="reas_cat" name="reas_cat" required>
-                           <option disabled>Select Catergory</option>
-                           <option value="Superior">Superior</option>
-                           <option value="Above Average">Above Average</option>
-                           <option value="High Average">High Average</option>
-                           <option value="Average">Average</option>
-                           <option value="Low Average">Low Average</option>
-                           <option value="Below Average">Below Average</option>
-                           <option value="Low">Low</option>
-                        </select>
-                     </div>
-                  </div>
-
-                  <div class="input-group mb-3">
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Verbal Total Raw Score:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="verbal" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Verbal Stanine:</h6>
-                        </label>
-                        <input class="form-control" type="number" name="verbal_stanine" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Verbal Percentile:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="verbal_percen" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-6">
-                        <label class="mb-1">
-                           <h6>Verbal Category:</h6>
-                        </label>
-                        <select id="verbal_cat" name="verbal_cat" required>
-                           <option disabled>Select Catergory</option>
-                           <option value="Superior">Superior</option>
-                           <option value="Above Average">Above Average</option>
-                           <option value="High Average">High Average</option>
-                           <option value="Average">Average</option>
-                           <option value="Low Average">Low Average</option>
-                           <option value="Below Average">Below Average</option>
-                           <option value="Low">Low</option>
-                        </select>
-                     </div>
-                  </div>
-
-                  <div class="input-group mb-3">
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Quantitative Score:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="quan" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Quantitative Category:</h6>
-                        </label>
-                        <select style="width: 90%;" id="quan_cat" name="quan_cat" required>
-                           <option disabled>Select Catergory</option>
-                           <option value="Superior">Superior</option>
-                           <option value="Above Average">Above Average</option>
-                           <option value="High Average">High Average</option>
-                           <option value="Average">Average</option>
-                           <option value="Low Average">Low Average</option>
-                           <option value="Below Average">Below Average</option>
-                           <option value="Low">Low</option>
-                        </select>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Figural Score:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="figu" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Figural Category:</h6>
-                        </label>
-                        <select name="figu_cat" id="figu_cat" required>
-                           <option disabled>Select Catergory</option>
-                           <option value="Superior">Superior</option>
-                           <option value="Above Average">Above Average</option>
-                           <option value="High Average">High Average</option>
-                           <option value="Average">Average</option>
-                           <option value="Low Average">Low Average</option>
-                           <option value="Below Average">Below Average</option>
-                           <option value="Low">Low</option>
-                        </select>
-                     </div>
-                  </div>
-
-                  <div class="input-group mb-3">
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Non-verbal Total Raw Score:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="nonver" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Non-verbal Stanine:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="nonver_stanine" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Non-verbal Percentile:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="nonver_percen" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Non-verbal Category:</h6>
-                        </label>
-                        <select id="nonver_cat" name="nonver_cat" required>
-                           <option disabled>Select Catergory</option>
-                           <option value="Superior">Superior</option>
-                           <option value="Above Average">Above Average</option>
-                           <option value="High Average">High Average</option>
-                           <option value="Average">Average</option>
-                           <option value="Low Average">Low Average</option>
-                           <option value="Below Average">Below Average</option>
-                           <option value="Low">Low</option>
-                        </select>
-                     </div>
-                  </div>
-
-                  <div class="input-group mb-3">
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Total Raw Score:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="total_raw" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Total Stanine:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="total_stanine" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Total Percentile:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" name="total_percen" min="0" required>
-                     </div>
-                     <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                        <label class="mb-1">
-                           <h6>Overall Category:</h6>
-                        </label>
-                        <select id="total_cat" name="total_cat" required>
-                           <option disabled>Select Catergory</option>
-                           <option value="Superior">Superior</option>
-                           <option value="Above Average">Above Average</option>
-                           <option value="High Average">High Average</option>
-                           <option value="Average">Average</option>
-                           <option value="Low Average">Low Average</option>
-                           <option value="Below Average">Below Average</option>
-                           <option value="Low">Low</option>
-                        </select>
-                     </div>
-                  </div>
-                  <div hidden class="input-group mb-3">
-                     <div style="float: left;" class="col-12">
-                        <label class="mb-1">
-                           <h6>Age:</h6>
-                        </label>
-                        <input style="width: 90%;" class="form-control" type="number" id="age" name="age" min="0">
+                        <input class="form-control" type="number" name="admission_score" min="0" max="100" required>
                      </div>
                   </div>
                </div>
                <div class="modal-footer">
                   <button class="btn btn-sm btn-success addScoreBtn">
-                     SAVE SCORE
+                     Add Score
                   </button>
                </div>
             </form>
@@ -361,7 +168,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                            <form action="send_mail_all.php" method="post">
                               <input type="hidden" name="semester" value="<?php echo $semester ?>">
                               <input type="hidden" name="academic" value="<?php echo $academic ?>">
-                              <button name="push_notification" type="submit" style="margin-left: 20px;" class="btn btn-sm btn-primary">Send Score to Applicant's</button>
+                              <!-- <button name="push_notification" type="submit" style="margin-left: 20px;" class="btn btn-sm btn-primary">Send Score to Applicant's</button> -->
                            </form>
                         </div>
                         <button class="btn btn-sm float-end btn-success emportScore" style="margin-left: 20px;">Import Scores</button>
@@ -374,13 +181,12 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                                  <thead style="text-align: center;">
                                     <tr>
                                        <th width="10%">App Number</th>
-                                       <th width="15%">Non-verbal</th>
-                                       <th width="15%">Comprehension</th>
-                                       <th width="10%">Reasoning</th>
-                                       <th width="10%">Verbal</th>
-                                       <th width="15%">Quantitative</th>
-                                       <th width="15%">Figural</th>
-                                       <th width="15%">Overall</th>
+                                       <th width="10%">Name</th>
+                                       <th width="10%">Gender</th>
+                                       <th width="10%">Chronological Age</th>
+                                       <th width="15%">Admission Score</th>
+                                       <th width="15%">Description</th>
+                                       <!-- <th width="15%">Action</th> -->
                                     </tr>
                                  </thead>
                                  <tbody>
@@ -390,13 +196,48 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                                     ?>
                                           <tr style="text-align: center;">
                                              <td><?= $applicant['applicant_id']; ?></td>
-                                             <td><?= $applicant['nonver_cat']; ?></td>
-                                             <td><?= $applicant['com_cate']; ?></td>
-                                             <td><?= $applicant['reas_cat']; ?></td>
-                                             <td><?= $applicant['verbal_cat']; ?></td>
-                                             <td><?= $applicant['quan_cat']; ?></td>
-                                             <td><?= $applicant['figu_cat']; ?></td>
-                                             <td><?= $applicant['total_cat']; ?></td>
+                                             <td style="text-align:left"><?= $applicant['fname']; ?> <?= $applicant['mname']; ?> <?= $applicant['lname']; ?></td>
+                                             <td><?= $applicant['gender']; ?></td>
+                                             <td>
+                                                <?php
+                                                $birthdate = $applicant['date_of_birth'];
+                                                $examDate = $applicant['sched_date'];
+                                                // Create DateTime sched_date
+                                                $birthdateObj = new DateTime($birthdate);
+                                                $currentDateObj = new DateTime($examDate); // This will use the current date and time
+
+                                                // Calculate the difference
+                                                $interval = $birthdateObj->diff($currentDateObj);
+
+                                                // Output the result
+                                                if ($interval->m > 1) {
+                                                   echo $interval->y . " Years Old " . $interval->m . " Months";
+                                                } else {
+                                                   echo $interval->y . " Years Old " . $interval->m . " Month";
+                                                }
+                                                ?>
+                                             </td>
+                                             <td><?= $applicant['admission_score']; ?></td>
+                                             <td>
+                                                <?php
+                                                if ($applicant['admission_score'] >= 96) {
+                                                   echo "<span class='badge badge-pill badge-primary'>Superior</span>";
+                                                } elseif ($applicant['admission_score'] >= 77) {
+                                                   echo "<span class='badge badge-pill badge-primary'>Above Average</span>";
+                                                } elseif ($applicant['admission_score'] >= 60) {
+                                                   echo "<span class='badge badge-pill badge-success'>High Average</span>";
+                                                } elseif ($applicant['admission_score'] >= 40) {
+                                                   echo "<span class='badge badge-pill badge-success'>Average</span>";
+                                                } elseif ($applicant['admission_score'] >= 23) {
+                                                   echo "<span class='badge badge-pill badge-warning'>Low Average</span>";
+                                                } elseif ($applicant['admission_score'] >= 5) {
+                                                   echo "<span class='badge badge-pill badge-danger'>Below Average</span>";
+                                                } else {
+                                                   echo "<span class='badge badge-pill badge-danger'>Low</span>";
+                                                }
+                                                ?>
+                                             </td>
+                                             <!-- <td>action</td> -->
                                           </tr>
                                     <?php
                                        }
@@ -448,6 +289,7 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                   data: formDataObject
                },
                beforeSend: function() {
+                  $('#addScoremodal').modal('hide');
                   // Show the loading spinner
                   $('.addScoreBtn').prop('disabled', true);
                   $('.addScoreBtn').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Adding...');
@@ -456,20 +298,125 @@ $applicantListData = isset($data['applicantListData']) ? $data['applicantListDat
                   // Handle the response from the server
                   response = JSON.parse(response);
                   console.log(response);
-                  swal({
-                     title: response.message,
-                     icon: response.type,
-                     text: response.text,
-                     button: "Close",
-                  }).then((value) => {
-                     location.reload();
-                  });
+                  if (response.status == 'success') {
+                     swal({
+                        title: response.message,
+                        icon: response.type,
+                        text: response.text,
+                        button: "Okay",
+                     }).then((value) => {
+                        location.reload();
+                     });
+                  } else {
+                     swal({
+                        title: response.message,
+                        icon: response.type,
+                        text: response.text,
+                        button: "Okay",
+                     }).then((value) => {
+                        $('.addScoreBtn').prop('disabled', false);
+                        $('.addScoreBtn').html('SAVE SCORE');
+                     });
+                  }
                },
                error: function(jqXHR, textStatus, errorThrown) {
                   // Handle errors here
                   console.log('Error: ' + textStatus, errorThrown);
                }
             });
+         });
+
+         $('#importCSVScore').on('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            // Get form data;
+
+            var fileInput = $('input[name=CSVScore]')[0];
+            var files = fileInput.files[0];
+
+            // Check if a file is selected
+            if (files === undefined) {
+               swal({
+                  title: "Please select a file to import",
+                  icon: "warning",
+                  text: "Please select a file to import",
+                  button: "Okay",
+               });
+               return;
+            }
+
+            // Check if the selected file is a CSV file
+            if (files.type !== 'text/csv' && !files.name.endsWith('.csv')) {
+               swal({
+                  title: "Invalid file type",
+                  icon: "error",
+                  text: "Please select a CSV file to import",
+                  button: "Okay",
+               });
+               return;
+            }
+
+            var formData = new FormData();
+            var fileInput = $('input[name=CSVScore]')[0].files[0];
+            formData.append('data', fileInput);
+            formData.append('type', "importCSVScore");
+            $.ajax({
+               url: BASE_PATH + '/Master/POST/POST.php',
+               type: 'POST',
+               data: formData,
+               contentType: false,
+               processData: false,
+               beforeSend: function() {
+                  // Show the loading spinner
+                  $('.importCSVScoreBtn').prop('disabled', true);
+                  $('.importCSVScoreBtn').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Importing...');
+               },
+               success: function(response) {
+                  // Handle the response from the server
+                  response = JSON.parse(response);
+                  console.log(response);
+                  if (response.status == 'success') {
+                     if (typeof response.allDataArray !== 'undefined') {
+                        var allDataArray = response.allDataArray;
+                        localStorage.setItem('allDataArray', JSON.stringify(allDataArray));
+                     }
+                     swal({
+                        title: response.message,
+                        icon: response.type,
+                        text: response.text,
+                        buttons: {
+                           cancel: "Okay",
+                           confirm: "See Logs",
+                        },
+                     }).then((willSeeLogs) => {
+                        if (willSeeLogs) {
+                           window.open('./addmission-score-logs.php', '_blank');
+                           location.reload();
+                        } else {
+                           // Reload current page
+                           location.reload();
+                        }
+                     });
+                  } else {
+                     swal({
+                        title: response.message,
+                        icon: response.type,
+                        text: response.text,
+                        button: "Okay",
+                     }).then((value) => {
+                        $('.importCSVScoreBtn').prop('disabled', false);
+                        $('.importCSVScoreBtn').html('IMPORT SCORE');
+                     });
+                  }
+               },
+               error: function(jqXHR, textStatus, errorThrown) {
+                  // Handle errors here
+                  console.log('Error: ' + textStatus, errorThrown);
+               }
+            });
+         });
+
+         $('#downloadCSVTemplate').on('click', function() {
+            window.location.href = BASE_PATH + '/step/guidance/applicant-scores/AdmissionTestScoreTemplate.php';
          });
 
          //Tom Select

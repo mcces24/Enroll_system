@@ -48,9 +48,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
    <link rel="dns-prefetch" href="//s.w.org">
    <link rel="alternate" type="application/rss+xml" title="Madridejos Community College &raquo; Feed" href="./../feed/index.html">
    <link rel="alternate" type="application/rss+xml" title="Madridejos Community College &raquo; Comments Feed" href="./../comments/feed/index.html">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-   <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+   <!-- Pickadate CSS -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/default.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/themes/default.date.css">
+   <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   <!-- Pickadate JS -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/picker.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/pickadate.js/3.6.4/picker.date.js"></script>
 
    <script>
       window._wpemojiSettings = {
@@ -115,6 +120,9 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
    </style>
    <link rel="stylesheet" id="astra-theme-css-css" href="./../wp-content/themes/astra/assets/css/minified/main.min.css?ver=3.9.2" media="all">
    <style id="astra-theme-css-inline-css">
+      .picker__select--year, .picker__select--month {
+         padding: 2px !important;
+      }
       .ast-no-sidebar .entry-content .alignfull {
          margin-left: calc(-50vw + 50%);
          margin-right: calc(-50vw + 50%);
@@ -4102,8 +4110,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                <input type="hidden" name="client_referer" value="">
                                                                <input type="hidden" name="happyforms_form_id" value="710">
                                                                <input type="hidden" name="happyforms_step" value="0">
-                                                               <input type="hidden" value="<?= $new_user_id?>" name="new_user_id">
-                                                               <input type="hidden" value="<?= $academic?>" name="academic">
+                                                               <input type="hidden" value="<?= $new_user_id ?>" name="new_user_id">
+                                                               <input type="hidden" value="<?= $academic ?>" name="academic">
                                                                <div class="happyforms-flex">
                                                                   <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                   <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -4279,7 +4287,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                         <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                         <div class="happyforms-part__el">
                                                                            <div class="happyforms-input">
-                                                                              <input id="happyforms-710_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                               <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                            </div>
                                                                         </div>
                                                                      </div>
@@ -4684,8 +4692,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                             <input type="hidden" name="client_referer" value="">
                                                             <input type="hidden" name="happyforms_form_id" value="710">
                                                             <input type="hidden" name="happyforms_step" value="0">
-                                                            <input type="hidden" value="<?= $new_user_id?>" name="new_user_id">
-                                                            <input type="hidden" value="<?= $academic?>" name="academic">
+                                                            <input type="hidden" value="<?= $new_user_id ?>" name="new_user_id">
+                                                            <input type="hidden" value="<?= $academic ?>" name="academic">
                                                             <div class="happyforms-flex">
                                                                <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -4845,7 +4853,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-710_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                         <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5253,8 +5261,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                             <input type="hidden" name="client_referer" value="">
                                                             <input type="hidden" name="happyforms_form_id" value="768">
                                                             <input type="hidden" name="happyforms_step" value="0">
-                                                            <input type="hidden" value="<?= $new_user_id?>" name="new_user_id">
-                                                            <input type="hidden" value="<?= $academic?>" name="academic">
+                                                            <input type="hidden" value="<?= $new_user_id ?>" name="new_user_id">
+                                                            <input type="hidden" value="<?= $academic ?>" name="academic">
                                                             <div class="happyforms-flex">
                                                                <input type="text" name="768-single_line_text" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -5496,7 +5504,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                         <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5892,8 +5900,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <input type="hidden" name="client_referer" value="">
                                                                   <input type="hidden" name="happyforms_form_id" value="768">
                                                                   <input type="hidden" name="happyforms_step" value="0">
-                                                                  <input type="hidden" value="<?= $new_user_id?>" name="new_user_id">
-                                                                  <input type="hidden" value="<?= $academic?>" name="academic">
+                                                                  <input type="hidden" value="<?= $new_user_id ?>" name="new_user_id">
+                                                                  <input type="hidden" value="<?= $academic ?>" name="academic">
                                                                   <div class="happyforms-flex">
                                                                      <input type="text" name="768-single_line_text" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                                      <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -6114,7 +6122,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                            <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                            <div class="happyforms-part__el">
                                                                               <div class="happyforms-input">
-                                                                                 <input id="happyforms-768_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                               <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                               </div>
                                                                            </div>
                                                                         </div>
@@ -6472,8 +6480,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                          <input type="hidden" name="client_referer" value="">
                                                          <input type="hidden" name="happyforms_form_id" value="710">
                                                          <input type="hidden" name="happyforms_step" value="0">
-                                                         <input type="hidden" value="<?= $new_user_id?>" name="new_user_id">
-                                                         <input type="hidden" value="<?= $academic?>" name="academic">
+                                                         <input type="hidden" value="<?= $new_user_id ?>" name="new_user_id">
+                                                         <input type="hidden" value="<?= $academic ?>" name="academic">
                                                          <div class="happyforms-flex">
                                                             <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -6649,7 +6657,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-710_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                      <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7054,8 +7062,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                          <input type="hidden" name="client_referer" value="">
                                                          <input type="hidden" name="happyforms_form_id" value="710">
                                                          <input type="hidden" name="happyforms_step" value="0">
-                                                         <input type="hidden" value="<?= $new_user_id?>" name="new_user_id">
-                                                         <input type="hidden" value="<?= $academic?>" name="academic">
+                                                         <input type="hidden" value="<?= $new_user_id ?>" name="new_user_id">
+                                                         <input type="hidden" value="<?= $academic ?>" name="academic">
                                                          <div class="happyforms-flex">
                                                             <input type="text" name="710-number" style="position:absolute;left:-5000px;" tabindex="-1" autocomplete="off"> <span class="screen-reader-text">Leave this field blank</span>
                                                             <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-full happyforms-part--label-show" id="happyforms-710_single_line_text_14-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_14" data-happyforms-required="">
@@ -7215,7 +7223,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-710_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                      <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7866,7 +7874,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-768_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                      <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -8490,7 +8498,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                             <span class="happyforms-part__description">ex: October 20,1992</span>
                                                             <div class="happyforms-part__el">
                                                                <div class="happyforms-input">
-                                                                  <input id="happyforms-768_single_line_text_8" type="text" name="date_of_birth" value="" placeholder="Date of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                  <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
                                                                </div>
                                                             </div>
                                                          </div>
@@ -8850,8 +8858,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                      </div>
                      </section>
             </div>
-            <?php else : ?>
-               <h5 class="fs-2x fw-bolder mb-0" style="text-align: center;">Pre-enrollment is currently NOT AVAILABLE.</h5>
+         <?php else : ?>
+            <h5 class="fs-2x fw-bolder mb-0" style="text-align: center;">Pre-enrollment is currently NOT AVAILABLE.</h5>
          <?php endif; ?>
          </div>
          <!-- .entry-content .clear -->
@@ -9252,6 +9260,20 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
       }, !1);
    </script>
    <script src="../assets/sweetalert.js"></script>
+   <script>
+        $(document).ready(function() {
+            // Ensure Pickadate.js is loaded and available
+            if (typeof $.fn.pickadate !== 'undefined') {
+                $('#datepicker').pickadate({
+                    format: 'yyyy-mm-dd', // Date format
+                    selectMonths: true, // Creates a dropdown to control month
+                    selectYears: 100 // Creates a dropdown of 100 years to control year
+                });
+            } else {
+                console.error('Pickadate.js is not loaded or there is a conflict.');
+            }
+        });
+    </script>
    <?php
    if (isset($_SESSION['statuss']) && $_SESSION['statuss'] != '') {
    ?>
@@ -9315,6 +9337,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
 
          })
       }
+
       function preEnrol(form) {
          $('.form-btn ').prop('disabled', true);
          $('.form-btn ').text('Sending request...');
@@ -9332,18 +9355,18 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
 
          if (data) {
             $.ajax({
-                  type: 'POST',
-                  url: '../Master/POST/POST.php', // Replace with your PHP script handling the form submission
-                  data: {
-                     type: 'preEnroll',
-                     data: data
-                  },
-                  success: function(response) {
-                     // Handle success response
-                     console.log('Form submitted successfully');
-                     console.log(response);
-                     if (response.isPreEnroll) {
-                        swal({
+               type: 'POST',
+               url: '../Master/POST/POST.php', // Replace with your PHP script handling the form submission
+               data: {
+                  type: 'preEnroll',
+                  data: data
+               },
+               success: function(response) {
+                  // Handle success response
+                  console.log('Form submitted successfully');
+                  console.log(response);
+                  if (response.isPreEnroll) {
+                     swal({
                            title: response.message,
                            text: "Visit MCC FB Page, for more info and guidelines",
                            icon: response.type,
@@ -9351,17 +9374,17 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                         })
                         .then((value) => {
                            swal({
-                              title: "Thank you for your request!",
-                              text: "MCC receive and procces your request.",
-                              icon: "success",
-                              button: "Done!",
-                           })
-                           .then((value) => {
-                              window.location.href = '../';
-                           });
+                                 title: "Thank you for your request!",
+                                 text: "MCC receive and procces your request.",
+                                 icon: "success",
+                                 button: "Done!",
+                              })
+                              .then((value) => {
+                                 window.location.href = '../';
+                              });
                         });
-                     } else {
-                        swal({
+                  } else {
+                     swal({
                            title: response.message,
                            text: "Visit MCC FB Page, for more info and guidelines",
                            icon: response.type,
@@ -9371,21 +9394,22 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                            $('.form-btn ').prop('disabled', false);
                            $('.form-btn ').text('Submit');
                         });
-                     }
-                  },
-                  error: function(error) {
-                     $('.form-btn ').prop('disabled', false);
-                     $('.form-btn ').text('Submit');
-                     // Handle error
-                     console.error('Error submitting form:', error);
-                     // Optionally, you can display an error message to the user
-                     swal({
-                        title: "Internal Error.",
-                        text: 'Error submitting form:', error,
-                        icon: 'error',
-                        button: "Okay",
-                     });
                   }
+               },
+               error: function(error) {
+                  $('.form-btn ').prop('disabled', false);
+                  $('.form-btn ').text('Submit');
+                  // Handle error
+                  console.error('Error submitting form:', error);
+                  // Optionally, you can display an error message to the user
+                  swal({
+                     title: "Internal Error.",
+                     text: 'Error submitting form:',
+                     error,
+                     icon: 'error',
+                     button: "Okay",
+                  });
+               }
             });
          }
       }
