@@ -19,11 +19,12 @@ if (isGuidanceLogin()) {
     <!-- //Meta tag Keywords -->
 
     <link href="//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!--/Style-CSS -->
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
     <!--//Style-CSS -->
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
 
 </head>
@@ -68,7 +69,7 @@ if (isGuidanceLogin()) {
                             <input type="password" class="password" name="password" placeholder="Enter Your Password" style="margin-bottom: 2px;" required>
                             <p style="float: right ;"><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
                             <p style="float: left;"><a href="../../" style="margin-bottom: 15px; display: block; text-align: right;">Back</a></p>
-                            <button name="submit" name="submit" class="btn" type="submit">Login</button>
+                            <button name="submit" name="submit" class="btn btn-danger" type="submit">Login</button>
                         </form>
 
                     </div>
@@ -105,7 +106,8 @@ if (isGuidanceLogin()) {
                     beforeSend: function() {
                         // Show the loading spinner
                         $('.btn').prop('disabled', true);
-                        $('.btn').text('Loading...');
+                        
+                        $('.btn').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loging in...');
                     },
                     success: function(response) {
                         // Handle the response from the server

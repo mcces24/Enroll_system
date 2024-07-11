@@ -135,6 +135,13 @@ function addApplicantScoresFunction($data) {
     return $response;
 }
 
+function importCSVScoreFunction($data) {
+    global $guidanceController; // Use global to access the variable declared outside the function
+    $response = $guidanceController->importCSVScoreController($data);
+    // Process $isLogin or return whatever logic you need
+    return $response;
+}
+
 
 
 

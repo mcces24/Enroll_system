@@ -232,16 +232,16 @@ class GuidanceController extends Student {
             ],
             'totalFailedToPass' => [
                 "JOIN" => "INNER JOIN admission_score a ON students.applicant_id = a.applicant_id",
-                'WHERE' => "academic = '$academic' AND semester_id = '$semester' AND total_cat = 'Low Average' ",
+                'WHERE' => "academic = '$academic' AND semester_id = '$semester' AND admission_score < 40",
             ],
             'totalPassButNotEnroll' => [
                 'WHERE' => "academic = '$academic' AND semester_id = '$semester' AND status_type = 'Applicant' ",
             ],
             'barGraph' => [
                 'WHERE' => "academic = '$academic' AND semester_id = '$semester' AND (status_type = 'Enroll New Students' OR status_type = 'Enroll Old Students') ",
-                'FIELDS' => "total_cat, count(*) as number",
+                'FIELDS' => "admission_score, count(*) as number",
                 'JOIN' => "INNER JOIN admission_score a ON students.applicant_id = a.applicant_id LEFT JOIN course c ON students.course_id=c.course_id LEFT JOIN year_lvl y ON students.year_id=y.year_id",
-                'GROUP BY' => "total_cat"
+                'GROUP BY' => "admission_score"
             ]
         ];
 
@@ -661,7 +661,7 @@ class GuidanceController extends Student {
         $params = [
             'applicantScoresData' => [
                 'WHERE' => "academic = '$academic' AND semester_id = '$semester'",
-                'JOIN' => 'INNER JOIN admission_score ON students.applicant_id=admission_score.applicant_id',
+                'JOIN' => 'INNER JOIN admission_score ON students.applicant_id=admission_score.applicant_id INNER JOIN admission_list ON students.applicant_id=admission_list.applicant_id',
                 'ORDER' => "admission_id ASC"
             ],
             'applicantList' =>  [
@@ -725,12 +725,165 @@ class GuidanceController extends Student {
         } else {
             $return = array(
                 'status' => 'failed',
-                'message' => 'Feiled to add score.',
+                'message' => 'Failed to add score.',
                 'type' => 'danger',
                 'text' => "For " . $applicant_id
             );
         }
         
+        return json_encode($return);
+    }
+
+    public function importCSVScoreController($datas) {
+        global $db;
+        //required file
+        $csvMimes = array(
+            'text/x-comma-separated-values',
+            'text/comma-separated-values',
+            'application/octet-stream',
+            'application/vnd.ms-excel',
+            'application/x-csv',
+            'text/x-csv', 'text/csv',
+            'application/csv',
+            'application/excel',
+            'application/vnd.msexcel',
+            'text/plain'
+        );
+
+        if (!empty($datas) && in_array($datas['type'], $csvMimes)) {
+
+            $requiredCSVDAta = array(
+                'Applicant ID',
+                'Admission Score',
+            );
+
+            $csvFile = fopen($datas['tmp_name'], 'r');
+
+            $getCSVData = fgetcsv($csvFile);
+
+            foreach ($requiredCSVDAta as $key => $value) {
+                if ($getCSVData[$key] != $value) {
+                    $return = array(
+                        'status' => 'failed',
+                        'message' => 'Invalid CSV file. Please upload a valid CSV file.',
+                        'type' => 'error',
+                    );
+                    return json_encode($return);
+                }
+            }
+
+            $insertedData = 0;
+            $failedToInsertData = 0;
+            $updatedData = 0;
+            $failedToUpdatedData = 0;
+            $invalidData = 0;
+            $dataCount = 0;
+
+            $insertedDataArray = [];
+            $failedToInsertDataArray = [];
+            $updatedDataArray = [];
+            $failedToUpdatedDataArray = [];
+            $invalidDataArray = [];
+            
+
+            while (($line = fgetcsv($csvFile)) !== FALSE) {
+                $dataCount++;
+
+                $applicant_id = $line[0];
+                $admissionScore  = $line[1];
+
+                $query = [
+                    'checkApplicant' => [
+                        'WHERE' => "applicant_id = '$applicant_id'",
+                    ],
+                    'studentUpdateStatus' => [
+                        'SET' => "status_type = 'Accept Applicant'",
+                        'WHERE' => "applicant_id = '$applicant_id'",
+                    ]
+                ];
+
+                $studendModel = new Student($db);
+                $haveStudentData = $studendModel->getStudentList($query['checkApplicant']);
+                $haveStudent = $haveStudentData->fetchAll(PDO::FETCH_ASSOC);
+
+                if (empty($haveStudent)) {
+                    $invalidData++;
+                    $invalidDataArray[] = $applicant_id;
+                    continue;
+                }
+                
+                $admissionScoreModel = new AdmissionScore($db);
+                $haveAdmissionScoreData = $admissionScoreModel->read($query['checkApplicant']);
+                $haveAdmissionScore = $haveAdmissionScoreData->fetchAll(PDO::FETCH_ASSOC);
+
+                if (empty($haveAdmissionScore)) {
+                    $studendModel = new Student($db);
+                    $update = $studendModel->update($query['studentUpdateStatus']);
+                    if ($update) {
+                        $query = [
+                            'FIELDS' => "applicant_id, admission_score",
+                            'VALUES' => "'$applicant_id', '$admissionScore'"
+                        ];
+                        $insertScore = $admissionScoreModel->create($query);
+                        if ($insertScore) {
+                            $insertedData++;
+                            $insertedDataArray[] = $applicant_id;
+                        } else {
+                            $failedToInsertData++;
+                            $failedToInsertDataArray[] = $applicant_id;
+                        }
+                    }
+                } else {
+                    $query = [
+                        'SET' => "admission_score = '$admissionScore'",
+                        'WHERE' => "applicant_id = '$applicant_id'",
+                    ];
+                    $updateScore = $admissionScoreModel->update($query);
+                    if ($updateScore) {
+                        $updatedData++;
+                        $updatedDataArray[] = $applicant_id;
+                    } else {
+                        $failedToUpdatedData++;
+                        $failedToUpdatedDataArray[] = $applicant_id;
+                    }
+                }
+            }
+            if ($dataCount > 0) {
+                $allDataArray = array(
+                    'insertedData' => $insertedDataArray,
+                    'failedToInsertData' => $failedToInsertDataArray,
+                    'updatedData' => $updatedDataArray,
+                    'failedToUpdatedData' => $failedToUpdatedDataArray,
+                    'invalidData' => $invalidDataArray,
+                );
+
+                $allDataArray = json_encode($allDataArray);
+                
+                $return = array(
+                    'allDataArray' => $allDataArray,
+                    'status' => 'success',
+                    'message' => 'Admission score data imported successfully.',
+                    'text' => "
+                        Inserted: $insertedData | Failed To Insert: $failedToInsertData | Updated: $updatedData | Failed To Update: $failedToUpdatedData | Invalid Data: $invalidData
+                    ",
+                    'type' => 'success',
+                );
+            } else {
+                $return = array(
+                    'status' => 'failed',
+                    'message' => 'No data found in CSV file.',
+                    'type' => 'error',
+                );
+            }
+
+        } else {
+            $return = array(
+                'status' => 'failed',
+                'message' => 'Invalid File type. Please upload a valid CSV file.',
+                'type' => 'error',
+            );
+        }
+
         return json_encode($return);
     }
 }
