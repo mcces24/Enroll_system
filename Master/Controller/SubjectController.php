@@ -1,6 +1,14 @@
 <?php
 class SubjectController extends Subject {
+
     public function getSubject($params = array()) {
+        global $db;
+        $academicController = New AcademicController($db);
+        $academicYear = $academicController->getActiveAcademicYear();
+        $start = !empty($academicYear[0]) && $academicYear[0]['academic_start'] ? $academicYear[0]['academic_start'] : null;
+        $end = !empty($academicYear[0]) && $academicYear[0]['academic_end'] ? $academicYear[0]['academic_end'] : null;
+        $academic = !empty($academicYear) ? "$start-$end" : null;
+        
         try {
             if (!empty($params)) {
                 if (isset($params['id_number'])) {
@@ -8,8 +16,10 @@ class SubjectController extends Subject {
                     $course_id = $params['course_id'];
                     $year_id = $params['year_id'];
                     $section_id = $params['section_id'];
+                    $academic = $params['academic'];
                     $condition = [
-                        'WHERE' => "semester_id = '$semester_id' AND course_id = $course_id AND year_id = $year_id AND section_id = $section_id",
+                        'WHERE' => "semester_id = '$semester_id' AND course_id = $course_id AND year_id = $year_id",
+                        'JOIN' => "LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'"
                     ];
                 } else {
                     $condition = [];

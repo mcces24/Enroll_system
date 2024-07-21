@@ -11,7 +11,7 @@ if (isset($_POST['delete_student'])) {
     if ($query_run) {
         $_SESSION['message'] = "Not Qualified, Data Erased!";
         $_SESSION['message_icon'] = "success";
-        header("Location: /");
+        header("Location: ./");
         exit(0);
     } else {
         $_SESSION['message'] = "Applicant is Qualified!";

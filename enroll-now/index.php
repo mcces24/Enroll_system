@@ -1,8 +1,15 @@
 <?php
 include_once '../MainFunction.php';
 
+$semester = getActiveSemester();
 if (isStudentLogin()) {
    $button1 = "Accounts";
+   $studentData = getStudentData();
+   $student = !empty($studentData['students'][0]) ? $studentData['students'][0] : array();
+   $student['semester_id'] = isset($semester['semester_name']) ? $semester['semester_name'] : $student['semester_id'];
+   $isAlreadySubmittedResponse  = checkIfAlreadyPreEnroll($student);
+
+   $isAlreadySubmitted = isset($isAlreadySubmittedResponse['isAlreadySubmitted']) ? $isAlreadySubmittedResponse['isAlreadySubmitted'] : false;
 } else {
    $button1 = "Login";
    header("location: ../enrollnow");
@@ -10,7 +17,6 @@ if (isStudentLogin()) {
 }
 
 $academicYear = getActiveAcademicYear();
-$semester = getActiveSemester();
 $enroll = getActiveEnroll();
 $new_user_id = getLoginUserId();
 $email = getLoginEmail();
@@ -5255,6 +5261,18 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                       <!-- End of HappyForms Additional CSS -->
                                                       <div class=" happyforms-styles" id="happyforms-768">
                                                       <?php } elseif (!empty($enroll) && $enroll['enroll_name'] == 'Old Students') { ?>
+                                                         <?php if(isset($isAlreadySubmitted) && $isAlreadySubmitted): ?>
+                                                         <div style="width: calc(100% - 1px); text-align: center;">
+                                                            <h4>You already pre enrolled. Please wait for the announcement.</h4>
+                                                            <h6>
+                                                               <a href="/step/students/">View my account...</a>
+                                                            </h6>
+                                                         </div>
+                                                         <?php elseif(!isset($student['fname'])): ?>
+                                                         <div style="width: calc(100% - 1px); text-align: center;">
+                                                            <h4>Current pre enrollment is for Old Students only. Please wait until pre enrollment for New Students is open.</h4>
+                                                         </div>
+                                                         <?php else: ?>
                                                          <form id="pre-enroll" autocomplete="off" onsubmit="return preEnrol(this)">
                                                             <input type="hidden" name="happyforms_random_seed" value="3639626543">
                                                             <input type="hidden" name="action" value="happyforms_message">
@@ -5279,7 +5297,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Juan</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_1" type="text" name="fname" value="" placeholder="First name" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_1" value="<?php echo isset($student['fname']) ? $student['fname'] : '' ?>" type="text" name="fname" value="" placeholder="First name" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5295,7 +5313,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Padilla (Leave it blank if NONE)</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_2" type="text" name="mname" value="" placeholder="Middle name" autocomplete="off" spellcheck="false" autocorrect="off">
+                                                                           <input id="happyforms-768_single_line_text_2" value="<?php echo isset($student['mname']) ? $student['mname'] : '' ?>" type="text" name="mname" value="" placeholder="Middle name" autocomplete="off" spellcheck="false" autocorrect="off">
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5311,12 +5329,12 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Dela Cruz</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_3" type="text" name="lname" value="" placeholder="Last name" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_3" value="<?php echo isset($student['lname']) ? $student['lname'] : '' ?>" type="text" name="lname" value="" placeholder="Last name" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
                                                                </div>
-                                                               <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_1-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_1" data-happyforms-required="">
+                                                               <div class="happyforms-part-select--required happyforms-form__part happyforms-part happyforms-part--select happyforms-part--width-half happyforms-part--label-show" id="happyforms-768_select_6-part" data-happyforms-type="select" data-happyforms-id="select_6" data-happyforms-required="">  
                                                                   <div class="happyforms-part-wrap">
                                                                      <div class="happyforms-part__label-container">
                                                                         <label for="happyforms-768_select_6" class="happyforms-part__label">
@@ -5332,7 +5350,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                                  <?php
                                                                                  if (!empty($courses)) {
                                                                                     foreach ($courses as $course) {
-                                                                                       echo '<option value=' . $course['course_id'] . '>' . $course['course_name'] . '|' . $course['course_code'] . '</option>';
+                                                                                       $selected = isset($student['course_id']) && $student['course_id'] == $course['course_id'] ? ' selected'  : null;
+                                                                                       echo '<option ' . $selected . ' value=' . $course['course_id'] . '>' . $course['course_name'] . '|' . $course['course_code'] . '</option>';
                                                                                     }
                                                                                  }
                                                                                  ?>
@@ -5342,7 +5361,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      </div>
                                                                   </div>
                                                                </div>
-                                                               <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_1-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_1" data-happyforms-required="">
+                                                               <div class="happyforms-part-select--required happyforms-form__part happyforms-part happyforms-part--select happyforms-part--width-half happyforms-part--label-show" id="happyforms-768_select_6-part" data-happyforms-type="select" data-happyforms-id="select_6" data-happyforms-required="">
                                                                   <div class="happyforms-part-wrap">
                                                                      <div class="happyforms-part__label-container">
                                                                         <label for="happyforms-768_select_5" class="happyforms-part__label">
@@ -5361,7 +5380,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      </div>
                                                                   </div>
                                                                </div>
-                                                               <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_1-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_1" data-happyforms-required="">
+                                                               <input type="hidden" id="type" name="type" value="<?php echo isset($student['type']) && $student['type'] == "New" ? 'Regular' : $student['type'] ?>">
+                                                               <!-- <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_1-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_1" data-happyforms-required="">
                                                                   <div class="happyforms-part-wrap">
                                                                      <div class="happyforms-part__label-container">
                                                                         <label for="happyforms-768_select_5" class="happyforms-part__label">
@@ -5381,7 +5401,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                         </div>
                                                                      </div>
                                                                   </div>
-                                                               </div>
+                                                               </div> -->
                                                                <div class="happyforms-form__part happyforms-part happyforms-part--single_line_text happyforms-part--width-third happyforms-part--label-show" id="happyforms-768_single_line_text_11-part" data-happyforms-type="single_line_text" data-happyforms-id="single_line_text_11" data-happyforms-required="">
                                                                   <div class="happyforms-part-wrap">
                                                                      <div class="happyforms-part__label-container">
@@ -5393,7 +5413,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 2019-0349</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input maxlength="9" id="happyforms-768_single_line_text_11" type="text" name="id_number" value="" placeholder="ID Number" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input maxlength="9" id="happyforms-768_single_line_text_11" type="text" value="<?php echo isset($student['id_number']) ? $student['id_number'] : '' ?>" name="id_number" value="" placeholder="ID Number" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5409,7 +5429,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 21</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input min="17" max="80" id="happyforms-768_single_line_text_11" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
+                                                                           <input min="17" max="80" id="happyforms-768_single_line_text_11" value="<?php echo isset($student['age']) ? $student['age'] : '' ?>" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5425,7 +5445,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Poblacion, Madridejos, Cebu</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_4" type="text" name="address" value="" placeholder="Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_4" type="text" value="<?php echo isset($student['address']) ? $student['address'] : '' ?>" name="address" placeholder="Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5443,10 +5463,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                            <div class="happyforms-part__select-wrap">
                                                                               <select name="status" data-serialize class="happyforms-select" required>
                                                                                  <option value="" class="happyforms-placeholder-option">Select Status</option>
-                                                                                 <option value="Single" id="select_5_option_1666592286529">Single </option>
-                                                                                 <option value="Married" id="select_5_option_1666592295476">Married </option>
-                                                                                 <option value="Widow" id="select_5_option_1666592309774">Widow </option>
-                                                                                 <option value="Others" id="select_5_option_1666592316421">Others </option>
+                                                                                 <option <?php echo isset($student['status']) && $student['status'] == "Single" ? 'selected' : '' ?> value="Single" id="select_5_option_1666592286529">Single </option>
+                                                                                 <option <?php echo isset($student['status']) && $student['status'] == "Married" ? 'selected' : '' ?> value="Married" id="select_5_option_1666592295476">Married </option>
+                                                                                 <option <?php echo isset($student['status']) && $student['status'] == "Widow" ? 'selected' : '' ?> value="Widow" id="select_5_option_1666592309774">Widow </option>
+                                                                                 <option <?php echo isset($student['status']) && $student['status'] == "Others" ? 'selected' : '' ?> value="Others" id="select_5_option_1666592316421">Others </option>
                                                                               </select>
                                                                            </div>
                                                                         </div>
@@ -5466,11 +5486,9 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                            <div class="happyforms-part__select-wrap">
                                                                               <select name="gender" data-serialize class="happyforms-select" required>
                                                                                  <option value="" class="happyforms-placeholder-option">Select Gender</option>
-                                                                                 <option value="Male" id="select_6_option_1666592286529">Male </option>
-                                                                                 <option value="Female" id="select_6_option_1666592295476">Female </option>
-                                                                                 <option value="Others" id="select_6_option_1666592316421">Others </option>
-                                                                                 <optgroup label="" id="select_6_option_1666592388682">
-                                                                                 </optgroup>
+                                                                                 <option <?php echo isset($student['gender']) && $student['gender'] == "Male" ? 'selected' : '' ?> value="Male" id="select_6_option_1666592286529">Male </option>
+                                                                                 <option <?php echo isset($student['gender']) && $student['gender'] == "Female" ? 'selected' : '' ?> value="Female" id="select_6_option_1666592295476">Female </option>
+                                                                                 <option <?php echo isset($student['gender']) && $student['gender'] == "Others" ? 'selected' : '' ?> value="Others" id="select_6_option_1666592316421">Others </option>
                                                                               </select>
                                                                            </div>
                                                                         </div>
@@ -5488,7 +5506,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Malbago, Madridejos, Cebu</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_7" type="text" name="place_of_birth" value="" placeholder="Place of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_7" value="<?php echo isset($student['place_of_birth']) ? $student['place_of_birth'] : '' ?>"  type="text" name="place_of_birth" placeholder="Place of birth" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5504,7 +5522,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: October 20,1992</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                         <input id="datepicker" type="text" name="date_of_birth" placeholder="Date of birth" required>
+                                                                         <input id="datepicker" type="text" value="<?php echo isset($student['date_of_birth']) ? $student['date_of_birth'] : '' ?>" name="date_of_birth" placeholder="Date of birth" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5520,7 +5538,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Roman Catholic</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_9" type="text" name="religion" value="" placeholder="Religion" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_9" type="text" name="religion" value="<?php echo isset($student['religion']) ? $student['religion'] : '' ?>" placeholder="Religion" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5536,7 +5554,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 09279817079</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input min="999999999" max="99999999999" id="happyforms-768_single_line_text_10" type="number" name="contact" value="" placeholder="Contact #" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Enter Valid Phone Number')" oninput="this.setCustomValidity('')">
+                                                                           <input min="999999999" max="99999999999" id="happyforms-768_single_line_text_10" type="number" name="contact" value="<?php echo isset($student['contact']) ? $student['contact'] : '' ?>" placeholder="Contact #" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Enter Valid Phone Number')" oninput="this.setCustomValidity('')">
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5552,7 +5570,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                           <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo isset($student['email']) ? $student['email'] : '' ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5568,7 +5586,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Jose Rizal</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_12" type="text" name="guardian" value="" placeholder="Guardian/Parents" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_12" type="text" name="guardian" value="<?php echo isset($student['guardian']) ? $student['guardian'] : '' ?>" placeholder="Guardian/Parents" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5584,7 +5602,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Nurse</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_13" type="text" name="occupation" value="" placeholder="Occupation" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_13" type="text" name="occupation" value="<?php echo isset($student['occupation']) ? $student['occupation'] : '' ?>" placeholder="Occupation" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5600,7 +5618,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Tugas, Madridejosm Cebu</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_14" type="text" name="guardian_address" value="" placeholder="Addresss" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_14" type="text" name="guardian_address" value="<?php echo isset($student['guardian_address']) ? $student['guardian_address'] : '' ?>" placeholder="Addresss" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5616,7 +5634,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 6053</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input min="99" max="9999" id="happyforms-768_single_line_text_15" type="number" name="home_zipcode" value="" placeholder="Zipcode" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Enter Valid Zipcode')" oninput="this.setCustomValidity('')">
+                                                                           <input min="99" max="9999" id="happyforms-768_single_line_text_15" type="number" name="home_zipcode" value="<?php echo isset($student['home_zipcode']) ? $student['home_zipcode'] : '' ?>" placeholder="Zipcode" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Enter Valid Zipcode')" oninput="this.setCustomValidity('')">
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5632,7 +5650,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 42, Please type NONE if not avialable.</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_16" type="text" name="nsat_score" value="" placeholder="NSAT score" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_16" type="text" name="nsat_score" value="<?php echo isset($student['nsat_score']) ? $student['nsat_score'] : '' ?>" placeholder="NSAT score" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5648,7 +5666,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 2016, Please type NONE if not avialable.</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input maxlength="9" id="happyforms-768_single_line_text_17" type="text" name="year" value="" placeholder="Year" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input maxlength="9" id="happyforms-768_single_line_text_17" type="text" name="year" value="<?php echo isset($student['year']) ? $student['year'] : '' ?>" placeholder="Year" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5664,7 +5682,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Malbago Elementray School</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_18" type="text" name="elementary" value="" placeholder="School graduated" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_18" type="text" name="elementary" value="<?php echo isset($student['elementary']) ? $student['elementary'] : '' ?>" placeholder="School graduated" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5680,7 +5698,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 2019-2020</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input maxlength="9" id="happyforms-768_single_line_text_19" type="text" name="elem_year" value="" placeholder="School year" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input maxlength="9" id="happyforms-768_single_line_text_19" type="text" name="elem_year" value="<?php echo isset($student['elem_year']) ? $student['elem_year'] : '' ?>" placeholder="School year" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5696,7 +5714,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Poblacion, Madridejos, Cebu</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_20" type="text" name="elem_address" value="" placeholder="School Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_20" type="text" name="elem_address" value="<?php echo isset($student['elem_address']) ? $student['elem_address'] : '' ?>" placeholder="School Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5712,7 +5730,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Madridejos National High School</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_18" type="text" name="high_school" value="" placeholder="School graduated" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_18" type="text" name="high_school" value="<?php echo isset($student['high_school']) ? $student['high_school'] : '' ?>" placeholder="School graduated" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5728,7 +5746,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 2019-2020</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input maxlength="9" id="happyforms-768_single_line_text_19" type="text" name="high_year" value="" placeholder="School year" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input maxlength="9" id="happyforms-768_single_line_text_19" type="text" name="high_year" value="<?php echo isset($student['high_year']) ? $student['high_year'] : '' ?>" placeholder="School year" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5744,7 +5762,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Poblacion, Madridejos, Cebu</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_20" type="text" name="high_address" value="" placeholder="School Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_20" type="text" name="high_address" value="<?php echo isset($student['high_address']) ? $student['high_address'] : '' ?>" placeholder="School Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5760,7 +5778,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Madridejos National High School</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_18" type="text" name="school_graduated" value="" placeholder="School graduated" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_18" type="text" name="school_graduated" value="<?php echo isset($student['school_graduated']) ? $student['school_graduated'] : '' ?>" placeholder="School graduated" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5776,7 +5794,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: 2019-2020</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input maxlength="9" id="happyforms-768_single_line_text_19" type="text" name="school_year" value="" placeholder="School year" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input maxlength="9" id="happyforms-768_single_line_text_19" type="text" name="school_year" value="<?php echo isset($student['school_year']) ? $student['school_year'] : '' ?>" placeholder="School year" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5792,7 +5810,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <span class="happyforms-part__description">ex: Poblacion, Madridejos, Cebu</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_20" type="text" name="school_address" value="" placeholder="School Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
+                                                                           <input id="happyforms-768_single_line_text_20" type="text" name="school_address" value="<?php echo isset($student['school_address']) ? $student['school_address'] : '' ?>" placeholder="School Address" autocomplete="off" spellcheck="false" autocorrect="off" required>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5810,7 +5828,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <input type="hidden" name="exam_remarks" value="Old Students">
                                                                </div>
                                                                <div>
-                                                                  <input type="hidden" name="status_type" value="Pre Old Students">
+                                                                  <input type="hidden" name="status_type" value="Old Students">
                                                                </div>
                                                                <div>
                                                                   <input type="hidden" name="picture">
@@ -5848,6 +5866,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   </div>
                                                                </div>
                                                          </form>
+                                                         <?php endif; ?>
 
                                                          <div class="exad-advance-tab-content exad-tab-image-has-no  exad-tab-image-right">
                                                             <link rel="stylesheet" property="stylesheet" href="./../wp-content/plugins/happyforms/bundles/css/frontend.css">
@@ -8180,7 +8199,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                <input type="hidden" name="exam_remarks" value="Old Students">
                                                             </div>
                                                             <div>
-                                                               <input type="hidden" name="status_type" value="Pre Old Students">
+                                                               <input type="hidden" name="status_type" value="Old Students">
                                                             </div>
                                                             <div>
                                                                <input type="hidden" name="picture">
@@ -8804,7 +8823,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                          <input type="hidden" name="good_moral" value="Avialable">
                                                       </div>
                                                       <div>
-                                                         <input type="hidden" name="exam_remarks" value="Pre Old Students">
+                                                         <input type="hidden" name="exam_remarks" value="Old Students">
                                                       </div>
                                                       <div>
                                                          <input type="hidden" name="status_type" value="Shift Students">
@@ -9261,7 +9280,12 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
    </script>
    <script src="../assets/sweetalert.js"></script>
    <script>
+         window.onload = function() {
+            var selectElement = document.getElementById('course_id');
+            selectElement.dispatchEvent(new Event('change'));
+         };
         $(document).ready(function() {
+            
             // Ensure Pickadate.js is loaded and available
             if (typeof $.fn.pickadate !== 'undefined') {
                 $('#datepicker').pickadate({

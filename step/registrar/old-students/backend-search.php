@@ -71,7 +71,7 @@ if(isset($_REQUEST["term"])){
     $semester = $rows111['semester_name'];
                                    
     $academic = "$start-$end";
-    $sql = "SELECT * FROM students INNER JOIN que ON students.id=que.student_id  WHERE  status_type = 'Old Students' AND id_number LIKE ? AND semester_id = '$semester' AND academic = '$academic' LIMIT 5";
+    $sql = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id WHERE (status_type = 'Old Students' OR status_type = 'Enroll ID' OR status_type = 'Enroll Old Students') AND id_number LIKE ? AND semester_id = '$semester' AND academic = '$academic' LIMIT 5";
     
     if($stmt = mysqli_prepare($conn, $sql)){
         // Bind variables to the prepared statement as parameters

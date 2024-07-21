@@ -1,6 +1,8 @@
 <?php
-session_start();
 require '../../../database/config.php';
+include_once '../../../MainFunction.php';
+$academicYear = getActiveAcademicYear();
+$academic = !empty($academicYear) ? $academicYear['academic_start'] . '-' . $academicYear['academic_end'] : null;
 
 if (!isset($_SESSION['SESSION_BSIT'])) {
     header("Location: ../login/");
@@ -113,18 +115,20 @@ foreach ($result as $row) {
     </div>
     <link rel="stylesheet" type="text/css" href="../../../loader/styles.css" />
     <script>
-        var loader = document.getElementById("preloader");
-        window.addEventListener("load", function() {
-            loader.style.display = "none"
-        })
+    var loader = document.getElementById("preloader");
+    window.addEventListener("load", function() {
+        loader.style.display = "none"
+    })
     </script>
     <?php include('message.php'); ?>
 
     <!-- start: Sidebar -->
     <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
         <div class="d-flex align-items-center p-3">
-            <img class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4" style="height: 50px; " src="../../assets/mcc2.png">
-            <a href="./" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">BSIT | Portal</a>
+            <img class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4"
+                style="height: 50px; " src="../../assets/mcc2.png">
+            <a href="./" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4">BSIT |
+                Portal</a>
             <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
         </div>
         <ul class="sidebar-menu p-3 m-0 mb-0">
@@ -137,7 +141,8 @@ foreach ($result as $row) {
             ?>
             <li class="sidebar-menu-divider mt-3 mb-1 text-uppercase">Profile</li>
             <div class="sidebar-user text-center">
-                <img class="img-90 rounded-circle" src="../../../admin/admin/user/uploads/<?php echo $resul['profile'] ?>" alt="">
+                <img class="img-90 rounded-circle"
+                    src="../../../admin/admin/user/uploads/<?php echo $resul['profile'] ?>" alt="">
                 <h6 class="mt-3 f-14 f-w-600"><?php echo $resul['name'] ?></h6>
                 <p class="mb-0 font-roboto"><?php echo $resul['department'] ?></p>
                 <br>
@@ -209,11 +214,13 @@ foreach ($result as $row) {
 
 
 
-    <div class="modal fade" id="editmodal_fees" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editmodal_fees" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> IMPORT FEES </h5>
+                    <button class="btn btn-success btn-sm" id="downloadCSVTemplate">Download Template</button>
                 </div>
 
                 <form action="importData.php" method="post" enctype="multipart/form-data">
@@ -222,7 +229,8 @@ foreach ($result as $row) {
                         <div class="form-group">
 
                             <label> Semester </label>
-                            <select class="form-control" name="semester_id1" id="semester_id1" data-serialize class="happyforms-select" onchange="FetchSemester1(this.value)" required>
+                            <select class="form-control" name="semester_id1" id="semester_id1" data-serialize
+                                class="happyforms-select" onchange="FetchSemester1(this.value)" required>
                                 <option selected disabled class="happyforms-placeholder-option">Select Semester</option>
                                 <option value="First Sem" class="happyforms-placeholder-option">First Sem</option>
                                 <option value="Second Sem" class="happyforms-placeholder-option">Second Sem</option>
@@ -242,8 +250,9 @@ foreach ($result as $row) {
                             <?php
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) { ?>
-                                    <input style="visibility: hidden;" type="text" name="course_id1" id="course_id1" onclick="FetchCourse1(this.value)" value="<?php echo $row['course_id'] ?>">
-                                    <label class="form-control" for="course_id1"><?php echo $row['course_name'] ?></label>
+                            <input style="visibility: hidden;" type="text" name="course_id1" id="course_id1"
+                                onclick="FetchCourse1(this.value)" value="<?php echo $row['course_id'] ?>">
+                            <label class="form-control" for="course_id1"><?php echo $row['course_name'] ?></label>
 
                             <?php
 
@@ -254,7 +263,8 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group">
                             <label> Year Level </label>
-                            <select class="form-control" name="year_id1" id="year_id1" data-serialize class="happyforms-select" onchange="FetchYear1(this.value)" required>
+                            <select class="form-control" name="year_id1" id="year_id1" data-serialize
+                                class="happyforms-select" onchange="FetchYear1(this.value)" required>
                                 <option value="" class="happyforms-placeholder-option">Select Year Level</option>
                             </select>
                         </div>
@@ -270,36 +280,36 @@ foreach ($result as $row) {
                     </div>
                 </form>
                 <script type="text/javascript">
-                    function FetchCourse1(id) {
-                        $('#year_id1').html('');
-                        $('#section_id1').html('<option>Select Section</option>');
-                        $.ajax({
-                            type: 'post',
-                            url: 'ajaxdata.php',
-                            data: {
-                                course_id: id
-                            },
-                            success: function(data) {
-                                $('#year_id1').html(data);
-                            }
+                function FetchCourse1(id) {
+                    $('#year_id1').html('');
+                    $('#section_id1').html('<option>Select Section</option>');
+                    $.ajax({
+                        type: 'post',
+                        url: 'ajaxdata.php',
+                        data: {
+                            course_id: id
+                        },
+                        success: function(data) {
+                            $('#year_id1').html(data);
+                        }
 
-                        })
-                    }
+                    })
+                }
 
-                    function FetchYear1(id) {
-                        $('#section_id1').html('');
-                        $.ajax({
-                            type: 'post',
-                            url: 'ajaxdata.php',
-                            data: {
-                                year_id: id
-                            },
-                            success: function(data) {
-                                $('#section_id1').html(data);
-                            }
+                function FetchYear1(id) {
+                    $('#section_id1').html('');
+                    $.ajax({
+                        type: 'post',
+                        url: 'ajaxdata.php',
+                        data: {
+                            year_id: id
+                        },
+                        success: function(data) {
+                            $('#section_id1').html(data);
+                        }
 
-                        })
-                    }
+                    })
+                }
                 </script>
 
             </div>
@@ -307,19 +317,23 @@ foreach ($result as $row) {
     </div>
     <!-- end: Sidebar -->
 
-    <div class="modal fade" id="editmodal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="editmodal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel"> IMPORT STUDY LOAD </h5>
+                    <button class="btn btn-success btn-sm" id="downloadCSVTemplateSubject">Download Template</button>
                 </div>
 
                 <form action="importData.php" method="post" enctype="multipart/form-data">
                     <div class="modal-body">
+                        <input type="hidden" name="academic_year" value="<?php echo $academic ?>">
 
                         <div class="form-group">
                             <label> Semester </label>
-                            <select class="form-control" name="semester_id" id="semester_id" data-serialize class="happyforms-select" onchange="FetchSemester(this.value)" required>
+                            <select class="form-control" name="semester_id" id="semester_id" data-serialize
+                                class="happyforms-select" onchange="FetchSemester(this.value)" required>
                                 <option selected disabled class="happyforms-placeholder-option">Select Semester</option>
                                 <option value="First Sem" class="happyforms-placeholder-option">First Sem</option>
                                 <option value="Second Sem" class="happyforms-placeholder-option">Second Sem</option>
@@ -338,8 +352,9 @@ foreach ($result as $row) {
                             <?php
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) { ?>
-                                    <input style="visibility: hidden;" type="text" name="course_id" id="course_id" onclick="FetchCourse(this.value)" value="<?php echo $row['course_id'] ?>">
-                                    <label class="form-control" for="course_id"><?php echo $row['course_name'] ?></label>
+                            <input style="visibility: hidden;" type="text" name="course_id" id="course_id"
+                                onclick="FetchCourse(this.value)" value="<?php echo $row['course_id'] ?>">
+                            <label class="form-control" for="course_id"><?php echo $row['course_name'] ?></label>
 
                             <?php
 
@@ -350,13 +365,15 @@ foreach ($result as $row) {
                         </div>
                         <div class="form-group">
                             <label> Year Level </label>
-                            <select class="form-control" name="year_id" id="year_id" data-serialize class="happyforms-select" onchange="FetchYear(this.value)" required>
+                            <select class="form-control" name="year_id" id="year_id" data-serialize
+                                class="happyforms-select" onchange="FetchYear(this.value)" required>
                                 <option value="" class="happyforms-placeholder-option">Select Year Level</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label> Section </label>
-                            <select class="form-control" name="section_id" id="section_id" data-serialize class="happyforms-select" required>
+                            <select class="form-control" name="section_id" id="section_id" data-serialize
+                                class="happyforms-select" required>
                                 <option value="" class="happyforms-placeholder-option">Select Section</option>
                             </select>
                         </div>
@@ -367,41 +384,42 @@ foreach ($result as $row) {
                         <div class="modal-footer">
                             <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
 
-                            <input type="submit" class="btn btn-sm btn-primary" name="importSubmit" value="IMPORT/UPDATE">
+                            <input type="submit" class="btn btn-sm btn-primary" name="importSubmit"
+                                value="IMPORT/UPDATE">
                         </div>
                     </div>
                 </form>
                 <script type="text/javascript">
-                    function FetchCourse(id) {
-                        $('#year_id').html('');
-                        $('#section_id').html('<option>Select Section</option>');
-                        $.ajax({
-                            type: 'post',
-                            url: 'ajaxdata.php',
-                            data: {
-                                course_id: id
-                            },
-                            success: function(data) {
-                                $('#year_id').html(data);
-                            }
+                function FetchCourse(id) {
+                    $('#year_id').html('');
+                    $('#section_id').html('<option>Select Section</option>');
+                    $.ajax({
+                        type: 'post',
+                        url: 'ajaxdata.php',
+                        data: {
+                            course_id: id
+                        },
+                        success: function(data) {
+                            $('#year_id').html(data);
+                        }
 
-                        })
-                    }
+                    })
+                }
 
-                    function FetchYear(id) {
-                        $('#section_id').html('');
-                        $.ajax({
-                            type: 'post',
-                            url: 'ajaxdata.php',
-                            data: {
-                                year_id: id
-                            },
-                            success: function(data) {
-                                $('#section_id').html(data);
-                            }
+                function FetchYear(id) {
+                    $('#section_id').html('');
+                    $.ajax({
+                        type: 'post',
+                        url: 'ajaxdata.php',
+                        data: {
+                            year_id: id
+                        },
+                        success: function(data) {
+                            $('#section_id').html(data);
+                        }
 
-                        })
-                    }
+                    })
+                }
                 </script>
 
             </div>
@@ -434,15 +452,27 @@ foreach ($result as $row) {
     ?>
 
     <!-- Display status message -->
+    <?php if(isset($_SESSION['status'])): ?>
+      <script>
+         var message = "<?php echo $_SESSION['message']; ?>";
+         var icon = "<?php echo $_SESSION['type']; ?>";
+         swal({
+            title: message,
+            icon: icon,
+            button: "Okay",
+         });
+      </script>
+   <?php unset($_SESSION['status']); ?>
+    <?php endif; ?>
     <?php if (!empty($statusMsg)) { ?>
-        <script>
-            swal({
-                title: "<?php echo $statusMsg; ?>",
-                text: "Have a nice day!",
-                icon: "<?php echo $statusType; ?>",
-                button: "OKAY",
-            });
-        </script>
+    <script>
+    swal({
+        title: "<?php echo $statusMsg; ?>",
+        text: "Have a nice day!",
+        icon: "<?php echo $statusType; ?>",
+        button: "OKAY",
+    });
+    </script>
 
     <?php } ?>
 
@@ -474,8 +504,10 @@ foreach ($result as $row) {
                                 $result = $db->query($query);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) { ?>
-                                        <input style="visibility: hidden;" type="button" name="course_id" id="course_id" onclick="FetchCourse(this.value)" value="<?php echo $row['course_id'] ?>">
-                                        <label class="btn btn-sm float-end btn-success editbtn1" for="course_id">Import Study Load</label>
+                                <input style="visibility: hidden;" type="button" name="course_id" id="course_id"
+                                    onclick="FetchCourse(this.value)" value="<?php echo $row['course_id'] ?>">
+                                <label class="btn btn-sm float-end btn-success editbtn1" for="course_id">Import Study
+                                    Load</label>
 
 
                                 <?php
@@ -485,111 +517,111 @@ foreach ($result as $row) {
                                 ?>
 
                             </div>
-
-                            <div class="card-body">
-
-
-
-
-                                <div class="form-group">
-                                    <select name="filter_semester" id="filter_semester" class="form-control" required>
-                                        <?php echo $semester; ?>
-                                    </select>
-                                </div>
-
-
-                                <div class="form-group">
-                                    <input type="text" name="filter_course" id="filter_course" class="form-control" value="BS in Information Technology" readonly>
-                                </div>
-
-                                <div class="form-group">
-                                    <select name="filter_year" id="filter_year" class="form-control" required>
-                                        <option value="">Select Year</option>
-                                        <?php echo $year; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" name="filter_section" id="filter_section" class="form-control" placeholder="Please input Section" required>
-                                </div>
-
-
-
-                                <div class="form-group">
-                                    <button type="button" name="filter" id="filter" class=" btn btn-info">Search</button>
-                                </div>
-
-
-
-
-                                <br>
-                            </div>
+                          
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <style type="text/css">
-                                        .card-body .form-group {
-                                            width: 20%;
-                                            padding: 4px;
-                                            margin: 0 auto;
-                                            float: left;
+                                    .card-body .form-group {
+                                        width: 20%;
+                                        padding: 4px;
+                                        margin: 0 auto;
+                                        float: left;
+                                    }
+
+                                    .card-body .form-group button {
+                                        width: 100px
+                                    }
+
+                                    .form-group .form-control {}
+
+
+                                    .table-responsive td {
+                                        font-size: 14px;
+                                    }
+
+                                    @media (max-width: 600px) {
+                                        .table-responsive {
+                                            font-size: 10px;
+
+                                            padding: 10px;
+                                            text-align: center;
                                         }
-
-                                        .card-body .form-group button {
-                                            width: 100px
-                                        }
-
-                                        .form-group .form-control {}
-
 
                                         .table-responsive td {
-                                            font-size: 14px;
+                                            padding: 100px;
                                         }
 
-                                        @media (max-width: 600px) {
-                                            .table-responsive {
-                                                font-size: 10px;
-
-                                                padding: 10px;
-                                                text-align: center;
-                                            }
-
-                                            .table-responsive td {
-                                                padding: 100px;
-                                            }
-
-                                            .card-body .form-group {
-                                                width: 100%;
-                                                padding: 4px;
-                                                margin: 0 auto;
-                                            }
-
-                                            .form-group button {
-                                                width: 100%;
-
-                                            }
-
-                                            .form-group .form-control,
-                                            .form-group button {
-                                                font-size: 10px;
-                                            }
+                                        .card-body .form-group {
+                                            width: 100%;
+                                            padding: 4px;
+                                            margin: 0 auto;
                                         }
+
+                                        .form-group button {
+                                            width: 100%;
+
+                                        }
+
+                                        .form-group .form-control,
+                                        .form-group button {
+                                            font-size: 10px;
+                                        }
+                                    }
                                     </style>
-                                    <table id="customer_data" class="" style="width: 100%;">
-                                        <thead class="la">
-                                            <tr>
-                                                <th>Code</th>
-                                                <th>Name</th>
-                                                <th>Unit</th>
-                                                <th>Lab Unit</th>
-                                                <th>Days</th>
-                                                <th>Time</th>
-                                                <th>Room</th>
-                                                <th>Instructor</th>
-                                                <th>Semester</th>
-                                                <th>Year</th>
-                                                <th>Sections</th>
-                                            </tr>
-                                        </thead>
-                                    </table>
+                                    <div class="table-responsive">
+                                        <table id="MytableidSubject" class="table table-striped">
+                                            <thead style="text-align: center;">
+                                                <tr>
+                                                    <th>Code</th>
+                                                    <th>Name</th>
+                                                    <th>Unit</th>
+                                                    <th>Lab Unit</th>
+                                                    <th>Days</th>
+                                                    <th>Time</th>
+                                                    <th>Room</th>
+                                                    <th>Instructor</th>
+                                                    <th>Semester</th>
+                                                    <th>Year</th>
+                                                    <th>Section</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <?php
+                                    $query = "SELECT *, subjects.subject_code as subjectCode FROM subjects 
+                                    LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic' 
+                                    INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id
+                                    INNER JOIN sections ON subject_connects.section_id = sections.section_id 
+                                    WHERE c.course_id = 1 AND subject_connects.course_id = 1";
+                                    $query_run = mysqli_query($conn, $query);
+                                    if(mysqli_num_rows($query_run) > 0)
+                                        {   
+                                            $seq = 0;
+                                            
+                                            while($subject = mysqli_fetch_array($query_run))
+                                            { 
+                                    ?>
+                                                <tr style="text-align: center;">
+                                                    <td><?= $subject['subjectCode']; ?></td>
+                                                    <td><?= $subject['subject_name']; ?></td>
+                                                    <td><?= $subject['units']; ?></td>
+                                                    <td><?= $subject['lab_unit']; ?></td>
+                                                    <td><?= !empty($subject['days']) ? $subject['days'] : 'TBA'; ?></td>
+                                                    <td><?= !empty($subject['time_sched']) ? $subject['time_sched'] : 'TBA'; ?>
+                                                    </td>
+                                                    <td><?= !empty($subject['room']) ? $subject['room'] : 'TBA'; ?></td>
+                                                    <td><?= !empty($subject['instructor']) ? $subject['instructor'] : 'TBA'; ?>
+                                                    </td>
+                                                    <td><?= $subject['semester_id']; ?></td>
+                                                    <td><?= $subject['year_name']; ?></td>
+                                                    <td><?= !empty($subject['section_code']) ? $subject['section_code'] : 'N/A'; ?>
+                                                </tr>
+                                                <?php
+                                       }
+                                    }
+                                    ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
                                 </div>
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -612,8 +644,10 @@ foreach ($result as $row) {
                                 $result = $db->query($query);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) { ?>
-                                        <input style="visibility: hidden;" type="button" name="course_id1" id="course_id1" onclick="FetchCourse1(this.value)" value="<?php echo $row['course_id'] ?>">
-                                        <label class="btn btn-sm float-end btn-success editbtn_fees" for="course_id1">Import Fees</label>
+                                <input style="visibility: hidden;" type="button" name="course_id1" id="course_id1"
+                                    onclick="FetchCourse1(this.value)" value="<?php echo $row['course_id'] ?>">
+                                <label class="btn btn-sm float-end btn-success editbtn_fees" for="course_id1">Import
+                                    Fees</label>
 
 
                                 <?php
@@ -627,52 +661,52 @@ foreach ($result as $row) {
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <style type="text/css">
+                                    .card-body .form-group {
+                                        width: 20%;
+                                        padding: 4px;
+                                        margin: 0 auto;
+                                        float: left;
+                                    }
+
+                                    .card-body .form-group button {
+                                        width: 100px
+                                    }
+
+                                    .form-group .form-control {}
+
+
+                                    .table-responsive {
+                                        font-size: 15px;
+                                    }
+
+                                    @media (max-width: 600px) {
+                                        .table-responsive {
+                                            font-size: 10px;
+
+                                            padding: 10px;
+                                            text-align: center;
+                                        }
+
+                                        .table-responsive td {
+                                            padding: 100px;
+                                        }
+
                                         .card-body .form-group {
-                                            width: 20%;
+                                            width: 100%;
                                             padding: 4px;
                                             margin: 0 auto;
-                                            float: left;
                                         }
 
-                                        .card-body .form-group button {
-                                            width: 100px
+                                        .form-group button {
+                                            width: 100%;
+
                                         }
 
-                                        .form-group .form-control {}
-
-
-                                        .table-responsive {
-                                            font-size: 15px;
+                                        .form-group .form-control,
+                                        .form-group button {
+                                            font-size: 10px;
                                         }
-
-                                        @media (max-width: 600px) {
-                                            .table-responsive {
-                                                font-size: 10px;
-
-                                                padding: 10px;
-                                                text-align: center;
-                                            }
-
-                                            .table-responsive td {
-                                                padding: 100px;
-                                            }
-
-                                            .card-body .form-group {
-                                                width: 100%;
-                                                padding: 4px;
-                                                margin: 0 auto;
-                                            }
-
-                                            .form-group button {
-                                                width: 100%;
-
-                                            }
-
-                                            .form-group .form-control,
-                                            .form-group button {
-                                                font-size: 10px;
-                                            }
-                                        }
+                                    }
                                     </style>
                                     <div class="table-responsive">
                                         <table id="Mytableid" style="width: 100%; text-align: center;">
@@ -700,18 +734,18 @@ foreach ($result as $row) {
 
                                                 ?>
 
-                                                        <tr>
-                                                            <td><?= $student['course_code']; ?></td>
-                                                            <td><?= $student['year_name']; ?></td>
-                                                            <td><?= $student['semester_id']; ?></td>
-                                                            <td><button data-id='<?php echo $student['fees_id']; ?>' class="userinfo btn btn-sm btn-success">View Fees</button></td>
-                                                        </tr>
+                                                <tr>
+                                                    <td><?= $student['course_code']; ?></td>
+                                                    <td><?= $student['year_name']; ?></td>
+                                                    <td><?= $student['semester_id']; ?></td>
+                                                    <td><button data-id='<?php echo $student['fees_id']; ?>'
+                                                            class="userinfo btn btn-sm btn-success">View Fees</button>
+                                                    </td>
+                                                </tr>
 
 
                                                 <?php
                                                     }
-                                                } else {
-                                                    echo "<h5> No Record Found </h5>";
                                                 }
                                                 ?>
 
@@ -722,25 +756,27 @@ foreach ($result as $row) {
 
                                     </div>
                                     <script type='text/javascript'>
-                                        $(document).ready(function() {
-                                            $('.userinfo').click(function() {
-                                                var userid = $(this).data('id');
-                                                $.ajax({
-                                                    url: 'ajaxfile.php',
-                                                    type: 'post',
-                                                    data: {
-                                                        userid: userid
-                                                    },
-                                                    success: function(response) {
-                                                        $('.modal-body1').html(response);
-                                                        $('#empModal1').modal('show');
-                                                    }
-                                                });
+                                    $(document).ready(function() {
+                                        $('.userinfo').click(function() {
+                                            var userid = $(this).data('id');
+                                            $.ajax({
+                                                url: 'ajaxfile.php',
+                                                type: 'post',
+                                                data: {
+                                                    userid: userid
+                                                },
+                                                success: function(response) {
+                                                    $('.modal-body1').html(response);
+                                                    $('#empModal1').modal('show');
+                                                }
                                             });
                                         });
+                                    });
                                     </script>
-                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-                                    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js">
+                                    </script>
+                                    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
+                                    </script>
                                     <div class="modal fade" id="empModal1" role="dialog">
                                         <div class="modal-dialog">
                                             <form action="update_fees.php" method="post">
@@ -751,18 +787,27 @@ foreach ($result as $row) {
                                                     <div class="modal-body1" style="width: 95%; margin: 0 auto;">
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-sm btn-secondary"
+                                                            data-dismiss="modal">Close</button>
 
-                                                        <input type="submit" class="btn btn-sm btn-primary" name="update_fees" value="Save Changes">
+                                                        <input type="submit" class="btn btn-sm btn-primary"
+                                                            name="update_fees" value="Save Changes">
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                     <script>
-                                        jQuery(document).ready(function() {
-                                            jQuery("#Mytableid").DataTable();
+                                    jQuery(document).ready(function() {
+                                        jQuery("#MytableidSubject").DataTable({
+                                            "pageLength": 10,
+                                            "ordering": false,
                                         });
+                                        jQuery("#Mytableid").DataTable({
+                                            "pageLength": 10,
+                                            "ordering": false,
+                                        });
+                                    });
                                     </script>
                                 </div>
                                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -790,124 +835,148 @@ foreach ($result as $row) {
 
 
     <script src="script.js"></script>
+    <?php if(isset($_SESSION['status'])): ?>
+      <script>
+         var message = "<?php echo $_SESSION['message']; ?>";
+         var icon = "<?php echo $_SESSION['type']; ?>";
+         swal({
+            title: message,
+            icon: icon,
+            button: "Okay",
+         });
+      </script>
+   <?php unset($_SESSION['status']); ?>
+    <?php endif; ?>
     <script>
-        function formToggle(ID) {
-            var element = document.getElementById(ID);
-            if (element.style.display === "none") {
-                element.style.display = "block";
-            } else {
-                element.style.display = "none";
-            }
+    function formToggle(ID) {
+        var element = document.getElementById(ID);
+        if (element.style.display === "none") {
+            element.style.display = "block";
+        } else {
+            element.style.display = "none";
         }
+    }
     </script>
     <script type="text/javascript" language="javascript">
-        $(document).ready(function() {
+    $(document).ready(function() {
 
-            fill_datatable();
+        fill_datatable();
 
-            function fill_datatable(filter_semester = '', filter_course = '', filter_year = '', filter_section = '') {
-                var dataTable = $('#customer_data').DataTable({
-                    "processing": true,
-                    "serverSide": true,
-                    "order": [],
-                    "searching": false,
-                    "ajax": {
-                        url: "fetch.php",
-                        type: "POST",
-                        data: {
-                            filter_semester: filter_semester,
-                            filter_course: filter_course,
-                            filter_year: filter_year,
-                            filter_section: filter_section
-                        }
+        function fill_datatable(filter_semester = '', filter_course = '', filter_year = '', filter_section =
+        '') {
+            var dataTable = $('#customer_data').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "order": [],
+                "searching": false,
+                "ajax": {
+                    url: "fetch.php",
+                    type: "POST",
+                    data: {
+                        filter_semester: filter_semester,
+                        filter_course: filter_course,
+                        filter_year: filter_year,
+                        filter_section: filter_section
                     }
-                });
-            }
-
-            $('#filter').click(function() {
-                var filter_semester = $('#filter_semester').val();
-                var filter_course = $('#filter_course').val();
-                var filter_year = $('#filter_year').val();
-                var filter_section = $('#filter_section').val();
-                if (filter_semester != '' && filter_course != '' && filter_year != '' && filter_section != '') {
-                    $('#customer_data').DataTable().destroy();
-                    fill_datatable(filter_semester, filter_course, filter_year, filter_section);
-                } else {
-                    alert('Select Both filter option');
-                    $('#customer_data').DataTable().destroy();
-                    fill_datatable();
                 }
             });
+        }
 
-
+        $('#filter').click(function() {
+            var filter_semester = $('#filter_semester').val();
+            var filter_course = $('#filter_course').val();
+            var filter_year = $('#filter_year').val();
+            var filter_section = $('#filter_section').val();
+            if (filter_semester != '' && filter_course != '' && filter_year != '' && filter_section !=
+                '') {
+                $('#customer_data').DataTable().destroy();
+                fill_datatable(filter_semester, filter_course, filter_year, filter_section);
+            } else {
+                alert('Select Both filter option');
+                $('#customer_data').DataTable().destroy();
+                fill_datatable();
+            }
         });
+
+
+    });
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+    $(document).ready(function() {
 
-            $('.editbtn1').on('click', function() {
+        $('.editbtn1').on('click', function() {
 
-                $('#editmodal1').modal('show');
+            $('#editmodal1').modal('show');
 
-                $tr = $(this).closest('tr');
+            $tr = $(this).closest('tr');
 
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
 
-                console.log(data);
+            console.log(data);
 
-                $('#applicant_id1').val(data[0]);
-                $('#exam_remarks').val(data[4]);
-                $('#findings').val(data[5]);
+            $('#applicant_id1').val(data[0]);
+            $('#exam_remarks').val(data[4]);
+            $('#findings').val(data[5]);
 
-            });
         });
+    });
     </script>
 
     <script type="text/javascript">
-        $(document).ready(function() {
+    $(document).ready(function() {
 
-            $('.editbtn_fees').on('click', function() {
-
-                $('#editmodal_fees').modal('show');
-
-                $tr = $(this).closest('tr');
-
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
-
-                console.log(data);
-
-                $('#fees_id').val(data[0]);
-                $('#exam_remarks').val(data[4]);
-                $('#findings').val(data[5]);
-
-            });
+        $('#downloadCSVTemplate').on('click', function() {
+            window.location.href =
+                '/step/CSVTemplate/FeesTemplate.php';
         });
+
+        $('#downloadCSVTemplateSubject').on('click', function() {
+            window.location.href =
+                '/step/CSVTemplate/SubjectsCSVTemplate.php';
+        });
+
+        $('.editbtn_fees').on('click', function() {
+
+            $('#editmodal_fees').modal('show');
+
+            $tr = $(this).closest('tr');
+
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
+
+            console.log(data);
+
+            $('#fees_id').val(data[0]);
+            $('#exam_remarks').val(data[4]);
+            $('#findings').val(data[5]);
+
+        });
+    });
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+    $(document).ready(function() {
 
-            $('.view_fees').on('click', function() {
+        $('.view_fees').on('click', function() {
 
-                $('#view_fees').modal('show');
+            $('#view_fees').modal('show');
 
-                $tr = $(this).closest('tr');
+            $tr = $(this).closest('tr');
 
-                var data = $tr.children("td").map(function() {
-                    return $(this).text();
-                }).get();
+            var data = $tr.children("td").map(function() {
+                return $(this).text();
+            }).get();
 
-                console.log(data);
+            console.log(data);
 
-                $('#fees_id').val(data[0]);
-                $('#exam_remarks').val(data[4]);
-                $('#findings').val(data[5]);
+            $('#fees_id').val(data[0]);
+            $('#exam_remarks').val(data[4]);
+            $('#findings').val(data[5]);
 
-            });
         });
+    });
     </script>
     <script src="../assets/js/jquery.min.js"></script>
     <script src="../../assets/js/script.js"></script>

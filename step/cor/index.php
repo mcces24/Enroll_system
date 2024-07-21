@@ -579,7 +579,7 @@ else{
                                                         <a href="cor.php?id=<?= $student['id']; ?>" class="btn btn-success btn-sm" target="_blank">Print Certificate Of Enrollment</a>
                                                          <?php endif; ?>
                                                          <?php if($student['type'] == "Shift" OR $student['type'] == "Irregular" OR $student['type'] == "Transferee"): ?>
-                                                        <a href="cor-irregular.php?id_number=<?= $student['id_number']; ?>" class="btn btn-success btn-sm" target="_blank">Print Certificate Of Enrollment</a>
+                                                            <a href="cor.php?id=<?= $student['id']; ?>" class="btn btn-success btn-sm" target="_blank">Print Certificate Of Enrollment</a>
                                                          <?php endif; ?>
                                                         <button formaction="code.php?id=<?= $student['id']; ?>&id_number=<?= $student['id_number']; ?>" formmethod="POST" class="btn btn-success btn-sm" name="done" >Done Printing</button>
                                                   </td>

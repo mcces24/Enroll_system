@@ -62,9 +62,11 @@
             <div class="modal-body" style="text-align: left;">
                 <form method="POST" action="code.php">
 
-
+    
                     <div class="form-group">
                         <input type="hidden" name="student_id" id="student_id" value="<?php echo $student['id']; ?>">
+                        <input type="hidden" name="type" id="type_student" value="regular">
+                        <input type="hidden" name="subjects" id="subjects" value="">
                         <label class="form-group"> Aplicant Number </label>
                         <input type="text" name="applicant_id" id="applicant_id" class="form-control" value="<?php echo $student['applicant_id']; ?>" readonly>
                         <input type="hidden" name="status_type" id="status_type" class="form-control" value="New Students" readonly>

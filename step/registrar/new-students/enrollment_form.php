@@ -174,7 +174,37 @@ if ($conn->connect_error) {
 }
 $section_id1 = $student['section_id'];
 $semester_id1 = $student['semester_id'];
-$sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor, lab_unit FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
+$course_id = $student['course_id'];
+$year_id = $student['year_id'];
+$academic = $student['academic'];
+$id_number = $student['id_number'];
+
+if ($student['type'] == "Irregular") {
+  $selectSubject = "SELECT * FROM selected_subject WHERE id_number = '$id_number' ORDER BY select_id LIMIT 1 ";
+  $selectSubjectResults = $conn->query($selectSubject);
+
+  if ($selectSubjectResults->num_rows > 0) {
+    while($subjects = $selectSubjectResults->fetch_assoc()) {
+      // Decode JSON string to PHP array
+      $string = $subjects['subject_codes'];
+
+      $unescapedString = stripslashes($string);
+
+      $array = json_decode($unescapedString, true);
+
+      //Convert array to a string enclosed in parentheses
+      $convertedString = '(' . implode(', ', array_map(function($item) {
+          return '"' . $item . '"';
+      }, $array)) . ')';
+
+      $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.course_id = '$course_id' AND subjects.subject_code IN $convertedString AND subject_connects.course_id = $course_id";
+    }
+  } else {
+    $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id1' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' AND subject_connects.course_id = $course_id";
+  }
+} else {
+  $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id1' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' AND subject_connects.course_id = $course_id";
+}
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -182,9 +212,8 @@ if ($result->num_rows > 0) {
   while($row = $result->fetch_assoc()) {
     ?>
 
-    
     <tr>
-      <td><?php echo  $row["subject_code"] ?></td>
+      <td><?php echo  $row["subjectCode"] ?></td>
       <td><?php echo  $row["subject_name"] ?></td>
       <td><?php  if ($row["units"] == 0){echo '1';} else{echo $row["units"];} ?> <?php
         if ($row["lab_unit"] !=0) {
@@ -192,13 +221,11 @@ if ($result->num_rows > 0) {
             echo  "($lab)"; 
         }
         ?></td>
-      <td><?php echo  $row["days"] ?></td>
-      <td><?php echo  $row["time_sched"] ?></td>
-      <td><?php echo  $row["room"] ?></td>
-      <td><?php echo  $row["instructor"] ?></td>
+      <td><?php echo !empty($row["days"]) ? $row["days"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["time_sched"]) ? $row["time_sched"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["room"]) ? $row["room"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["instructor"]) ? $row["instructor"] : 'TBA' ?></td>
     </tr>
-
-    
     
 <?php  }
  }   else {
@@ -233,19 +260,7 @@ if ($result->num_rows > 0) {
       </thead>
       <tbody>
 <?php
-require '../../../database/regis.php';
-require '../../../database/regis2.php';
-require '../../../database/regis3.php';
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-  die("Connection failed: " . $conn->connect_error);
-}
-$section_id1 = $student['section_id'];
-$semester_id1 = $student['semester_id'];
-$sql = "SELECT subject_code, subject_name, units, days, time_sched, room, instructor, lab_unit FROM subjects WHERE section_id=$section_id1 AND semester_id = '$semester_id1' ";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -255,7 +270,7 @@ if ($result->num_rows > 0) {
 
     
     <tr>
-      <td><?php echo  $row["subject_code"] ?></td>
+      <td><?php echo  $row["subjectCode"] ?></td>
       <td><?php echo  $row["subject_name"] ?></td>
       <td><?php  if ($row["units"] == 0){echo '1';} else{echo $row["units"];} ?> <?php
         if ($row["lab_unit"] !=0) {
@@ -263,10 +278,10 @@ if ($result->num_rows > 0) {
             echo  "($lab)"; 
         }
         ?></td>
-      <td><?php echo  $row["days"] ?></td>
-      <td><?php echo  $row["time_sched"] ?></td>
-      <td><?php echo  $row["room"] ?></td>
-      <td><?php echo  $row["instructor"] ?></td>
+      <td><?php echo !empty($row["days"]) ? $row["days"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["time_sched"]) ? $row["time_sched"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["room"]) ? $row["room"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["instructor"]) ? $row["instructor"] : 'TBA' ?></td>
     </tr>
 
     

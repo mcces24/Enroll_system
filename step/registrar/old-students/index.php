@@ -233,7 +233,7 @@ else{
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-5 col-xl-6">
+                    <!-- <div class="col-12 col-md-5 col-xl-6">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white">
                                 Queuing
@@ -349,8 +349,8 @@ else{
                                     
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-7 col-xl-12">
+                    </div> -->
+                    <div class="col-12 col-md-12 col-xl-12">
                         <?php if(in_array($rows['status'] AND $rows1['sem_status'],array('1'))): ?> 
                             <?php 
                             if(isset($_GET['search']))
@@ -375,7 +375,7 @@ else{
                                        
                                         $academic = "$start-$end";
 
-                                        $query = "SELECT * FROM students INNER JOIN que ON students.id=que.student_id INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id  WHERE (status_type = 'Old Students' OR status_type = 'Enroll ID' OR status_type = 'Enroll Old Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(id_number) LIKE '%$filtervalues%' ";
+                                        $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id  WHERE (status_type = 'Old Students' OR status_type = 'Enroll ID' OR status_type = 'Enroll Old Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(id_number) LIKE '%$filtervalues%' ";
                                         $query_run = mysqli_query($conn, $query);
 
                                         if(mysqli_num_rows($query_run) > 0)
@@ -395,7 +395,7 @@ else{
                                        
                                         $academic = "$start-$end";
                                         if ( $row['section_id'] != 0) {
-                                        $query = "SELECT * FROM students INNER JOIN que ON students.id=que.student_id INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id INNER JOIN sections s ON students.section_id=s.section_id   WHERE (status_type = 'Old Students' OR status_type = 'Enroll ID' OR status_type = 'Enroll Old Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(id_number) LIKE '%$filtervalues%' ";
+                                        $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id INNER JOIN sections s ON students.section_id=s.section_id   WHERE (status_type = 'Old Students' OR status_type = 'Enroll ID' OR status_type = 'Enroll Old Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(id_number) LIKE '%$filtervalues%' ";
                                         }
                                         $query_run = mysqli_query($conn, $query);
 
@@ -492,10 +492,7 @@ else{
                                         else
                                         {
                                             ?>
-                                                <tr>
-                                                    <td colspan="6" style="text-align:center;">No ID Number Found!!</td>
-                                                </tr>
-                                                
+                                            <h4>Student's not pre-enrolled.</h4>
                                             <?php
                                         }
                                     }

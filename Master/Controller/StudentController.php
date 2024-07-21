@@ -9,6 +9,27 @@ class StudentController extends Student {
         }
         return $userId;
     }
+
+    public function ifAlreadyPreEnrollController($data) {
+        $response = [];
+        try {
+            $stmt = $this->ifAlreadyPreEnroll($data);
+            if ($stmt->rowCount() > 0) {
+                $response['isAlreadySubmitted'] = true;
+            } else {
+                $response['isAlreadySubmitted'] = false;
+            }
+        } catch (PDOException $e) {
+            // Handle PDOException (database connection issues, etc.)
+            echo "PDOException in ifAlreadyPreEnrollController(): " . $e->getMessage();
+            return false; // or handle the error in another way
+        } catch (Exception $e) {
+            // Handle other exceptions
+            echo "Exception in ifAlreadyPreEnrollController(): " . $e->getMessage();
+            return false; // or handle the error in another way
+        }
+        return $response;
+    }
     
     public function preEnrollAdd($data) {
         $response = [];
@@ -56,7 +77,9 @@ class StudentController extends Student {
         try {
             $new_user_id = $data['new_user_id'];
             $condition = [
-                'WHERE' => "new_user_id = $new_user_id"
+                'WHERE' => "new_user_id = $new_user_id",
+                'LIMIT' => 1,
+                'ORDER' => 'id DESC',
             ];
             $studentLists = $this->getStudentList($condition);
 
@@ -76,7 +99,8 @@ class StudentController extends Student {
                 'course_id' => isset($returnStudentList['students'][0]['course_id']) ? $returnStudentList['students'][0]['course_id'] : 0,
                 'section_id' => isset($returnStudentList['students'][0]['section_id']) ? $returnStudentList['students'][0]['section_id'] : 0,
                 'semester_id' => isset($returnStudentList['students'][0]['semester_id']) ? $returnStudentList['students'][0]['semester_id'] : 0,
-                'year_id' => isset($returnStudentList['students'][0]['year_id']) ? $returnStudentList['students'][0]['year_id'] : 0
+                'year_id' => isset($returnStudentList['students'][0]['year_id']) ? $returnStudentList['students'][0]['year_id'] : 0,
+                'academic' => isset($returnStudentList['students'][0]['year_id']) ? $returnStudentList['students'][0]['year_id'] : 0
             ];
             $qrCode = $qrcodeController->getQrcodeData($params);
             $returnStudentList['qrcode'] = isset($qrCode[0]) ? $qrCode[0] : array();

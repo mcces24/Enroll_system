@@ -257,8 +257,24 @@ require '../../../database/regis3.php';
         .result1 p:hover {
             background: #f2f2f2;
         }
-    </style>
 
+        .header {
+            display: flex;
+            align-items: center; /* optional, based on your design */
+            padding: 10px; /* optional, based on your design */
+            background-color: #f8f9fa; /* optional, based on your design */
+        }
+
+        .dataTables_length {
+            display: none;
+        }
+
+        .enroll_now {
+            pointer-events: none;
+            color: gray; /* Optional: to show that the link is disabled */
+            text-decoration: none; /* Optional: to remove underline */
+        }
+    </style>
 
 </head>
 
@@ -454,13 +470,13 @@ require '../../../database/regis3.php';
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-7 col-xl-12">
+                    <div class="col-12 col-md-12 col-xl-12">
                         <?php if (in_array($rows['status'] and $rows1['sem_status'], array('1'))) : ?>
                             <?php
                             if (isset($_GET['search'])) {    ?>
                                 <div class="card border-0 shadow-sm h-100">
                                     <div class="card-header bg-white">
-                                        Results
+                                        <b>Results</b>
                                     </div>
                                     <div class="card-body">
 
@@ -550,10 +566,10 @@ require '../../../database/regis3.php';
                                                                         <p style="width: 90%;" class="form-control"><?php echo $student['lname'] ?></p>
                                                                     </div>
                                                                 </div>
-                                                                <div class="input-group mb-3">
+                                                                <div class="input-group  mb-3">
                                                                     <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                                         <label class="mb-1"><span>Applicant Number</span></label>
-                                                                        <p style="width: 90%;" class="form-control"><?php echo $student['applicant_id'] ?></p>
+                                                                        <p style="width: 90%;" class="form-control sm"><?php echo $student['applicant_id'] ?></p>
                                                                     </div>
                                                                     <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                                         <label class="mb-1"><span>Gender</span></label>
@@ -561,32 +577,72 @@ require '../../../database/regis3.php';
                                                                     </div>
                                                                     <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                                         <label class="mb-1"><span>ID Number</span></label>
-                                                                        <p style="width: 90%; color: red;" class="form-control"><?php echo $student['id_number'] ?></p>
+                                                                        <?php if ($student['id_number'] != 0) { ?>
+                                                                            <p style="width: 90%; color: red;" class="form-control"><?php echo $student['id_number'] ?></p>
+                                                                        <?php } else { ?>
+                                                                            <p style="width: 90%; color: red;" class="form-control">Not Yet Enroll</p>
+                                                                        <?php } ?>
                                                                     </div>
                                                                 </div>
-
-                                                                <tr style="text-align: center;">
-
-                                                                    <td hidden><?= $student['applicant_id']; ?></td>
-                                                                    <td hidden><?= $student['id']; ?></td>
-                                                                    <td><span hidden></span></td>
-                                                                    <td width="100%">
+                                                                <hr>
+                                                                <div style="text-align: center;" >
+                                                                    <span hidden><?= $student['applicant_id']; ?></span>
+                                                                    <span hidden><?= $student['id']; ?></span>
+                                                                    <div width="100%">
 
                                                                         <?php if (in_array($student['status_type'], array('Enroll'))) : ?>
-                                                                            <a href="#addsection_<?php echo $student['id']; ?>" class="btn btn-success btn-sm float-right" data-bs-toggle="modal"> Add Section for: <?= $student['course_code']; ?> - <?= $student['year_name']; ?></a>
-                                                                            <a href="#edit_<?php echo $student['id']; ?>" class="btn btn-info btn-sm" data-bs-toggle="modal"> Enroll Applicant</a>
+                                                                            <!-- <a href="#addsection_<?php echo $student['id']; ?>" class="btn btn-success btn-sm float-right" data-bs-toggle="modal"> Add Section for: <?= $student['course_code']; ?> - <?= $student['year_name']; ?></a> -->
+                                                                            <a href="#edit_<?php echo $student['id']; ?>" class="btn btn-info btn-sm enroll_now" id="enroll_now" disabled data-bs-toggle="modal"> Enroll Applicant</a>
                                                                         <?php endif; ?>
                                                                         <?php if (in_array($student['status_type'], array('New Students'))) : ?>
                                                                             <a href="#update_<?php echo $student['id']; ?>" class="btn btn-warning btn-sm" data-bs-toggle="modal"> Update Document</a>
                                                                         <?php endif; ?>
-                                                                        <?php if (in_array($student['type'], array('New')) and in_array($student['status_type'], array('New Students'))) : ?>
+                                                                        <?php if (in_array($student['type'], array('Regular', 'Irregular')) and in_array($student['status_type'], array('New Students'))) : ?>
                                                                             <a href="enrollment_form.php?id=<?= $student['id']; ?>" class="btn btn-primary btn-sm" target="_blank">Generate Enrollment Form</a>
                                                                         <?php endif; ?>
-                                                                        <?php if (in_array($student['type'], array('Transferee')) and in_array($student['status_type'], array('New Students'))) : ?>
-                                                                            <a href="subject-select.php?id_number=<?= $student['id_number']; ?>&section=<?= $student['section_id']; ?>" class="btn btn-primary btn-sm" target="_blank">Subjects To Enroll</a>
-                                                                        <?php endif; ?>
-                                                                    </td>
-                                                                </tr>
+                                                                    </div>
+                                                                </div>
+                                                                <?php if($student['type'] == 'New'): ?>
+                                                                <hr>
+                                                                <div class="col-12">
+                                                                    <div class="header" id="type" style="display: flex; align-items: center;">
+                                                                        <div>
+                                                                            <b>Subjects</b>
+                                                                        </div>
+                                                                        <div class="mx-3">
+                                                                            <input type="checkbox" checked name="regular" id="regular" data-course_id="<?php echo $student['course_id'] ?>" data-year_id="<?php echo $student['year_id'] ?>">
+                                                                            <b>Regular</b>
+                                                                        </div>
+                                                                        <div class="mx-3">
+                                                                            <input type="checkbox" name="irregular" id="irregular" data-course_id="<?php echo $student['course_id'] ?>" data-year_id="<?php echo $student['year_id'] ?>">
+                                                                            <b>Irregular</b>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div class="table-responsive mt-2" style="text-align: center;">
+                                                                <span class="loading">Loading subjects.....</span>
+                                                                <table id="Mytableid" class="" >
+                                                                    <thead >
+                                                                        <tr>
+                                                                            <th>Select</th>
+                                                                            <th>Code</th>
+                                                                            <th>Name</th>
+                                                                            <th>Unit</th>
+                                                                            <th>Lab Unit</th>
+                                                                            <th>Days</th>
+                                                                            <th>Time</th>
+                                                                            <th>Room</th>
+                                                                            <th>Instructor</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                    </tbody>
+                                                                </table>
+                                                                </div>
+                                                                <?php endif; ?>
+                                                                
 
 
                                                     <?php
@@ -640,10 +696,17 @@ require '../../../database/regis3.php';
     <!-- start: JS -->
     <script src="../../assets/js/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
     <script src="../../assets/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets/js/script.js"></script>
 
     <script>
+        // jQuery(document).ready(function() {
+        //     jQuery("#Mytableid").DataTable({
+        //         "pageLength": 50,
+        //         "ordering": false,
+        //     });
+        // });
         $(document).ready(function() {
             $('.search-box input[type="text"]').on("keyup input", function() {
                 /* Get input value on change */
@@ -666,6 +729,184 @@ require '../../../database/regis3.php';
                 $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
                 $(this).parent(".result").empty();
             });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#Mytableid').hide();
+            setTimeout(() => {
+                $('#regular').prop('checked', true).trigger('change');
+            }, 100);
+            var savedSubjects = [];
+            $('#irregular').change(function() {
+                savedSubjects = [];
+                $('input[name="subjects"]').val('');
+                if ($(this).is(':checked')) {
+                    $('input[name="type"]').val('Irregular');
+                    $('#regular').prop('checked', false);
+                    $('#enroll_now').addClass('enroll_now');
+                    var course_id = $(this).data('course_id');
+                    var year_id = $(this).data('year_id');
+                    
+                    var data = {
+                        type: 'irregular',
+                        course_id: course_id,
+                        year_id: year_id
+                    };
+
+                    // AJAX request
+                    $.ajax({
+                        url: 'getSubjects.php', // Replace with your server URL
+                        type: 'POST',
+                        data: data,
+                        success: function(response) {
+                            
+                            if (response.error) {
+                                console.error('Error:', response.error);
+                            } else if (response.success) {
+                                // Handle the successful response here
+                                var table = $('#Mytableid').DataTable();
+                                if ($.fn.DataTable.isDataTable('#Mytableid')) {
+                                    table.destroy(); // Destroy existing DataTable instance
+                                }
+
+                                // Example: Populate a table or perform other actions with the data
+                                var tableBody = $('#Mytableid tbody');
+                                tableBody.empty(); // Clear existing data
+                                var subjectCount = 0;
+                                response.subjects.forEach(function(subject) {
+                                    subjectCount ++;
+                                    var row = '<tr style="text-align: center;">' +
+                                            '<td><input type="checkbox" class="subject-checkbox" data-code="' + subject.subjectCode + '"></td>' +
+                                            '<td>' + subject.subjectCode + '</td>' +
+                                            '<td>' + subject.subject_name + '</td>' +  // Adjust based on your actual data
+                                            '<td>' + subject.course_id + '</td>' +
+                                            '<td>' + subject.year_id + '</td>' +
+                                            '<td>' + (subject.days != null ? subject.days : 'TBA') + '</td>' + 
+                                            '<td>' + (subject.time_schedi != null ? subject.time_sched : 'TBA') + '</td>' + 
+                                            '<td>' + (subject.room	 != null ? subject.room : 'TBA') + '</td>' + 
+                                            '<td>' + (subject.instructor != null ? subject.instructor : 'TBA') + '</td>' + 
+                                            '</tr>';
+                                    tableBody.append(row);
+                                });
+
+                                jQuery("#Mytableid").DataTable({
+                                    "pageLength": 20,
+                                    "ordering": false,
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle any errors here
+                            console.error('Error:', status, error);
+                        }
+                    });
+                    
+                }
+            });
+
+            $('#regular').change(function() {
+                savedSubjects = [];
+                $('input[name="subjects"]').val('');
+                if ($(this).is(':checked')) {
+                    $('input[name="type"]').val('Regular');
+                    $('#irregular').prop('checked', false);
+                    var course_id = $(this).data('course_id');
+                    var year_id = $(this).data('year_id');
+                    
+                    var data = {
+                        type: 'regular',
+                        course_id: course_id,
+                        year_id: year_id
+                    };
+
+                    // AJAX request
+                    $.ajax({
+                        url: 'getSubjects.php', // Replace with your server URL
+                        type: 'POST',
+                        data: data,
+                        success: function(response) {
+                            $(".loading").hide();
+                            $("#Mytableid").show();
+
+                            if (response.error) {
+                                console.error('Error:', response.error);
+                            } else if (response.success) {
+                                // Handle the successful response here
+                                var table = $('#Mytableid').DataTable();
+                                if ($.fn.DataTable.isDataTable('#Mytableid')) {
+                                    table.destroy(); // Destroy existing DataTable instance
+                                }
+
+                                // Example: Populate a table or perform other actions with the data
+                                var tableBody = $('#Mytableid tbody');
+                                tableBody.empty(); // Clear existing data
+                                var subjectCount = 0;
+                                response.subjects.forEach(function(subject) {
+                                    subjectCount ++;
+                                    var row = '<tr style="text-align: center;">' +
+                                            '<td><input type="checkbox" checked disabled class="subject-checkbox" data-code="' + subject.subjectCode + '"></td>' +
+                                            '<td>' + subject.subjectCode + '</td>' +
+                                            '<td>' + subject.subject_name + '</td>' +  // Adjust based on your actual data
+                                            '<td>' + subject.course_id + '</td>' +
+                                            '<td>' + subject.year_id + '</td>' +
+                                            '<td>' + (subject.days != null ? subject.days : 'TBA') + '</td>' + 
+                                            '<td>' + (subject.time_schedi != null ? subject.time_sched : 'TBA') + '</td>' + 
+                                            '<td>' + (subject.room	 != null ? subject.room : 'TBA') + '</td>' + 
+                                            '<td>' + (subject.instructor != null ? subject.instructor : 'TBA') + '</td>' + 
+                                            '</tr>';
+                                    tableBody.append(row);
+                                });
+
+                                jQuery("#Mytableid").DataTable({
+                                    "pageLength": subjectCount,
+                                    "ordering": false,
+                                });
+
+                                setTimeout(() => {
+                                    $('#Mytableid').find('.subject-checkbox').each(function() {
+                                        $(this).prop('checked', true).trigger('change');
+                                    });
+                                }, 100);
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            // Handle any errors here
+                            console.error('Error:', status, error);
+                        }
+                    });
+                }
+            });
+            
+            
+            $('#Mytableid').on('change', '.subject-checkbox', function() {
+                $('#enroll_now').removeClass('enroll_now');
+                var subjectCode = $(this).data('code');
+
+                if ($(this).is(':checked')) {
+                    savedSubjects.push(subjectCode);
+                    
+                } else {
+                    savedSubjects = savedSubjects.filter(code => code !== subjectCode);
+                }
+                var savedSubjectsString = JSON.stringify(savedSubjects);
+                $('input[name="subjects"]').val(savedSubjectsString);
+            });
+
+            // Load saved subjects (optional)
+            function loadSavedSubjects() {
+                var savedSubjects = JSON.parse(localStorage.getItem('savedSubjects')) || [];
+
+                $('#Mytableid .subject-checkbox').each(function() {
+                    var subjectId = $(this).data('id');
+                    if (savedSubjects.some(subject => subject.id === subjectId)) {
+                        $(this).prop('checked', true);
+                    }
+                });
+            }
+
+            loadSavedSubjects();
         });
     </script>
     <!-- end: JS -->

@@ -21,7 +21,31 @@ function getStudentLists() {
     global $studentController; 
     try {
         $getVerifiedData = $studentController->getStudents();
-        return isset($getVerifiedData) ? $getVerifiedData : array();
+        return !empty($getVerifiedData) ? $getVerifiedData : array();
+    } catch (Exception $e) {
+        // Handle other exceptions
+        //echo "Exception in createNewUser(): " . $e->getMessage();
+        return false; // or handle the error in another way
+    }
+}
+
+function getStudentData() {
+    global $studentController; 
+    try {
+        $studentData = $studentController->getStudents();
+        return !empty($studentData) ? $studentData : array();
+    } catch (Exception $e) {
+        // Handle other exceptions
+        //echo "Exception in createNewUser(): " . $e->getMessage();
+        return false; // or handle the error in another way
+    }
+}
+
+function checkIfAlreadyPreEnroll($data) {
+    global $studentController; 
+    try {
+        $checkIfAlreadyPreEnroll = $studentController->ifAlreadyPreEnrollController($data);
+        return !empty($checkIfAlreadyPreEnroll) ? $checkIfAlreadyPreEnroll : array();
     } catch (Exception $e) {
         // Handle other exceptions
         //echo "Exception in createNewUser(): " . $e->getMessage();

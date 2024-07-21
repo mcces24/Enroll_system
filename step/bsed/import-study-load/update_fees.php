@@ -19,10 +19,10 @@
             $registration = $_POST['registration'];
             $medical = $_POST['medical'];
             $cultural = $_POST['cultural'];
-            
+            $nstp = $_POST['nstp'];
             
  
-            $sql = "UPDATE fees SET library = '$library', computer = '$computer', school_id = '$school_id', athletic = '$athletic', admission = '$admission', development = '$development', guidance = '$guidance', handbook = '$handbook', entrance = '$entrance', registration = '$registration', medical = '$medical', cultural = '$cultural' WHERE fees_id = '$fees_id'";
+            $sql = "UPDATE fees SET library = '$library', computer = '$computer', school_id = '$school_id', athletic = '$athletic', admission = '$admission', development = '$development', guidance = '$guidance', handbook = '$handbook', entrance = '$entrance', registration = '$registration', medical = '$medical', cultural = '$cultural', nstp = '$nstp' WHERE fees_id = '$fees_id'";
             //if-else statement in executing our query
             $_SESSION['message'] = ( $db->exec($sql) ) ? 'Users Information Update' : 'No changes happen upon updating users!';
  

@@ -1,6 +1,7 @@
 <?php
 // Load the database configuration file
 include_once '../../../database/dbConfig.php';
+session_start();
 
 if (isset($_POST['importSubmit'])) {
 
@@ -27,6 +28,7 @@ if (isset($_POST['importSubmit'])) {
                 $course_id = mysqli_real_escape_string($conn, $_POST['course_id']);
                 $year_id = mysqli_real_escape_string($conn, $_POST['year_id']);
                 $section_id = mysqli_real_escape_string($conn, $_POST['section_id']);
+                $academic_year = mysqli_real_escape_string($conn, $_POST['academic_year']);
                 $subject_code   = $line[0];
                 $subject_name  = $line[1];
                 $units  = $line[2];
@@ -36,35 +38,35 @@ if (isset($_POST['importSubmit'])) {
                 $room = $line[6];
                 $instructor = $line[7];
 
+                $prevQueryConnect = "SELECT * FROM subject_connects WHERE subject_code = '$subject_code' AND section_id = $section_id AND academic_year = '$academic_year' ";
+                $prevResultConnect = $db->query($prevQueryConnect);
 
-
-
-
-
-
-                // Check whether member already exists in the database with the same email
-                $prevQuery = "SELECT subject_id FROM subjects WHERE subject_name = '$line[1]' AND semester_id = '$semester_id' AND course_id = '$course_id' AND year_id = '$year_id' AND section_id = '$section_id'";
-                $prevResult = $db->query($prevQuery);
-
-                if ($prevResult->num_rows > 0) {
+                if ($prevResultConnect->num_rows > 0) {
                     // Update member data in the database
-                    $db->query("UPDATE subjects SET subject_code = '" . $subject_code . "', units = '" . $units . "', lab_unit = '$lab_unit', days = '" . $days . "', time_sched = '" . $time_sched . "', room = '" . $room . "', instructor = '$instructor' WHERE subject_code = '$subject_code' AND subject_name = '$subject_name' ");
+                    $db->query("UPDATE subject_connects SET days = '$days', time_sched = '$time_sched', room = '$room', instructor = '$instructor' WHERE subject_code = '$subject_code' AND academic_year = '$academic_year' AND course_id = '$course_id' ");
                 } else {
                     // Insert member data in the database
-                    $db->query("INSERT INTO subjects (subject_code, subject_name, units, lab_unit, days, time_sched, room, instructor, semester_id, course_id, year_id, section_id) VALUES ('" . $subject_code . "', '" . $subject_name . "', '" . $units . "', '" . $lab_unit . "', '" . $days . "', '" . $time_sched . "', '" . $room . "', '" . $instructor . "', '" . $semester_id . "', '" . $course_id . "', '" . $year_id . "', '" . $section_id . "')");
+                    $db->query("INSERT INTO subject_connects (subject_code, days, time_sched, room, instructor, academic_year, section_id, course_id) 
+                    VALUES ('" . $subject_code . "', '" . $days . "', '" . $time_sched . "', '" . $room . "', '" . $instructor . "', '" . $academic_year . "', '" . $section_id . "', '" . $course_id . "')");
                 }
             }
 
             // Close opened CSV file
             fclose($csvFile);
-            $qstring = '?status=succ';
+           $_SESSION['status'] = 'success';
+           $_SESSION['type'] = 'success';
+           $_SESSION['message'] = 'Subject Uploaded Successfully!';
         } else {
-            $qstring = '?status=err';
+            $_SESSION['status'] = 'error';
+            $_SESSION['type'] = 'error';
+            $_SESSION['message'] = 'Subject Not Updloaded!';
         }
     } else {
-        $qstring = '?status=invalid_file';
+        $_SESSION['status'] = 'error';
+        $_SESSION['type'] = 'error';
+        $_SESSION['message'] = 'Subject Not Updloaded!';
     }
-    header("Location: ./" . $qstring);
+    header("Location: ./");
 }
 
 if (isset($_POST['importSubmit_fees'])) {
@@ -103,10 +105,7 @@ if (isset($_POST['importSubmit_fees'])) {
                 $registration = $line[9];
                 $medical = $line[10];
                 $cultural = $line[11];
-
-
-
-
+                $nstp = $line[11];
 
                 // Check whether member already exists in the database with the same email
                 $prevQuery = "SELECT fees_id FROM fees WHERE semester_id = '$semester_id' AND course_id = '$course_id' AND year_id = '$year_id'";
@@ -114,10 +113,10 @@ if (isset($_POST['importSubmit_fees'])) {
 
                 if ($prevResult->num_rows > 0) {
                     // Update member data in the database
-                    $db->query("UPDATE fees SET library = '$library',computer = '$computer',school_id = '$school_id',athletic = '$athletic',admission = '$admission',development = '$development',guidance = '$guidance',handbook = '$handbook',entrance = '$entrance',registration = '$registration',medical = '$medical',cultural = '$cultural', ");
+                    $db->query("UPDATE fees SET library = '$library',computer = '$computer',school_id = '$school_id',athletic = '$athletic',admission = '$admission',development = '$development',guidance = '$guidance',handbook = '$handbook',entrance = '$entrance',registration = '$registration',medical = '$medical',cultural = '$cultural',nstp = '$nstp', ");
                 } else {
                     // Insert member data in the database
-                    $db->query("INSERT INTO fees (library, computer, school_id, athletic, admission, development, guidance, handbook, entrance, registration, medical, cultural, semester_id, course_id, year_id) VALUES ('" . $library . "', '" . $computer . "', '" . $school_id . "', '" . $athletic . "', '" . $admission . "', '" . $development . "', '" . $guidance . "', '" . $handbook . "', '" . $entrance . "', '" . $registration . "', '" . $medical . "', '" . $cultural . "', '" . $semester_id . "', '" . $course_id . "', '" . $year_id . "')");
+                    $db->query("INSERT INTO fees (library, computer, school_id, athletic, admission, development, guidance, handbook, entrance, registration, medical, cultural, nstp, semester_id, course_id, year_id) VALUES ('" . $library . "', '" . $computer . "', '" . $school_id . "', '" . $athletic . "', '" . $admission . "', '" . $development . "', '" . $guidance . "', '" . $handbook . "', '" . $entrance . "', '" . $registration . "', '" . $medical . "', '" . $cultural . "', '" . $nstp . "', '" . $semester_id . "', '" . $course_id . "', '" . $year_id . "')");
                 }
             }
 

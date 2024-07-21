@@ -5,7 +5,9 @@ if (!isStudentLogin()) {
     die();
 } else {
     $academicYear = getActiveAcademicYear();
+    $academic = !empty($academicYear) ? $academicYear['academic_start'] . '-' . $academicYear['academic_end'] : null;
     $semester = getActiveSemester();
+    $semester = !empty($semester) ?  $semester['semester_name'] : null;
     $enroll = getActiveEnroll();
     $user_id = getLoginUserId();
     $getAllList = getStudentLists();
@@ -141,9 +143,9 @@ if (!isStudentLogin()) {
                         <?php endif; ?>
                     </div>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <? if (isset($student['lname']) && isset($student['fname']) && isset($student['mname']) ) : ?>
+                        <?php if (!empty($student)): ?>
                             <li style="text-align: center;"><span><?php echo $student['lname'] ?>,<?php echo $student['fname'] ?> <?php echo $student['mname'] ?></span></li>
-                        <? endif; ?>
+                        <?php endif; ?>
                         <li><a class="dropdown-item" href="login/logout.php">Logout<i style="float: right;" class="ri-login-box-line"></i></a></li>
                     </ul>
                 </div>
@@ -208,9 +210,18 @@ if (!isStudentLogin()) {
 
                     }
                 </style>
-                <!-- start: Summary -->
-
-                <!-- end: Summary -->
+                <div class="row g-3 mt-2">
+                    <div class="col-12 col-md-12 col-xl-12">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h4>
+                                    Current School Year: <?php print_r($academic) ?> | <?php print_r($semester) ?>
+                                </h4>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- start: Graph -->
                 <div class="row g-3 mt-2">
 
@@ -220,34 +231,57 @@ if (!isStudentLogin()) {
                                 Personal Information
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="upper" style="width: 100%;">
-                                        <?php if (!empty($student)): ?>
-                                            <tr>
-                                                <th colspan="4">ID Number</th>
-                                                <td colspan="1"><?= $student['id_number']; ?></td>
-                                                <th colspan="4">Course</th>
-                                                <td colspan="1"><?= !empty($course) ? $course['course_name'] : 'Not Yet Enroll'; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="4">Student Name:</th>
-                                                <td colspan="1"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
-                                                <th colspan="4">Year Level</th>
-                                                <td colspan="1"><?= !empty($year_lvl) ? $year_lvl['year_name'] : 'Not Yet Enroll'; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <th colspan="4">Gender:</th>
-                                                <td colspan="1"><?= $student['gender']; ?></td>
-                                                <th colspan="4">Section</th>
-                                                <td colspan="1"><?= !empty($sections) ? $sections['sections'] : 'Not Yet Enroll'; ?></td>
-                                            </tr>
-                                            <?php else : ?>
-                                                <tr>
-                                                    <td colspan="6" style="text-align:center;">You are not enroll. Please Pre-enroll first.</td>
-                                                </tr>
+                                <?php if (!empty($student)): ?>
+                                        <div class="table-responsive">
+                                            <table class="upper" style="width: 100%;">
+                                                <?php if($student['semester_id'] == $semester && $student['academic'] == $academic): ?>
+                                                    <tr>
+                                                        <th colspan="4">ID Number</th>
+                                                        <td colspan="1"><?= !empty($student['id_number']) ? $student['id_number'] : 'Not Yet Enroll'; ?></td>
+                                                        <th colspan="4">Course</th>
+                                                        <td colspan="1"><?= !empty($course) ? $course['course_name'] : 'Not Yet Enroll'; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="4">Name:</th>
+                                                        <td colspan="1"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
+                                                        <th colspan="4">Year Level</th>
+                                                        <td colspan="1"><?= !empty($year_lvl) ? $year_lvl['year_name'] : 'Not Yet Enroll'; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th colspan="4">Gender:</th>
+                                                        <td colspan="1"><?= $student['gender']; ?></td>
+                                                        <th colspan="4">Section</th>
+                                                        <td colspan="1"><?= !empty($sections) ? $sections['sections'] : 'Not Yet Enroll'; ?></td>
+                                                    </tr>
+                                                    <?php else : ?>
+                                                    <tr>
+                                                        <?php if($enroll['enroll_name'] == 'Old Students'): ?>
+                                                        <td colspan="6" style="text-align:center;">
+                                                            <h4>Pre enrollment for Old student is on going. Pre enroll now.</h4>
+                                                            <a href="/enroll-now" class="btn btn-success btn-sm">Pre enroll here...</a>
+                                                        </td>
+                                                        <?php else: ?>
+                                                        <td colspan="6" style="text-align:center;">
+                                                            <h4>Enrollment for old students is not yet open. Check again later.</h4>
+                                                        </td>
+                                                        <?php endif; ?>
+                                                    </tr>
+                                                <?php endif; ?>
+                                            </table>
+                                        </div>
+                                <?php else: ?>  
+                                    <?php if($enroll['enroll_name'] == 'New Students'): ?>     
+                                        <div style="text-align:center;">
+                                            <h4>Pre enrollment for New student is on going. Pre enroll now.</h4>
+                                            <a href="/enroll-now" class="btn btn-success btn-sm">Pre enroll here...</a>
+                                        </div>
+                                        <?php else: ?>
+                                        <div style="text-align:center;">
+                                            <h4>Enrollment for new students is not yet open. Check again later.</h4>
+                                        </div>
                                         <?php endif; ?>
-                                    </table>
-                                </div>
+                                    </tr>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -298,8 +332,10 @@ if (!isStudentLogin()) {
                                         </tbody>
                                     </table>
                                 </div>
+                                <?php if (!empty($subject)) : ?>
                                 <button id="btn-one" class="btn btn-success btn-sm">Download as PDF</button>
                                 <button id="dw_bt" class="btn btn-success btn-sm">Download a Image</button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

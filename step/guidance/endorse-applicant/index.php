@@ -136,8 +136,6 @@ if (mysqli_num_rows($querys_run111) > 0) {
                 <?php include '../inc/dropdown.php' ?>
             </nav>
 
-
-
             <!-- end: Navbar -->
 
             <!-- start: Content -->
@@ -204,19 +202,19 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                             <label class="mb-1">
                                                                 <h6>Applicant Number:</h6>
                                                             </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['applicant_id']; ?>" readonly>
+                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['applicant_id']; ?>" disabled>
                                                         </div>
                                                         <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                             <label class="mb-1">
                                                                 <h6>Fullname:</h6>
                                                             </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?>" readonly>
+                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?>" disabled>
                                                         </div>
                                                         <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                             <label class="mb-1">
                                                                 <h6>Gender:</h6>
                                                             </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['gender']; ?>" readonly>
+                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['gender']; ?>" disabled>
                                                         </div>
                                                     </div>
                                                     <div class="input-group mb-3">
@@ -224,228 +222,22 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                             <label class="mb-1">
                                                                 <h6>Address:</h6>
                                                             </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['address']; ?>" readonly>
+                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['address']; ?>" disabled>
                                                         </div>
                                                         <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                             <label class="mb-1">
                                                                 <h6>Age:</h6>
                                                             </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['age']; ?>" readonly>
+                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['age']; ?>" disabled>
                                                         </div>
                                                         <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                             <label class="mb-1">
                                                                 <h6>Birthdate:</h6>
                                                             </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['date_of_birth']; ?>" readonly>
+                                                            <input style="width: 90%;" class="form-control" type="text" name="app" value="<?= $student['date_of_birth']; ?>" disabled>
                                                         </div>
                                                     </div>
-                                                    <hr>
-                                                    <h4 class="text-center">Admission Test Score</h4>
-                                                    <div class="input-group mb-3">
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Comprehension Score:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="comp" value="<?= $student['comp']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Comprehension Category:</h6>
-                                                            </label>
-                                                            <select style="width: 90%;" class="form-control" name="com_cate">
-                                                                <option value="<?= $student['com_cate']; ?>"><?= $student['com_cate']; ?></option>
-                                                                <option disabled>Select Catergory</option>
-                                                                <option value="Superior">Superior</option>
-                                                                <option value="Above Average">Above Average</option>
-                                                                <option value="High Average">High Average</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Low Average">Low Average</option>
-                                                                <option value="Below Average">Below Average</option>
-                                                                <option value="Low">Low</option>
-                                                            </select>
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Reasoning Score:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="reas" value="<?= $student['reas']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Reasoning Category:</h6>
-                                                            </label>
-                                                            <select style="width: 90%;" class="form-control" name="reas_cat">
-                                                                <option value="<?= $student['reas_cat']; ?>"><?= $student['reas_cat']; ?></option>
-                                                                <option disabled>Select Catergory</option>
-                                                                <option value="Superior">Superior</option>
-                                                                <option value="Above Average">Above Average</option>
-                                                                <option value="High Average">High Average</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Low Average">Low Average</option>
-                                                                <option value="Below Average">Below Average</option>
-                                                                <option value="Low">Low</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Verbal Total Raw Score:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="verbal" value="<?= $student['verbal']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Verbal Stanine:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="verbal_stanine" value="<?= $student['verbal_stanine']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Verbal Percentile:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="verbal_percen" value="<?= $student['verbal_percen']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Verbal Category:</h6>
-                                                            </label>
-                                                            <select style="width: 90%;" class="form-control" name="verbal_cat">
-                                                                <option value="<?= $student['verbal_cat']; ?>"><?= $student['verbal_cat']; ?></option>
-                                                                <option disabled>Select Catergory</option>
-                                                                <option value="Superior">Superior</option>
-                                                                <option value="Above Average">Above Average</option>
-                                                                <option value="High Average">High Average</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Low Average">Low Average</option>
-                                                                <option value="Below Average">Below Average</option>
-                                                                <option value="Low">Low</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Quantitative Score:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="quan" value="<?= $student['quan']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Quantitative Category:</h6>
-                                                            </label>
-                                                            <select style="width: 90%;" class="form-control" name="quan_cat">
-                                                                <option value="<?= $student['quan_cat']; ?>"><?= $student['quan_cat']; ?></option>
-                                                                <option disabled>Select Catergory</option>
-                                                                <option value="Superior">Superior</option>
-                                                                <option value="Above Average">Above Average</option>
-                                                                <option value="High Average">High Average</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Low Average">Low Average</option>
-                                                                <option value="Below Average">Below Average</option>
-                                                                <option value="Low">Low</option>
-                                                            </select>
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Figural Score:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="figu" value="<?= $student['figu']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Figural Category:</h6>
-                                                            </label>
-                                                            <select style="width: 90%;" class="form-control" name="figu_cat">
-                                                                <option value="<?= $student['figu_cat']; ?>"><?= $student['figu_cat']; ?></option>
-                                                                <option disabled>Select Catergory</option>
-                                                                <option value="Superior">Superior</option>
-                                                                <option value="Above Average">Above Average</option>
-                                                                <option value="High Average">High Average</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Low Average">Low Average</option>
-                                                                <option value="Below Average">Below Average</option>
-                                                                <option value="Low">Low</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group mb-3">
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Non-verbal Total Raw Score:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="nonver" value="<?= $student['nonver']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Non-verbal Stanine:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="nonver_stanine" value="<?= $student['nonver_stanine']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Non-verbal Percentile:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="nonver_percen" value="<?= $student['nonver_percen']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Non-verbal Category:</h6>
-                                                            </label>
-                                                            <select style="width: 90%;" class="form-control" name="nonver_cat">
-                                                                <option value="<?= $student['nonver_cat']; ?>"><?= $student['nonver_cat']; ?></option>
-                                                                <option disabled>Select Catergory</option>
-                                                                <option value="Superior">Superior</option>
-                                                                <option value="Above Average">Above Average</option>
-                                                                <option value="High Average">High Average</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Low Average">Low Average</option>
-                                                                <option value="Below Average">Below Average</option>
-                                                                <option value="Low">Low</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-
-
-                                                    <div class="input-group mb-3">
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Total Raw Score:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="total_raw" value="<?= $student['total_raw']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Total Stanine:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="total_stanine" value="<?= $student['total_stanine']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Total Percentile:</h6>
-                                                            </label>
-                                                            <input style="width: 90%;" class="form-control" type="text" name="total_percen" value="<?= $student['total_percen']; ?>">
-                                                        </div>
-                                                        <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                            <label class="mb-1">
-                                                                <h6>Overall Category:</h6>
-                                                            </label>
-                                                            <select style="width: 90%;" class="form-control" name="total_cat">
-                                                                <option value="<?= $student['total_cat']; ?>"><?= $student['total_cat']; ?></option>
-                                                                <option disabled>Select Catergory</option>
-                                                                <option value="Superior">Superior</option>
-                                                                <option value="Above Average">Above Average</option>
-                                                                <option value="High Average">High Average</option>
-                                                                <option value="Average">Average</option>
-                                                                <option value="Low Average">Low Average</option>
-                                                                <option value="Below Average">Below Average</option>
-                                                                <option value="Low">Low</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
+                                                
                                                     <div class="input-group mb-3">
                                                         <div style="float: left;" class="col-12 col-md-12 col-xl-12 text-center">
                                                             <input type="hidden" name="status_type" value="Applicant">
@@ -455,12 +247,9 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                                 </button>
                                                             <?php endif; ?>
                                                             <?php if (in_array($student['status_type'], array('Applicant', 'Enroll'))) : ?>
-                                                                <button type="submit" name="add_exam1" class="btn btn-warning btn-sm">
-                                                                    Update
-                                                                </button>
                                                                 <a href="steps.php?id=<?= $student['id']; ?>" target="_blank" class="btn btn-success btn-sm">Enrollment Steps</a>
                                                                 <a href="results.php?applicant_id=<?= $student['applicant_id']; ?>" target="_blank" class="btn btn-success btn-sm">Assessment Report</a>
-                                                                <a href="../queuing/?search=<?php echo $student['applicant_id']; ?>" class="btn btn-success btn-sm"> Queue Applicant</a>
+                                                                <a href="#edit1_" class="btn btn-success btn-sm" data-bs-toggle="modal"> Que Students | Applicant</a>
                                                             <?php endif; ?>
                                                             <?php if (in_array($student['status_type'], array('Enroll New Students'))) : ?>
                                                                 <a href="results.php?applicant_id=<?= $student['applicant_id']; ?>" target="_blank" class="btn btn-primary btn-sm">Assessment Report</a>
@@ -469,6 +258,33 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
                                                         </div>
                                                     </div>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="edit1_" tabindex="-1" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="ModalLabel">Que Applicant</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body" style="text-align: left;">
+                                                                <form action="code.php" method="POST">
+                                                                    <input type="hidden" name="id" value="<?php echo $student['id'] ?>">
+                                                                    <div class="form-group">
+                                                                        <label class="form-group"> Que Number </label>
+                                                                        <input type="text" name="queuing" id="queuing" class="form-control" placeholder="Enter que number here...">
+                                                                    </div>
+
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+                                                                        <button type="submit" name="que_applicant" class="btn btn-primary btn-sm"> Que Students/Applicant</button>
+                                                                    </div>
+                                                                </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- End Moda -->
 
                                                 <?php
                                                 }

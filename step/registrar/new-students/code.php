@@ -26,6 +26,9 @@ if (isset($_POST['edit'])) {
     $status_type = mysqli_real_escape_string($conn, $_POST['status_type']);
     $email = mysqli_real_escape_string($conn, $_POST['email']);
 
+    $type = mysqli_real_escape_string($conn, $_POST['type']);
+    $subjects = mysqli_real_escape_string($conn, $_POST['subjects']);
+
     $query1 = "UPDATE que SET status='2' WHERE student_id='$student_id' ";
     $query_run1 = mysqli_query($conn, $query1);
 
@@ -33,10 +36,28 @@ if (isset($_POST['edit'])) {
     $query_run2 = mysqli_query($conn, $query2);
 
 
-    $query = "UPDATE students SET section_id='$section_id', id_number='$id_number', status_type='$status_type' WHERE applicant_id='$applicant_id' ";
+    $query = "UPDATE students SET type='$type', section_id='$section_id', id_number='$id_number', status_type='$status_type' WHERE applicant_id='$applicant_id' ";
     $query_run = mysqli_query($conn, $query);
 
     if ($query_run) {
+
+        if ($type == 'Irregular') {
+            $queryInsert = "INSERT INTO selected_subject (id_number, subject_codes) VALUES (?, ?)";
+
+            if ($stmt = $conn->prepare($queryInsert)) {
+                // Bind parameters (assuming id_number is an integer and subject_codes is a string)
+                $stmt->bind_param("ss", $id_number, $subjects);
+
+                $stmt->execute();
+
+                echo "New record created successfully";
+
+                // Close the statement
+                $stmt->close();
+            } else {
+                echo "Error preparing statement: " . $conn->error;
+            }
+        }
         // $query2 = "SELECT * FROM student_acc WHERE id_number = '$id_number' ";
         // $query_run2 = mysqli_query($conn, $query2);
 

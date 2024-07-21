@@ -521,136 +521,31 @@
                                                             <div class="input-group mb-3">
                                                                 <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                                                                     <label class="mb-1">
-                                                                        <h6>Comprehension Score:</h6>
+                                                                        <h6>Addmission Score:</h6>
                                                                     </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['comp'] ?></p>
+                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['admission_score'] ?></p>
                                                                 </div>
                                                                 <div style="float: left;" class="col-3 col-md-3 col-xl-3">
                                                                     <label class="mb-1">
-                                                                        <h6>Comprehension Category:</h6>
+                                                                        <h6>Description:</h6>
                                                                     </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['com_cate'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Reasoning Score:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['reas'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Reasoning Category:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['reas_cat'] ?></p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="input-group mb-3">
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Verbal Total Raw Score:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['verbal'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Verbal Stanine:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['verbal_stanine'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Verbal Percentile:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['verbal_percen'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Verbal Category:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['verbal_cat'] ?></p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="input-group mb-3">
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Quantitative Score:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['quan'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Quantitative Category:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['quan_cat'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Figural Score:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['figu'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Figural Category:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['figu_cat'] ?></p>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="input-group mb-3">
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Non-verbal Total Raw Score:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['nonver'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Non-verbal Stanine:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['nonver_stanine'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Non-verbal Percentile:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['nonver_percen'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Non-verbal Category:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['nonver_cat'] ?></p>
-                                                                </div>
-                                                            </div>
-
-
-                                                            <div class="input-group mb-3">
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Total Raw Score:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['total_raw'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Total Stanine:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['total_stanine'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Total Percentile:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['total_percen'] ?></p>
-                                                                </div>
-                                                                <div style="float: left;" class="col-3 col-md-3 col-xl-3">
-                                                                    <label class="mb-1">
-                                                                        <h6>Overall Category:</h6>
-                                                                    </label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['total_cat'] ?></p>
+                                                                    <?php
+                                                                        if ($student['admission_score'] >= 96) {
+                                                                        echo "<p class='form-control'>Superior</p>";
+                                                                        } elseif ($student['admission_score'] >= 77) {
+                                                                        echo "<p class='form-control'>Above Average</p>";
+                                                                        } elseif ($student['admission_score'] >= 60) {
+                                                                        echo "<p class='form-control'>High Average</p>";
+                                                                        } elseif ($student['admission_score'] >= 40) {
+                                                                        echo "<p class='form-control'>Average</p>";
+                                                                        } elseif ($student['admission_score'] >= 23) {
+                                                                        echo "<p class='form-control'>Low Average</p>";
+                                                                        } elseif ($student['admission_score'] >= 5) {
+                                                                        echo "<p class='form-control'>Below Average</p>";
+                                                                        } else {
+                                                                        echo "<p class='form-control'>Low</p>";
+                                                                        }
+                                                                    ?>
                                                                 </div>
                                                             </div>
 

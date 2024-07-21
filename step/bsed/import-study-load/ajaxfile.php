@@ -56,6 +56,10 @@ while( $row = mysqli_fetch_array($result) ){
     <label> Cultural Fees </label>
     <input class="form-control" type="number" name="cultural" value="<?php echo $row['cultural']; ?>"  />
 </div>
+<div class="form-group" style="width: 100%;">
+    <label> NSTP Fees </label>
+    <input class="form-control" type="number" name="nstp" value="<?php echo $row['nstp']; ?>"  />
+</div>
 
  
 <?php } ?>
