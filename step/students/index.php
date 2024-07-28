@@ -275,11 +275,17 @@ if (!isStudentLogin()) {
                                             <h4>Pre enrollment for New student is on going. Pre enroll now.</h4>
                                             <a href="/enroll-now" class="btn btn-success btn-sm">Pre enroll here...</a>
                                         </div>
+                                        <?php elseif($enroll['enroll_name'] == 'Old Students'): ?>
+                                        <div style="text-align:center;">
+                                            <h4>Pre enrollment for Old student is on going. Pre enroll now.</h4>
+                                            <a href="/enroll-now" class="btn btn-success btn-sm">Pre enroll here...</a>
+                                        </div>
                                         <?php else: ?>
                                         <div style="text-align:center;">
                                             <h4>Enrollment for new students is not yet open. Check again later.</h4>
                                         </div>
                                         <?php endif; ?>
+                                        
                                     </tr>
                                 <?php endif; ?>
                             </div>
@@ -315,13 +321,13 @@ if (!isStudentLogin()) {
                                             <?php if (!empty($subject)) : ?>
                                                 <?php foreach ($subject as $row):?>
                                                     <tr>
-                                                        <td><?php echo  $row["subject_code"] ?></td>
+                                                        <td><?php echo  $row["subjectCode"] ?></td>
                                                         <td><?php echo  $row["subject_name"] ?></td>
                                                         <td><?php echo  $row["units"] ?></td>
-                                                        <td><?php echo  $row["days"] ?></td>
-                                                        <td><?php echo  $row["time_sched"] ?></td>
-                                                        <td><?php echo  $row["room"] ?></td>
-                                                        <td><?php echo  $row["instructor"] ?></td>
+                                                        <td><?php echo !empty($row["days"]) ? $row["days"] : 'TBA' ?></td>
+                                                        <td><?php echo !empty($row["time_sched"]) ? $row["time_sched"] : 'TBA' ?></td>
+                                                        <td><?php echo !empty($row["room"]) ? $row["room"] : 'TBA' ?></td>
+                                                        <td><?php echo !empty($row["instructor"]) ? $row["instructor"] : 'TBA' ?></td>
                                                     </tr>
                                                 <?php endforeach;?>
                                             <?php else : ?>

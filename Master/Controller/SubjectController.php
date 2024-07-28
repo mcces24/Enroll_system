@@ -17,10 +17,33 @@ class SubjectController extends Subject {
                     $year_id = $params['year_id'];
                     $section_id = $params['section_id'];
                     $academic = $params['academic'];
+                    $id_number = $params['id_number'];
                     $condition = [
-                        'WHERE' => "semester_id = '$semester_id' AND course_id = $course_id AND year_id = $year_id",
-                        'JOIN' => "LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'"
+                        'FIELDS' => "*, subjects.subject_code as subjectCode",
+                        'WHERE' => "subjects.semester_id = '$semester_id' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id'",
+                        'JOIN' => "LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic' INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id"
                     ];
+
+                    if ($params['type'] == "Irregular") {
+                        $selectSubject = "SELECT * FROM selected_subject WHERE id_number = :id_number ORDER BY select_id LIMIT 1";
+                        $stmt = $db->prepare($selectSubject);
+                        $stmt->bindParam(':id_number', $id_number, PDO::PARAM_STR);
+                        $stmt->execute();
+                        
+                        if ($stmt->rowCount() > 0) {
+                            while ($subjects = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                                $string = $subjects['subject_codes'];
+                                $unescapedString = stripslashes($string);
+                                $array = json_decode($unescapedString, true);
+                    
+                                $convertedString = '(' . implode(', ', array_map(function($item) {
+                                    return '"' . $item . '"';
+                                }, $array)) . ')';
+                    
+                                $condition['WHERE'] .= " AND subjects.subject_code IN $convertedString";
+                            }
+                        }
+                    }                    
                 } else {
                     $condition = [];
                 }

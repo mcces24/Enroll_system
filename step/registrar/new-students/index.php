@@ -792,7 +792,7 @@ require '../../../database/regis3.php';
                                 });
 
                                 jQuery("#Mytableid").DataTable({
-                                    "pageLength": 20,
+                                    "pageLength": 25,
                                     "ordering": false,
                                 });
                             }
@@ -858,7 +858,11 @@ require '../../../database/regis3.php';
                                             '</tr>';
                                     tableBody.append(row);
                                 });
-
+                                if (subjectCount < 0) {
+                                    subjectCount = 10
+                                } else {
+                                    subjectCount = 25
+                                }
                                 jQuery("#Mytableid").DataTable({
                                     "pageLength": subjectCount,
                                     "ordering": false,
@@ -881,7 +885,13 @@ require '../../../database/regis3.php';
             
             
             $('#Mytableid').on('change', '.subject-checkbox', function() {
-                $('#enroll_now').removeClass('enroll_now');
+                var checkedCount = $('#Mytableid .subject-checkbox:checked').length;
+        
+                if (checkedCount > 0) {
+                    $('#enroll_now').removeClass('enroll_now');
+                } else {
+                    $('#enroll_now').addClass('enroll_now');
+                }
                 var subjectCode = $(this).data('code');
 
                 if ($(this).is(':checked')) {

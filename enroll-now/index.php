@@ -5268,7 +5268,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                <a href="/step/students/">View my account...</a>
                                                             </h6>
                                                          </div>
-                                                         <?php elseif(!isset($student['fname'])): ?>
+                                                         <?php elseif(!empty($enroll) && $enroll['enroll_name'] != 'Old Students'): ?>
                                                          <div style="width: calc(100% - 1px); text-align: center;">
                                                             <h4>Current pre enrollment is for Old Students only. Please wait until pre enrollment for New Students is open.</h4>
                                                          </div>

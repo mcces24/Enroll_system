@@ -555,7 +555,7 @@ pdf2htmlEX.defaultViewer = new pdf2htmlEX.Viewer({});
     $semester_id = $student['semester_id'];
     $course_id = $student['course_id'];
 if ($student['type'] == "Irregular") {
-    $selectSubject = "SELECT * FROM selected_subject WHERE id_number = '$id_number' ORDER BY select_id LIMIT 1 ";
+    $selectSubject = "SELECT * FROM selected_subject WHERE id_number = '$id_number' ORDER BY select_id DESC LIMIT 1 ";
     $selectSubjectResults = $conn->query($selectSubject);
   
     if ($selectSubjectResults->num_rows > 0) {
@@ -658,11 +658,12 @@ if ($conn->connect_error) {
 }
 $course_id = $student['course_id'];
 $section_id1 = $student['section_id'];
+$semester_id = $student['semester_id'];
 $year_id = $student['year_id'];
 $academic = $student['academic'];
 $id_number = $student['id_number'];
 if ($student['type'] == "Irregular") {
-    $selectSubject = "SELECT * FROM selected_subject WHERE id_number = '$id_number' ORDER BY select_id LIMIT 1 ";
+    $selectSubject = "SELECT * FROM selected_subject WHERE id_number = '$id_number' ORDER BY select_id DESC LIMIT 1 ";
     $selectSubjectResults = $conn->query($selectSubject);
   
     if ($selectSubjectResults->num_rows > 0) {
@@ -682,18 +683,10 @@ if ($student['type'] == "Irregular") {
         $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.course_id = '$course_id' AND subjects.subject_code IN $convertedString AND subject_connects.course_id = $course_id";
       }
     } else {
-        $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects 
-        LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic' 
-        INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id
-        INNER JOIN sections ON subject_connects.section_id = sections.section_id 
-        WHERE c.course_id = $course_id AND subject_connects.course_id = $course_id AND y.year_id = $year_id ";
+        $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' ";
     }
 } else {
-    $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects 
-        LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic' 
-        INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id
-        INNER JOIN sections ON subject_connects.section_id = sections.section_id 
-        WHERE c.course_id = $course_id AND subject_connects.course_id = $course_id AND y.year_id = $year_id ";
+    $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' ";
 }
 
 $result = $conn->query($sql);
@@ -713,10 +706,10 @@ if ($result->num_rows > 0) {
             echo  "($lab)"; 
         }
         ?></td>
-      <td><?php echo  $row["days"] ?></td>
-      <td><?php echo  $row["time_sched"] ?></td>
-      <td><?php echo  $row["room"] ?></td>
-      <td><?php echo  $row["instructor"] ?></td>
+      <td><?php echo !empty($row["days"]) ? $row["days"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["time_sched"]) ? $row["time_sched"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["room"]) ? $row["room"] : 'TBA' ?></td>
+      <td><?php echo !empty($row["instructor"]) ? $row["instructor"] : 'TBA' ?></td>
     </tr>
 
     
@@ -737,7 +730,7 @@ if ($result->num_rows > 0) {
 </div>
 </body>
 </html>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     function PrintPage() {
         window.print();
     }
@@ -745,4 +738,4 @@ if ($result->num_rows > 0) {
         PrintPage()
         setTimeout(function(){ window.close() },750)
     });
-</script> -->
+</script>

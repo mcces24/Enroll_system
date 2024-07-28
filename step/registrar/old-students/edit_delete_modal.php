@@ -11,7 +11,9 @@
             
             <div class="form-group">
                 <input type="hidden" name="email" id="email" value="<?php echo $row['email']; ?>">
-                <input type="hidden" name="id_number" id="id_number" value="<?php echo $row['id_number']; ?>">
+                <input type="text" name="id_number" id="id_number" value="<?php echo $row['id_number']; ?>">
+                <input type="text" name="type" id="type_student" value="regular">
+                <input type="text" name="subjects" id="subjects" value="">
                 <input type="hidden" name="student_id" id="student_id" value="<?php echo $row['id']; ?>">
                             <label class="form-group"> ID Number </label>
                             <input type="text" name="id_number" id="id_number" class="form-control"

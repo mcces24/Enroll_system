@@ -20,7 +20,7 @@ function preEnrollStudents($data) {
 function getStudentLists() {
     global $studentController; 
     try {
-        $getVerifiedData = $studentController->getStudents();
+        $getVerifiedData = $studentController->getStudentsCurrentData();
         return !empty($getVerifiedData) ? $getVerifiedData : array();
     } catch (Exception $e) {
         // Handle other exceptions

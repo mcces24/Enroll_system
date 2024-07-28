@@ -180,7 +180,7 @@ $academic = $student['academic'];
 $id_number = $student['id_number'];
 
 if ($student['type'] == "Irregular") {
-  $selectSubject = "SELECT * FROM selected_subject WHERE id_number = '$id_number' ORDER BY select_id LIMIT 1 ";
+  $selectSubject = "SELECT * FROM selected_subject WHERE id_number = '$id_number' ORDER BY select_id DESC LIMIT 1 ";
   $selectSubjectResults = $conn->query($selectSubject);
 
   if ($selectSubjectResults->num_rows > 0) {
@@ -200,10 +200,10 @@ if ($student['type'] == "Irregular") {
       $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.course_id = '$course_id' AND subjects.subject_code IN $convertedString AND subject_connects.course_id = $course_id";
     }
   } else {
-    $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id1' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' AND subject_connects.course_id = $course_id";
+    $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id1' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' ";
   }
 } else {
-  $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id1' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' AND subject_connects.course_id = $course_id";
+  $sql = "SELECT *, subjects.subject_code as subjectCode FROM subjects LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = '$academic'  INNER JOIN course c ON subjects.course_id = c.course_id INNER JOIN year_lvl y ON subjects.year_id = y.year_id WHERE subjects.semester_id = '$semester_id1' AND subjects.course_id = '$course_id' AND subjects.year_id = '$year_id' ";
 }
 $result = $conn->query($sql);
 

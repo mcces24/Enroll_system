@@ -66,7 +66,18 @@ class StudentController extends Student {
     function getStudents(){
         $userId = $this->getLoginUserId();
         $data = [
-            'new_user_id' => $userId
+            'new_user_id' => $userId,
+            'getPrevRecord' => true
+        ];
+        $response = $this->getStudentLists($data);
+        return $response;
+    }
+
+    function getStudentsCurrentData(){
+        $userId = $this->getLoginUserId();
+        $data = [
+            'new_user_id' => $userId,
+            'getPrevRecord' => false
         ];
         $response = $this->getStudentLists($data);
         return $response;
@@ -75,12 +86,26 @@ class StudentController extends Student {
     function getStudentLists($data) {
         global $db; 
         try {
+            $academicController = new academicController($db);
+            $semesterController = new semesterController($db);
+            $academicYear = $academicController->getActiveAcademicYear();
+            $academic = !empty($academicYear) ? $academicYear[0]['academic_start'] . '-' . $academicYear[0]['academic_end'] : null;
+            $semester = $semesterController->getActiveSemester();
+            $semester = !empty($semester) ?  $semester[0]['semester_name'] : null;
+
             $new_user_id = $data['new_user_id'];
+            $getPrevRecord = isset($data['getPrevRecord']) ? $data['getPrevRecord'] : false;
+
             $condition = [
-                'WHERE' => "new_user_id = $new_user_id",
+                'WHERE' => "new_user_id = $new_user_id AND semester_id = '$semester' AND academic = '$academic'",
                 'LIMIT' => 1,
                 'ORDER' => 'id DESC',
             ];
+            
+            if ($getPrevRecord) {
+                $condition['WHERE'] = "new_user_id = $new_user_id";
+            }
+            
             $studentLists = $this->getStudentList($condition);
 
             if ($studentLists === false) {
@@ -100,7 +125,9 @@ class StudentController extends Student {
                 'section_id' => isset($returnStudentList['students'][0]['section_id']) ? $returnStudentList['students'][0]['section_id'] : 0,
                 'semester_id' => isset($returnStudentList['students'][0]['semester_id']) ? $returnStudentList['students'][0]['semester_id'] : 0,
                 'year_id' => isset($returnStudentList['students'][0]['year_id']) ? $returnStudentList['students'][0]['year_id'] : 0,
-                'academic' => isset($returnStudentList['students'][0]['year_id']) ? $returnStudentList['students'][0]['year_id'] : 0
+                'academic' => isset($returnStudentList['students'][0]['year_id']) ? $returnStudentList['students'][0]['year_id'] : 0,
+                'type' => isset($returnStudentList['students'][0]['type']) ? $returnStudentList['students'][0]['type'] : '',
+                'id_number' => isset($returnStudentList['students'][0]['id_number']) ? $returnStudentList['students'][0]['id_number'] : 0,
             ];
             $qrCode = $qrcodeController->getQrcodeData($params);
             $returnStudentList['qrcode'] = isset($qrCode[0]) ? $qrCode[0] : array();
@@ -122,9 +149,11 @@ class StudentController extends Student {
             ) {
                 
             } else{
-                $SubjectController = new SubjectController($db);
-                $subject = $SubjectController->getSubject($params);
-                $returnStudentList['subject'] = isset($subject) ? $subject : array();
+                if ($getPrevRecord) {
+                    $SubjectController = new SubjectController($db);
+                    $subject = $SubjectController->getSubject($params);
+                    $returnStudentList['subject'] = isset($subject) ? $subject : array();
+                }
             }
     
             return $returnStudentList;
