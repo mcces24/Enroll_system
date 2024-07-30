@@ -416,7 +416,7 @@ else{
                                                 
                                                 <tr style="text-align: center;">
                                                 
-                                                <td hidden><?= $student['id_number']; ?></td>
+                                                <!-- <td hidden><?= $student['id_number']; ?></td> -->
                                                 <td hidden ><?= $student['id_number']; ?></td>
                                                 <td><span hidden></span></td>
                                                 <td width="100%"> 
