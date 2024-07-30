@@ -373,15 +373,6 @@ else{
                                         {
                                             foreach($query_run as $student)
                                             {
-                                                
-                                                
-                                               
-                                       
-
-                                        if(mysqli_num_rows($query_run) > 0)
-                                        {
-                                            foreach($query_run as $student)
-                                            {
                                                 ?>
                                                                        
                         
@@ -425,9 +416,9 @@ else{
                                                 
                                                 <tr style="text-align: center;">
                                                 
-                                                <!-- <td hidden><?= $student['id_number']; ?></td>
+                                                <td hidden><?= $student['id_number']; ?></td>
                                                 <td hidden ><?= $student['id_number']; ?></td>
-                                                <td><span hidden></span></td> -->
+                                                <td><span hidden></span></td>
                                                 <td width="100%"> 
                                                     <a href="#update_<?php echo $student['id_number']; ?>" class="btn btn-warning btn-sm" data-bs-toggle="modal"> Update Document</a>
                                                 </td>
@@ -438,7 +429,7 @@ else{
                                             }
                                         }
                                             }
-                                        }
+                                        
                                         else
                                         {
                                             ?>
