@@ -51,7 +51,7 @@ else{
 <?php
                         
                             
-                            $query = "SELECT * FROM academic WHERE status='1' order by academic_id desc ";
+                            $query = "SELECT * FROM academic WHERE status='1' order by academic_id desc limit 1 ";
                             $query_run = mysqli_query($conn, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
