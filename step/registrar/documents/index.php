@@ -430,7 +430,6 @@ else{
                                                 <td><span hidden></span></td>
                                                 <td width="100%"> 
                                                     <a href="#update_<?php echo $student['id_number']; ?>" class="btn btn-warning btn-sm" data-bs-toggle="modal"> Update Document</a>
-                                                    
                                                 </td>
                                             </tr>
                                                 
