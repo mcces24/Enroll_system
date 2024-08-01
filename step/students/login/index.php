@@ -95,7 +95,7 @@ Copy code
                         <input type="email" class="form-control" id="forgotEmail" name="email" placeholder="Email" required>
                     </div>
                     <div class="alert alert-danger" id="forgotPasswordAlert" style="display: none;"></div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn">Submit</button>
                 </form>
             </div>
         </div>
