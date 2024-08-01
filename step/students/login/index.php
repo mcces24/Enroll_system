@@ -69,33 +69,30 @@
             </div>
             <!-- //form -->
         </div>
-   
+    </section>
     <!-- //form section start -->
 
-<!-- Forgot Password Modal -->
-<div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"> <!-- Added modal-dialog-centered class -->
-        <div class="content-wthree">
-            <div class="modal-header">
-                <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="forgotPasswordForm">
-                    <div class="mb-3">
-                        <label for="forgotEmail" class="form-label">Enter your email address</label>
-                        <input type="email" class="form-control" id="forgotEmail" name="email" placeholder="Email" required>
-                    </div>
-                    <div class="alert alert-danger" id="forgotPasswordAlert" style="display: none;"></div>
-                    <button type="submit" class="btn">Submit</button>
-                </form>
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"> <!-- Added modal-dialog-centered class -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="forgotEmail" class="form-label">Enter your email address</label>
+                            <input type="email" class="form-control" id="forgotEmail" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="alert alert-danger" id="forgotPasswordAlert" style="display: none;"></div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
-</section>
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
