@@ -637,7 +637,7 @@ class GuidanceController extends Student {
 
         $params = [
             'applicantGuidanceFormData' => [
-                'WHERE' => "academic = '$academic' AND semester_id = '$semester'",
+                //'WHERE' => "academic = '$academic' AND semester_id = '$semester'",
                 'JOIN' => 'INNER JOIN guidance_record g ON students.applicant_id = g.applicant_id',
                 'ORDER' => "students.id ASC"
             ],
