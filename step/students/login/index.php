@@ -69,17 +69,9 @@
             </div>
             <!-- //form -->
         </div>
-    </section>
+   
     <!-- //form section start -->
 
-    
-To ensure the modal pops up in the center of the screen, you can use Bootstrap's built-in utility classes for modals. Specifically, adding modal-dialog-centered to the modal's dialog container will center it vertically and horizontally.
-
-Here is how you can modify the modal code:
-
-Updated Modal Code
-html
-Copy code
 <!-- Forgot Password Modal -->
 <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered"> <!-- Added modal-dialog-centered class -->
@@ -95,12 +87,15 @@ Copy code
                         <input type="email" class="form-control" id="forgotEmail" name="email" placeholder="Email" required>
                     </div>
                     <div class="alert alert-danger" id="forgotPasswordAlert" style="display: none;"></div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn">Submit</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+
+</section>
     <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
