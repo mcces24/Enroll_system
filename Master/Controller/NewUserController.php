@@ -146,6 +146,123 @@ class NewUserController extends NewUser {
         return $responseData;
     }
 
+    public function forgetPassword($data) {
+        $responseData = [];
+        try {
+            // Get data by email
+            
+
+            $username = isset($data['username']) ? $data['username'] : null;
+            $otp_code = isset($data['otp_code']) ? $data['otp_code'] : null;
+            $new_password = isset($data['new_password']) ? $data['new_password'] : null;
+            $otp_code_verify = isset($data['otp_code_verify']) ? $data['otp_code_verify'] : null;
+            $sendingOtp = isset($data['sendingOtp']) ? $data['sendingOtp'] : false;
+            $email = isset($data['email']) ? $data['email'] : false;
+            $verified_status = isset($data['verified_status']) ? $data['verified_status'] : false;
+
+            if (!empty($email) && !empty($verified_status)) {
+                $params = [
+                    "SET" => "verified_status = '$verified_status'",
+                    "WHERE" => "email = '$email'",
+                ];
+
+                $update = $this->update($params);
+
+                if ($update ) {
+                    $responseData['status'] = 'success';
+                    $responseData['message'] = 'OTP SENT';
+                    $responseData['type'] = 'success';
+                } else {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = 'OTP NOT SENT';
+                    $responseData['type'] = 'error'; 
+                }
+
+                return $responseData;
+            }
+
+            if (!empty($username)) {
+                $stmt = $this->forgetStudent($data);
+                 // Check if there are any rows returned
+                if ($stmt->rowCount() > 0) {
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if ($row) {
+                        $responseData['status'] = 'success';
+                        $responseData['message'] = 'Sending OTP to your Email.';
+                        $responseData['type'] = 'success';
+                    }
+                } else {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = 'Email not found. Please use registered email.';
+                    $responseData['type'] = 'danger';
+                }
+
+                return $responseData;
+            } 
+
+            if (!empty($new_password) && !empty($otp_code_verify)) {
+                $password = md5($new_password);
+                $params = [
+                    "SET" => "password = '$password', verified_status = '1'",
+                    "WHERE" => "verified_status = '$otp_code_verify'",
+                ];
+
+                $update = $this->update($params);
+
+                if ($update ) {
+                    $responseData['status'] = 'success';
+                    $responseData['message'] = 'Password has been changed. Please Login.';
+                    $responseData['type'] = 'success';
+                } else {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = 'Error changing password.';
+                    $responseData['type'] = 'error'; 
+                }
+
+                return $responseData;
+            } 
+
+            if (!empty($otp_code)) {
+                $stmt = $this->forgetStudent($data);
+                 // Check if there are any rows returned
+                if ($stmt->rowCount() > 0) {
+                    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if ($row) {
+                        $responseData['status'] = 'success';
+                        $responseData['message'] = 'OTP Verify';
+                        $responseData['type'] = 'success';
+                    }
+                } else {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = 'Invalid OTP';
+                    $responseData['type'] = 'danger';
+                }
+
+                return $responseData;
+            } 
+
+            if ($sendingOtp) {
+                $responseData['status'] = 'success';
+                $responseData['message'] = 'OTP SENT';
+                $responseData['type'] = 'success';
+
+                return $responseData;
+            }
+            
+           
+        } catch (PDOException $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "PDOException in ifEmailExists(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        } catch (Exception $e) {
+            $responseData['status'] = 'failed';
+            $responseData['message'] = "Exception in getLoginUser(): " . $e->getMessage();
+            $responseData['type'] = 'danger';
+        }
+
+        return $responseData;
+    }
+
     public function ifEmailExists($email) {
         try {
             // Get data by email
