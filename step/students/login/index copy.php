@@ -1,3 +1,11 @@
+<?php
+include_once '../../../MainFunction.php';
+if (isStudentLogin()) {
+    header('Location: ../');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -11,10 +19,7 @@
     <!-- //Meta tag Keywords -->
 
     <link href="//fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS for Modal -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!--/Style-CSS -->
     <link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
     <!--//Style-CSS -->
@@ -41,10 +46,13 @@
     <!-- form section start -->
 
     <section class="w3l-mockup-form">
+
+
         <div class="container">
             <!-- /form -->
             <div class="workinghny-form-grid">
                 <div class="main-mockup">
+
                     <div class="w3l_form align-self">
                         <div class="left_grid_info">
                             <img src="images/mcc2.png" alt="">
@@ -58,12 +66,16 @@
 
                         <form id="loginForm">
                             <input type="text" class="email" name="username" placeholder="Enter Your ID Number / Email" required>
+
                             <input type="password" class="password" name="password" placeholder="Enter Your Password" required>
 
+
                             <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
+                            <!-- <p style="float: right ;"><a href="" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p> -->
                             <p style="float: right;"><a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p>
-                            <button name="submit" class="btn" type="submit">Login</button>
+                            <button name="submit" name="submit" class="btn" type="submit">Login</button>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -94,63 +106,46 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-
     <script>
         $(document).ready(function() {
             var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
+            // console.log(BASE_PATH);
+            function getQueryParam(param) {
+                let urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(param);
+            }
+            let verifyParam = getQueryParam('verify');
 
-            // Handle the Forgot Password form submission
-            $('#forgotPasswordForm').on('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-
-                var email = $('#forgotEmail').val();
-                $('.btn-primary').prop('disabled', true);
-                $('.btn-primary').text('Submitting...');
-
+            if (verifyParam) {
+                
+                // Perform AJAX request
                 $.ajax({
                     url: BASE_PATH + '/Master/POST/POST.php',
-                    type: 'POST',
+                    method: 'POST',
                     data: {
-                        type: 'forgotPassword',
-                        email: email
+                        type: 'verify',
+                        data: verifyParam 
                     },
                     success: function(response) {
-                        response = JSON.parse(response);
-                        $('#forgotPasswordAlert').removeClass('alert-danger alert-success');
-
-                        if (response.status == 'success') {
-                            $('#forgotPasswordAlert').addClass('alert-success');
-                            $('#forgotPasswordAlert').html(response.message);
-                            $('#forgotPasswordAlert').show();
-                        } else {
-                            $('#forgotPasswordAlert').addClass('alert-danger');
-                            $('#forgotPasswordAlert').html(response.message);
-                            $('#forgotPasswordAlert').show();
-                        }
-
-                        $('.btn-primary').prop('disabled', false);
-                        $('.btn-primary').text('Submit');
+                        let jsonResponse = JSON.parse(response);
+                        console.log(jsonResponse);
+                        $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
+                        $('.alert').addClass(`alert-${jsonResponse.type}`);
+                        $('.alert').html(jsonResponse.message);
+                        $('.alert').prop('style', `display: block;`);
                     },
-                    error: function(jqXHR, textStatus, errorThrown) {
-                        console.log('Error: ' + textStatus, errorThrown);
-                        $('#forgotPasswordAlert').addClass('alert-danger');
-                        $('#forgotPasswordAlert').html('An error occurred. Please try again.');
-                        $('#forgotPasswordAlert').show();
-                        $('.btn-primary').prop('disabled', false);
-                        $('.btn-primary').text('Submit');
+                    error: function(error) {
+                        console.log(error);
+                        $('#result').html('An error occurred');
                     }
                 });
-            });
+            }
 
-            // Existing Login Form handler...
             $('#loginForm').on('submit', function(event) {
-                event.preventDefault();
-
+                event.preventDefault(); // Prevent the default form submission
+                // Get form data
                 var formData = {
                     username: $('input[name=username]').val(),
                     password: $('input[name=password]').val()
@@ -159,6 +154,7 @@
                 $('.btn').prop('disabled', true);
                 $('.btn').text('Logging in...');
 
+                // Send the AJAX request
                 $.ajax({
                     url: BASE_PATH + '/Master/POST/POST.php',
                     type: 'POST',
@@ -167,6 +163,7 @@
                         data: formData 
                     },
                     success: function(response) {
+                        // Handle the response from the server
                         response = JSON.parse(response);
                         console.log(response);
                         $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
@@ -182,6 +179,7 @@
                                 } else {
                                     window.location.href = '../';
                                 }
+                                
                             }, 1000);
                         } else {
                             $('.alert').html(response.message);
@@ -192,11 +190,14 @@
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
+                        // Handle errors here
                         console.log('Error: ' + textStatus, errorThrown);
                     }
                 });
             });
         });
     </script>
+
 </body>
+
 </html>
