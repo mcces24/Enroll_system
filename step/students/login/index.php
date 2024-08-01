@@ -71,7 +71,8 @@ if (isStudentLogin()) {
 
 
                             <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
-                            <p style="float: right ;"><a href="" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p>
+                            <!-- <p style="float: right ;"><a href="" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p> -->
+                            <p style="float: right;"><a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p>
                             <button name="submit" name="submit" class="btn" type="submit">Login</button>
                         </form>
 
@@ -82,6 +83,28 @@ if (isStudentLogin()) {
         </div>
     </section>
     <!-- //form section start -->
+
+    <!-- Forgot Password Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="forgotPasswordModalLabel">Forgot Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="forgotPasswordForm">
+                        <div class="mb-3">
+                            <label for="forgotEmail" class="form-label">Enter your email address</label>
+                            <input type="email" class="form-control" id="forgotEmail" name="email" placeholder="Email" required>
+                        </div>
+                        <div class="alert alert-danger" id="forgotPasswordAlert" style="display: none;"></div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
