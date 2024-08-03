@@ -2389,9 +2389,9 @@ if(isset($_GET['applicant_id']))
          }
          window.addEventListener('DOMContentLoaded', (event) => {
             PrintPage()
-            setTimeout(function() {
-                  window.close()
-            }, 750)
+            // setTimeout(function() {
+            //       window.close()
+            // }, 750)
          });
       </script>
    <?php endif; ?>
