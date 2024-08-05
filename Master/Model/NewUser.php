@@ -67,6 +67,54 @@ class NewUser {
         }
     }
 
+    public function forgetStudent($data = array()) {
+        try {
+            $username = isset($data['username']) ? $data['username'] : null;
+            $otp_code = isset($data['otp_code']) ? $data['otp_code'] : null;
+            $new_password = isset($data['new_password']) ? $data['new_password'] : null;
+
+            if (!empty($username)) {
+                $query = 'SELECT * FROM ' . $this->table . ' n 
+                      WHERE (n.email = :username)';
+
+                $stmt = $this->conn->prepare($query);
+            
+                // Bind parameters
+                $stmt->bindParam(':username', $username);
+        
+                if ($stmt->execute()) {
+                    return $stmt;
+                } else {
+                    $errorInfo = $stmt->errorInfo();
+                    throw new Exception("Failed to execute query: " . $errorInfo[2]);
+                }
+            }
+
+            if (!empty($otp_code)) {
+                $query = 'SELECT * FROM ' . $this->table . ' n 
+                      WHERE (n.verified_status = :verified_status)';
+
+                $stmt = $this->conn->prepare($query);
+            
+                // Bind parameters
+                $stmt->bindParam(':verified_status', $otp_code);
+        
+                if ($stmt->execute()) {
+                    return $stmt;
+                } else {
+                    $errorInfo = $stmt->errorInfo();
+                    throw new Exception("Failed to execute query: " . $errorInfo[2]);
+                }
+            }
+        } catch (PDOException $e) {
+            echo "PDOException in forgetStudentController(): " . $e->getMessage();
+            return false;
+        } catch (Exception $e) {
+            echo "Exception in forgetStudentController(): " . $e->getMessage();
+            return false;
+        }
+    }
+
     public function getVerifiedData($verify) {
         try {
             $query = 'SELECT * FROM ' . $this->table . ' WHERE verified_status = :verify';
@@ -142,5 +190,22 @@ class NewUser {
         }
 
         return false;
+    }
+
+    public function update($params = array()){
+        $conditions = '';
+        $set = '';
+        
+        if (!empty($params['SET'])) {
+            $set .= ' SET ' . $params['SET'];
+        }
+        if (!empty($params['WHERE'])) {
+            $conditions .= ' WHERE ' . $params['WHERE'];
+        }
+
+        $query = 'UPDATE ' . $this->table . $set . $conditions;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
     }
 }

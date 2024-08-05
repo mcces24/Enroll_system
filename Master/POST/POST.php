@@ -91,6 +91,10 @@ function getPostData($POST)
             $data = $POST['data'] ?? null;
             importCSVScore($data);
             break;
+        case 'forgetStudent':
+            $data = $POST['data'] ?? null;
+            forgetStudent($data);
+            break;
         default:
             break;
     }
@@ -380,3 +384,79 @@ function importCSVScore($data) {
     header('Content-Type: application/json');
     echo json_encode($response);
 }
+
+function forgetStudent($data)
+{   
+    $username = isset($data['username']) ? $data['username'] : null;
+    $otp_code = isset($data['otp_code']) ? $data['otp_code'] : null;
+    $new_password = isset($data['new_password']) ? $data['new_password'] : null;
+    $sendingOtp = isset($data['sendingOtp']) ? $data['sendingOtp'] : false;
+    $sendingEmail = isset($data['sendingEmail']) ? $data['sendingEmail'] : null;
+    $otp_code_verify = isset($data['otp_code_verify']) ? $data['otp_code_verify'] : null;
+
+    $data = array(
+        'username' => $username,
+        'otp_code' => $otp_code,
+        'new_password' => $new_password,
+        'sendingOtp' => $sendingOtp,
+        'otp_code_verify' => $otp_code_verify,
+    );
+
+    if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
+        if ($sendingOtp) {
+            $email = $sendingEmail;
+            $randomNumber = rand(100000, 999999);
+
+            $params = [
+                'email' => $email,
+                'verified_status' => $randomNumber
+            ];
+
+            $response = forgetStudentFuntion($params);
+
+            if ($response) {
+                $mail = new PHPMailer(true);
+
+                try {
+                    // PHPMailer setup
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                    $mail->Password   = 'nxnqxklsnggbkdtc';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->Port       = 465;
+
+                    $senderName = 'Forgot Password - Madridejos Community College';
+                    $senderEmail = 'capstone.project2022.2023@gmail.com';
+
+                    $mail->setFrom($senderEmail, $senderName);
+                    $mail->addAddress($email);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Madridejos Community College - Verify Account';
+
+                    
+                    $mail->isHTML(true);
+                    $mail->Body = file_get_contents('Layout/forgot_password.html');
+                    $mail->Body = str_replace('<?= $OTP ?>', $randomNumber, $mail->Body);
+
+                    $mail->send();
+                } catch (Exception $e) {
+                    $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                    header('HTTP/1.1 500 Internal Server Error');
+                }
+            }
+            echo json_encode($response);
+            return;
+        }
+        if (!empty($username) || !empty($otp_code) || !empty($new_password)) {
+            $verifiedData = forgetStudentFuntion($data);
+        }
+    } else {
+        $verifiedData = null;
+    }
+
+    echo json_encode($verifiedData);
+}
+

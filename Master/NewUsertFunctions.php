@@ -52,6 +52,18 @@ function getLoginUser($username, $password) {
     }
 }
 
+function forgetStudentFuntion($data) {
+    global $newUserController; // Use global to access the variable declared outside the function
+    try {
+        $getVerifiedData = $newUserController->forgetPassword($data);
+        return $getVerifiedData;
+    } catch (Exception $e) {
+        // Handle other exceptions
+        echo "Exception in forgetStudentFuntion(): " . $e->getMessage();
+        return false; // or handle the error in another way
+    }
+}
+
 function ifEmailExists($email) {
     global $newUserController; // Use global to access the variable declared outside the function
 
