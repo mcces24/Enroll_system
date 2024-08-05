@@ -21,7 +21,7 @@ $applicantGuidanceFormData = isset($data['applicantGuidanceFormData']) ? $data['
             <!-- start: Navbar -->
             <nav class="px-3 py-2 bg-white rounded shadow-sm">
                 <i class="ri-menu-line sidebar-toggle me-3 d-block d-md-none"></i>
-                <h5 class="fw-bold mb-0 me-auto">Guidance Record | Form 1 </h5>
+                <h5 class="fw-bold mb-0 me-auto">Guidance Record | Personal Information System </h5>
                 <?php include '../inc/dropdown.php' ?>
             </nav>
             <!-- end: Navbar -->
@@ -33,7 +33,7 @@ $applicantGuidanceFormData = isset($data['applicantGuidanceFormData']) ? $data['
                     <div class="col-12 col-md-7 col-xl-8" style="width: 100%;">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white">
-                                Applicant Guidance Form 1 Record
+                                Applicant Guidance Personal Information System Record
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
