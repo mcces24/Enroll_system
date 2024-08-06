@@ -21,7 +21,7 @@
                                     <div class="fw-semibold">Old Students</div>
                                     <span class="fs-7">Latest Pre-enroll Old Students: <?php echo $old ?></span>
                                 </div>
-                                <span class="badge bg-primary rounded-pill"><?php // echo $old_students; ?></span>
+                                <span class="badge bg-primary rounded-pill"><?php echo $old_students; ?></span>
                             </a>
                         </div>
                         <?php else: ?>
