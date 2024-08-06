@@ -15,7 +15,8 @@
                                 </div>
                                 <span class="badge bg-primary rounded-pill"><?php // echo $new_students; ?></span>
                             </a>
-                            <a href="../pre-enrollment/index.php"
+                            <!-- <a href="../pre-enrollment/index.php" -->
+                             <a href="../old-students/index.php"
                                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                                 <div class="me-auto">
                                     <div class="fw-semibold">Old Students</div>
