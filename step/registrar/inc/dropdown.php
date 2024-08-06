@@ -19,7 +19,7 @@
                                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                                 <div class="me-auto">
                                     <div class="fw-semibold">Old Students</div>
-                                    <span class="fs-7">Latest Pre-enroll Old Students: <?php echo $old ?></span>
+                                    <span class="fs-7">Latest Pre-enroll Old Students: <?php echo $old_students ?></span>
                                 </div>
                                 <span class="badge bg-primary rounded-pill"><?php echo $old_students; ?></span>
                             </a>
