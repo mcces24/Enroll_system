@@ -4,7 +4,7 @@
                     </div>
                     
                     <div class="dropdown-menu fx-dropdown-menu">
-                        <?php if(array($rows['status'] AND $rows1['sem_status'],array('1'))): ?>
+                        <?php if(in_array($rows['status'] AND $rows1['sem_status'],array('1'))): ?>
                         <h5 class="p-3 bg-indigo text-light">Notification</h5>
                         <div class="list-group list-group-flush">
                             <a href="../new-students/index.php?search=<?php // echo $new ?>"
