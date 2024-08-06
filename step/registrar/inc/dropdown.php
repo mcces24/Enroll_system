@@ -4,7 +4,7 @@
                     </div>
                     
                     <div class="dropdown-menu fx-dropdown-menu">
-                        <?php if(in_array($rows['status'] AND $rows1['sem_status'],array('1'))): ?>
+                        <?php if(in_array($rows['status'] AND $rows1['sem_status'],array('0'))): ?>
                         <h5 class="p-3 bg-indigo text-light">Notification</h5>
                         <div class="list-group list-group-flush">
                             <a href="../new-students/index.php?search=<?php // echo $new ?>"
@@ -19,7 +19,7 @@
                                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                                 <div class="me-auto">
                                     <div class="fw-semibold">Old Students</div>
-                                    <span class="fs-7">Latest Pre-enroll Old Students: <?php // echo $old ?></span>
+                                    <span class="fs-7">Latest Pre-enroll Old Students: <?php echo $old ?></span>
                                 </div>
                                 <span class="badge bg-primary rounded-pill"><?php // echo $old_students; ?></span>
                             </a>
