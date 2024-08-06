@@ -34,7 +34,7 @@ else{
                                 
         require '../../../database/config.php';
 
-        $querys1 = "SELECT * FROM students WHERE status_type = 'Pre Old Students' GROUP BY id_number DESC LIMIT 1";
+        $querys1 = "SELECT * FROM students WHERE status_type = 'Old Students' GROUP BY id_number DESC LIMIT 1";
         $querys_run1 = mysqli_query ($conn, $querys1);
 
         if (mysqli_num_rows($querys_run1)>0) {
