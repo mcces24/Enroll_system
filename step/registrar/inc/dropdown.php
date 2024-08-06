@@ -1,11 +1,11 @@
 <div class="cursor-pointer dropdown-toggle navbar-link" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <i class="ri-notification-line"><span style="font-size: 10px; float: right;"><?php // echo $new_students+$old_students; ?></i>
+                        <i class="ri-notification-line"><span style="font-size: 10px; float: right;"><?php  echo $new_students+$old_students; ?></i>
                     </div>
                     
                     <div class="dropdown-menu fx-dropdown-menu">
-                        <?php //if(in_array($rows['status'] AND $rows1['sem_status'],array('1'))): ?>
-                        <!-- <h5 class="p-3 bg-indigo text-light">Notification</h5>
+                        <?php if(in_array($rows['status'] AND $rows1['sem_status'],array('1'))): ?>
+                        <h5 class="p-3 bg-indigo text-light">Notification</h5>
                         <div class="list-group list-group-flush">
                             <a href="../new-students/index.php?search=<?php // echo $new ?>"
                                 class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
@@ -23,10 +23,10 @@
                                 </div>
                                 <span class="badge bg-primary rounded-pill"><?php // echo $old_students; ?></span>
                             </a>
-                        </div> -->
-                        <?php //else: ?>
+                        </div>
+                        <?php else: ?>
                         <h5 class="p-3 bg-indigo text-light">No Notification</h5>
-                        <?php //endif; ?>
+                        <?php endif; ?>
                     </div>
                     <div class="dropdown me-3 d-none d-sm-block">
                     
