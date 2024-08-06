@@ -77,7 +77,7 @@ class StudentController extends Student {
         $userId = $this->getLoginUserId();
         $data = [
             'new_user_id' => $userId,
-            'getPrevRecord' => false
+            'getPrevRecord' => true
         ];
         $response = $this->getStudentLists($data);
         return $response;
