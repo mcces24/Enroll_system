@@ -178,7 +178,7 @@ else{
     <?php include('edit_delete_modal.php'); ?>
 
     <!-- start: Sidebar -->
-    <?php include '../inc/dropdown.php'  ?>
+    <?php include '../inc/navbar.php'  ?>
     <div class="sidebar-overlay"></div>
     <!-- end: Sidebar -->
 
