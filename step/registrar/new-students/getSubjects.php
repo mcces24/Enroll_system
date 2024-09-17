@@ -85,20 +85,19 @@ if (isset($_POST['course_id']) && isset($_POST['year_id']) && isset($_POST['type
     } else {
         $query = "SELECT *, subjects.subject_code AS subjectCode
               FROM subjects
-              LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = ?
+              LEFT JOIN subject_connects ON subjects.subject_code = subject_connects.subject_code AND subject_connects.academic_year = ? AND subject_connects.course_id = ?
               INNER JOIN course c ON subjects.course_id = c.course_id
               INNER JOIN year_lvl y ON subjects.year_id = y.year_id
               WHERE subjects.year_id = ? AND subjects.course_id = ? AND subjects.semester_id = ?";
     }
 
     
-
     if ($stmt = mysqli_prepare($conn, $query)) {
         // Bind parameters
         if ($_POST['type'] == 'irregular') {
             mysqli_stmt_bind_param($stmt, 'sss', $academic, $course_id, $course_id);
         } else {
-            mysqli_stmt_bind_param($stmt, 'ssss', $academic, $year_id, $course_id, $semester);
+            mysqli_stmt_bind_param($stmt, 'sssss', $academic, $course_id, $year_id, $course_id, $semester);
         }
         
 
