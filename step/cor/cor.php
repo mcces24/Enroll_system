@@ -764,7 +764,7 @@ if ($result->num_rows > 0) {
 </div>
 </body>
 </html>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     function PrintPage() {
         window.print();
     }
@@ -772,4 +772,4 @@ if ($result->num_rows > 0) {
         PrintPage()
         setTimeout(function(){ window.close() },750)
     });
-</script> -->
+</script>
