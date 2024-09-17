@@ -132,7 +132,7 @@ die("Connection Failed:".mysqli_connect_error());
     }
 
     .student_name_signature .sign {
-        width: 80px;
+        width: 120px;
         display: block;
         margin: 0 auto;
     }
