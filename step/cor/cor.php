@@ -120,7 +120,7 @@ die("Connection Failed:".mysqli_connect_error());
     .student_name_signature{
         position: absolute;
         margin-left: 100px;
-        margin-top: 900px;
+        margin-top: 910px;
         z-index: 1;
         width: 250px;
         text-align: center;
