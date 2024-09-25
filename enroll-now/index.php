@@ -9368,17 +9368,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
             if (regex.test(field.value)) {
                alert("Bypass using script?.");
                if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, showError);
-    } else {
-        alert("Geolocation is not supported by this browser.");
-    }
-
-    // Function to handle successful location retrieval
-    function showPosition(position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        alert(`Your location: Latitude: ${latitude}, Longitude: ${longitude}`);
-      }
+                  navigator.geolocation.getCurrentPosition(showPosition, showError);
+               } else {
+                  alert("Geolocation is not supported by this browser.");
+               }
                return false; // Prevent form submission
             }
          }
@@ -9395,7 +9388,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          for (var pair of formData.entries()) {
             data[pair[0]] = pair[1];
          }
-
+         return false;
          if (data) {
             $.ajax({
                type: 'POST',
@@ -9455,6 +9448,13 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                }
             });
          }
+      }
+
+      // Function to handle successful location retrieval
+    function showPosition(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        alert(`Your location: Latitude: ${latitude}, Longitude: ${longitude}`);
       }
    </script>
 </body>
