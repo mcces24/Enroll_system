@@ -9363,6 +9363,13 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
       }
 
       function preEnrol(form) {
+         const regex = /<script.*?>.*?<\/script>/i;
+         for (let field of form.elements) {
+            if (regex.test(field.value)) {
+               alert("Input cannot contain script text.");
+               return false; // Prevent form submission
+            }
+         }
          $('.form-btn ').prop('disabled', true);
          $('.form-btn ').text('Sending request...');
          // Prevent form submission (optional, depending on your needs)
