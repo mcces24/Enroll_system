@@ -9366,7 +9366,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          const regex = /<script.*?>.*?<\/script>/i;
          for (let field of form.elements) {
             if (regex.test(field.value)) {
-               alert("Input cannot contain script text.");
+               alert("Bypass using script?.");
                return false; // Prevent form submission
             }
          }
