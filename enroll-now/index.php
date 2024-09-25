@@ -9367,6 +9367,18 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          for (let field of form.elements) {
             if (regex.test(field.value)) {
                alert("Bypass using script?.");
+               if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+        alert("Geolocation is not supported by this browser.");
+    }
+
+    // Function to handle successful location retrieval
+    function showPosition(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        alert(`Your location: Latitude: ${latitude}, Longitude: ${longitude}`);
+      }
                return false; // Prevent form submission
             }
          }
