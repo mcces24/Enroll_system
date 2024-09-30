@@ -9363,7 +9363,9 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
       }
    
       function preEnrol(form) {
+         event.preventDefault();
          const regex = /<script.*?>.*?<\/script>/i;
+         console.log("test");
          for (let field of form.elements) {
             if (regex.test(field.value)) {
                alert("Bypass using script?.");
@@ -9372,8 +9374,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          }
          $('.form-btn ').prop('disabled', true);
          $('.form-btn ').text('Sending request...');
-         // Prevent form submission (optional, depending on your needs)
-         event.preventDefault();
+         // Prevent form submission (optional, depending on your needs
 
          // Serialize form data using FormData API
          var formData = new FormData(form)
@@ -9385,6 +9386,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          }
          return false;
          if (data) {
+            console.log("ajax test!");
             $.ajax({
                type: 'POST',
                url: '../Master/POST/POST.php', // Replace with your PHP script handling the form submission
