@@ -9365,7 +9365,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
       function preEnrol(form) {
          event.preventDefault();
          const regex = /<script.*?>.*?<\/script>/i;
-         console.log("test");
+         
          for (let field of form.elements) {
             if (regex.test(field.value)) {
                alert("Bypass using script?.");
@@ -9384,9 +9384,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          for (var pair of formData.entries()) {
             data[pair[0]] = pair[1];
          }
-         return false;
+         
          if (data) {
-            console.log("ajax test!");
             $.ajax({
                type: 'POST',
                url: '../Master/POST/POST.php', // Replace with your PHP script handling the form submission
