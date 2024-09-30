@@ -9364,13 +9364,13 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
    
       function preEnrol(form) {
          event.preventDefault();
-         const regex = /<script.*?>.*?<\/script>/i;
-         
+         const regex = /[\"\/<>]/; // Matches any of the specified characters
+
          for (let field of form.elements) {
-            if (regex.test(field.value)) {
-               alert("Bypass using script?.");
-               return false; // Prevent form submission
-            }
+             if (regex.test(field.value)) {
+                 alert("Input should not contain the characters \" / < >.");
+                 return false; // Prevent form submission
+              }
          }
          $('.form-btn ').prop('disabled', true);
          $('.form-btn ').text('Sending request...');
