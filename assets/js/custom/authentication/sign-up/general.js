@@ -49,7 +49,7 @@ var KTSignupGeneral = function () {
                 var response = JSON.parse(xhrInsertUser.responseText);
                 if (response.isSave) {
                     Swal.fire({
-                        text: "Account created successfully. Please login. Email verification was send your email. Please verify your account.",
+                        text: "Account created successfully. Email verification was send your email. Please verify your account.",
                         icon: "success",
                         buttonsStyling: false,
                         confirmButtonText: "Login Now",
