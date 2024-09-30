@@ -9368,7 +9368,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
 
          for (let field of form.elements) {
              if (regex.test(field.value)) {
-                 alert("Input should not contain the characters \" / < >.");
+                 alert("Invalid data format!!");
                  return false; // Prevent form submission
               }
          }
