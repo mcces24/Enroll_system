@@ -22,20 +22,33 @@
         }
     }
 
-    if (isset($_POST['submit'])) {
-        $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
+if (isset($_POST['submit'])) {
+    // Sanitize user inputs
+    $email = mysqli_real_escape_string($conn, $_POST['email']);
+    $password = $_POST['password']; // No need to escape as we will use password_verify()
 
-        $sql = "SELECT * FROM users WHERE username='{$email}' AND password='{$password}'";
-        $result = mysqli_query($conn, $sql);
+    // Prepare a query to select the user based on email/username
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        if (mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
 
+        // Use password_verify to check the hashed password
+        if (password_verify($password, $row['password'])) {
             if ($row['role'] == "Registrar Office") {
                 $id = $row['id'];
-                $query = "UPDATE users SET online='1' WHERE id='$id' ";
-                $result1 = mysqli_query($conn, $query);
+
+                // Update user's online status
+                $query = "UPDATE users SET online = '1' WHERE id = ?";
+                $stmt1 = $conn->prepare($query);
+                $stmt1->bind_param("i", $id);
+                $stmt1->execute();
+
+                // Start session for the logged-in user
                 $_SESSION['SESSION_REGISTRAR'] = $email;
                 header("Location: ../home/index.php");
             } else {
@@ -44,7 +57,14 @@
         } else {
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
+    } else {
+        $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
     }
+
+    // Close the prepared statement
+    $stmt->close();
+}
+
 ?>
 
 <!DOCTYPE html>
