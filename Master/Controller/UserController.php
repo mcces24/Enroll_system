@@ -37,9 +37,29 @@ class UserController extends User {
                 throw new Exception("Failed to fetch active academic year");
             }
     
-            $responeUser = [];
-            while ($row = $user->fetch(PDO::FETCH_ASSOC)) {
-                $responeUser[] = $row;
+            // $responeUser = [];
+            // while ($row = $user->fetch(PDO::FETCH_ASSOC)) {
+            //     $responeUser[] = $row;
+            // }
+
+            $user = $user->fetch(PDO::FETCH_ASSOC);
+
+            if ($user) {
+                // Assuming the plain text password is available in $params['password']
+                $plainTextPassword = $params['password'];
+            
+                // Verify the password using password_verify
+                if (password_verify($plainTextPassword, $user['password'])) {
+                    // Password matches, login successful
+                    echo "Login successful!";
+                    // Here, you can proceed with setting session data or other post-login actions
+                } else {
+                    // Password does not match
+                    echo "Invalid password.";
+                }
+            } else {
+                // No user found
+                echo "Invalid username.";
             }
     
             return $responeUser;
