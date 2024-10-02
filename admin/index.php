@@ -23,20 +23,30 @@ if (isset($_GET['verification'])) {
 }
 
 if (isset($_POST['submit'])) {
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, md5($_POST['password']));
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
 
-    $sql = "SELECT * FROM admin WHERE email='{$email}' AND password='{$password}'";
-    $result = mysqli_query($conn, $sql);
+    // Prepared statement to avoid SQL injection
+    $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-    if (mysqli_num_rows($result) === 1) {
-        $row = mysqli_fetch_assoc($result);
-
-        if (empty($row['code'])) {
-            $_SESSION['SESSION_EMAIL'] = $email;
-            header("Location: admin/");
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+        echo $password;
+        // Verify password
+        if ($password == $row['password']) {
+            if (empty($row['code'])) {
+                // Start session and redirect
+                $_SESSION['SESSION_EMAIL'] = $email;
+                header("Location: admin/");
+                exit();
+            } else {
+                $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
+            }
         } else {
-            $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
+            $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     } else {
         $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
