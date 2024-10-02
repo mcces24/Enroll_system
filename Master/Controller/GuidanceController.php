@@ -13,7 +13,7 @@ class GuidanceController extends Student {
             $user = new UserController($db);
             $responeUser = $user->getUser($params);
             $responeUser = isset($responeUser[0]) ? $responeUser[0] : $responeUser;
-            Check if there are any rows returned
+            //Check if there are any rows returned
             if (!empty($responeUser)) {
                 if (isset($responeUser['role']) && $responeUser['role'] == "Guidance Office") {
 
