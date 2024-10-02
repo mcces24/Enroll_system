@@ -40,7 +40,7 @@ class GuidanceController extends Student {
                 }
             } else {
                 $responseData['status'] = 'failed';
-                $responseData['message'] = 'Email or password do not match11.';
+                $responseData['message'] = 'Email or password do not match.';
                 $responseData['type'] = 'danger';
             }
         } catch (PDOException $e) {
