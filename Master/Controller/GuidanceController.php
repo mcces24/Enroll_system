@@ -12,7 +12,7 @@ class GuidanceController extends Student {
             ];
             $user = new UserController($db);
             $responeUser = $user->getUser($params);
-            echo $responeUser;
+            print_r($responeUser);
             return $responeUser;
             $responeUser = isset($responeUser[0]) ? $responeUser[0] : $responeUser;
             // Check if there are any rows returned
