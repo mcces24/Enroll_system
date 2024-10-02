@@ -34,7 +34,6 @@ if (isset($_POST['submit'])) {
 
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
-        echo $password;
         // Verify password
         if ($password == $row['password']) {
             if (empty($row['code'])) {
