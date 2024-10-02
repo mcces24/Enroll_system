@@ -52,13 +52,13 @@ if (isset($_POST['submit'])) {
                 $_SESSION['SESSION_REGISTRAR'] = $email;
                 header("Location: ../home/index.php");
             } else {
-                $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+                $msg = "<div class='alert alert-info'>Email or password do not match for this porta3l.</div>";
             }
         } else {
-            $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
+            $msg = "<div class='alert alert-danger'>Email or password do not match2.</div>";
         }
     } else {
-        $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
+        $msg = "<div class='alert alert-danger'>Email or password do not match1.</div>";
     }
 
     // Close the prepared statement
