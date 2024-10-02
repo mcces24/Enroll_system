@@ -23,28 +23,50 @@ if (isset($_GET['verification'])) {
 }
 
 if (isset($_POST['submit'])) {
+    // Get the email and password from POST
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']); // This is the plain text password from the user
 
-    $sql = "SELECT * FROM users WHERE username='{$email}' AND password='{$password}'";
-    $result = mysqli_query($conn, $sql);
+    // Prepare SQL to select user by email
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
+        
+        // Verify the password using password_verify
+        if (password_verify($password, $row['password'])) {  // Assuming 'password' field contains the hashed password
 
-        if ($row['role'] == "BSIT Portal") {
-            $id = $row['id'];
-            $query = "UPDATE users SET online='1' WHERE id='$id' ";
-            $result1 = mysqli_query($conn, $query);
-            $_SESSION['SESSION_BSIT'] = $email;
-            header("Location: ../");
+            // Check if the user has the appropriate role
+            if ($row['role'] == "BSIT Portal") {
+                $id = $row['id'];
+                
+                // Update the user's online status
+                $query = "UPDATE users SET online = '1' WHERE id = ?";
+                $stmt1 = mysqli_prepare($conn, $query);
+                mysqli_stmt_bind_param($stmt1, "i", $id);
+                mysqli_stmt_execute($stmt1);
+
+                // Set session and redirect the user
+                $_SESSION['SESSION_BSIT'] = $email;
+                header("Location: ../");
+                exit;
+            } else {
+                $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+            }
         } else {
-            $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+            // Password does not match
+            $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     } else {
+        // No user found with the provided email
         $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
