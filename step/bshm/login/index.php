@@ -23,28 +23,54 @@ if (isset($_GET['verification'])) {
 }
 
 if (isset($_POST['submit'])) {
+    // Retrieve email and password from POST request
     $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $password = mysqli_real_escape_string($conn, $_POST['password']); // Plaintext password from user
 
-    $sql = "SELECT * FROM users WHERE username='{$email}' AND password='{$password}'";
-    $result = mysqli_query($conn, $sql);
+    // Prepare SQL query to fetch user by email/username (do not include password in the query)
+    $sql = "SELECT * FROM users WHERE username = ?";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
+    // Check if the user exists
     if (mysqli_num_rows($result) === 1) {
         $row = mysqli_fetch_assoc($result);
 
-        if ($row['role'] == "BSHM Portal") {
-            $id = $row['id'];
-            $query = "UPDATE users SET online='1' WHERE id='$id' ";
-            $result1 = mysqli_query($conn, $query);
-            $_SESSION['SESSION_BSHM'] = $email;
-            header("Location: ../");
+        // Verify the password using password_verify()
+        if (password_verify($password, $row['password'])) {
+            
+            // Check if the user role is correct for this portal
+            if ($row['role'] == "BSHM Portal") {
+                $id = $row['id'];
+                
+                // Update user status to online
+                $query = "UPDATE users SET online = '1' WHERE id = ?";
+                $stmt1 = mysqli_prepare($conn, $query);
+                mysqli_stmt_bind_param($stmt1, "i", $id);
+                mysqli_stmt_execute($stmt1);
+
+                // Set session for the user
+                $_SESSION['SESSION_BSHM'] = $email;
+                
+                // Redirect to the homepage or dashboard
+                header("Location: ../");
+                exit();
+            } else {
+                // Invalid role for this portal
+                $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+            }
         } else {
-            $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+            // Invalid password
+            $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     } else {
+        // No user found with the provided email/username
         $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
