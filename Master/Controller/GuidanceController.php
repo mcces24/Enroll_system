@@ -12,39 +12,37 @@ class GuidanceController extends Student {
             ];
             $user = new UserController($db);
             $responeUser = $user->getUser($params);
-            print_r($responeUser);
-            return $responeUser;
             $responeUser = isset($responeUser[0]) ? $responeUser[0] : $responeUser;
-            // Check if there are any rows returned
-            // if (!empty($responeUser)) {
-            //     if (isset($responeUser['role']) && $responeUser['role'] == "Guidance Office") {
+            Check if there are any rows returned
+            if (!empty($responeUser)) {
+                if (isset($responeUser['role']) && $responeUser['role'] == "Guidance Office") {
 
-            //         $params = [
-            //             "SET" => "online = '1'",
-            //             "WHERE" => "username = '$username'",
-            //         ];
+                    $params = [
+                        "SET" => "online = '1'",
+                        "WHERE" => "username = '$username'",
+                    ];
 
-            //         $update = $user->update($params);
-            //         if ($update ) {
-            //             setcookie('GUIDANCE_LOGIN_AUTH', $responeUser['id'], time() + (86400 * 30), '/');
-            //             $responseData['status'] = 'success';
-            //             $responseData['message'] = 'Login successfully.';
-            //             $responseData['type'] = 'success';
-            //         } else {
-            //             $responseData['status'] = 'failed';
-            //             $responseData['message'] = 'Failed to login.';
-            //             $responseData['type'] = 'error'; 
-            //         }
-            //     } else {
-            //         $responseData['status'] = 'failed';
-            //         $responseData['message'] = 'Email or password do not match for this portal.';
-            //         $responseData['type'] = 'warning';
-            //     }
-            // } else {
-            //     $responseData['status'] = 'failed';
-            //     $responseData['message'] = 'Email or password do not match.';
-            //     $responseData['type'] = 'danger';
-            // }
+                    $update = $user->update($params);
+                    if ($update ) {
+                        setcookie('GUIDANCE_LOGIN_AUTH', $responeUser['id'], time() + (86400 * 30), '/');
+                        $responseData['status'] = 'success';
+                        $responseData['message'] = 'Login successfully.';
+                        $responseData['type'] = 'success';
+                    } else {
+                        $responseData['status'] = 'failed';
+                        $responseData['message'] = 'Failed to login.';
+                        $responseData['type'] = 'error'; 
+                    }
+                } else {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = 'Email or password do not match for this portal.';
+                    $responseData['type'] = 'warning';
+                }
+            } else {
+                $responseData['status'] = 'failed';
+                $responseData['message'] = 'Email or password do not match.';
+                $responseData['type'] = 'danger';
+            }
         } catch (PDOException $e) {
             $responseData['status'] = 'failed';
             $responseData['message'] = "PDOException in login(): " . $e->getMessage();
