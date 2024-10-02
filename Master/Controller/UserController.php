@@ -4,21 +4,31 @@ class UserController extends User {
     public function getUser($params = array()) {
         try {
             if (!empty($params)) {
+                // Initialize empty condition array
+                $condition = [];
+            
+                // If username and password are provided
                 if (isset($params['username']) && isset($params['password'])) {
                     $username = $params['username'];
                     $password = $params['password'];
+            
+                    // Retrieve user by username (do not include password in condition yet)
                     $condition = [
-                        'WHERE' => "username = '$username' AND password = '$password'"
+                        'WHERE' => "username = :username",
+                        'bindings' => [':username' => $username]
                     ];
-                } else if (isset($params['id'])) {
+            
+                } elseif (isset($params['id'])) {
+                    // If only ID is provided
                     $id = $params['id'];
                     $condition = [
-                        'WHERE' => "id = '$id'"
+                        'WHERE' => "id = :id",
+                        'bindings' => [':id' => $id]
                     ];
-                } else {
-                    $condition = [];
                 }
+            
             } else {
+                // No conditions provided, so return an empty condition
                 $condition = [];
             }
             
