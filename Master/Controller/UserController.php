@@ -59,7 +59,7 @@ class UserController extends User {
                 }
             } else {
                 // No user found
-                echo "Invalid username.";
+               $responeUser = array();
             }
     
             return $responeUser;
