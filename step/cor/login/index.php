@@ -23,28 +23,53 @@
     }
 
     if (isset($_POST['submit'])) {
+        // Retrieve email and password from the form
         $email = mysqli_real_escape_string($conn, $_POST['email']);
-        $password = mysqli_real_escape_string($conn, $_POST['password']);
-
-        $sql = "SELECT * FROM users WHERE username='{$email}' AND password='{$password}'";
-        $result = mysqli_query($conn, $sql);
-
+        $password = mysqli_real_escape_string($conn, $_POST['password']); // Plaintext password from the user
+    
+        // Prepare SQL query to fetch user data by username
+        $sql = "SELECT * FROM users WHERE username = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+    
+        // Check if user exists
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-
-            if ($row['role'] == "COR Section") {
-                $id = $row['id'];
-                $query = "UPDATE users SET online='1' WHERE id='$id' ";
-                $result1 = mysqli_query($conn, $query);
-                $_SESSION['SESSION_COR'] = $email;
-                header("Location: ../index.php");
+    
+            // Verify the password using password_verify()
+            if (password_verify($password, $row['password'])) {
+                // Check if the user role is "COR Section"
+                if ($row['role'] == "COR Section") {
+                    $id = $row['id'];
+    
+                    // Update user status to online
+                    $query = "UPDATE users SET online = '1' WHERE id = ?";
+                    $stmt1 = mysqli_prepare($conn, $query);
+                    mysqli_stmt_bind_param($stmt1, "i", $id);
+                    mysqli_stmt_execute($stmt1);
+    
+                    // Set session for the user
+                    $_SESSION['SESSION_COR'] = $email;
+    
+                    // Redirect to the homepage or dashboard
+                    header("Location: ../index.php");
+                    exit();
+                } else {
+                    // Role mismatch
+                    $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+                }
             } else {
-                $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+                // Incorrect password
+                $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
             }
         } else {
+            // No user found with the given email
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     }
+
 ?>
 
 <!DOCTYPE html>
