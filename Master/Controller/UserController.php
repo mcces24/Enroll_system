@@ -51,7 +51,7 @@ class UserController extends User {
                 // Verify the password using password_verify
                 if (password_verify($plainTextPassword, $user['password'])) {
                     // Password matches, login successful
-                    $responeUser[] = $row;
+                    $responeUser[] = $user;
                     // Here, you can proceed with setting session data or other post-login actions
                 } else {
                     // Password does not match
