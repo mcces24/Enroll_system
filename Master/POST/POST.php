@@ -267,15 +267,15 @@ function sendGuidanceForm($data)
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
-                echo "Test";
+                print_r($system);
                 // PHPMailer setup
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                // $mail->Username   = !empty($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
-                // $mail->Password   = !empty($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
-                $mail->Username   = 'capstone.project2022.2023@gmail.com';
-                $mail->Password   = 'nxnqxklsnggbkdtc';
+                $mail->Username   = !empty($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = !empty($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                // $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                // $mail->Password   = 'nxnqxklsnggbkdtc';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port       = 465;
 
