@@ -70,12 +70,12 @@ if (isset($_GET['reset'])) {
     <!-- form section start -->
     
     <section class="w3l-mockup-form">
-        <div class="img">
+<!--         <div class="img">
             <img src="img/undraw_programming_re_kg9v.svg">
         </div>
         <div class="img2">
             <img src="img/undraw_progressive_app_m-9-ms.svg">
-        </div>
+        </div> -->
         <div class="container">
             <!-- /form -->
             <div class="workinghny-form-grid">
