@@ -59,18 +59,17 @@ class GuidanceController extends Student {
     public function isGuidanceLogin() {
         
         if (isset($_COOKIE['GUIDANCE_LOGIN_AUTH']) && !empty($_COOKIE['GUIDANCE_LOGIN_AUTH'])) {
-            
-        
 
+            global $db;
+            $guidanceRecord = new GuidanceRecord($db);
+            $params = [
+                'WHERE' => "applicant_id = '$applicantId'",
+            ];
+            $checkRecord = $guidanceRecord->read($params);
+            $checkRecordData = $checkRecord->fetchAll(PDO::FETCH_ASSOC);
             echo "TEST";
              return $_COOKIE['GUIDANCE_LOGIN_AUTH'];
-            // $userData = $user->read($params);
-            // $data = $userData->fetchAll(PDO::FETCH_ASSOC);
-            // if (!empty($data)) {
-            //     return $_COOKIE['GUIDANCE_LOGIN_AUTH'];
-            // } else {
-            //     return false;
-            // }
+            
         } else {
             return false;
         }
