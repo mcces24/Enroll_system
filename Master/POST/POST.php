@@ -262,11 +262,12 @@ function sendGuidanceForm($data)
         
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
-        print_r($responseJson);
+        
         if ($responseJson['status'] = 'success') {
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
+                echo "Test";
                 // PHPMailer setup
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
@@ -295,6 +296,7 @@ function sendGuidanceForm($data)
                 $mail->send();
             } catch (Exception $e) {
                 $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                echo  $response['error'];
                 header('HTTP/1.1 500 Internal Server Error');
             }
         }
