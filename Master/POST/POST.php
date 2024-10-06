@@ -68,7 +68,6 @@ function getPostData($POST)
             acceptNewApplicant($data);
             break;
         case 'sendGuidanceForm':
-            return "test";
             $data = $POST['data'] ?? null;
             sendGuidanceForm($data);
             break;
@@ -260,7 +259,7 @@ function sendGuidanceForm($data)
         $email = $value['email'];
         $applicant_id = $value['applicant_id'];
         $name = $value['name'];
-
+        return;
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
         if ($responseJson['status'] = 'success') {
