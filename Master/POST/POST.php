@@ -259,10 +259,12 @@ function sendGuidanceForm($data)
         $email = $value['email'];
         $applicant_id = $value['applicant_id'];
         $name = $value['name'];
-
+        echo "test";
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
+         echo "test1";
         if ($responseJson['status'] = 'success') {
+            print_r($responseJson, true);
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
