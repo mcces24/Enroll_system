@@ -68,6 +68,7 @@ function getPostData($POST)
             acceptNewApplicant($data);
             break;
         case 'sendGuidanceForm':
+            return "test";
             $data = $POST['data'] ?? null;
             sendGuidanceForm($data);
             break;
