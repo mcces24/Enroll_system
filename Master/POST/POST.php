@@ -262,9 +262,8 @@ function sendGuidanceForm($data)
         
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
-        print_r($responseJson, true);
+        echo $responseJson;
         if ($responseJson['status'] = 'success') {
-            return;
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
