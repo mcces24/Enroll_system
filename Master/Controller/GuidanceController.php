@@ -63,13 +63,15 @@ class GuidanceController extends Student {
             $params = [
                 'WHERE' => "username = '$_COOKIE['GUIDANCE_LOGIN_AUTH']'",
             ];
-            $userData = $user->read($params);
-            $data = $userData->fetchAll(PDO::FETCH_ASSOC);
-            if (!empty($data)) {
-                return $_COOKIE['GUIDANCE_LOGIN_AUTH'];
-            } else {
-                return false;
-            }
+
+            echo "TEST";
+            // $userData = $user->read($params);
+            // $data = $userData->fetchAll(PDO::FETCH_ASSOC);
+            // if (!empty($data)) {
+            //     return $_COOKIE['GUIDANCE_LOGIN_AUTH'];
+            // } else {
+            //     return false;
+            // }
         } else {
             return false;
         }
