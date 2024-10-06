@@ -270,8 +270,8 @@ function sendGuidanceForm($data)
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
-                $mail->Password   = isset($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                $mail->Username   = !empty($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = !empty($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port       = 465;
 
