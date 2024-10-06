@@ -60,9 +60,7 @@ class GuidanceController extends Student {
         
         if (isset($_COOKIE['GUIDANCE_LOGIN_AUTH']) && !empty($_COOKIE['GUIDANCE_LOGIN_AUTH'])) {
             
-            $params = [
-                'WHERE' => "username = '$_COOKIE['GUIDANCE_LOGIN_AUTH']'",
-            ];
+        
 
             echo "TEST";
              return $_COOKIE['GUIDANCE_LOGIN_AUTH'];
