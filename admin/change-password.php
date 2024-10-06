@@ -65,8 +65,8 @@ if (isset($_GET['reset'])) {
     </script>
 
     <!-- form section start -->
-<!--     <img class="wave" src="img/wave.png">
-    <img class="wave2" src="img/wave2.png"> -->
+    <img class="wave" src="img/wave.png">
+<!--     <img class="wave2" src="img/wave2.png"> -->
     <!-- form section start -->
     
     <section class="w3l-mockup-form">
