@@ -430,7 +430,7 @@ class GuidanceController extends Student {
                     'id' => $id
                 );
             }
-            print_r($return);
+            echo "test";
             return json_encode($return);
         } catch (PDOException $e) {
             $responseData['status'] = 'failed';
