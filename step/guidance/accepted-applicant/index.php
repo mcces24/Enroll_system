@@ -30,7 +30,7 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                     <div class="col-12 col-md-7 col-xl-8" style="width: 100%;">
                         <div class="card border-0 shadow-sm h-100">
                             <div class="card-header bg-white">
-                                List of Pre-enrolled Applicant | Send Guidance Form1
+                                List of Pre-enrolled Applicant | Send Guidance Form123 test
 
                                 <div style="float: right;">
                                     <button type="button" name="bulk_send" class="btn btn-sm float-end btn-info send_button" id="bulk_send" data-action="bulk">
