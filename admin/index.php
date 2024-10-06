@@ -24,7 +24,7 @@ if (isset($_GET['verification'])) {
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $password = md5($_POST['password']);
+    $password = $_POST['password']; // Plain text password
 
     // Prepared statement to avoid SQL injection
     $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
@@ -34,8 +34,9 @@ if (isset($_POST['submit'])) {
 
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
-        // Verify password
-        if ($password == $row['password']) {
+        
+        // Verify the password using password_verify
+        if (password_verify($password, $row['password'])) {
             if (empty($row['code'])) {
                 // Start session and redirect
                 $_SESSION['SESSION_EMAIL'] = $email;
@@ -51,6 +52,7 @@ if (isset($_POST['submit'])) {
         $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
