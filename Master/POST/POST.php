@@ -262,41 +262,41 @@ function sendGuidanceForm($data)
 
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
-        // if ($responseJson['status'] = 'success') {
-        //     $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
-        //     $mail = new PHPMailer(true);
-        //     try {
-        //         // PHPMailer setup
-        //         $mail->isSMTP();
-        //         $mail->Host       = 'smtp.gmail.com';
-        //         $mail->SMTPAuth   = true;
-        //         $mail->Username   = !empty($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
-        //         $mail->Password   = !empty($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
-        //         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        //         $mail->Port       = 465;
+        if ($responseJson['status'] = 'success') {
+            $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
+            $mail = new PHPMailer(true);
+            try {
+                // PHPMailer setup
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = !empty($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = !empty($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port       = 465;
 
-        //         $senderName = 'Guidance Office - Madridejos Community College';
-        //         $senderEmail = 'capstone.project2022.2023@gmail.com';
+                $senderName = 'Guidance Office - Madridejos Community College';
+                $senderEmail = 'capstone.project2022.2023@gmail.com';
 
-        //         $mail->setFrom($senderEmail, $senderName);
-        //         $mail->addAddress($email);
-        //         $mail->Subject = 'MCC Guidance Office Form';
+                $mail->setFrom($senderEmail, $senderName);
+                $mail->addAddress($email);
+                $mail->Subject = 'MCC Guidance Office Form';
 
-        //         $domain = isset($system['domain']) ? $system['domain'] : '';
-        //         $link = "$domain/guidance-step/?applicant_id=$applicant_id";
+                $domain = isset($system['domain']) ? $system['domain'] : '';
+                $link = "$domain/guidance-step/?applicant_id=$applicant_id";
 
-        //         $mail->isHTML(true);
-        //         $mail->Body = file_get_contents('Layout/accept_mail.html');
-        //         $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
-        //         $mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
-        //         $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
+                $mail->isHTML(true);
+                $mail->Body = file_get_contents('Layout/accept_mail.html');
+                $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
+                $mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
+                $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
 
-        //         $mail->send();
-        //     } catch (Exception $e) {
-        //         $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
-        //         header('HTTP/1.1 500 Internal Server Error');
-        //     }
-        // }
+                $mail->send();
+            } catch (Exception $e) {
+                $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                header('HTTP/1.1 500 Internal Server Error');
+            }
+        }
         $return[] = $response;
     }
     header('Content-Type: application/json');
