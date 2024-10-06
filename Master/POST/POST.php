@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 include_once '../../MainFunction.php';
 require './phpmailer/src/Exception.php';
@@ -262,7 +262,7 @@ function sendGuidanceForm($data)
         
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
-        echo $responseJson;
+        print_r($responseJson);
         if ($responseJson['status'] = 'success') {
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
