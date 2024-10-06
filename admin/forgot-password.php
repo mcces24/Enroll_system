@@ -42,44 +42,57 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $code = mysqli_real_escape_string($conn, md5(rand()));
 
-    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM admin WHERE email='{$email}'")) > 0) {
-        $query = mysqli_query($conn, "UPDATE admin SET code='{$code}' WHERE email='{$email}'");
+    $query = "SELECT * FROM admin WHERE email = ?";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "s", $email); // 's' indicates the email is a string
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
 
-        if ($query) {        
-            echo "<div style='display: none;'>";
-            //Create an instance; passing `true` enables exceptions
-            $mail = new PHPMailer(true);
+    if (mysqli_num_rows($result) > 0) {
 
-            try {
-                //Server settings
-                $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                $mail->isSMTP();                                            //Send using SMTP
-                $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                $mail->Username = ($student['email_user']);                     //SMTP username
-                $mail->Password   = ($student['email_pass']);                              //SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
-
-                //Recipients
-                $mail->setFrom($student['email_user']);
-                $mail->addAddress($email);
-
-                //Content
-                $mail->isHTML(true);                                  //Set email format to HTML
-                $mail->Subject = 'Forgot Password Link';
-                $domain = $student['domain'];
-                $link = "$domain/admin/change-password.php?reset=$code";
-                $mail->Body    = "Here is the verification link <p>$link</p>";
-
-                $mail->send();
-                echo 'Message has been sent';
-            } catch (Exception $e) {
-                echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-            }
-            echo "</div>";        
-            $msg = "<div class='alert alert-info'>We've send a verification link on your email address.</div>";
-        }
+        $row = mysqli_fetch_assoc($result);
+    
+          if ($row['email'] === $email) {
+              $query = mysqli_query($conn, "UPDATE admin SET code='{$code}' WHERE email='{$email}'");
+      
+              if ($query) {        
+                  echo "<div style='display: none;'>";
+                  //Create an instance; passing `true` enables exceptions
+                  $mail = new PHPMailer(true);
+      
+                  try {
+                      //Server settings
+                      $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                      $mail->isSMTP();                                            //Send using SMTP
+                      $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                      $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                      $mail->Username = ($student['email_user']);                     //SMTP username
+                      $mail->Password   = ($student['email_pass']);                              //SMTP password
+                      $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                      $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+      
+                      //Recipients
+                      $mail->setFrom($student['email_user']);
+                      $mail->addAddress($email);
+      
+                      //Content
+                      $mail->isHTML(true);                                  //Set email format to HTML
+                      $mail->Subject = 'Forgot Password Link';
+                      $domain = $student['domain'];
+                      $link = "$domain/admin/change-password.php?reset=$code";
+                      $mail->Body    = "Here is the verification link <p>$link</p>";
+      
+                      $mail->send();
+                      echo 'Message has been sent';
+                  } catch (Exception $e) {
+                      echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                  }
+                  echo "</div>";        
+                  $msg = "<div class='alert alert-info'>We've send a verification link on your email address.</div>";
+              }
+        } else {
+            $msg = "<div class='alert alert-danger'>$email - This email address do not found.</div>";
+          }
     } else {
         $msg = "<div class='alert alert-danger'>$email - This email address do not found.</div>";
     }
