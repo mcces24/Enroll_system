@@ -5,27 +5,45 @@ $msg = "";
 include '../database/config.php';
 
 if (isset($_GET['reset'])) {
-    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM admin WHERE code='{$_GET['reset']}'")) > 0) {
+    $reset_code = mysqli_real_escape_string($conn, $_GET['reset']);
+    
+    // Use prepared statements for security
+    $stmt = mysqli_prepare($conn, "SELECT * FROM admin WHERE code = ?");
+    mysqli_stmt_bind_param($stmt, 's', $reset_code);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    if (mysqli_num_rows($result) > 0) {
         if (isset($_POST['submit'])) {
-            $password = mysqli_real_escape_string($conn, md5($_POST['password']));
-            $confirm_password = mysqli_real_escape_string($conn, md5($_POST['confirm-password']));
+            // Use password_hash to hash the password securely
+            $password = mysqli_real_escape_string($conn, $_POST['password']);
+            $confirm_password = mysqli_real_escape_string($conn, $_POST['confirm-password']);
 
             if ($password === $confirm_password) {
-                $query = mysqli_query($conn, "UPDATE admin SET password='{$password}', code='' WHERE code='{$_GET['reset']}'");
+                // Hash the password securely with password_hash()
+                $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+                
+                // Prepare the update query using a prepared statement
+                $update_stmt = mysqli_prepare($conn, "UPDATE admin SET password = ?, code = '' WHERE code = ?");
+                mysqli_stmt_bind_param($update_stmt, 'ss', $hashed_password, $reset_code);
+                $query = mysqli_stmt_execute($update_stmt);
 
                 if ($query) {
                     header("Location: index.php");
+                    exit();  // It's a good practice to call exit after redirection
                 }
             } else {
                 $msg = "<div class='alert alert-danger'>Password and Confirm Password do not match.</div>";
             }
         }
     } else {
-        $msg = "<div class='alert alert-danger'>Reset Link do not match.</div>";
+        $msg = "<div class='alert alert-danger'>Invalid reset link.</div>";
     }
 } else {
     header("Location: forgot-password.php");
+    exit();  // Use exit after redirecting
 }
+
 
 ?>
 
