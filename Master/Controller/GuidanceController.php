@@ -405,9 +405,9 @@ class GuidanceController extends Student {
         try {
             //return $lastApplicantId;
             $id = $data['id'];
-
+            //Accept_form
             $query = [
-                'SET' => "status_type = 'Accept_form'",
+                'SET' => "status_type = 'Accept Applicant'",
                 'WHERE' => "id = '$id'",
             ];
 
