@@ -64,6 +64,7 @@ function getPostData($POST)
             guidanceLogout();
             break;
         case 'acceptNewApplicant':
+            return "test";
             $data = $POST['data'] ?? null;
             acceptNewApplicant($data);
             break;
