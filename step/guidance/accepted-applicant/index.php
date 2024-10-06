@@ -156,10 +156,8 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                     });
                 }
                 console.log(data);
-                console.log("BASE_PATH", BASE_PATH);
-                console.log("Test");
                 if (data.length > 0) {
-                    console.log(BASE_PATH);
+                    console.log("Data more than 1");
                     $.ajax({
                         dataType: 'json',
                         url: BASE_PATH + '/Master/POST/POST.php',
