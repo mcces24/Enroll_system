@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 include_once '../../MainFunction.php';
 require './phpmailer/src/Exception.php';
@@ -259,15 +259,13 @@ function sendGuidanceForm($data)
         $email = $value['email'];
         $applicant_id = $value['applicant_id'];
         $name = $value['name'];
-        
+
         $response = sendGuidanceFormFunction($value);
         $responseJson = json_decode($response, true);
-        
         if ($responseJson['status'] = 'success') {
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
-                print_r($system);
                 // PHPMailer setup
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
@@ -298,7 +296,6 @@ function sendGuidanceForm($data)
                 $mail->send();
             } catch (Exception $e) {
                 $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
-                echo  $response['error'];
                 header('HTTP/1.1 500 Internal Server Error');
             }
         }
@@ -343,8 +340,10 @@ function sendAdmission($data)
                 $mail->isSMTP();
                 $mail->Host       = 'smtp.gmail.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
-                $mail->Password   = isset($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                // $mail->Username   = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                // $mail->Password   = isset($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = 'nxnqxklsnggbkdtc';
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port       = 465;
 
