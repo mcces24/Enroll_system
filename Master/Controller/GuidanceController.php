@@ -24,7 +24,7 @@ class GuidanceController extends Student {
 
                     $update = $user->update($params);
                     if ($update ) {
-                        setcookie('GUIDANCE_LOGIN_AUTH', $responeUser['id'], time() + (86400 * 30), '/');
+                        setcookie('GUIDANCE_LOGIN_AUTH', $responeUser['id'], time() + (14400), '/');
                         $responseData['status'] = 'success';
                         $responseData['message'] = 'Login successfully.';
                         $responseData['type'] = 'success';
