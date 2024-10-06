@@ -261,8 +261,6 @@ function sendGuidanceForm($data)
         $name = $value['name'];
 
         $response = sendGuidanceFormFunction($value);
-        header('Content-Type: application/json');
-        echo json_encode($return);
         $responseJson = json_decode($response, true);
         if ($responseJson['status'] = 'success') {
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
