@@ -62,7 +62,7 @@ class GuidanceController extends Student {
             $cookieValue = $_COOKIE['GUIDANCE_LOGIN_AUTH'];
             $user = new User($db);
             $params = [
-                'WHERE' => "username = '$cookieValue'",
+                'WHERE' => "id = '$cookieValue'",
             ];
             $checkCookies = $user->read($params);
             $checkCookiesData = $checkCookies->fetchAll(PDO::FETCH_ASSOC);
