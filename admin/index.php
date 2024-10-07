@@ -11,9 +11,10 @@ $msg = "";
 
 // Function to log login attempts
 function logLoginAttempt($conn, $email, $type, $location, $completeAddress, $lat, $lon) {
-    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, CONVERT_TZ(NOW(), 'UTC', ?))");
+    $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
+    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $portal = 'admin';
-    $stmt->bind_param("sssssdd", $email, $portal, $type, $location, $completeAddress, $lat, $lon);
+    $stmt->bind_param("sssssdds", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $currentDateTime);
     $stmt->execute();
     $stmt->close();
 }
