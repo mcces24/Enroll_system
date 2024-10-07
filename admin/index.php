@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
         if (password_verify($password, $row['password'])) {
             if (empty($row['code'])) {
 
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
@@ -78,7 +78,7 @@ if (isset($_POST['submit'])) {
                 exit();
             } else {
 
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
@@ -89,7 +89,7 @@ if (isset($_POST['submit'])) {
                 $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
             }
         } else {
-            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
+            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
             $attempt = $email; 
             $portal = 'admin';
             $type = 'failed';
@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     } else {
-        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
+        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
         $attempt = $email; 
         $portal = 'admin';
         $type = 'failed';
