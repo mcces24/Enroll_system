@@ -9,7 +9,7 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
 include '../../database/config.php';
 
 // Fetch data from the database
-$sql = "SELECT id, name, email FROM users";
+$sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed'";
 $result = $conn->query($sql);
 ?>
 
