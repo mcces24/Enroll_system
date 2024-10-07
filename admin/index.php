@@ -6,7 +6,14 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
     exit();
 }
 
-include '/database/config.php';
+define('CONFIG_PATH', dirname(__DIR__) . '/database/config.php');
+
+// Include the configuration file safely
+if (file_exists(CONFIG_PATH)) {
+    include_once CONFIG_PATH;
+} else {
+    die('Error: Configuration file not found.');
+}
 include '../Master/POST/LoginAttempt.php';
 $msg = "";
 
