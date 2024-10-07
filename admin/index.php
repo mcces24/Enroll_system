@@ -165,6 +165,20 @@ if (isset($_POST['submit'])) {
     <script src="js/jquery.min.js"></script>
     <script>
         $(document).ready(function(c) {
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                    },
+                    (error) => {
+                        console.error(`Error occurred: ${error.message}`);
+                    }
+                );
+            } else {
+                console.log("Geolocation is not supported by this browser.");
+            }
             $('.alert-close').on('click', function(c) {
                 $('.main-mockup').fadeOut('slow', function(c) {
                     $('.main-mockup').remove();
