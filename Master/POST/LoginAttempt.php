@@ -2,11 +2,19 @@
 function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon) {
     date_default_timezone_set('America/New_York');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
+
+    // Step 1: Delete old records if there are more than 30
+    $deleteStmt = $conn->prepare("DELETE FROM login_logs WHERE id NOT IN (SELECT id FROM (SELECT id FROM login_logs ORDER BY created_at DESC LIMIT 100) AS temp)");
+    $deleteStmt->execute();
+    $deleteStmt->close();
+
+    // Step 2: Insert the new record
     $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
     $stmt->bind_param("sssssdds", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $currentDateTime);
     $stmt->execute();
     $stmt->close();
 }
+
 
 function getUserLocation() {
     $ip = $_SERVER['REMOTE_ADDR'];
