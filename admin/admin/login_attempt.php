@@ -9,7 +9,7 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
 include '../../database/config.php';
 
 // Fetch data from the database
-$sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed'";
+$sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' ORDER BY id DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -18,17 +18,17 @@ $result = $conn->query($sql);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Table</title>
+    <title>Attemp Log Admin</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container mt-5">
-    <h2>User Table</h2>
+    <h2>Attemp Log Admin (Failed)</h2>
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Name</th>
+                <th>Use Attemp</th>
+                <th>Location</th>
                 <th>Email</th>
             </tr>
         </thead>
@@ -36,9 +36,10 @@ $result = $conn->query($sql);
             <?php if ($result->num_rows > 0): ?>
                 <?php while($row = $result->fetch_assoc()): ?>
                     <tr>
-                        <td><?php echo htmlspecialchars($row['id']); ?></td>
-                        <td><?php echo htmlspecialchars($row['name']); ?></td>
-                        <td><?php echo htmlspecialchars($row['email']); ?></td>
+                        <td><?php echo htmlspecialchars($row['attemp']); ?></td>
+                        <td><?php echo htmlspecialchars($row['portal']); ?></td>
+                        <td><?php echo htmlspecialchars($row['location']); ?></td>
+                        <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                     </tr>
                 <?php endwhile; ?>
             <?php else: ?>
