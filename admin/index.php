@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
+                $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
         
@@ -82,7 +82,7 @@ if (isset($_POST['submit'])) {
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
+                $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
 
@@ -93,7 +93,7 @@ if (isset($_POST['submit'])) {
             $attempt = $email; 
             $portal = 'admin';
             $type = 'failed';
-            $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
+            $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
             $stmt->execute();
             $stmt->close();
     
@@ -104,7 +104,7 @@ if (isset($_POST['submit'])) {
         $attempt = $email; 
         $portal = 'admin';
         $type = 'failed';
-        $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
+        $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
         $stmt->execute();
         $stmt->close();
 
