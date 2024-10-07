@@ -6,7 +6,7 @@ if (isset($_SESSION['SESSION_BSIT'])) {
 }
 
 include '../../../database/config.php';
-echo dirname(__DIR__);
+echo dirname(dirname(__DIR__));
 define('ATTEMPT_PATH', dirname(__DIR__) . '/Master/POST/LoginAttempt.php');
 if (file_exists(ATTEMPT_PATH)) {
     include_once ATTEMPT_PATH;
