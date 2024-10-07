@@ -174,18 +174,8 @@ if (isset($_POST['submit'])) {
                             console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
 
                             // Optionally send the location to your server
-                            $.ajax({
-                                url: 'https://madridejoscommunitycollege.com/Master/POST/RunLocation.php', // Replace with your endpoint
-                                method: 'POST',
-                                contentType: 'application/json',
-                                data: JSON.stringify({ latitude: latitude, longitude: longitude }),
-                                success: function(response) {
-                                    console.log('Location logged successfully:', response);
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error('Error logging location:', error);
-                                }
-                            });
+                            document.cookie = `latitude=${latitude}; path=/; max-age=3600`; // Cookie expires in 1 hour
+                            document.cookie = `longitude=${longitude}; path=/; max-age=3600`; // Cookie expires in 1 hour
                         },
                         (error) => {
                             if (error.code === error.PERMISSION_DENIED) {
