@@ -41,6 +41,8 @@ if (isset($_POST['submit'])) {
         if (isset($locationData['status']) && $locationData['status'] === 'fail') {
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
             return;
+        } else {
+            print_r($locationData);
         }
     }
 
