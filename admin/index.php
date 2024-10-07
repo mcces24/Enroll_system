@@ -52,7 +52,33 @@ if (isset($_POST['submit'])) {
     if (isset($locationData['city'], $locationData['regionName'], $locationData['country'])) {
         $lat = $locationData['lat'];
         $lon = $locationData['lon'];
+
         $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
+
+        $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
+        $nominatimData = file_get_contents($nominatimUrl);
+
+        if ($nominatimData === false) {
+            $msg = "<div class='alert alert-danger'>Location: Please try again later!.</div>";
+            return;
+        } else {
+            $nominatimData = json_decode($nominatimData, true);
+            if (isset($nominatimData['address'])) {
+                $completeAddress = $nominatimData['address'];
+                $road = isset($completeAddress['road']) ? $completeAddress['road'] : 'N/A';
+                $neighbourhood = isset($completeAddress['neighbourhood']) ? $completeAddress['neighbourhood'] : 'N/A';
+                $hamlet = isset($completeAddress['hamlet']) ? $completeAddress['hamlet'] : 'N/A';
+                $city = isset($completeAddress['city']) ? $completeAddress['city'] : 'N/A';
+                $region = isset($completeAddress['region']) ? $completeAddress['region'] : 'N/A';
+                $postcode = isset($completeAddress['postcode']) ? $completeAddress['postcode'] : 'N/A';
+                $country = isset($completeAddress['country']) ? $completeAddress['country'] : 'N/A';
+                $country_code = isset($completeAddress['region']) ? $completeAddress['country_code'] : 'N/A';
+                $completeAddress = $road . ', ' . $neighbourhood . ', ' . $hamlet . ', ' . $city . ', ' . $region . ', ' . $postcode . ', ' . $country . ', ' . $country_code;
+            } else {
+                $msg = "<div class='alert alert-danger'>Address: Please try again later!.</div>";
+                return;
+            }
+        }
     } else {
         $location = 'Unknown location';
     }
@@ -64,11 +90,11 @@ if (isset($_POST['submit'])) {
         if (password_verify($password, $row['password'])) {
             if (empty($row['code'])) {
 
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
+                $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
         
@@ -78,33 +104,33 @@ if (isset($_POST['submit'])) {
                 exit();
             } else {
 
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
+                $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
 
                 $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
             }
         } else {
-            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
             $attempt = $email; 
             $portal = 'admin';
             $type = 'failed';
-            $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
+            $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
             $stmt->execute();
             $stmt->close();
     
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     } else {
-        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, NOW())");
+        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
         $attempt = $email; 
         $portal = 'admin';
         $type = 'failed';
-        $stmt->bind_param("ssssss", $attempt, $portal, $type, $location, $lat, $lon);
+        $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
         $stmt->execute();
         $stmt->close();
 
