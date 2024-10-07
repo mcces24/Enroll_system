@@ -5,11 +5,11 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
     header("Location: admin/");
     exit();
 }
-
+echo "test";
 include '../database/config.php';
 include 'Master/POST/LoginAttempt.php';
 $msg = "";
-
+echo "1123";
 // Account verification
 if (isset($_GET['verification'])) {
     $verificationCode = mysqli_real_escape_string($conn, $_GET['verification']);
