@@ -33,15 +33,16 @@ if (isset($_POST['submit'])) {
     $result = $stmt->get_result();
 
     $ip = $_SERVER['REMOTE_ADDR'];
-    echo "IP Address: $ip\n";
     
     $locationData = file_get_contents("http://ip-api.com/json/{$ip}");
     if ($locationData === false) {
-        echo "Error fetching location data.\n";
+        $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
+        return;
     } else {
         $locationData = json_decode($locationData, true);
         if (isset($locationData['status']) && $locationData['status'] === 'fail') {
-            echo "Error: " . $locationData['message'] . "\n";
+            $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
+            return;
         } else {
             print_r($locationData);
         }
