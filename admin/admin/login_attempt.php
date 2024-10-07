@@ -7,7 +7,7 @@ if (!isset($_SESSION['SESSION_EMAIL'])) {
 }
 
 include '../../database/config.php';
-
+echo 'This is the login logs page';
 // Fetch data admin
 $failed_sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' ORDER BY id DESC LIMIT 30";
 $failed_result = $conn->query($failed_sql);
