@@ -47,8 +47,13 @@ if (isset($_POST['submit'])) {
         $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
 
         $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
-        echo $nominatimUrl;
-        $nominatimData = file_get_contents("https://nominatim.openstreetmap.org/reverse?lat=10.3377&lon=123.9080&format=json");
+        $options = [
+            "http" => [
+                "header" => "User-Agent: MyApp/1.0 (myemail@example.com)\r\n"
+            ]
+        ];
+        $context = stream_context_create($options);
+        $nominatimData = @file_get_contents($nominatimUrl, false, $context);
         echo $nominatimData;
         if ($nominatimData === false) {
             $error = error_get_last();
