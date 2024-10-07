@@ -6,7 +6,7 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
     exit();
 }
 
-include '../database/config.php';
+include '../../database/config.php';
 
 // Fetch data from the database
 $sql = "SELECT id, name, email FROM users";
