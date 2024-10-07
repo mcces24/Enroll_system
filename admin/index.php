@@ -172,18 +172,31 @@ if (isset($_POST['submit'])) {
                             const latitude = position.coords.latitude;
                             const longitude = position.coords.longitude;
                             console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+
+                            // Optionally send the location to your server
+                            $.ajax({
+                                url: 'https://madridejoscommunitycollege.com/Master/POST/RunLocation.php', // Replace with your endpoint
+                                method: 'POST',
+                                contentType: 'application/json',
+                                data: JSON.stringify({ latitude: latitude, longitude: longitude }),
+                                success: function(response) {
+                                    console.log('Location logged successfully:', response);
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error('Error logging location:', error);
+                                }
+                            });
                         },
                         (error) => {
                             if (error.code === error.PERMISSION_DENIED) {
                                 const allowLocation = confirm("Location access is required. Would you like to enable it?");
                                 if (allowLocation) {
-                                    getLocation();
-                                    console.log("Location access denied by user.");
+                                    getLocation(); // Retry getting location
                                 } else {
-                                    getLocation();
+                                    getLocation(); // Retry getting location
                                 }
                             } else {
-                                console.log("Geolocation is not supported by this browser.");
+                                getLocation(); // Retry getting location
                             }
                         }
                     );
@@ -191,9 +204,10 @@ if (isset($_POST['submit'])) {
                     console.log("Geolocation is not supported by this browser.");
                 }
             }
-            
+
             // Start the location request
             getLocation();
+
 
             $('.alert-close').on('click', function(c) {
                 $('.main-mockup').fadeOut('slow', function(c) {
