@@ -166,8 +166,6 @@ if (isset($_POST['submit'])) {
     <script src="https://madridejoscommunitycollege.com/assets/js/location.js"></script>
     <script>
         $(document).ready(function(c) {
-            getLocation();
-
             $('.alert-close').on('click', function(c) {
                 $('.main-mockup').fadeOut('slow', function(c) {
                     $('.main-mockup').remove();
