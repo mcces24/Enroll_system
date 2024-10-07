@@ -36,6 +36,8 @@ if (isset($_POST['submit'])) {
     $locationData = file_get_contents("https://freegeoip.app/json/{$ip}");
     $locationData = json_decode($locationData, true);
 
+    print_r($locationData);
+
     if (isset($locationData['city'], $locationData['region_name'], $locationData['country_name'])) {
         $location = $locationData['city'] . ', ' . $locationData['region_name'] . ', ' . $locationData['country_name'];
     } else {
@@ -48,11 +50,29 @@ if (isset($_POST['submit'])) {
         // Verify the password using password_verify
         if (password_verify($password, $row['password'])) {
             if (empty($row['code'])) {
+
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+                $attempt = $email; 
+                $portal = 'admin';
+                $type = 'failed';
+                $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+                $stmt->execute();
+                $stmt->close();
+        
                 // Start session and redirect
                 $_SESSION['SESSION_EMAIL'] = $email;
                 header("Location: admin/");
                 exit();
             } else {
+
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+                $attempt = $email; 
+                $portal = 'admin';
+                $type = 'failed';
+                $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+                $stmt->execute();
+                $stmt->close();
+
                 $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
             }
         } else {
