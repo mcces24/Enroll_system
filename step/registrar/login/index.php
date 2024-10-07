@@ -78,6 +78,7 @@ if (isset($_POST['submit'])) {
                     logLoginAttempt($conn, $email, 'registrar', 'success', $location, $completeAddress, $lat, $lon);
                     $_SESSION['SESSION_REGISTRAR'] = $email;
                     header("Location: ../home/index.php");
+                    exit;
                 } else {
                     $msg = "<div class='alert alert-info'>Email or password do not match for this porta3l.</div>";
                 }
