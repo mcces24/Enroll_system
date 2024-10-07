@@ -4,6 +4,9 @@ session_start();
 if (isset($_SESSION['SESSION_EMAIL'])) {
     header("Location: admin/");
     exit();
+} else {
+    header("Location: ../");
+    exit();
 }
 
 include '../../database/config.php';
