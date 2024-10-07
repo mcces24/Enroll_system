@@ -41,8 +41,6 @@ if (isset($_POST['submit'])) {
         if (isset($locationData['status']) && $locationData['status'] === 'fail') {
             $msg = "<div class='alert alert-danger'>System: Please try again later!.</div>";
             return;
-        } else {
-            print_r($locationData);
         }
     }
 
