@@ -10,6 +10,7 @@ class GuidanceController extends Student {
 
     public function login($username, $password) {
         global $db;
+        $conn = mysqli_connect("localhost", "u510162695_mcces", "MccAdmin1", "u510162695_mcc_es");
         $responseData = [];
         try {
             // Get user location
@@ -55,36 +56,36 @@ class GuidanceController extends Student {
 
                     $update = $user->update($params);
                     if ($update ) {
-                        logLoginAttempt($db, $email, 'guidance', 'success', $location, $completeAddress, $lat, $lon);
+                        logLoginAttempt($conn, $username, 'guidance', 'success', $location, $completeAddress, $lat, $lon);
                         setcookie('GUIDANCE_LOGIN_AUTH', $responeUser['username'], time() + (14400), '/');
                         $responseData['status'] = 'success';
                         $responseData['message'] = 'Login successfully.';
                         $responseData['type'] = 'success';
                     } else {
-                        logLoginAttempt($db, $email, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
+                        logLoginAttempt($conn, $username, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
                         $responseData['status'] = 'failed';
                         $responseData['message'] = 'Failed to login.';
                         $responseData['type'] = 'error'; 
                     }
                 } else {
-                    logLoginAttempt($db, $email, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
+                    logLoginAttempt($conn, $username, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
                     $responseData['status'] = 'failed';
                     $responseData['message'] = 'Email or password do not match for this portal.';
                     $responseData['type'] = 'warning';
                 }
             } else {
-                logLoginAttempt($db, $email, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
+                logLoginAttempt($conn, $username, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
                 $responseData['status'] = 'failed';
                 $responseData['message'] = 'Email or password do not match.';
                 $responseData['type'] = 'danger';
             }
         } catch (PDOException $e) {
-            logLoginAttempt($db, $email, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
+            logLoginAttempt($conn, $username, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
             $responseData['status'] = 'failed';
             $responseData['message'] = "PDOException in login(): " . $e->getMessage();
             $responseData['type'] = 'danger';
         } catch (Exception $e) {
-            logLoginAttempt($db, $email, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
+            logLoginAttempt($conn, $username, 'guidance', 'failed', $location, $completeAddress, $lat, $lon);
             $responseData['status'] = 'failed';
             $responseData['message'] = "Exception in login(): " . $e->getMessage();
             $responseData['type'] = 'danger';
