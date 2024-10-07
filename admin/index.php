@@ -34,20 +34,25 @@ if (isset($_POST['submit'])) {
     
     $locationData = file_get_contents("http://ip-api.com/json/{$ip}");
     if ($locationData === false) {
-        $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
+        $msg = "<div class='alert alert-danger'>Error: Please try again later!.</div>";
         return;
     } else {
         $locationData = json_decode($locationData, true);
         if (isset($locationData['status']) && $locationData['status'] === 'fail') {
-            $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
+            $msg = "<div class='alert alert-danger'>System: Please try again later!.</div>";
             return;
         } else {
             print_r($locationData);
         }
     }
 
-    if (isset($locationData['city'], $locationData['region_name'], $locationData['country_name'])) {
-        $location = $locationData['city'] . ', ' . $locationData['region_name'] . ', ' . $locationData['country_name'];
+    $lat = 0;
+    $lon = 0;
+
+    if (isset($locationData['city'], $locationData['regionName'], $locationData['country'])) {
+        $lat = $locationData['lat'];
+        $lon = $locationData['lon'];
+        $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
     } else {
         $location = 'Unknown location';
     }
@@ -59,11 +64,11 @@ if (isset($_POST['submit'])) {
         if (password_verify($password, $row['password'])) {
             if (empty($row['code'])) {
 
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+                $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
         
@@ -73,33 +78,33 @@ if (isset($_POST['submit'])) {
                 exit();
             } else {
 
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+                $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
 
                 $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
             }
         } else {
-            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
             $attempt = $email; 
             $portal = 'admin';
             $type = 'failed';
-            $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+            $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
             $stmt->execute();
             $stmt->close();
     
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     } else {
-        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, lat, lon,  created_at) VALUES (?, ?, ?, ?, NOW())");
         $attempt = $email; 
         $portal = 'admin';
         $type = 'failed';
-        $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+        $stmt->bind_param("ssss", $attempt, $portal, $type, $location, $lat, $lon);
         $stmt->execute();
         $stmt->close();
 
