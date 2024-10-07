@@ -41,8 +41,6 @@ if (isset($_POST['submit'])) {
     // Get user location
     $locationResponse = getUserLocation();
     
-    // Usage in login handling
-    $locationResponse = getUserLocation();
     if (!$locationResponse['success']) {
         $msg = "<div class='alert alert-danger'>{$locationResponse['message']}</div>";
     } else {
