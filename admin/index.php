@@ -33,11 +33,19 @@ if (isset($_POST['submit'])) {
     $result = $stmt->get_result();
 
     $ip = $_SERVER['REMOTE_ADDR'];
-    echo $ip;
-    $locationData = file_get_contents("https://freegeoip.app/json/{$ip}");
-    $locationData = json_decode($locationData, true);
-
-    print_r($locationData);
+    echo "IP Address: $ip\n";
+    
+    $locationData = file_get_contents("http://ip-api.com/json/{$ip}");
+    if ($locationData === false) {
+        echo "Error fetching location data.\n";
+    } else {
+        $locationData = json_decode($locationData, true);
+        if (isset($locationData['status']) && $locationData['status'] === 'fail') {
+            echo "Error: " . $locationData['message'] . "\n";
+        } else {
+            print_r($locationData);
+        }
+    }
 
     if (isset($locationData['city'], $locationData['region_name'], $locationData['country_name'])) {
         $location = $locationData['city'] . ', ' . $locationData['region_name'] . ', ' . $locationData['country_name'];
