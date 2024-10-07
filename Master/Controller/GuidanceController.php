@@ -1,7 +1,7 @@
 <?php
-define('ATTEMPT_PATH', dirname(__DIR__) . '/Master/POST/LoginAttempt.php');
-if (file_exists(ATTEMPT_PATH)) {
-    include_once ATTEMPT_PATH;
+
+if (file_exists(BASE_PATH_URL . '/Master/POST/LoginAttempt.php')) {
+    include_once BASE_PATH_URL . '/Master/POST/LoginAttempt.php';
 } else {
     die('Error: Configuration file not found.');
 }
