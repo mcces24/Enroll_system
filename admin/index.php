@@ -41,26 +41,21 @@ if (isset($_POST['submit'])) {
     // Get user location
     $locationResponse = getUserLocation();
     
+    // Usage in login handling
+    $locationResponse = getUserLocation();
     if (!$locationResponse['success']) {
         $msg = "<div class='alert alert-danger'>{$locationResponse['message']}</div>";
     } else {
-        $locationData = json_decode($locationData, true);
-        if (isset($locationData['status']) && $locationData['status'] === 'fail') {
-            $msg = "<div class='alert alert-danger'>System: Please try again later!</div>";
+        $lat = $locationResponse['data']['lat'];
+        $lon = $locationResponse['data']['lon'];
+        $location = $locationResponse['data']['location'];
+
+        // Get complete address
+        $addressResponse = getCompleteAddress($lat, $lon);
+        if (!$addressResponse['success']) {
+            $msg = "<div class='alert alert-danger'>{$addressResponse['message']}</div>";
         } else {
-            // Extract latitude and longitude
-            $lat = $locationResponse['data']['lat'];
-            $lon = $locationResponse['data']['lon'];
-            $location = $locationResponse['data']['location'];
-            
-            // Get complete address
-            $addressResponse = getCompleteAddress($lat, $lon);
-            
-            if (!$addressResponse['success']) {
-                $msg = "<div class='alert alert-danger'>{$addressResponse['message']}</div>";
-            } else {
-                $completeAddress = $addressResponse['address'];
-            }
+            $completeAddress = $addressResponse['address'];
         }
     }
 
