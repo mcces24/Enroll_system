@@ -26,6 +26,7 @@ if (isset($_GET['verification'])) {
 
 // Login handling
 if (isset($_POST['submit'])) {
+    echo "test823   ";
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -73,7 +74,7 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-
+    echo "test123";
     // Prepare and execute login query
     $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
     $stmt->bind_param("s", $email);
