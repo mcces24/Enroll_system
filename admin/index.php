@@ -165,20 +165,36 @@ if (isset($_POST['submit'])) {
     <script src="js/jquery.min.js"></script>
     <script>
         $(document).ready(function(c) {
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
-                        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-                    },
-                    (error) => {
-                        console.error(`Error occurred: ${error.message}`);
-                    }
-                );
-            } else {
-                console.log("Geolocation is not supported by this browser.");
+            function getLocation() {
+                if ("geolocation" in navigator) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const latitude = position.coords.latitude;
+                            const longitude = position.coords.longitude;
+                            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                        },
+                        (error) => {
+                            if (error.code === error.PERMISSION_DENIED) {
+                                const allowLocation = confirm("Location access is required. Would you like to enable it?");
+                                if (allowLocation) {
+                                    // Try to get location again
+                                    getLocation();
+                                } else {
+                                    console.log("Location access denied by user.");
+                                }
+                            } else {
+                                console.error(`Error occurred: ${error.message}`);
+                            }
+                        }
+                    );
+                } else {
+                    console.log("Geolocation is not supported by this browser.");
+                }
             }
+            
+            // Start the location request
+            getLocation();
+
             $('.alert-close').on('click', function(c) {
                 $('.main-mockup').fadeOut('slow', function(c) {
                     $('.main-mockup').remove();
