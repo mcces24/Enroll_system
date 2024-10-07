@@ -97,6 +97,7 @@ if (isset($_POST['submit'])) {
             // Verify the password
             if (password_verify($password, $row['password'])) {
                 if (empty($row['code'])) {
+                    logLoginAttempt($conn, $email, 'failed', $location, $completeAddress, $lat, $lon);
                     $_SESSION['SESSION_EMAIL'] = $email;
                     header("Location: admin/");
                     exit();
