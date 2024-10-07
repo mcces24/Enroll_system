@@ -7,7 +7,7 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
 }
 
 include '../database/config.php';
-include '/Master/POST/LoginAttempt.php';
+include 'Master/POST/LoginAttempt.php';
 $msg = "";
 
 // Account verification
