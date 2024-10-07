@@ -7,17 +7,17 @@ if (!isset($_SESSION['SESSION_EMAIL'])) {
 }
 
 include '../../database/config.php';
-echo 'This is the login logs page';
+
 // Fetch data admin
-$failed_sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' ORDER BY id DESC LIMIT 30";
+$failed_sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'admin' ORDER BY id DESC LIMIT 30";
 $failed_result = $conn->query($failed_sql);
-$successful_sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' ORDER BY id DESC LIMIT 30";
+$successful_sql = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'admin' ORDER BY id DESC LIMIT 30";
 $successful_result = $conn->query($successful_sql);
 
 // Fetch data guidance
-$failed_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs_guidance WHERE type = 'failed' ORDER BY id DESC LIMIT 30";
+$failed_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
 $failed_result_guidance = $conn->query($failed_sql_guidance);
-$successful_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs_guidance WHERE type = 'success' ORDER BY id DESC LIMIT 30";
+$successful_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
 $successful_result_guidance = $conn->query($successful_sql_guidance);
 ?>
 
