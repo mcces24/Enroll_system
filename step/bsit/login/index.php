@@ -1,5 +1,3 @@
-<!-- Code by Brave Coder - https://youtube.com/BraveCoder -->
-
 <?php
 session_start();
 if (isset($_SESSION['SESSION_BSIT'])) {
@@ -8,6 +6,12 @@ if (isset($_SESSION['SESSION_BSIT'])) {
 }
 
 include '../../../database/config.php';
+define('ATTEMPT_PATH', dirname(__DIR__) . '/Master/POST/LoginAttempt.php');
+if (file_exists(ATTEMPT_PATH)) {
+    include_once ATTEMPT_PATH;
+} else {
+    die('Error: Configuration file not found.');
+}
 $msg = "";
 
 if (isset($_GET['verification'])) {
