@@ -5,11 +5,11 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
     header("Location: admin/");
     exit();
 }
-echo "test";
-include '../database/config.php';
+
+include '/database/config.php';
 include '../Master/POST/LoginAttempt.php';
 $msg = "";
-echo "1123";
+
 // Account verification
 if (isset($_GET['verification'])) {
     $verificationCode = mysqli_real_escape_string($conn, $_GET['verification']);
@@ -26,7 +26,6 @@ if (isset($_GET['verification'])) {
 
 // Login handling
 if (isset($_POST['submit'])) {
-    echo "test823   ";
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -74,18 +73,14 @@ if (isset($_POST['submit'])) {
             }
         }
     }
-    echo "test123";
+
     // Prepare and execute login query
     $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
     
-
-    echo $msg;
     if (empty($msg)) {
-
-        echo "  232131312312test123  ";
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
             
