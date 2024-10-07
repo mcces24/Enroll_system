@@ -44,33 +44,31 @@ if (isset($_POST['submit'])) {
         $lat = $locationData['lat'];
         $lon = $locationData['lon'];
 
-        echo $lat;
-        echo $lon;
-
         $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
 
         $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
         echo $nominatimUrl;
         $nominatimData = file_get_contents($nominatimUrl);
         echo $nominatimData;
-        echo "test";
-
-        $nominatimData = json_decode($nominatimData, true);
-        if (isset($nominatimData['address'])) {
-            $completeAddress = $nominatimData['address'];
-            $road = isset($completeAddress['road']) ? $completeAddress['road'] : 'N/A';
-            $neighbourhood = isset($completeAddress['neighbourhood']) ? $completeAddress['neighbourhood'] : 'N/A';
-            $hamlet = isset($completeAddress['hamlet']) ? $completeAddress['hamlet'] : 'N/A';
-            $city = isset($completeAddress['city']) ? $completeAddress['city'] : 'N/A';
-            $region = isset($completeAddress['region']) ? $completeAddress['region'] : 'N/A';
-            $postcode = isset($completeAddress['postcode']) ? $completeAddress['postcode'] : 'N/A';
-            $country = isset($completeAddress['country']) ? $completeAddress['country'] : 'N/A';
-            $country_code = isset($completeAddress['region']) ? $completeAddress['country_code'] : 'N/A';
-            $completeAddress = $road . ', ' . $neighbourhood . ', ' . $hamlet . ', ' . $city . ', ' . $region . ', ' . $postcode . ', ' . $country . ', ' . $country_code;
+        if ($nominatimData === false) {
+            $msg = "<div class='alert alert-danger'>Location: Please try again later!.</div>";
         } else {
-            $msg = "<div class='alert alert-danger'>Address: Please try again later!.</div>";
+            $nominatimData = json_decode($nominatimData, true);
+            if (isset($nominatimData['address'])) {
+                $completeAddress = $nominatimData['address'];
+                $road = isset($completeAddress['road']) ? $completeAddress['road'] : 'N/A';
+                $neighbourhood = isset($completeAddress['neighbourhood']) ? $completeAddress['neighbourhood'] : 'N/A';
+                $hamlet = isset($completeAddress['hamlet']) ? $completeAddress['hamlet'] : 'N/A';
+                $city = isset($completeAddress['city']) ? $completeAddress['city'] : 'N/A';
+                $region = isset($completeAddress['region']) ? $completeAddress['region'] : 'N/A';
+                $postcode = isset($completeAddress['postcode']) ? $completeAddress['postcode'] : 'N/A';
+                $country = isset($completeAddress['country']) ? $completeAddress['country'] : 'N/A';
+                $country_code = isset($completeAddress['region']) ? $completeAddress['country_code'] : 'N/A';
+                $completeAddress = $road . ', ' . $neighbourhood . ', ' . $hamlet . ', ' . $city . ', ' . $region . ', ' . $postcode . ', ' . $country . ', ' . $country_code;
+            } else {
+                $msg = "<div class='alert alert-danger'>Address: Please try again later!.</div>";
+            }
         }
-
     } else {
         $location = 'Unknown location';
     }
