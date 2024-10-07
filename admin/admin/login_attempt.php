@@ -1,10 +1,7 @@
 <?php
 session_start();
 
-if (isset($_SESSION['SESSION_EMAIL'])) {
-    header("Location: admin/");
-    exit();
-} else {
+if (!isset($_SESSION['SESSION_EMAIL'])) {
     header("Location: ../");
     exit();
 }
