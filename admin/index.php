@@ -78,13 +78,12 @@ if (isset($_POST['submit'])) {
                     $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
                 }
             } else {
-                logLoginAttempt($conn, $email, 'admin', 'failed', $location, $completeAddress, $lat, $lon);
                 $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
             }
         } else {
-            logLoginAttempt($conn, $email, 'admin', 'failed', $location, $completeAddress, $lat, $lon);
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
+        logLoginAttempt($conn, $email, 'admin', 'failed', $location, $completeAddress, $lat, $lon);
     }
 }
 ?>
