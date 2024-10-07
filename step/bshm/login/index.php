@@ -8,6 +8,12 @@ if (isset($_SESSION['SESSION_BSHM'])) {
 }
 
 include '../../../database/config.php';
+define('ATTEMPT_PATH', dirname(dirname(dirname(__DIR__))) . '/Master/POST/LoginAttempt.php');
+if (file_exists(ATTEMPT_PATH)) {
+    include_once ATTEMPT_PATH;
+} else {
+    die('Error: Missing files!');
+}
 $msg = "";
 
 if (isset($_GET['verification'])) {
@@ -27,6 +33,24 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = mysqli_real_escape_string($conn, $_POST['password']); // Plaintext password from user
 
+    $locationResponse = getUserLocation();
+    
+    if (!$locationResponse['success']) {
+        $msg = "<div class='alert alert-danger'>{$locationResponse['message']}</div>";
+    } else {
+        $lat = $locationResponse['data']['lat'];
+        $lon = $locationResponse['data']['lon'];
+        $location = $locationResponse['data']['location'];
+
+        // Get complete address
+        $addressResponse = getCompleteAddress($lat, $lon);
+        if (!$addressResponse['success']) {
+            $msg = "<div class='alert alert-danger'>{$addressResponse['message']}</div>";
+        } else {
+            $completeAddress = $addressResponse['address'];
+        }
+    }
+
     // Prepare SQL query to fetch user by email/username (do not include password in the query)
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = mysqli_prepare($conn, $sql);
@@ -35,39 +59,42 @@ if (isset($_POST['submit'])) {
     $result = mysqli_stmt_get_result($stmt);
 
     // Check if the user exists
-    if (mysqli_num_rows($result) === 1) {
-        $row = mysqli_fetch_assoc($result);
-
-        // Verify the password using password_verify()
-        if (password_verify($password, $row['password'])) {
-            
-            // Check if the user role is correct for this portal
-            if ($row['role'] == "BSHM Portal") {
-                $id = $row['id'];
+    if (empty($msg)) {
+        if (mysqli_num_rows($result) === 1) {
+            $row = mysqli_fetch_assoc($result);
+    
+            // Verify the password using password_verify()
+            if (password_verify($password, $row['password'])) {
                 
-                // Update user status to online
-                $query = "UPDATE users SET online = '1' WHERE id = ?";
-                $stmt1 = mysqli_prepare($conn, $query);
-                mysqli_stmt_bind_param($stmt1, "i", $id);
-                mysqli_stmt_execute($stmt1);
-
-                // Set session for the user
-                $_SESSION['SESSION_BSHM'] = $email;
-                
-                // Redirect to the homepage or dashboard
-                header("Location: ../");
-                exit();
+                // Check if the user role is correct for this portal
+                if ($row['role'] == "BSHM Portal") {
+                    $id = $row['id'];
+                    
+                    // Update user status to online
+                    $query = "UPDATE users SET online = '1' WHERE id = ?";
+                    $stmt1 = mysqli_prepare($conn, $query);
+                    mysqli_stmt_bind_param($stmt1, "i", $id);
+                    mysqli_stmt_execute($stmt1);
+    
+                    // Set session for the user
+                    $_SESSION['SESSION_BSHM'] = $email;
+                    logLoginAttempt($conn, $email, 'bshm', 'success', $location, $completeAddress, $lat, $lon);
+                    // Redirect to the homepage or dashboard
+                    header("Location: ../");
+                    exit();
+                } else {
+                    // Invalid role for this portal
+                    $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+                }
             } else {
-                // Invalid role for this portal
-                $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
+                // Invalid password
+                $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
             }
         } else {
-            // Invalid password
+            // No user found with the provided email/username
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
+            logLoginAttempt($conn, $email, 'bshm', 'failed', $location, $completeAddress, $lat, $lon);
         }
-    } else {
-        // No user found with the provided email/username
-        $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
     }
 }
 
