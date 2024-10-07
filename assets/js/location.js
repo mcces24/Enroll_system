@@ -12,7 +12,7 @@ function getLocation() {
             },
             (error) => {
                 if (error.code === error.PERMISSION_DENIED) {
-                    const allowLocation = confirm("Location access is required. Would you like to enable it?");
+                    const allowLocation = alert("Location access is required. Please enable location.");
                     if (allowLocation) {
                         getLocation(); // Retry getting location
                     } else {
