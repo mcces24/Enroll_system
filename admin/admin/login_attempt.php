@@ -11,7 +11,7 @@ include '../../database/config.php';
 // Fetch data admin
 $failed_sql_admin = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' ORDER BY id DESC LIMIT 30";
 $failed_result_admin = $conn->query($failed_sql_admin);
-$successful_sql_admin = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'successful' ORDER BY id DESC";
+$successful_sql_admin = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' ORDER BY id DESC";
 $successful_result_admin = $conn->query($successful_sql_admin);
 
 // Fetch data guidance
