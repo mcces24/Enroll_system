@@ -1,4 +1,10 @@
 <?php
+define('ATTEMPT_PATH', dirname(__DIR__) . '/Master/POST/LoginAttempt.php');
+if (file_exists(ATTEMPT_PATH)) {
+    include_once ATTEMPT_PATH;
+} else {
+    die('Error: Configuration file not found.');
+}
 class GuidanceController extends Student {
 
     public function login($username, $password) {
