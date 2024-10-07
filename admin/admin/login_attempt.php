@@ -8,20 +8,16 @@ if (!isset($_SESSION['SESSION_EMAIL'])) {
 
 include '../../database/config.php';
 
-// Fetch data for failed login attempts (Admin), limited to the latest 30 entries
+// Fetch data admin
 $failed_sql_admin = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' ORDER BY id DESC LIMIT 30";
 $failed_result_admin = $conn->query($failed_sql_admin);
-
-// Fetch data for successful login attempts (Admin)
 $successful_sql_admin = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'successful' ORDER BY id DESC";
 $successful_result_admin = $conn->query($successful_sql_admin);
 
-// Fetch data for failed login attempts (Guidance)
-$failed_sql_guidance = "SELECT attemp, portal, location, com_location FROM guidance_logs WHERE type = 'failed' ORDER BY id DESC LIMIT 30";
+// Fetch data guidance
+$failed_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
 $failed_result_guidance = $conn->query($failed_sql_guidance);
-
-// Fetch data for successful login attempts (Guidance)
-$successful_sql_guidance = "SELECT attemp, portal, location, com_location FROM guidance_logs WHERE type = 'successful' ORDER BY id DESC";
+$successful_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
 $successful_result_guidance = $conn->query($successful_sql_guidance);
 ?>
 
