@@ -35,12 +35,10 @@ if (isset($_POST['submit'])) {
     $locationData = file_get_contents("http://ip-api.com/json/{$ip}");
     if ($locationData === false) {
         $msg = "<div class='alert alert-danger'>Error: Please try again later!.</div>";
-        return;
     } else {
         $locationData = json_decode($locationData, true);
         if (isset($locationData['status']) && $locationData['status'] === 'fail') {
             $msg = "<div class='alert alert-danger'>System: Please try again later!.</div>";
-            return;
         }
     }
 
@@ -59,7 +57,6 @@ if (isset($_POST['submit'])) {
 
         if ($nominatimData === false) {
             $msg = "<div class='alert alert-danger'>Location: Please try again later!.</div>";
-            return;
         } else {
             $nominatimData = json_decode($nominatimData, true);
             if (isset($nominatimData['address'])) {
@@ -75,7 +72,6 @@ if (isset($_POST['submit'])) {
                 $completeAddress = $road . ', ' . $neighbourhood . ', ' . $hamlet . ', ' . $city . ', ' . $region . ', ' . $postcode . ', ' . $country . ', ' . $country_code;
             } else {
                 $msg = "<div class='alert alert-danger'>Address: Please try again later!.</div>";
-                return;
             }
         }
     } else {
