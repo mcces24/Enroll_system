@@ -80,13 +80,13 @@ if (isset($_POST['submit'])) {
                     header("Location: ../home/index.php");
                     exit;
                 } else {
-                    $msg = "<div class='alert alert-info'>Email or password do not match for this porta3l.</div>";
+                    $msg = "<div class='alert alert-info'>Email or password do not match for this portal.</div>";
                 }
             } else {
-                $msg = "<div class='alert alert-danger'>Email or password do not match2.</div>";
+                $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
             }
         } else {
-            $msg = "<div class='alert alert-danger'>Email or password do not match1.</div>";
+            $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
         logLoginAttempt($conn, $email, 'registrar', 'failed', $location, $completeAddress, $lat, $lon);
     }
