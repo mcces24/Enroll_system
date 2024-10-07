@@ -3,7 +3,8 @@
 if (file_exists(BASE_PATH_URL . '/Master/POST/LoginAttempt.php')) {
     include_once BASE_PATH_URL . '/Master/POST/LoginAttempt.php';
 } else {
-    die('Error: Configuration file not found.');
+    
+    die('Error: Configuration file not found.' . dirname(__DIR__));
 }
 class GuidanceController extends Student {
 
