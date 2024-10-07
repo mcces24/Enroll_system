@@ -53,10 +53,10 @@ function getUserLocation() {
 
 function getCompleteAddress($lat, $lon) {
 
-    // if (isset($_COOKIE['latitude']) && !empty($_COOKIE['latitude']) && isset($_COOKIE['longitude']) && !empty($_COOKIE['longitude'])) {
-    //     $lat = $_COOKIE['latitude'];
-    //     $lon = $_COOKIE['longitude'];
-    // }
+    if (isset($_COOKIE['latitude']) && !empty($_COOKIE['latitude']) && isset($_COOKIE['longitude']) && !empty($_COOKIE['longitude'])) {
+        $lat = $_COOKIE['latitude'];
+        $lon = $_COOKIE['longitude'];
+    }
     
     $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
     $options = ["http" => ["header" => "User-Agent: MyApp/1.0 (myemail@example.com)\r\n"]];
