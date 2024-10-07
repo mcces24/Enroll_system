@@ -44,9 +44,13 @@ if (isset($_POST['submit'])) {
         $lat = $locationData['lat'];
         $lon = $locationData['lon'];
 
+        echo $lat;
+        echo $lon;
+
         $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
 
         $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
+        echo $nominatimUrl;
         $nominatimData = file_get_contents($nominatimUrl);
         print_r($nominatimData);
         if ($nominatimData === false) {
