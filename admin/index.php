@@ -11,7 +11,7 @@ $msg = "";
 
 // Function to log login attempts
 function logLoginAttempt($conn, $email, $type, $location, $completeAddress, $lat, $lon) {
-    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, CONVERT_TZ(NOW(), 'UTC', ?))");
     $portal = 'admin';
     $stmt->bind_param("sssssdd", $email, $portal, $type, $location, $completeAddress, $lat, $lon);
     $stmt->execute();
