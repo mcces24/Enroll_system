@@ -48,6 +48,7 @@ if (isset($_POST['submit'])) {
 
     $lat = 0;
     $lon = 0;
+    $completeAddress = 'Unknown location';
 
     if (isset($locationData['city'], $locationData['regionName'], $locationData['country'])) {
         $lat = $locationData['lat'];
@@ -89,12 +90,11 @@ if (isset($_POST['submit'])) {
         // Verify the password using password_verify
         if (password_verify($password, $row['password'])) {
             if (empty($row['code'])) {
-
                 $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
+                $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
         
@@ -103,12 +103,11 @@ if (isset($_POST['submit'])) {
                 header("Location: admin/");
                 exit();
             } else {
-
                 $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
                 $attempt = $email; 
                 $portal = 'admin';
                 $type = 'failed';
-                $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
+                $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
 
@@ -119,7 +118,7 @@ if (isset($_POST['submit'])) {
             $attempt = $email; 
             $portal = 'admin';
             $type = 'failed';
-            $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
+            $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
             $stmt->execute();
             $stmt->close();
     
@@ -130,7 +129,7 @@ if (isset($_POST['submit'])) {
         $attempt = $email; 
         $portal = 'admin';
         $type = 'failed';
-        $stmt->bind_param("sssssss", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
+        $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
         $stmt->execute();
         $stmt->close();
 
