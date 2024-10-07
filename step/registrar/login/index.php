@@ -8,6 +8,12 @@
     }
 
     include '../../../database/config.php';
+    define('ATTEMPT_PATH', dirname(dirname(dirname(__DIR__))) . '/Master/POST/LoginAttempt.php');
+    if (file_exists(ATTEMPT_PATH)) {
+        include_once ATTEMPT_PATH;
+    } else {
+        die('Error: Missing files!');
+    }
     $msg = "";
 
     if (isset($_GET['verification'])) {
@@ -27,6 +33,25 @@ if (isset($_POST['submit'])) {
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $password = $_POST['password']; // No need to escape as we will use password_verify()
 
+     // Get user location
+    $locationResponse = getUserLocation();
+    
+    if (!$locationResponse['success']) {
+        $msg = "<div class='alert alert-danger'>{$locationResponse['message']}</div>";
+    } else {
+        $lat = $locationResponse['data']['lat'];
+        $lon = $locationResponse['data']['lon'];
+        $location = $locationResponse['data']['location'];
+
+        // Get complete address
+        $addressResponse = getCompleteAddress($lat, $lon);
+        if (!$addressResponse['success']) {
+            $msg = "<div class='alert alert-danger'>{$addressResponse['message']}</div>";
+        } else {
+            $completeAddress = $addressResponse['address'];
+        }
+    }
+
     // Prepare a query to select the user based on email/username
     $sql = "SELECT * FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
@@ -34,31 +59,35 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-
-        // Use password_verify to check the hashed password
-        if (password_verify($password, $row['password'])) {
-            if ($row['role'] == "Registrar Office") {
-                $id = $row['id'];
-
-                // Update user's online status
-                $query = "UPDATE users SET online = '1' WHERE id = ?";
-                $stmt1 = $conn->prepare($query);
-                $stmt1->bind_param("i", $id);
-                $stmt1->execute();
-
-                // Start session for the logged-in user
-                $_SESSION['SESSION_REGISTRAR'] = $email;
-                header("Location: ../home/index.php");
+    if (empty($msg)) {
+        if ($result->num_rows === 1) {
+            $row = $result->fetch_assoc();
+    
+            // Use password_verify to check the hashed password
+            if (password_verify($password, $row['password'])) {
+                if ($row['role'] == "Registrar Office") {
+                    $id = $row['id'];
+    
+                    // Update user's online status
+                    $query = "UPDATE users SET online = '1' WHERE id = ?";
+                    $stmt1 = $conn->prepare($query);
+                    $stmt1->bind_param("i", $id);
+                    $stmt1->execute();
+    
+                    // Start session for the logged-in user
+                    logLoginAttempt($conn, $email, 'registrar', 'success', $location, $completeAddress, $lat, $lon);
+                    $_SESSION['SESSION_REGISTRAR'] = $email;
+                    header("Location: ../home/index.php");
+                } else {
+                    $msg = "<div class='alert alert-info'>Email or password do not match for this porta3l.</div>";
+                }
             } else {
-                $msg = "<div class='alert alert-info'>Email or password do not match for this porta3l.</div>";
+                $msg = "<div class='alert alert-danger'>Email or password do not match2.</div>";
             }
         } else {
-            $msg = "<div class='alert alert-danger'>Email or password do not match2.</div>";
+            $msg = "<div class='alert alert-danger'>Email or password do not match1.</div>";
         }
-    } else {
-        $msg = "<div class='alert alert-danger'>Email or password do not match1.</div>";
+        logLoginAttempt($conn, $email, 'registrar', 'failed', $location, $completeAddress, $lat, $lon);
     }
 
     // Close the prepared statement
