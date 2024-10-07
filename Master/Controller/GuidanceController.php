@@ -4,7 +4,7 @@ define('ATTEMPT_PATH', dirname(__DIR__) . '/POST/LoginAttempt.php');
 if (file_exists(ATTEMPT_PATH)) {
     include_once ATTEMPT_PATH;
 } else {
-    die('Error: Configuration file not found.');
+    die('Error: Some files are missing.');
 }
 class GuidanceController extends Student {
 
@@ -12,6 +12,30 @@ class GuidanceController extends Student {
         global $db;
         $responseData = [];
         try {
+            // Get user location
+            $locationResponse = getUserLocation();
+
+            if (!$locationResponse['success']) {
+                $responseData['status'] = 'failed';
+                $responseData['message'] = $locationResponse['message'];
+                $responseData['type'] = 'error'; 
+                return $responseData;
+            } else {
+                $lat = $locationResponse['data']['lat'];
+                $lon = $locationResponse['data']['lon'];
+                $location = $locationResponse['data']['location'];
+        
+                // Get complete address
+                $addressResponse = getCompleteAddress($lat, $lon);
+                if (!$addressResponse['success']) {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = $addressResponse['message'];
+                    $responseData['type'] = 'error'; 
+                    return $responseData;
+                } else {
+                    $completeAddress = $addressResponse['address'];
+                }
+            }
             // Get data by email
             $params = [
                 'username' => $username,
