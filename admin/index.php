@@ -1,150 +1,118 @@
 <?php
 session_start();
+
 if (isset($_SESSION['SESSION_EMAIL'])) {
     header("Location: admin/");
-    die();
+    exit();
 }
 
 include '../database/config.php';
 $msg = "";
 
-if (isset($_GET['verification'])) {
-    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE code='{$_GET['verification']}'")) > 0) {
-        $query = mysqli_query($conn, "UPDATE users SET code='' WHERE code='{$_GET['verification']}'");
+// Function to log login attempts
+function logLoginAttempt($conn, $email, $type, $location, $completeAddress, $lat, $lon) {
+    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+    $portal = 'admin';
+    $stmt->bind_param("sssssdd", $email, $portal, $type, $location, $completeAddress, $lat, $lon);
+    $stmt->execute();
+    $stmt->close();
+}
 
+// Account verification
+if (isset($_GET['verification'])) {
+    $verificationCode = mysqli_real_escape_string($conn, $_GET['verification']);
+    if (mysqli_num_rows(mysqli_query($conn, "SELECT * FROM users WHERE code='$verificationCode'")) > 0) {
+        $query = mysqli_query($conn, "UPDATE users SET code='' WHERE code='$verificationCode'");
         if ($query) {
             $msg = "<div class='alert alert-success'>Account verification has been successfully completed.</div>";
         }
     } else {
         header("Location: ");
+        exit();
     }
 }
 
+// Login handling
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $password = $_POST['password']; // Plain text password
+    $password = $_POST['password'];
 
+    // Get user location
     $ip = $_SERVER['REMOTE_ADDR'];
+    $locationData = @file_get_contents("http://ip-api.com/json/{$ip}");
     
-    $locationData = file_get_contents("http://ip-api.com/json/{$ip}");
     if ($locationData === false) {
-        $msg = "<div class='alert alert-danger'>Error: Please try again later!.</div>";
+        $msg = "<div class='alert alert-danger'>Error: Please try again later!</div>";
     } else {
         $locationData = json_decode($locationData, true);
         if (isset($locationData['status']) && $locationData['status'] === 'fail') {
-            $msg = "<div class='alert alert-danger'>System: Please try again later!.</div>";
-        }
-    }
-
-    $lat = 0;
-    $lon = 0;
-    $completeAddress = 'Unknown location';
-
-    if (isset($locationData['city'], $locationData['regionName'], $locationData['country'])) {
-        $lat = $locationData['lat'];
-        $lon = $locationData['lon'];
-
-        $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
-
-        $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
-        $options = [
-            "http" => [
-                "header" => "User-Agent: MyApp/1.0 (myemail@example.com)\r\n"
-            ]
-        ];
-        $context = stream_context_create($options);
-        $nominatimData = @file_get_contents($nominatimUrl, false, $context);
-        echo $nominatimData;
-        if ($nominatimData === false) {
-            $error = error_get_last();
-            echo "Error fetching data: " . $error['message'] . "\n";
-            $msg = "<div class='alert alert-danger'>Location: Please try again later!.</div>";
+            $msg = "<div class='alert alert-danger'>System: Please try again later!</div>";
         } else {
-            $nominatimData = json_decode($nominatimData, true);
-            if (isset($nominatimData['address'])) {
-                $completeAddress = $nominatimData['address'];
-                $road = isset($completeAddress['road']) ? $completeAddress['road'] : 'N/A';
-                $neighbourhood = isset($completeAddress['neighbourhood']) ? $completeAddress['neighbourhood'] : 'N/A';
-                $hamlet = isset($completeAddress['hamlet']) ? $completeAddress['hamlet'] : 'N/A';
-                $city = isset($completeAddress['city']) ? $completeAddress['city'] : 'N/A';
-                $region = isset($completeAddress['region']) ? $completeAddress['region'] : 'N/A';
-                $postcode = isset($completeAddress['postcode']) ? $completeAddress['postcode'] : 'N/A';
-                $country = isset($completeAddress['country']) ? $completeAddress['country'] : 'N/A';
-                $country_code = isset($completeAddress['region']) ? $completeAddress['country_code'] : 'N/A';
-                $completeAddress = $road . ', ' . $neighbourhood . ', ' . $hamlet . ', ' . $city . ', ' . $region . ', ' . $postcode . ', ' . $country . ', ' . $country_code;
+            // Extract latitude and longitude
+            $lat = $locationData['lat'] ?? 0;
+            $lon = $locationData['lon'] ?? 0;
+            $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
+            
+            // Reverse geocoding
+            $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
+            $options = ["http" => ["header" => "User-Agent: MyApp/1.0 (myemail@example.com)\r\n"]];
+            $context = stream_context_create($options);
+            $nominatimData = @file_get_contents($nominatimUrl, false, $context);
+            
+            if ($nominatimData === false) {
+                $msg = "<div class='alert alert-danger'>Error fetching address: Please try again later!</div>";
             } else {
-                $msg = "<div class='alert alert-danger'>Address: Please try again later!.</div>";
+                $nominatimData = json_decode($nominatimData, true);
+                if (isset($nominatimData['address'])) {
+                    $addressParts = [
+                        $nominatimData['address']['road'] ?? 'N/A',
+                        $nominatimData['address']['neighbourhood'] ?? 'N/A',
+                        $nominatimData['address']['hamlet'] ?? 'N/A',
+                        $nominatimData['address']['city'] ?? 'N/A',
+                        $nominatimData['address']['region'] ?? 'N/A',
+                        $nominatimData['address']['postcode'] ?? 'N/A',
+                        $nominatimData['address']['country'] ?? 'N/A',
+                        $nominatimData['address']['country_code'] ?? 'N/A',
+                    ];
+                    $completeAddress = implode(', ', array_filter($addressParts));
+                } else {
+                    $msg = "<div class='alert alert-danger'>Error: Unable to retrieve address!</div>";
+                }
             }
         }
-    } else {
-        $location = 'Unknown location';
     }
 
-    // Prepared statement to avoid SQL injection
+    // Prepare and execute login query
     $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
-
+    
     if (empty($msg)) {
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
             
-            // Verify the password using password_verify
+            // Verify the password
             if (password_verify($password, $row['password'])) {
                 if (empty($row['code'])) {
-                    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-                    $attempt = $email; 
-                    $portal = 'admin';
-                    $type = 'failed';
-                    $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
-                    $stmt->execute();
-                    $stmt->close();
-            
-                    // Start session and redirect
                     $_SESSION['SESSION_EMAIL'] = $email;
                     header("Location: admin/");
                     exit();
                 } else {
-                    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-                    $attempt = $email; 
-                    $portal = 'admin';
-                    $type = 'failed';
-                    $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
-                    $stmt->execute();
-                    $stmt->close();
-    
                     $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
                 }
             } else {
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-                $attempt = $email; 
-                $portal = 'admin';
-                $type = 'failed';
-                $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
-                $stmt->execute();
-                $stmt->close();
-        
+                logLoginAttempt($conn, $email, 'failed', $location, $completeAddress, $lat, $lon);
                 $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
             }
         } else {
-            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-            if ($stmt === false) {
-                die("MySQL prepare error: " . $conn->error);
-            }
-            $attempt = $email; 
-            $portal = 'admin';
-            $type = 'failed';
-            $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
-            $stmt->execute();
-            $stmt->close();
-    
+            logLoginAttempt($conn, $email, 'failed', $location, $completeAddress, $lat, $lon);
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="zxx">
