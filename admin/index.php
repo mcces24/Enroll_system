@@ -178,12 +178,12 @@ if (isset($_POST['submit'])) {
                                 const allowLocation = confirm("Location access is required. Would you like to enable it?");
                                 if (allowLocation) {
                                     // Try to get location again
-                                    getLocation();
-                                } else {
                                     console.log("Location access denied by user.");
+                                } else {
+                                    getLocation();
                                 }
                             } else {
-                                console.error(`Error occurred: ${error.message}`);
+                                getLocation();
                             }
                         }
                     );
