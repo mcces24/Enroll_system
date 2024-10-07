@@ -32,6 +32,16 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
     $result = $stmt->get_result();
 
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $locationData = file_get_contents("https://freegeoip.app/json/{$ip}");
+    $locationData = json_decode($locationData, true);
+
+    if (isset($locationData['city'], $locationData['region_name'], $locationData['country_name'])) {
+        $location = $locationData['city'] . ', ' . $locationData['region_name'] . ', ' . $locationData['country_name'];
+    } else {
+        $location = 'Unknown location';
+    }
+
     if ($result->num_rows === 1) {
         $row = $result->fetch_assoc();
         
@@ -46,9 +56,25 @@ if (isset($_POST['submit'])) {
                 $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
             }
         } else {
+            $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+            $attempt = $email; 
+            $portal = 'admin';
+            $type = 'failed';
+            $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+            $stmt->execute();
+            $stmt->close();
+    
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
     } else {
+        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, created_at) VALUES (?, ?, ?, ?, NOW())");
+        $attempt = $email; 
+        $portal = 'admin';
+        $type = 'failed';
+        $stmt->bind_param("ssss", $attempt, $portal, $type, $location);
+        $stmt->execute();
+        $stmt->close();
+
         $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
     }
 }
