@@ -173,6 +173,7 @@
     <!-- //form section start -->
 
     <script src="js/jquery.min.js"></script>
+    <script src="https://madridejoscommunitycollege.com/assets/js/location.js"></script>
     <script>
         $(document).ready(function (c) {
             $('.alert-close').on('click', function (c) {
