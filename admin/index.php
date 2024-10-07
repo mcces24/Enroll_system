@@ -7,14 +7,16 @@ if (isset($_SESSION['SESSION_EMAIL'])) {
 }
 
 define('CONFIG_PATH', dirname(__DIR__) . '/database/config.php');
+define('ATTEMPT_PATH', dirname(__DIR__) . '/Master/POST/LoginAttempt.php');
 
 // Include the configuration file safely
-if (file_exists(CONFIG_PATH)) {
+if (file_exists(ATTEMPT_PATH)) {
     include_once CONFIG_PATH;
+    include_once ATTEMPT_PATH;
 } else {
     die('Error: Configuration file not found.');
 }
-include '../Master/POST/LoginAttempt.php';
+
 $msg = "";
 
 // Account verification
