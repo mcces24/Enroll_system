@@ -28,8 +28,9 @@ $result = $conn->query($sql);
         <thead>
             <tr>
                 <th>Use Attemp</th>
+                <th>Portal</th>
                 <th>Location</th>
-                <th>Email</th>
+                <th>Complete Location</th>
             </tr>
         </thead>
         <tbody>
