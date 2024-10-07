@@ -177,13 +177,13 @@ if (isset($_POST['submit'])) {
                             if (error.code === error.PERMISSION_DENIED) {
                                 const allowLocation = confirm("Location access is required. Would you like to enable it?");
                                 if (allowLocation) {
-                                    // Try to get location again
+                                    getLocation();
                                     console.log("Location access denied by user.");
                                 } else {
                                     getLocation();
                                 }
                             } else {
-                                getLocation();
+                                console.log("Geolocation is not supported by this browser.");
                             }
                         }
                     );
