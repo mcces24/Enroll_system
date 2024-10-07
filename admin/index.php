@@ -53,7 +53,7 @@ if (isset($_POST['submit'])) {
             $nominatimData = @file_get_contents($nominatimUrl, false, $context);
             
             if ($nominatimData === false) {
-                $msg = "<div class='alert alert-danger'>Error fetching address: Please try again later!</div>";
+                $msg = "<div class='alert alert-danger'>Error fetching: Please try again later!</div>";
             } else {
                 $nominatimData = json_decode($nominatimData, true);
                 if (isset($nominatimData['address'])) {
@@ -69,7 +69,7 @@ if (isset($_POST['submit'])) {
                     ];
                     $completeAddress = implode(', ', array_filter($addressParts));
                 } else {
-                    $msg = "<div class='alert alert-danger'>Error: Unable to retrieve address!</div>";
+                    $msg = "<div class='alert alert-danger'>Error: Unable to retrieve!</div>";
                 }
             }
         }
@@ -81,7 +81,11 @@ if (isset($_POST['submit'])) {
     $stmt->execute();
     $result = $stmt->get_result();
     
+
+    echo $msg;
     if (empty($msg)) {
+
+        echo "  232131312312test123  ";
         if ($result->num_rows === 1) {
             $row = $result->fetch_assoc();
             
