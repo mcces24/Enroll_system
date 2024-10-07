@@ -39,46 +39,27 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
     // Get user location
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $locationData = @file_get_contents("http://ip-api.com/json/{$ip}");
+    $locationResponse = getUserLocation();
     
-    if ($locationData === false) {
-        $msg = "<div class='alert alert-danger'>Error: Please try again later!</div>";
+    if (!$locationResponse['success']) {
+        $msg = "<div class='alert alert-danger'>{$locationResponse['message']}</div>";
     } else {
         $locationData = json_decode($locationData, true);
         if (isset($locationData['status']) && $locationData['status'] === 'fail') {
             $msg = "<div class='alert alert-danger'>System: Please try again later!</div>";
         } else {
             // Extract latitude and longitude
-            $lat = $locationData['lat'] ?? 0;
-            $lon = $locationData['lon'] ?? 0;
-            $location = $locationData['city'] . ', ' . $locationData['regionName'] . ', ' . $locationData['country'];
+            $lat = $locationResponse['data']['lat'];
+            $lon = $locationResponse['data']['lon'];
+            $location = $locationResponse['data']['location'];
             
-            // Reverse geocoding
-            $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
-            $options = ["http" => ["header" => "User-Agent: MyApp/1.0 (myemail@example.com)\r\n"]];
-            $context = stream_context_create($options);
-            $nominatimData = @file_get_contents($nominatimUrl, false, $context);
+            // Get complete address
+            $addressResponse = getCompleteAddress($lat, $lon);
             
-            if ($nominatimData === false) {
-                $msg = "<div class='alert alert-danger'>Error fetching: Please try again later!</div>";
+            if (!$addressResponse['success']) {
+                $msg = "<div class='alert alert-danger'>{$addressResponse['message']}</div>";
             } else {
-                $nominatimData = json_decode($nominatimData, true);
-                if (isset($nominatimData['address'])) {
-                    $addressParts = [
-                        $nominatimData['address']['road'] ?? 'N/A',
-                        $nominatimData['address']['neighbourhood'] ?? 'N/A',
-                        $nominatimData['address']['hamlet'] ?? 'N/A',
-                        $nominatimData['address']['city'] ?? 'N/A',
-                        $nominatimData['address']['region'] ?? 'N/A',
-                        $nominatimData['address']['postcode'] ?? 'N/A',
-                        $nominatimData['address']['country'] ?? 'N/A',
-                        $nominatimData['address']['country_code'] ?? 'N/A',
-                    ];
-                    $completeAddress = implode(', ', array_filter($addressParts));
-                } else {
-                    $msg = "<div class='alert alert-danger'>Error: Unable to retrieve!</div>";
-                }
+                $completeAddress = $addressResponse['address'];
             }
         }
     }
