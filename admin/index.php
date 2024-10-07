@@ -124,6 +124,9 @@ if (isset($_POST['submit'])) {
         }
     } else {
         $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+        if ($stmt === false) {
+            die("MySQL prepare error: " . $conn->error);
+        }
         $attempt = $email; 
         $portal = 'admin';
         $type = 'failed';
