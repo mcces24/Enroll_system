@@ -24,12 +24,6 @@ if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password']; // Plain text password
 
-    // Prepared statement to avoid SQL injection
-    $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
     $ip = $_SERVER['REMOTE_ADDR'];
     
     $locationData = file_get_contents("http://ip-api.com/json/{$ip}");
@@ -78,24 +72,42 @@ if (isset($_POST['submit'])) {
         $location = 'Unknown location';
     }
 
-    if ($result->num_rows === 1) {
-        $row = $result->fetch_assoc();
-        
-        // Verify the password using password_verify
-        if (password_verify($password, $row['password'])) {
-            if (empty($row['code'])) {
-                $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-                $attempt = $email; 
-                $portal = 'admin';
-                $type = 'failed';
-                $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
-                $stmt->execute();
-                $stmt->close();
-        
-                // Start session and redirect
-                $_SESSION['SESSION_EMAIL'] = $email;
-                header("Location: admin/");
-                exit();
+    // Prepared statement to avoid SQL injection
+    $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if (empty($msg)) {
+        if ($result->num_rows === 1) {
+            $row = $result->fetch_assoc();
+            
+            // Verify the password using password_verify
+            if (password_verify($password, $row['password'])) {
+                if (empty($row['code'])) {
+                    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+                    $attempt = $email; 
+                    $portal = 'admin';
+                    $type = 'failed';
+                    $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
+                    $stmt->execute();
+                    $stmt->close();
+            
+                    // Start session and redirect
+                    $_SESSION['SESSION_EMAIL'] = $email;
+                    header("Location: admin/");
+                    exit();
+                } else {
+                    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+                    $attempt = $email; 
+                    $portal = 'admin';
+                    $type = 'failed';
+                    $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
+                    $stmt->execute();
+                    $stmt->close();
+    
+                    $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
+                }
             } else {
                 $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
                 $attempt = $email; 
@@ -104,11 +116,14 @@ if (isset($_POST['submit'])) {
                 $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
                 $stmt->execute();
                 $stmt->close();
-
-                $msg = "<div class='alert alert-info'>First verify your account and try again.</div>";
+        
+                $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
             }
         } else {
             $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
+            if ($stmt === false) {
+                die("MySQL prepare error: " . $conn->error);
+            }
             $attempt = $email; 
             $portal = 'admin';
             $type = 'failed';
@@ -118,19 +133,6 @@ if (isset($_POST['submit'])) {
     
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
-    } else {
-        $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW())");
-        if ($stmt === false) {
-            die("MySQL prepare error: " . $conn->error);
-        }
-        $attempt = $email; 
-        $portal = 'admin';
-        $type = 'failed';
-        $stmt->bind_param("sssssdd", $attempt, $portal, $type, $location, $completeAddress, $lat, $lon);
-        $stmt->execute();
-        $stmt->close();
-
-        $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
     }
 }
 
