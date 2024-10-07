@@ -1,10 +1,10 @@
 <?php
 
-if (file_exists(BASE_PATH_URL . '/Master/POST/LoginAttempt.php')) {
-    include_once BASE_PATH_URL . '/Master/POST/LoginAttempt.php';
+define('ATTEMPT_PATH', dirname(__DIR__) . '/POST/LoginAttempt.php');
+if (file_exists(ATTEMPT_PATH)) {
+    include_once ATTEMPT_PATH;
 } else {
-    
-    die('Error: Configuration file not found.' . dirname(__DIR__));
+    die('Error: Configuration file not found.');
 }
 class GuidanceController extends Student {
 
