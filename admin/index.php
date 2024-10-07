@@ -48,7 +48,7 @@ if (isset($_POST['submit'])) {
 
         $nominatimUrl = "https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json";
         echo $nominatimUrl;
-        $nominatimData = @file_get_contents($nominatimUrl);
+        $nominatimData = file_get_contents("https://nominatim.openstreetmap.org/reverse?lat={$lat}&lon={$lon}&format=json");
         echo $nominatimData;
         if ($nominatimData === false) {
             $msg = "<div class='alert alert-danger'>Location: Please try again later!.</div>";
