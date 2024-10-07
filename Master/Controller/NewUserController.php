@@ -1,4 +1,12 @@
 <?php
+
+define('ATTEMPT_PATH', dirname(__DIR__) . '/POST/LoginAttempt.php');
+if (file_exists(ATTEMPT_PATH)) {
+    include_once ATTEMPT_PATH;
+} else {
+    die('Error: Some files are missing.');
+}
+
 class NewUserController extends NewUser {
 
     function getNewUserData($params = array()) {
@@ -101,7 +109,33 @@ class NewUserController extends NewUser {
 
     public function login($username, $password) {
         $responseData = [];
+        $conn = mysqli_connect("localhost", "u510162695_mcces", "MccAdmin1", "u510162695_mcc_es");
         try {
+
+            // Get user location
+            $locationResponse = getUserLocation();
+
+            if (!$locationResponse['success']) {
+                $responseData['status'] = 'failed';
+                $responseData['message'] = $locationResponse['message'];
+                $responseData['type'] = 'error'; 
+                return $responseData;
+            } else {
+                $lat = $locationResponse['data']['lat'];
+                $lon = $locationResponse['data']['lon'];
+                $location = $locationResponse['data']['location'];
+        
+                // Get complete address
+                $addressResponse = getCompleteAddress($lat, $lon);
+                if (!$addressResponse['success']) {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = $addressResponse['message'];
+                    $responseData['type'] = 'error'; 
+                    return $responseData;
+                } else {
+                    $completeAddress = $addressResponse['address'];
+                }
+            }
             // Get data by email
             $stmt = $this->getLoginUser($username, $password);
     
@@ -110,10 +144,12 @@ class NewUserController extends NewUser {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($row) {
                     if ($row['verified_status'] != '1') {
+                        logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
                         $responseData['status'] = 'failed';
                         $responseData['message'] = 'Account is not yet verified, Please check your email to verify your account.';
                         $responseData['type'] = 'info';
                     } else {
+                        logLoginAttempt($conn, $username, 'student', 'success', $location, $completeAddress, $lat, $lon);
                         setcookie('USER_LOGIN_AUTH', $row['Id'], time() + (86400 * 30), '/');
                         // $_SESSION['SESSION_STUDENTS'] = $username;
                         // $_SESSION['USER_ID'] = $row['Id'];
@@ -124,20 +160,24 @@ class NewUserController extends NewUser {
                         setcookie('isRegistered', false, time() - 3600, '/');
                     }
                 } else {
+                    logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
                     $responseData['status'] = 'failed';
                     $responseData['message'] = 'ID Number Is Not Yet Enroll In This Semester.';
                     $responseData['type'] = 'info';
                 }
             } else {
+                logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
                 $responseData['status'] = 'failed';
                 $responseData['message'] = 'ID Number/Email Account Not Found OR Invalid.';
                 $responseData['type'] = 'danger';
             }
         } catch (PDOException $e) {
+            logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
             $responseData['status'] = 'failed';
             $responseData['message'] = "PDOException in ifEmailExists(): " . $e->getMessage();
             $responseData['type'] = 'danger';
         } catch (Exception $e) {
+            logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
             $responseData['status'] = 'failed';
             $responseData['message'] = "Exception in getLoginUser(): " . $e->getMessage();
             $responseData['type'] = 'danger';
