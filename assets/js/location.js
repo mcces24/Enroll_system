@@ -32,7 +32,7 @@ function getLocation() {
                 // Optionally send the location to your server
                 document.cookie = `latitude=${latitude}; path=/; max-age=3600`; // Cookie expires in 1 hour
                 document.cookie = `longitude=${longitude}; path=/; max-age=3600`; // Cookie expires in 1 hour
-                 document.cookie = `accuracy=${accuracy}; path=/; max-age=3600`; // Cookie expires in 1 hour
+                document.cookie = `accuracy=${accuracy}; path=/; max-age=3600`; // Cookie expires in 1 hour
             },
             (error) => {
                 if (error.code === error.PERMISSION_DENIED) {
