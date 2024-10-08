@@ -91,10 +91,10 @@ if (isset($_POST['submit'])) {
                   $msg = "<div class='alert alert-info'>We've send a verification link on your email address.</div>";
               }
         } else {
-            $msg = "<div class='alert alert-danger'>$email - This email address do not found.</div>";
+            $msg = "<div class='alert alert-danger'>$email - Email address not found.</div>";
           }
     } else {
-        $msg = "<div class='alert alert-danger'>$email - This email address do not found.</div>";
+        $msg = "<div class='alert alert-danger'>$email - Email address not found.</div>";
     }
 }
 
