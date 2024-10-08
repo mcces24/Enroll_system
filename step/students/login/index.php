@@ -164,8 +164,8 @@ if (isStudentLogin()) {
                         type: 'login',
                         data: formData 
                     },
-                    contentType: false, // Prevent jQuery from setting content type
-                    processData: false, // Prevent jQuery from processing data
+                    // contentType: false, // Prevent jQuery from setting content type
+                    // processData: false, // Prevent jQuery from processing data
                     success: function(response) {
                         // Handle the response from the server
                         response = JSON.parse(response);
