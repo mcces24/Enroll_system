@@ -148,18 +148,11 @@ if (isStudentLogin()) {
             $('#loginForm').on('submit', function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 // Get form data
-                // Create a FormData object
-                var formData = new FormData();
-            
-                // Append username and password
-                formData.append('username', $('input[name=username]').val());
-                formData.append('password', $('input[name=password]').val());
-            
-                // Append the image file
-                var imageFile = $('#fileInput')[0].files[0]; // Get the selected file
-                if (imageFile) {
-                    formData.append('image', imageFile); // Append the image file
-                }
+                var formData = {
+                    username: $('input[name=username]').val(),
+                    password: $('input[name=password]').val(),
+                    image: $('#fileInput')[0].files[0] // Get the selected image file
+                };
 
                 $('.btn').prop('disabled', true);
                 $('.btn').text('Logging in...');
