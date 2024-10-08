@@ -1,6 +1,6 @@
 <?php
 function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon) {
-    date_default_timezone_set('America/New_York');
+    date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
 
     // Step 1: Delete old records if there are more than 30
