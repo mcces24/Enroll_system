@@ -34,7 +34,6 @@ function getPostData($POST)
             verifiedUser($POST['data'] ?? null);
             break;
         case 'login':
-            print_r($POST);
             $data = $POST['data'] ?? null;
             login($data);
             break;
@@ -122,6 +121,7 @@ function verifiedUser($verify)
 
 function login($data)
 {
+    print_r($data);
     $username = isset($data['username']) ? $data['username'] : null;
     $password = isset($data['password']) ? $data['password'] : null;
 
