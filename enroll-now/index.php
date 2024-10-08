@@ -9389,8 +9389,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
             // Create a variable to hold the AJAX request
             let ajaxRequest;
             
-            // Set a timeout for 30 seconds (30000 milliseconds)
-            const timeoutDuration = 500;
+            // Set a timeout for 5 seconds (5000 milliseconds)
+            const timeoutDuration = 5000;
             
             ajaxRequest = $.ajax({
                 type: 'POST',
@@ -9459,7 +9459,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                 $('.form-btn').text('Submit');
                 swal({
                     title: "Request Timeout",
-                    text: "The request took too long to complete. Please check internet connection",
+                    text: "Please check internet connection and try again",
                     icon: 'warning',
                     button: "Okay",
                 });
