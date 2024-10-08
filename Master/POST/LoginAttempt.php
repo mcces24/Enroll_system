@@ -3,6 +3,11 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
 
+    if (isset($_COOKIE['latitude']) && !empty($_COOKIE['latitude']) && isset($_COOKIE['longitude']) && !empty($_COOKIE['longitude'])) {
+        $lat = $_COOKIE['latitude'];
+        $lon = $_COOKIE['longitude'];
+    }
+
     // Step 1: Delete old records if there are more than 30
     // $deleteStmt = $conn->prepare("DELETE FROM login_logs WHERE id NOT IN (SELECT id FROM (SELECT id FROM login_logs ORDER BY created_at DESC LIMIT 100) AS temp)");
     // $deleteStmt->execute();
