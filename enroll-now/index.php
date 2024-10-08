@@ -4179,10 +4179,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                               <span class="happyforms-required"></span>
                                                                            </label>
                                                                         </div>
-                                                                        <span class="happyforms-part__description">ex: 21</span>
+                                                                        <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                                         <div class="happyforms-part__el">
                                                                            <div class="happyforms-input">
-                                                                              <input min="17" max="80" maxlength="2" id="happyforms-710_single_line_text_12" type="number" name="age" value="" placeholder="Age" autocomplete="off" maz spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
+                                                                              <input min="17" max="80" maxlength="2" id="happyforms-710_single_line_text_12" type="number" name="age" value="" placeholder="Age" autocomplete="off" maz spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                            </div>
                                                                         </div>
                                                                      </div>
@@ -4762,10 +4762,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                            <span class="happyforms-required"></span>
                                                                         </label>
                                                                      </div>
-                                                                     <span class="happyforms-part__description">ex: 21</span>
+                                                                     <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input min="17" max="80" id="happyforms-710_single_line_text_9" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17)" oninput="this.setCustomValidity('')">
+                                                                            <input min="17" max="80" maxlength="2" id="happyforms-710_single_line_text_12" type="number" name="age" value="" placeholder="Age" autocomplete="off" maz spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5428,10 +5428,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                            <span class="happyforms-required"></span>
                                                                         </label>
                                                                      </div>
-                                                                     <span class="happyforms-part__description">ex: 21</span>
+                                                                     <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input min="17" max="80" id="happyforms-768_single_line_text_11" value="<?php echo isset($student['age']) ? $student['age'] : '' ?>" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
+                                                                           <input min="17" max="80" id="happyforms-768_single_line_text_11" value="<?php echo isset($student['age']) ? $student['age'] : '' ?>" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -6046,10 +6046,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                                  <span class="happyforms-required"></span>
                                                                               </label>
                                                                            </div>
-                                                                           <span class="happyforms-part__description">ex: 21</span>
+                                                                           <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                                            <div class="happyforms-part__el">
                                                                               <div class="happyforms-input">
-                                                                                 <input min="17" max="80" id="happyforms-768_single_line_text_11" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
+                                                                                 <input min="17" max="80" id="happyforms-768_single_line_text_11" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                               </div>
                                                                            </div>
                                                                         </div>
@@ -6566,10 +6566,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                         <span class="happyforms-required"></span>
                                                                      </label>
                                                                   </div>
-                                                                  <span class="happyforms-part__description">ex: 21</span>
+                                                                  <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input min="17" max="80" maxlength="2" id="happyforms-710_single_line_text_12" type="number" name="age" value="" placeholder="Age" autocomplete="off" maz spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
+                                                                        <input min="17" max="80" maxlength="2" id="happyforms-710_single_line_text_12" type="number" name="age" value="" placeholder="Age" autocomplete="off" maz spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7149,10 +7149,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                         <span class="happyforms-required"></span>
                                                                      </label>
                                                                   </div>
-                                                                  <span class="happyforms-part__description">ex: 21</span>
+                                                                  <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input min="17" max="80" id="happyforms-710_single_line_text_9" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17)" oninput="this.setCustomValidity('')">
+                                                                        <input min="17" max="80" maxlength="2" id="happyforms-710_single_line_text_12" type="number" name="age" value="" placeholder="Age" autocomplete="off" maz spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7801,10 +7801,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                         <span class="happyforms-required"></span>
                                                                      </label>
                                                                   </div>
-                                                                  <span class="happyforms-part__description">ex: 21</span>
+                                                                  <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input min="17" max="80" id="happyforms-768_single_line_text_11" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
+                                                                        <input min="17" max="80" id="happyforms-768_single_line_text_11" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -8426,10 +8426,10 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <span class="happyforms-required"></span>
                                                                </label>
                                                             </div>
-                                                            <span class="happyforms-part__description">ex: 21</span>
+                                                            <span class="happyforms-part__description" style="color: red;">*Age is automatically computed based on your birthday.</span>
                                                             <div class="happyforms-part__el">
                                                                <div class="happyforms-input">
-                                                                  <input min="17" max="80" id="happyforms-768_single_line_text_11" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')">
+                                                                  <input min="17" max="80" id="happyforms-768_single_line_text_11" type="number" name="age" value="" placeholder="Age" autocomplete="off" spellcheck="false" autocorrect="off" required oninvalid="this.setCustomValidity('Age required at least 17')" oninput="this.setCustomValidity('')" disabled>
                                                                </div>
                                                             </div>
                                                          </div>
@@ -9474,6 +9474,34 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
             }, timeoutDuration);
          }
       }
+   </script>
+   <script>
+        $(document).ready(function() {
+            $('#datepicker').change(function() {
+                computeAge();
+            });
+
+            function computeAge() {
+                const dobInput = $('#datepicker').val();
+                if (!dobInput) {
+                    $('input[name="age"]').val(''); // Changed to select by name
+                    return;
+                }
+
+                const dob = new Date(dobInput);
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const monthDiff = today.getMonth() - dob.getMonth();
+
+                // Adjust age if the birthday hasn't occurred yet this year
+                if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+
+                // Set the age in the specified input field
+                $('input[name="age"]').val(age); // Changed to select by name
+            }
+        });
    </script>
 </body>
 
