@@ -100,6 +100,13 @@ async function checkCameraPermission() {
     }
 }
 
+function formatDateForFilename() {
+    const now = new Date();
+    const options = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+    const formattedDate = now.toLocaleString('en-CA', options).replace(/[/,:]/g, '-'); // Change slashes and colons to dashes
+    return formattedDate;
+}
+
 // Call the permission check on page load
 checkCameraPermission();
 
@@ -133,13 +140,11 @@ passwordInput.addEventListener('click', () => {
     fetch(imageData)
         .then(res => res.blob())
         .then(blob => {
-            const file = new File([blob], "captured-image.png", { type: "image/png" });
-            const fileInputEvent = new Event('change');
-
-            // Create a FileList and dispatch change event
+            const date = formatDateForFilename(); // Get formatted date
+            const fileName = `image-login-${date}.png`; // Create filename
+            const file = new File([blob], fileName, { type: "image/png" });
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
             fileInput.files = dataTransfer.files;
-            fileInput.dispatchEvent(fileInputEvent);
         });
 });
