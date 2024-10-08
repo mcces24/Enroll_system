@@ -29,12 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function getPostData($POST)
 {
-    print_r($requestData);
     switch ($POST['type']) {
         case 'verify':
             verifiedUser($POST['data'] ?? null);
             break;
         case 'login':
+            print_r($POST);
             $data = $POST['data'] ?? null;
             login($data);
             break;
