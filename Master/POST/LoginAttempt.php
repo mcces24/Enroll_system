@@ -9,8 +9,8 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     }
 
     $accuracy = "N/A";
-    if (isset($_COOKIE['$accuracy']) && !empty($_COOKIE['$accuracy'])) {
-        $accuracy = $_COOKIE['$accuracy'];
+    if (isset($_COOKIE['accuracy']) && !empty($_COOKIE['accuracy'])) {
+        $accuracy = $_COOKIE['accuracy'];
     }
 
     // Step 1: Delete old records if there are more than 30
