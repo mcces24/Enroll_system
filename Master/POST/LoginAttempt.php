@@ -8,6 +8,11 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
         $lon = $_COOKIE['longitude'];
     }
 
+    $accuracy = "N/A";
+    if (isset($_COOKIE['$accuracy']) && !empty($_COOKIE['$accuracy'])) {
+        $accuracy = $_COOKIE['$accuracy'];
+    }
+
     // Step 1: Delete old records if there are more than 30
     if ($portal == 'student') {
         $deleteStmt = $conn->prepare("
@@ -27,8 +32,8 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     }
 
     // Step 2: Insert the new record
-    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssss", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $currentDateTime);
+    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, accuracy, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssss", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $accuracy, $currentDateTime);
     $stmt->execute();
     $stmt->close();
 }
