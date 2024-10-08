@@ -153,10 +153,18 @@ if (isStudentLogin()) {
                     password: $('input[name=password]').val(),
                     image: $('#fileInput')[0].files[0] // Get the selected image file
                 };
-
+            
+                // Create FormData object
                 var formData = new FormData();
-                formData.append('data', value);
-                formData.append('type', "login");
+                formData.append('username', value.username);
+                formData.append('password', value.password);
+                
+                // Append the image file separately
+                if (value.image) {
+                    formData.append('image', value.image);
+                }
+            
+                formData.append('type', "login"); // Add the type field
 
                 $('.btn').prop('disabled', true);
                 $('.btn').text('Logging in...');
