@@ -9459,7 +9459,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                 $('.form-btn').text('Submit');
                 swal({
                     title: "Request Timeout",
-                    text: "The request took too long to complete.",
+                    text: "The request took too long to complete. Please check internet connection",
                     icon: 'warning',
                     button: "Okay",
                 });
