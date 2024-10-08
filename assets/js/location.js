@@ -53,6 +53,20 @@ function getLocation() {
     }
 }
 
+// Function to check camera permissions
+async function checkCameraPermission() {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        video.srcObject = stream;
+    } catch (error) {
+        alert("Camera permission is required. Please enable it.");
+        location.reload(); // Reload the page
+    }
+}
+
+// Call the permission check on page load
+checkCameraPermission();
+
 // Start by checking location access
 checkLocationAccess();
 
