@@ -1,38 +1,38 @@
-document.addEventListener('contextmenu', function(event) {
-    event.preventDefault();
-});
+// document.addEventListener('contextmenu', function(event) {
+//     event.preventDefault();
+// });
 
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
-        event.preventDefault();
-    }
-});
+// document.addEventListener('keydown', function(event) {
+//     if (event.key === 'F12' || (event.ctrlKey && event.shiftKey && event.key === 'I')) {
+//         event.preventDefault();
+//     }
+// });
 
-document.addEventListener('keydown', function(event) {
-    if (event.ctrlKey && event.shiftKey && event.key === 'I') {
-        event.preventDefault();
-    }
-});
+// document.addEventListener('keydown', function(event) {
+//     if (event.ctrlKey && event.shiftKey && event.key === 'I') {
+//         event.preventDefault();
+//     }
+// });
 
-var isDevToolsOpen = false;
+// var isDevToolsOpen = false;
 
-function detectDevTools() {
-    var startTime = new Date();
-    debugger;  // This causes a pause if DevTools is open
-    var endTime = new Date();
+// function detectDevTools() {
+//     var startTime = new Date();
+//     debugger;  // This causes a pause if DevTools is open
+//     var endTime = new Date();
 
-    if (endTime - startTime > 100) {  // Long pause means DevTools is open
-        isDevToolsOpen = true;
-        alert("DevTools are open! The page will reload.");
-        window.location.reload();  // Reload the page
-    } else {
-        isDevToolsOpen = false;
-    }
-}
+//     if (endTime - startTime > 100) {  // Long pause means DevTools is open
+//         isDevToolsOpen = true;
+//         alert("DevTools are open! The page will reload.");
+//         window.location.reload();  // Reload the page
+//     } else {
+//         isDevToolsOpen = false;
+//     }
+// }
 
-setInterval(function() {
-    detectDevTools();
-}, 1000);  // Check every second
+// setInterval(function() {
+//     detectDevTools();
+// }, 1000);  // Check every second
 
 function checkLocationAccess() {
     navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
