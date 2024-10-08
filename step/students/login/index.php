@@ -156,14 +156,7 @@ if (isStudentLogin()) {
             
                 // Create FormData object
                 var formData = new FormData();
-                formData.append('username', value.username);
-                formData.append('password', value.password);
-                
-                // Append the image file separately
-                if (value.image) {
-                    formData.append('image', value.image);
-                }
-            
+                formData.append('data', value);
                 formData.append('type', "login"); // Add the type field
 
                 $('.btn').prop('disabled', true);
