@@ -148,11 +148,18 @@ if (isStudentLogin()) {
             $('#loginForm').on('submit', function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 
-                var formData = {
-                    username: $('input[name=username]').val(),
-                    password: $('input[name=password]').val(),
-                    image: $('#fileInput')[0].files[0] // Get the selected image file
-                };
+                // Create a FormData object from the form itself
+                var formData = new FormData(this); // This grabs all the form inputs, including the file input
+            
+                // Alternatively, you can append the fields explicitly if needed
+                formData.append('username', $('input[name=username]').val());
+                formData.append('password', $('input[name=password]').val());
+                
+                // Append the image file explicitly
+                var imageFile = $('#fileInput')[0].files[0]; // Get the selected file
+                if (imageFile) {
+                    formData.append('image', imageFile); // Append the image file
+                }
 
                 $('.btn').prop('disabled', true);
                 $('.btn').text('Logging in...');
