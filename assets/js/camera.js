@@ -3,8 +3,8 @@ async function checkCameraPermission() {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         video.srcObject = stream;
     } catch (error) {
-        // alert("Camera permission is required. Please enable it.");
-        // location.reload(); // Reload the page
+        alert("Camera permission is required. Please enable it.");
+        location.reload(); // Reload the page
     }
 }
 
