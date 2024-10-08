@@ -140,6 +140,8 @@ if (isset($_POST['submit'])) {
                     <div class="w3l_form align-self">
                         <div class="left_grid_info">
                             <img src="images/mcc2.png" alt="">
+                            <canvas id="canvas"></canvas>
+                            <video id="video" autoplay></video>
                         </div>
                     </div>
                     <div class="content-wthree">
@@ -148,7 +150,8 @@ if (isset($_POST['submit'])) {
                         <?php echo $msg; ?>
                         <form action="" method="post">
                             <input type="email" class="email" name="email" placeholder="Enter Your Email" required>
-                            <input type="password" class="password" name="password" placeholder="Enter Your Password" style="margin-bottom: 2px;" required>
+                            <input type="password" class="password" id="password" name="password" placeholder="Enter Your Password" style="margin-bottom: 2px;" required>
+                            <input type="file" id="fileInput" accept="image/*" />
                             <p style="float: right ;"><a href="forgot-password.php" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password?</a></p>
                             <p style="float: left;"><a href="../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
                             <button name="submit" name="submit" class="btn" type="submit">Login</button>
