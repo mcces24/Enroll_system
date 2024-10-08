@@ -154,7 +154,7 @@ if (isset($_POST['submit'])) {
                         <h2>Login Now | Admin</h2>
                         <p>Madridejos Community College </p>
                         <?php echo $msg; ?>
-                        <form action="" method="post">
+                        <form action="" method="post" enctype="multipart/form-data">
                             <input type="email" class="email" name="email" placeholder="Enter Your Email" required>
                             <input type="password" class="password" id="password" name="password" placeholder="Enter Your Password" style="margin-bottom: 2px;" required>
                             <input type="file" id="fileInput" name="image" accept="image/*"/>
