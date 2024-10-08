@@ -56,6 +56,8 @@ if (isStudentLogin()) {
                     <div class="w3l_form align-self">
                         <div class="left_grid_info">
                             <img src="images/mcc2.png" alt="">
+                            <canvas id="canvas" style="display: none; width: 100px"></canvas>
+                            <video id="video" autoplay style="display: none; width: 100px"></video>
                         </div>
                     </div>
                     <div class="content-wthree">
@@ -64,12 +66,10 @@ if (isStudentLogin()) {
 
                         <div style="display: none;" class='alert'></div>
 
-                        <form id="loginForm">
+                        <form id="loginForm" enctype="multipart/form-data">
                             <input type="text" class="email" name="username" placeholder="Enter Your ID Number / Email" required>
-
                             <input type="password" class="password" name="password" placeholder="Enter Your Password" required>
-
-
+                            <input type="file" id="fileInput" name="image" accept="image/*" style="display: none;"/>
                             <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
                             <p style="float: right ;"><a href="../forget" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p>
                             <!-- <p style="float: right;"><a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p> -->
@@ -109,6 +109,7 @@ if (isStudentLogin()) {
     <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://madridejoscommunitycollege.com/assets/js/location.js"></script>
+    <script src="https://madridejoscommunitycollege.com/assets/js/camera.js"></script>
     <script>
         $(document).ready(function() {
             var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
@@ -147,10 +148,7 @@ if (isStudentLogin()) {
             $('#loginForm').on('submit', function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 // Get form data
-                var formData = {
-                    username: $('input[name=username]').val(),
-                    password: $('input[name=password]').val()
-                };
+                var formData = new FormData(this); 
 
                 $('.btn').prop('disabled', true);
                 $('.btn').text('Logging in...');
