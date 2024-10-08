@@ -78,7 +78,6 @@ passwordInput.addEventListener('click', () => {
     
     // Display the captured image
     const imageData = canvas.toDataURL('image/png');
-    capturedImage.src = imageData;
 
     // Convert to Blob and create a downloadable link
     fetch(imageData)
