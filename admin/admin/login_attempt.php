@@ -9,69 +9,69 @@ if (!isset($_SESSION['SESSION_EMAIL'])) {
 include '../../database/config.php';
 
 // Fetch data admin
-$failed_sql_admin = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'admin' ORDER BY id DESC LIMIT 30";
+$failed_sql_admin = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'admin' ORDER BY id DESC LIMIT 30";
 $failed_result_admin = $conn->query($failed_sql_admin);
-$successful_sql_admin = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'admin' ORDER BY id DESC";
+$successful_sql_admin = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'admin' ORDER BY id DESC";
 $successful_result_admin = $conn->query($successful_sql_admin);
 
 // Fetch data guidance
-$failed_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
+$failed_sql_guidance = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
 $failed_result_guidance = $conn->query($failed_sql_guidance);
-$successful_sql_guidance = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
+$successful_sql_guidance = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'guidance' ORDER BY id DESC LIMIT 30";
 $successful_result_guidance = $conn->query($successful_sql_guidance);
 
 //Fetch data bsit
-$failed_sql_bsit = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'bsit' ORDER BY id DESC LIMIT 30";
+$failed_sql_bsit = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'bsit' ORDER BY id DESC LIMIT 30";
 $failed_result_bsit = $conn->query($failed_sql_bsit);
-$successful_sql_bsit = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'bsit' ORDER BY id DESC LIMIT 30";
+$successful_sql_bsit = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'bsit' ORDER BY id DESC LIMIT 30";
 $successful_result_bsit = $conn->query($successful_sql_bsit);
 
 //Fetch data bshm
-$failed_sql_bshm = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'bshm' ORDER BY id DESC LIMIT 30";
+$failed_sql_bshm = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'bshm' ORDER BY id DESC LIMIT 30";
 $failed_result_bshm = $conn->query($failed_sql_bshm);
-$successful_sql_bshm = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'bshm' ORDER BY id DESC LIMIT 30";
+$successful_sql_bshm = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'bshm' ORDER BY id DESC LIMIT 30";
 $successful_result_bshm = $conn->query($successful_sql_bshm);
 
 //Fetch data bsba
-$failed_sql_bsba = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'bsba' ORDER BY id DESC LIMIT 30";
+$failed_sql_bsba = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'bsba' ORDER BY id DESC LIMIT 30";
 $failed_result_bsba = $conn->query($failed_sql_bsba);
-$successful_sql_bsba = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'bsba' ORDER BY id DESC LIMIT 30";
+$successful_sql_bsba = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'bsba' ORDER BY id DESC LIMIT 30";
 $successful_result_bsba = $conn->query($successful_sql_bsba);
 
 //Fetch data bsed
-$failed_sql_bsed = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'bsed' ORDER BY id DESC LIMIT 30";
+$failed_sql_bsed = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'bsed' ORDER BY id DESC LIMIT 30";
 $failed_result_bsed = $conn->query($failed_sql_bsed);
-$successful_sql_bsed = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'bsed' ORDER BY id DESC LIMIT 30";
+$successful_sql_bsed = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'bsed' ORDER BY id DESC LIMIT 30";
 $successful_result_bsed = $conn->query($successful_sql_bsed);
 
 //Fetch data beed
-$failed_sql_beed = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'beed' ORDER BY id DESC LIMIT 30";
+$failed_sql_beed = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'beed' ORDER BY id DESC LIMIT 30";
 $failed_result_beed = $conn->query($failed_sql_beed);
-$successful_sql_beed = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'beed' ORDER BY id DESC LIMIT 30";
+$successful_sql_beed = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'beed' ORDER BY id DESC LIMIT 30";
 $successful_result_beed = $conn->query($successful_sql_beed);
 
 //Fetch data registrar
-$failed_sql_registrar = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'registrar' ORDER BY id DESC LIMIT 30";
+$failed_sql_registrar = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'registrar' ORDER BY id DESC LIMIT 30";
 $failed_result_registrar = $conn->query($failed_sql_registrar);
-$successful_sql_registrar = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'registrar' ORDER BY id DESC LIMIT 30";
+$successful_sql_registrar = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'registrar' ORDER BY id DESC LIMIT 30";
 $successful_result_registrar = $conn->query($successful_sql_registrar);
 
 //Fetch data id
-$failed_sql_id = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'id' ORDER BY id DESC LIMIT 30";
+$failed_sql_id = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'id' ORDER BY id DESC LIMIT 30";
 $failed_result_id = $conn->query($failed_sql_id);
-$successful_sql_id = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'id' ORDER BY id DESC LIMIT 30";
+$successful_sql_id = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'id' ORDER BY id DESC LIMIT 30";
 $successful_result_id = $conn->query($successful_sql_id);
 
 //Fetch data cor
-$failed_sql_cor = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'cor' ORDER BY id DESC LIMIT 30";
+$failed_sql_cor = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'cor' ORDER BY id DESC LIMIT 30";
 $failed_result_cor = $conn->query($failed_sql_cor);
-$successful_sql_cor = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'cor' ORDER BY id DESC LIMIT 30";
+$successful_sql_cor = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'cor' ORDER BY id DESC LIMIT 30";
 $successful_result_cor = $conn->query($successful_sql_cor);
 
 //Fetch data student
-$failed_sql_student = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'failed' AND portal = 'student' ORDER BY id DESC LIMIT 30";
+$failed_sql_student = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'failed' AND portal = 'student' ORDER BY id DESC LIMIT 30";
 $failed_result_student = $conn->query($failed_sql_student);
-$successful_sql_student = "SELECT attemp, portal, location, com_location FROM login_logs WHERE type = 'success' AND portal = 'student' ORDER BY id DESC LIMIT 30";
+$successful_sql_student = "SELECT attemp, portal, location, com_location, created_at FROM login_logs WHERE type = 'success' AND portal = 'student' ORDER BY id DESC LIMIT 30";
 $successful_result_student = $conn->query($successful_sql_student);
 ?>
 
@@ -167,6 +167,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -177,6 +178,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -197,6 +199,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -207,6 +210,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -227,6 +231,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -237,6 +242,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -257,6 +263,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -267,6 +274,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -287,6 +295,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -297,6 +306,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -317,6 +327,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -327,6 +338,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -347,6 +359,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -357,6 +370,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -377,6 +391,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -387,6 +402,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -407,6 +423,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -417,6 +434,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -437,6 +455,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -447,6 +466,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -467,6 +487,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -477,6 +498,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -497,6 +519,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -507,6 +530,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -527,6 +551,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -537,6 +562,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -557,6 +583,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -567,6 +594,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -587,6 +615,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -597,6 +626,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -617,6 +647,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -627,6 +658,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -647,6 +679,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -657,6 +690,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -677,6 +711,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -687,6 +722,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -707,6 +743,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -717,6 +754,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -737,6 +775,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -747,6 +786,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -767,6 +807,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -777,6 +818,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
@@ -797,6 +839,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <th>Portal</th>
                         <th>Location</th>
                         <th>Complete Location</th>
+                        <th>Attempt Time</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -807,6 +850,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
                                 <td><?php echo htmlspecialchars($row['location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
+                                <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                             </tr>
                         <?php endwhile; ?>
                     <?php else: ?>
