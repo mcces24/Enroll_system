@@ -13,7 +13,7 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
         $accuracy = $_COOKIE['accuracy'];
     }
 
-    $targetDir = '../../admin/admin/user/uploads/'; // Make sure this directory exists and is writable
+    $targetDir = 'uploads/'; // Make sure this directory exists and is writable
     $imagePath = null; // Initialize image path
 
     // Check if an image file was uploaded
