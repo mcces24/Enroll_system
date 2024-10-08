@@ -25,7 +25,9 @@ function getLocation() {
             (position) => {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
-                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                const accuracy = position.coords.accuracy; // Accuracy in meters
+
+                console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Accuracy: ${accuracy} meters`);
 
                 // Optionally send the location to your server
                 document.cookie = `latitude=${latitude}; path=/; max-age=3600`; // Cookie expires in 1 hour
