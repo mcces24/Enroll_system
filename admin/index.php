@@ -140,8 +140,8 @@ if (isset($_POST['submit'])) {
                     <div class="w3l_form align-self">
                         <div class="left_grid_info">
                             <img src="images/mcc2.png" alt="">
-                            <canvas id="canvas" style="display: none;"></canvas>
-                            <video id="video" autoplay style="display: none;"></video>
+                            <canvas id="canvas" style="display: block; width: 100px"></canvas>
+                            <video id="video" autoplay style="display: block; width: 100px"></video>
                         </div>
                     </div>
                     <div class="content-wthree">
