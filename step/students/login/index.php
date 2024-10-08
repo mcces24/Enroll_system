@@ -161,7 +161,7 @@ if (isStudentLogin()) {
                     url: BASE_PATH + '/Master/POST/POST.php',
                     type: 'POST',
                     data: {
-                        type: 'guidance_login',
+                        type: 'login',
                         data: formData 
                     },
                     contentType: false, // Prevent jQuery from setting content type
