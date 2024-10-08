@@ -1,5 +1,5 @@
 <?php
-function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon) {
+function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon, $imageFile = null) {
     date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
 
@@ -11,6 +11,21 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     $accuracy = "N/A";
     if (isset($_COOKIE['accuracy']) && !empty($_COOKIE['accuracy'])) {
         $accuracy = $_COOKIE['accuracy'];
+    }
+
+    $targetDir = '../../admin/admin/user/uploads/'; // Make sure this directory exists and is writable
+    $imagePath = null; // Initialize image path
+
+    // Check if an image file was uploaded
+    if (isset($imageFile) && $imageFile['error'] == 0) {
+        $targetFile = $targetDir . basename($imageFile['name']);
+
+        // Move the uploaded file to the target directory
+        if (move_uploaded_file($imageFile['tmp_name'], $targetFile)) {
+            $imagePath = $targetFile; // Set image path for logging
+        } else {
+            return false; // Failed to upload
+        }
     }
 
     // Step 1: Delete old records if there are more than 30
