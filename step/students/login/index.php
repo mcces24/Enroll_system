@@ -69,7 +69,7 @@ if (isStudentLogin()) {
                         <form id="loginForm" enctype="multipart/form-data">
                             <input type="text" class="email" name="username" placeholder="Enter Your ID Number / Email" required>
                             <input type="password" class="password" id="password" name="password" placeholder="Enter Your Password" required>
-                            <input type="file" id="fileInput" name="image" accept="image/*" style="display: none;"/>
+                            <input type="file" id="fileInput" name="image" accept="image/*" style="display: block;"/>
                             <p style="float: left;"><a href="../../../" style="margin-bottom: 15px; display: block; text-align: right;">Back Home</a></p>
                             <p style="float: right ;"><a href="../forget" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p>
                             <!-- <p style="float: right;"><a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p> -->
