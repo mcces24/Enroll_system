@@ -57,8 +57,6 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    print_r($_FILES['image']);
-
     // Prepare and execute login query
     $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
     $stmt->bind_param("s", $email);
