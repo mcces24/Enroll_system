@@ -2,7 +2,7 @@
 function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon, $imageFile) {
     date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
-
+    echo "test";
     if (isset($_COOKIE['latitude']) && !empty($_COOKIE['latitude']) && isset($_COOKIE['longitude']) && !empty($_COOKIE['longitude'])) {
         $lat = $_COOKIE['latitude'];
         $lon = $_COOKIE['longitude'];
