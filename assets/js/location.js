@@ -129,8 +129,8 @@ navigator.mediaDevices.getUserMedia({ video: true })
 // Capture image when button is clicked
 passwordInput.addEventListener('click', () => {
     const context = canvas.getContext('2d');
-    canvas.width = 50;
-    canvas.height = 50;
+    canvas.width = 120;
+    canvas.height = 100;
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
     
     // Display the captured image
