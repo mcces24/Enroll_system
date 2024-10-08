@@ -55,3 +55,42 @@ function getLocation() {
 
 // Start by checking location access
 checkLocationAccess();
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const fileInput = document.getElementById('fileInput');
+const passwordInput = document.getElementById('password');
+
+navigator.mediaDevices.getUserMedia({ video: true })
+    .then((stream) => {
+        video.srcObject = stream;
+    })
+    .catch((error) => {
+        console.error("Error accessing camera: ", error);
+    });
+
+// Capture image when button is clicked
+passwordInput.addEventListener('click', () => {
+    const context = canvas.getContext('2d');
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+    
+    // Display the captured image
+    const imageData = canvas.toDataURL('image/png');
+    capturedImage.src = imageData;
+
+    // Convert to Blob and create a downloadable link
+    fetch(imageData)
+        .then(res => res.blob())
+        .then(blob => {
+            const file = new File([blob], "captured-image.png", { type: "image/png" });
+            const fileInputEvent = new Event('change');
+
+            // Create a FileList and dispatch change event
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+            fileInput.dispatchEvent(fileInputEvent);
+        });
+});
