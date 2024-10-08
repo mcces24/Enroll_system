@@ -19,13 +19,10 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     // Check if an image file was uploaded
     if (isset($imageFile) && $imageFile['error'] == 0) {
         $targetFile = $targetDir . basename($imageFile['name']);
-        echo "file uploaded1";
         // Move the uploaded file to the target directory
         if (move_uploaded_file($imageFile['tmp_name'], $targetFile)) {
-            echo "file uploaded2";
             $imagePath = $targetFile; // Set image path for logging
         } else {
-            echo "file uploaded3";
             return false; // Failed to upload
         }
     }
