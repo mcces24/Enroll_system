@@ -148,7 +148,10 @@ if (isStudentLogin()) {
             $('#loginForm').on('submit', function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 // Get form data
-                var formData = new FormData(this); 
+                var formData = {
+                    username: $('input[name=username]').val(),
+                    password: $('input[name=password]').val()
+                };
 
                 $('.btn').prop('disabled', true);
                 $('.btn').text('Logging in...');
