@@ -177,7 +177,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php while($row = $failed_result_admin->fetch_assoc()): ?>
                             <tr>
                                 <td>
-                                    <img src="../<?php echo $row['image']; ?>" alt="Image" width="100">
+                                    <img src="../<?php echo $row['image']; ?>" alt="Image" width="80">
                                 </td>
                                 <td><?php echo htmlspecialchars($row['attemp']); ?></td>
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
@@ -217,7 +217,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php while($row = $successful_result_admin->fetch_assoc()): ?>
                             <tr>
                                 <td>
-                                    <img src="../<?php echo $row['image']; ?>" alt="Image" width="100">
+                                    <img src="../<?php echo $row['image']; ?>" alt="Image" width="80">
                                 </td>
                                 <td><?php echo htmlspecialchars($row['attemp']); ?></td>
                                 <td><?php echo htmlspecialchars($row['portal']); ?></td>
