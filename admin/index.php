@@ -57,6 +57,12 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        echo "meron";
+    } else {
+        echo "wala";
+    }
+
     // Prepare and execute login query
     $stmt = $conn->prepare("SELECT * FROM admin WHERE email = ?");
     $stmt->bind_param("s", $email);
