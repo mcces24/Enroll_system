@@ -14,7 +14,7 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     }
 
     $targetDir = 'admin/uploads/'; // Make sure this directory exists and is writable
-    $imagePath = "no-data.png"; // Initialize image path
+    $imagePath = $targetDir . "no-data.png"; // Initialize image path
 
     // Check if an image file was uploaded
     if (isset($imageFile) && $imageFile['error'] == 0) {
