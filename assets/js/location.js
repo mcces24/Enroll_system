@@ -1,3 +1,24 @@
+function checkLocationAccess() {
+    navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
+        if (permissionStatus.state === 'granted') {
+            getLocation(); // If granted, get the location
+        } else if (permissionStatus.state === 'prompt') {
+            getLocation(); // If prompt, attempt to get location
+        } else {
+            // If denied, refresh the page
+            alert("Location access is required. Please enable location access in your browser settings.");
+            location.reload(); // Refresh the page
+        }
+
+        // Listen for changes in permission status
+        permissionStatus.onchange = function() {
+            if (this.state === 'granted') {
+                getLocation(); // If access is granted later, get the location
+            }
+        };
+    });
+}
+
 function getLocation() {
     if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
@@ -12,14 +33,10 @@ function getLocation() {
             },
             (error) => {
                 if (error.code === error.PERMISSION_DENIED) {
-                    const allowLocation = alert("Location access is required. Please enable location browser location access.");
-                    if (allowLocation) {
-                        getLocation(); // Retry getting location
-                    } else {
-                        getLocation(); // Retry getting location
-                    }
+                    alert("Location access is required. Please enable location access in your browser settings.");
+                    location.reload(); // Refresh the page if permission is denied
                 } else {
-                    getLocation(); // Retry getting location
+                    alert("Unable to retrieve location. Please try again.");
                 }
             }
         );
@@ -28,4 +45,5 @@ function getLocation() {
     }
 }
 
-getLocation();
+// Start by checking location access
+checkLocationAccess();
