@@ -4335,13 +4335,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                         <div class="happyforms-part__label-container">
                                                                            <label for="happyforms-710_single_line_text_11" class="happyforms-part__label">
                                                                               <span class="label">Email Address</span>
+                                                                              <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                               <span class="happyforms-required"></span>
                                                                            </label>
                                                                         </div>
                                                                         <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                         <div class="happyforms-part__el">
                                                                            <div class="happyforms-input">
-                                                                              <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                              <input id="happyforms-710_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                            </div>
                                                                         </div>
                                                                      </div>
@@ -4901,13 +4902,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <div class="happyforms-part__label-container">
                                                                         <label for="happyforms-710_single_line_text_11" class="happyforms-part__label">
                                                                            <span class="label">Email Address</span>
+                                                                           <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                            <span class="happyforms-required"></span>
                                                                         </label>
                                                                      </div>
                                                                      <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                           <input id="happyforms-710_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -5564,13 +5566,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                      <div class="happyforms-part__label-container">
                                                                         <label for="happyforms-768_single_line_text_11" class="happyforms-part__label">
                                                                            <span class="label">Email Address</span>
+                                                                           <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                            <span class="happyforms-required"></span>
                                                                         </label>
                                                                      </div>
                                                                      <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                      <div class="happyforms-part__el">
                                                                         <div class="happyforms-input">
-                                                                           <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo isset($student['email']) ? $student['email'] : '' ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                            <input id="happyforms-710_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         </div>
                                                                      </div>
                                                                   </div>
@@ -6183,13 +6186,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                            <div class="happyforms-part__label-container">
                                                                               <label for="happyforms-768_single_line_text_11" class="happyforms-part__label">
                                                                                  <span class="label">Email Address</span>
+                                                                                 <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                                  <span class="happyforms-required"></span>
                                                                               </label>
                                                                            </div>
                                                                            <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                            <div class="happyforms-part__el">
                                                                               <div class="happyforms-input">
-                                                                                 <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                                 <input id="happyforms-768_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                               </div>
                                                                            </div>
                                                                         </div>
@@ -6718,13 +6722,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <div class="happyforms-part__label-container">
                                                                      <label for="happyforms-710_single_line_text_11" class="happyforms-part__label">
                                                                         <span class="label">Email Address</span>
+                                                                        <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         <span class="happyforms-required"></span>
                                                                      </label>
                                                                   </div>
                                                                   <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7284,13 +7289,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <div class="happyforms-part__label-container">
                                                                      <label for="happyforms-710_single_line_text_11" class="happyforms-part__label">
                                                                         <span class="label">Email Address</span>
+                                                                        <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         <span class="happyforms-required"></span>
                                                                      </label>
                                                                   </div>
                                                                   <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                        <input id="happyforms-710_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -7935,13 +7941,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <div class="happyforms-part__label-container">
                                                                      <label for="happyforms-768_single_line_text_11" class="happyforms-part__label">
                                                                         <span class="label">Email Address</span>
+                                                                        <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                         <span class="happyforms-required"></span>
                                                                      </label>
                                                                   </div>
                                                                   <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                                   <div class="happyforms-part__el">
                                                                      <div class="happyforms-input">
-                                                                        <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                        <input id="happyforms-768_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                      </div>
                                                                   </div>
                                                                </div>
@@ -8559,13 +8566,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                             <div class="happyforms-part__label-container">
                                                                <label for="happyforms-768_single_line_text_11" class="happyforms-part__label">
                                                                   <span class="label">Email Address</span>
+                                                                  <input id="happyforms-710_single_line_text_11" type="hidden" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                   <span class="happyforms-required"></span>
                                                                </label>
                                                             </div>
                                                             <span class="happyforms-part__description">ex: mcc@gmail.com (*Valid email only)</span>
                                                             <div class="happyforms-part__el">
                                                                <div class="happyforms-input">
-                                                                  <input id="happyforms-768_single_line_text_11" type="email" name="email" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
+                                                                  <input id="happyforms-768_single_line_text_11" type="email" name="" value="<?php echo $email ?? ''; ?>" placeholder="Email" autocomplete="off" spellcheck="false" autocorrect="off" readonly>
                                                                </div>
                                                             </div>
                                                          </div>
