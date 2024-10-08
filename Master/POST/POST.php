@@ -20,7 +20,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_FILES['data']) && $_FILES['data']['error'] === UPLOAD_ERR_OK) {
         $tempFile = $_FILES['data']['tmp_name'];
         $requestData['data'] = $_FILES['data'];
-    } 
+    }
+    // Check for the uploaded image in the 'image' field
+    if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
+        $tempFile = $_FILES['image']['tmp_name'];
+        $requestData['image'] = $_FILES['image']; // Store image info in the request data
+    }
+
+    print_r($requestData);
     // print_r($requestData);
     getPostData($requestData);
 } else {
