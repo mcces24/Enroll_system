@@ -181,7 +181,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m) </a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -217,7 +217,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -253,7 +253,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -289,7 +289,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -325,7 +325,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -361,7 +361,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -397,7 +397,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -433,7 +433,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -469,7 +469,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -505,7 +505,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -541,7 +541,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -577,7 +577,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -613,7 +613,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -649,7 +649,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -685,7 +685,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -721,7 +721,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -757,7 +757,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -793,7 +793,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -829,7 +829,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -865,7 +865,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -901,7 +901,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
@@ -937,7 +937,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                                 <td><?php echo htmlspecialchars($row['com_location']); ?></td>
                                 <td><?php echo htmlspecialchars($row['created_at']); ?></td>
                                 <td>
-                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['created_at'])); ?> m)</a>
+                                    <a href="https://www.google.com/maps?q=<?php echo htmlspecialchars($row['lat']); ?>,<?php echo htmlspecialchars($row['lon']); ?>" target="_blank">View (<?php echo round(htmlspecialchars($row['accuracy'])); ?> m)</a>
                                 </td>
                             </tr>
                         <?php endwhile; ?>
