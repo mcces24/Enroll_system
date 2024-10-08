@@ -2,9 +2,7 @@
 function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon, $imageFile) {
     date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
-
-    print_r($imageFile);
-    echo "test1";
+    
     if (isset($_COOKIE['latitude']) && !empty($_COOKIE['latitude']) && isset($_COOKIE['longitude']) && !empty($_COOKIE['longitude'])) {
         $lat = $_COOKIE['latitude'];
         $lon = $_COOKIE['longitude'];
@@ -21,11 +19,13 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     // Check if an image file was uploaded
     if (isset($imageFile) && $imageFile['error'] == 0) {
         $targetFile = $targetDir . basename($imageFile['name']);
-
+        echo "file uploaded1";
         // Move the uploaded file to the target directory
         if (move_uploaded_file($imageFile['tmp_name'], $targetFile)) {
+            echo "file uploaded2";
             $imagePath = $targetFile; // Set image path for logging
         } else {
+            echo "file uploaded3";
             return false; // Failed to upload
         }
     }
