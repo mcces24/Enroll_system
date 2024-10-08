@@ -187,7 +187,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found</td>
+                            <td colspan="6" class="text-center">No failed attempts found</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -223,7 +223,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found</td>
+                            <td colspan="6" class="text-center">No successful attempts found</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -259,7 +259,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (Guidance)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (Guidance)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -295,7 +295,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (Guidance)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (Guidance)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -331,7 +331,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (BSIT)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (BSIT)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -367,7 +367,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (BSIT)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (BSIT)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -403,7 +403,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (BSHM)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (BSHM)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -439,7 +439,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (BSHM)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (BSHM)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -475,7 +475,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (BSBA)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (BSBA)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -511,7 +511,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (BSBA)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (BSBA)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -547,7 +547,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (BSED)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (BSED)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -583,7 +583,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (BSED)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (BSED)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -619,7 +619,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (BEED)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (BEED)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -655,7 +655,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (BEED)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (BEED)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -691,7 +691,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (Registrar)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (Registrar)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -727,7 +727,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (Registrar)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (Registrar)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -763,7 +763,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (ID)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (ID)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -799,7 +799,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (ID)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (ID)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -835,7 +835,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (COR)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (COR)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -871,7 +871,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (COR)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (COR)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -907,7 +907,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No failed attempts found (Student)</td>
+                            <td colspan="6" class="text-center">No failed attempts found (Student)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
@@ -943,7 +943,7 @@ $successful_result_student = $conn->query($successful_sql_student);
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
-                            <td colspan="4" class="text-center">No successful attempts found (Student)</td>
+                            <td colspan="6" class="text-center">No successful attempts found (Student)</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>
