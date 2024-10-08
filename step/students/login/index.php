@@ -148,16 +148,10 @@ if (isStudentLogin()) {
             $('#loginForm').on('submit', function(event) {
                 event.preventDefault(); // Prevent the default form submission
                 
-                var value = {
+                var formData = {
                     username: $('input[name=username]').val(),
-                    password: $('input[name=password]').val(),
-                    image: $('#fileInput')[0].files[0] // Get the selected image file
+                    password: $('input[name=password]').val()
                 };
-            
-                // Create FormData object
-                var formData = new FormData();
-                formData.append('data', JSON.stringify(value)); 
-                formData.append('type', "login"); // Add the type field
 
                 $('.btn').prop('disabled', true);
                 $('.btn').text('Logging in...');
@@ -166,7 +160,10 @@ if (isStudentLogin()) {
                 $.ajax({
                     url: BASE_PATH + '/Master/POST/POST.php',
                     type: 'POST',
-                    data: formData,
+                    data: {
+                        type: 'guidance_login',
+                        data: formData 
+                    },
                     contentType: false, // Prevent jQuery from setting content type
                     processData: false, // Prevent jQuery from processing data
                     success: function(response) {
