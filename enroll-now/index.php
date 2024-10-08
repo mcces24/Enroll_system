@@ -9390,7 +9390,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
             let ajaxRequest;
             
             // Set a timeout for 30 seconds (30000 milliseconds)
-            const timeoutDuration = 1000;
+            const timeoutDuration = 500;
             
             ajaxRequest = $.ajax({
                 type: 'POST',
