@@ -10,7 +10,7 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
 
     // Step 2: Insert the new record
     $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssdds", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $currentDateTime);
+    $stmt->bind_param("ssssssss", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $currentDateTime);
     $stmt->execute();
     $stmt->close();
 }
