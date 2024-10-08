@@ -121,7 +121,6 @@ function verifiedUser($verify)
 
 function login($data)
 {
-    print_r($data);
     $username = isset($data['username']) ? $data['username'] : null;
     $password = isset($data['password']) ? $data['password'] : null;
 
