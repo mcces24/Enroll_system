@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tempFile = $_FILES['data']['tmp_name'];
         $requestData['data'] = $_FILES['data'];
     }
-    print_r($requestData);
+    // print_r($requestData);
     getPostData($requestData);
 } else {
     echo 'Invalid request!!!!';
@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 function getPostData($POST)
 {
+    print_r($requestData);
     switch ($POST['type']) {
         case 'verify':
             verifiedUser($POST['data'] ?? null);
@@ -121,7 +122,6 @@ function verifiedUser($verify)
 
 function login($data)
 {
-    print_r($data);
     $username = isset($data['username']) ? $data['username'] : null;
     $password = isset($data['password']) ? $data['password'] : null;
 
