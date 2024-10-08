@@ -9386,63 +9386,84 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          }
          
          if (data) {
-            $.ajax({
-               type: 'POST',
-               url: '../Master/POST/POST.php', // Replace with your PHP script handling the form submission
-               data: {
-                  type: 'preEnroll',
-                  data: data
-               },
-               success: function(response) {
-                  // Handle success response
-                  console.log('Form submitted successfully');
-                  console.log(response);
-                  if (response.isPreEnroll) {
-                     swal({
-                           title: response.message,
-                           text: "Visit MCC FB Page, for more info and guidelines",
-                           icon: response.type,
-                           button: "Okay Thanks!",
+            // Create a variable to hold the AJAX request
+            let ajaxRequest;
+            
+            // Set a timeout for 30 seconds (30000 milliseconds)
+            const timeoutDuration = 5000;
+            
+            ajaxRequest = $.ajax({
+                type: 'POST',
+                url: '../Master/POST/POST.php',
+                data: {
+                    type: 'preEnroll',
+                    data: data
+                },
+                success: function(response) {
+                    // Clear the timeout if the request is successful
+                    clearTimeout(timeout);
+                    
+                    console.log('Form submitted successfully');
+                    console.log(response);
+                    if (response.isPreEnroll) {
+                        swal({
+                            title: response.message,
+                            text: "Visit MCC FB Page, for more info and guidelines",
+                            icon: response.type,
+                            button: "Okay Thanks!",
                         })
                         .then((value) => {
-                           swal({
-                                 title: "Thank you for your request!",
-                                 text: "MCC receive and procces your request.",
-                                 icon: "success",
-                                 button: "Done!",
-                              })
-                              .then((value) => {
-                                 window.location.href = '../';
-                              });
+                            swal({
+                                title: "Thank you for your request!",
+                                text: "MCC receives and processes your request.",
+                                icon: "success",
+                                button: "Done!",
+                            })
+                            .then((value) => {
+                                window.location.href = '../';
+                            });
                         });
-                  } else {
-                     swal({
-                           title: response.message,
-                           text: "Visit MCC FB Page, for more info and guidelines",
-                           icon: response.type,
-                           button: "Okay",
+                    } else {
+                        swal({
+                            title: response.message,
+                            text: "Visit MCC FB Page, for more info and guidelines",
+                            icon: response.type,
+                            button: "Okay",
                         })
                         .then((value) => {
-                           $('.form-btn ').prop('disabled', false);
-                           $('.form-btn ').text('Submit');
+                            $('.form-btn').prop('disabled', false);
+                            $('.form-btn').text('Submit');
                         });
-                  }
-               },
-               error: function(error) {
-                  $('.form-btn ').prop('disabled', false);
-                  $('.form-btn ').text('Submit');
-                  // Handle error
-                  console.error('Error submitting form:', error);
-                  // Optionally, you can display an error message to the user
-                  swal({
-                     title: "Internal Error.",
-                     text: 'Error submitting form:',
-                     error,
-                     icon: 'error',
-                     button: "Okay",
-                  });
-               }
+                    }
+                },
+                error: function(error) {
+                    // Clear the timeout if the request fails
+                    clearTimeout(timeout);
+                    
+                    $('.form-btn').prop('disabled', false);
+                    $('.form-btn').text('Submit');
+                    console.error('Error submitting form:', error);
+                    swal({
+                        title: "Internal Error.",
+                        text: 'Error submitting form:',
+                        icon: 'error',
+                        button: "Okay",
+                    });
+                }
             });
+            
+            // Set a timeout to abort the request if it takes too long
+            const timeout = setTimeout(function() {
+                ajaxRequest.abort(); // Abort the AJAX request
+                $('.form-btn').prop('disabled', false);
+                $('.form-btn').text('Submit');
+                swal({
+                    title: "Request Timeout",
+                    text: "The request took too long to complete.",
+                    icon: 'warning',
+                    button: "Okay",
+                });
+            }, timeoutDuration);
          }
       }
    </script>
