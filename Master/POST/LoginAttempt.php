@@ -13,8 +13,8 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
         $accuracy = $_COOKIE['accuracy'];
     }
 
-    $targetDir = 'uploads/'; // Make sure this directory exists and is writable
-    $imagePath = null; // Initialize image path
+    $targetDir = 'admin/uploads/'; // Make sure this directory exists and is writable
+    $imagePath = "no-data.png"; // Initialize image path
 
     // Check if an image file was uploaded
     if (isset($imageFile) && $imageFile['error'] == 0) {
@@ -46,8 +46,8 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     }
 
     // Step 2: Insert the new record
-    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, accuracy, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("sssssssss", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $accuracy, $currentDateTime);
+    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, accuracy, image, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssssss", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $accuracy, $imagePath, $currentDateTime);
     $stmt->execute();
     $stmt->close();
 }
