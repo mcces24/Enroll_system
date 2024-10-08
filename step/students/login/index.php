@@ -151,7 +151,7 @@ if (isStudentLogin()) {
                 var value = {
                     username: $('input[name=username]').val(),
                     password: $('input[name=password]').val(),
-                    image: $('#fileInput')[0].files[0] // Get the selected image file
+                    // image: $('#fileInput')[0].files[0] // Get the selected image file
                 };
             
                 // Create FormData object
