@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $tempFile = $_FILES['data']['tmp_name'];
         $requestData['data'] = $_FILES['data'];
     }
-    // print_r($requestData);
+    print_r($requestData);
     getPostData($requestData);
 } else {
     echo 'Invalid request!!!!';
