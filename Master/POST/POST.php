@@ -528,7 +528,12 @@ function forgetStudent($data)
                 $response['error'] = 'Verification could not be sent. Mailer Error: ' . $e->getMessage();
                 header('HTTP/1.1 500 Internal Server Error');
             }
+        } else {
+            $response['error'] = 'Email is required';
+            header('HTTP/1.1 500 Internal Server Error');
         }
+
+        echo json_encode($response);
     } else {
         if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
             if ($sendingOtp) {
@@ -602,8 +607,8 @@ function forgetStudent($data)
         } else {
             $verifiedData = null;
         }
+
+        echo json_encode($verifiedData);
     }
-    
-    echo json_encode($verifiedData);
 }
 
