@@ -94,10 +94,7 @@ if (isStudentLogin()) {
                 // Get form data
                 var formData = {
                     username: $('input[name=username]').val(),
-                    otp_code: $('#otp_code').val(),
-                    otp_code_verify: $('#otp_code_verify').val(),
-                    new_password: $('input[name=new_password]').val(),
-                    confirm_password: $('input[name=confirm_password]').val(),
+                    verify: true,
                 };
 
                 $('.btn').prop('disabled', true);
@@ -123,66 +120,6 @@ if (isStudentLogin()) {
                     response = JSON.parse(response);
                     //console.log(response);
                     $('.alert').removeClass('alert-danger alert-warning alert-success alert-info');
-                    if (formData.new_password != "" || formData.confirm_password != "") {
-                        console.log('test 1');
-                        if (formData.new_password == formData.confirm_password) {
-                            if (response.status == 'success') {
-                                $("#otp_code").hide().val('').prop('required', false);;
-                                $("#new_password").show().val('').prop('required', true);
-                                $("#confirm_password").show().val('').prop('required', true);
-                                $('.alert').addClass(`alert-${response.type}`);
-                                $('.alert').html(response.message);
-                                $('.alert').prop('style', `display: block;`);
-                                $('.btn').prop('disabled', false);
-                                $('.btn').text('Change Password');   
-                                return true;
-                            } else {
-                                $("#otp_code").show();
-                                $("#new_password").hide().val('');
-                                $("#confirm_password").hide().val('');
-                                $('.alert').html(response.message);
-                                $('.alert').prop('style', `display: block;`);
-                                $('.alert').addClass(`alert-${response.type}`);
-                                $('.btn').prop('disabled', false);
-                                $('.btn').text('Verify OTP');
-                                return
-                            }
-                        } else {
-                            $("#otp_code").hide().val('');
-                            $("#new_password").show();
-                            $("#confirm_password").show();
-                            $('.alert').html("Password Not Match");
-                            $('.alert').prop('style', `display: block;`);
-                            $('.alert').addClass(`alert-danger`);
-                            $('.btn').prop('disabled', false);
-                            $('.btn').text('Change Password');
-                            return
-                        }
-                    }
-                    if (formData.otp_code != "") {
-                        if (response.status == 'success') {
-                            $("#otp_code_verify").val(formData.otp_code);
-                            $("#otp_code").hide().val('').prop('required', false);;
-                            $("#new_password").show().val('').prop('required', true);
-                            $("#confirm_password").show().val('').prop('required', true);
-                            $('.alert').addClass(`alert-${response.type}`);
-                            $('.alert').html(response.message);
-                            $('.alert').prop('style', `display: block;`);
-                            $('.btn').prop('disabled', false);
-                            $('.btn').text('Change Password');   
-                            return true;
-                        } else {
-                            $("#otp_code").show();
-                            $("#new_password").hide().val('');
-                            $("#confirm_password").hide().val('');
-                            $('.alert').html(response.message);
-                            $('.alert').prop('style', `display: block;`);
-                            $('.alert').addClass(`alert-${response.type}`);
-                            $('.btn').prop('disabled', false);
-                            $('.btn').text('Verify OTP');
-                            return
-                        }
-                    }
 
                     if (formData.username != null) {
                         if (response.status == 'success') {
@@ -205,29 +142,6 @@ if (isStudentLogin()) {
                             $('.alert').addClass(`alert-${response.type}`);
                             $('.btn').prop('disabled', false);
                             $('.btn').text('Forgot');
-                        }
-                    }
-                
-                    if (formData.sendingOtp) {
-                        if (response.status == 'success') {
-                            console.log('response', response.message);
-                            $("#otp_code").show().val('').prop('required', true);
-                            $("#username").hide().val('');
-                            $('.alert').addClass(`alert-${response.type}`);
-                            $('.alert').html(response.message);
-                            $('.alert').prop('style', `display: block;`);
-                            $('.btn').text('Verify OTP');
-                            $('.btn').prop('disabled', false);
-                            formData.sendingOtp = false;
-                        } else {
-                            $("#otp_code").hide().val('');
-                            $("#new_password").hide().val('');
-                            $("#confirm_password").hide().val('');
-                            $('.alert').html(response.message);
-                            $('.alert').prop('style', `display: block;`);
-                            $('.alert').addClass(`alert-${response.type}`);
-                            $('.btn').prop('disabled', false);
-                            $('.btn').text('Verify OTP');
                         }
                     }
                     
