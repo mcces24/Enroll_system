@@ -227,9 +227,23 @@ class NewUserController extends NewUser {
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     if ($row) {
                         if ($verify) {
-                            $responseData['status'] = 'success';
-                            $responseData['message'] = 'Verification link send to your email.';
-                            $responseData['type'] = 'success';
+
+                            $params = [
+                                "SET" => "verified_status = '$verified_status'",
+                                "WHERE" => "email = '$username'",
+                            ];
+            
+                            $update = $this->update($params);
+
+                            if ($update ) {
+                                $responseData['status'] = 'success';
+                                $responseData['message'] = 'Verification link send to your email.';
+                                $responseData['type'] = 'success';
+                            } else {
+                                $responseData['status'] = 'failed';
+                                $responseData['message'] = 'Error sending verification link.';
+                                $responseData['type'] = 'danger';
+                            }
                         } else {
                             $responseData['status'] = 'success';
                             $responseData['message'] = 'Sending OTP to your Email.';
