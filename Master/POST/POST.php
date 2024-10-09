@@ -167,28 +167,28 @@ function register($data)
 
         try {
             // PHPMailer setup
-            $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
-            $mail->SMTPAuth   = true;
-            $mail->Username   = 'capstone.project2022.2023@gmail.com';
-            $mail->Password   = 'nxnqxklsnggbkdtc';
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-            $mail->Port       = 465;
-
-            $senderName = 'Verify Account - Madridejos Community College';
-            $senderEmail = 'capstone.project2022.2023@gmail.com';
-
-            //hostimger
             // $mail->isSMTP();
-            // $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
-            // $mail->SMTPAuth = true;  // Enable SMTP authentication
-            // $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
-            // $mail->Password = 'MCCes@2024';  // Your Hostinger email password
-            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-            // $mail->Port = 587;
+            // $mail->Host       = 'smtp.gmail.com';
+            // $mail->SMTPAuth   = true;
+            // $mail->Username   = 'capstone.project2022.2023@gmail.com';
+            // $mail->Password   = 'nxnqxklsnggbkdtc';
+            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            // $mail->Port       = 465;
 
             // $senderName = 'Verify Account - Madridejos Community College';
-            // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+            // $senderEmail = 'capstone.project2022.2023@gmail.com';
+
+            //hostimger
+            $mail->isSMTP();
+            $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
+            $mail->SMTPAuth = true;  // Enable SMTP authentication
+            $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
+            $mail->Password = 'MCCes@2024';  // Your Hostinger email password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+            $mail->Port = 587;
+
+            $senderName = 'Verify Account - Madridejos Community College';
+            $senderEmail = 'no-reply@madridejoscommunitycollege.com';
             
             $mail->setFrom($senderEmail, $senderName);
             $mail->addAddress($email);
