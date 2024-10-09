@@ -168,7 +168,7 @@ License: For each use you must have a valid license purchased only from above li
 															Name</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="fname" placeholder="Ex: Jose" value="<?php echo $applicant['fname'] ?? null ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="fname" placeholder="Ex: Jose" value="<?php echo $applicant['fname'] ?? null ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -179,7 +179,7 @@ License: For each use you must have a valid license purchased only from above li
 															Name</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="mname" placeholder="Ex: Laurel" value="<?php echo $applicant['mname'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="mname" placeholder="Ex: Laurel" value="<?php echo $applicant['mname'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -189,7 +189,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Surname</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="lname" placeholder="Ex: Dela Crus" value="<?php echo $applicant['lname'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="lname" placeholder="Ex: Dela Crus" value="<?php echo $applicant['lname'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -223,7 +223,7 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Label-->
 														<label class="required fs-6 fw-bold form-label mb-2">Sex</label>
 														<!--end::Label-->
-														<select name="sex" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true" disabled>
+														<select name="sex" class="form-select form-select-lg form-select-solid" data-control="select2" data-placeholder="Select..." data-allow-clear="true" data-hide-search="true" >
 															<option></option>
 															<option <?php echo  $applicant['gender'] == 'Male' ? 'selected' : '' ?> value="Male">Male</option>
 															<option <?php echo  $applicant['gender'] == 'Female' ? 'selected' : '' ?> value="Female">Female</option>
@@ -239,7 +239,7 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Input-->
 
 														<!-- <input type="text" class="form-control" id="kt_datepicker_1" readonly placeholder="Select date"/> -->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $applicant['date_of_birth'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $applicant['date_of_birth'] ?? null  ?>"  />
 
 														<!--end::Input-->
 													</div>
@@ -248,7 +248,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Age</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="numeric" maxlength="2" pattern="[0-9\s]{13,19}" class="form-control form-control-lg form-control-solid" name="age" placeholder="24" value="<?php echo $applicant['age'] ?? null  ?>" disabled />
+														<input type="numeric" maxlength="2" pattern="[0-9\s]{13,19}" class="form-control form-control-lg form-control-solid" name="age" placeholder="24" value="<?php echo $applicant['age'] ?? null  ?>"  />
 														<!-- <span class="form-text text-muted">Please enter only digits</span> -->
 														<!--end::Input-->
 													</div>
@@ -259,7 +259,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Place of Birth</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="pbirth" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $applicant['place_of_birth'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="pbirth" placeholder="Ex: Talangnan, Madridejos, Cebu" value="<?php echo $applicant['place_of_birth'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -358,7 +358,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Religion</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="religion" placeholder="Ex: Roman Catholic" value="<?php echo $applicant['religion'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="religion" placeholder="Ex: Roman Catholic" value="<?php echo $applicant['religion'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -376,7 +376,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Email Address</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $applicant['email'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $applicant['email'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -940,7 +940,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Name of School</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="enameschool" placeholder="" value="<?php echo $applicant['elementary'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="enameschool" placeholder="" value="<?php echo $applicant['elementary'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -950,7 +950,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Inclusive Dates</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="eincdate" placeholder="" value="<?php echo $applicant['elem_year'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="eincdate" placeholder="" value="<?php echo $applicant['elem_year'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<div class="col-4">
@@ -985,7 +985,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Name of School</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="hnameschool" placeholder="" value="<?php echo $applicant['high_school'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="hnameschool" placeholder="" value="<?php echo $applicant['high_school'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -995,7 +995,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Inclusive Dates</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="hincdate" placeholder="" value="<?php echo $applicant['high_year'] ?? null  ?>" disabled />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="hincdate" placeholder="" value="<?php echo $applicant['high_year'] ?? null  ?>"  />
 														<!--end::Input-->
 													</div>
 													<div class="col-4">
