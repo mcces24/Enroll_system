@@ -480,10 +480,61 @@ function forgetStudent($data)
         $response = forgetStudentFuntion($params);
 
         if ($response['status'] == 'success') {
-            
-        }
+            $mail = new PHPMailer(true);
 
-        echo json_encode($response);
+            try {
+                // PHPMailer setup
+                $mail->isSMTP();
+                $mail->Host       = 'smtp.gmail.com';
+                $mail->SMTPAuth   = true;
+                $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                $mail->Password   = 'nxnqxklsnggbkdtc';
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                $mail->Port       = 465;
+
+                $senderName = 'Verify Account - Madridejos Community College';
+                $senderEmail = 'capstone.project2022.2023@gmail.com';
+
+                //hostimger
+                // $mail->isSMTP();
+                // $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
+                // $mail->SMTPAuth = true;  // Enable SMTP authentication
+                // $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
+                // $mail->Password = 'MCCes@2024';  // Your Hostinger email password
+                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+                // $mail->Port = 587;
+
+                // $senderName = 'Verify Account - Madridejos Community College';
+                // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+                
+                $mail->setFrom($senderEmail, $senderName);
+                $mail->addAddress($email);
+
+                $mail->isHTML(true);
+                $mail->Subject = 'Madridejos Community College - Verify Account';
+
+                $link = "https://madridejoscommunitycollege.com/step/students/login/?verify=$randomNumber";
+                $mail->isHTML(true);
+                $mail->Body = file_get_contents('Layout/email_verification.html');
+                $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
+
+                if ($mail->send()) {
+                    echo json_encode($response);
+                } else {
+                    $response['error'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+                    $response['type'] = 'danger';
+                    $response['status'] = 'error';
+                    header('HTTP/1.1 500 Internal Server Error');
+                    echo json_encode($response);
+                }
+            } catch (Exception $e) {
+                $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                $response['type'] = 'danger';
+                $response['status'] = 'error';
+                header('HTTP/1.1 500 Internal Server Error');
+                echo json_encode($response);
+            }
+        }
     } else {
         if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
             if ($sendingOtp) {
