@@ -518,21 +518,17 @@ function forgetStudent($data)
                 $mail->Body = file_get_contents('Layout/email_verification.html');
                 $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
 
-                if ($mail->send()) {
-                    echo json_encode($response);
-                } else {
+                if (!$mail->send()) {
                     $response['error'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
                     $response['type'] = 'danger';
                     $response['status'] = 'error';
                     header('HTTP/1.1 500 Internal Server Error');
-                    echo json_encode($response);
                 }
             } catch (Exception $e) {
                 $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
                 $response['type'] = 'danger';
                 $response['status'] = 'error';
                 header('HTTP/1.1 500 Internal Server Error');
-                echo json_encode($response);
             }
         }
         echo json_encode($response);
