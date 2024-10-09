@@ -453,7 +453,7 @@ function forgetStudent($data)
         $response = forgetStudentFuntion($params);
         $params = [
             'email' => $email,
-            'verified_status' => $randomNumber
+            'verified_status' => $randomNumber,
             'verify' => $verify
         ];
 
