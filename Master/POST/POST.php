@@ -310,7 +310,7 @@ function sendGuidanceForm($data)
                 $mail->addAddress($email);
                 $mail->Subject = 'MCC Guidance Office Form';
 
-                $domain = isset($system['domain']) ? $system['domain'] : '';
+                $domain = isset($system['domain']) ? $system['domain'] : 'https://madridejoscommunitycollege.com';
                 $link = "$domain/guidance-step/?applicant_id=$applicant_id";
 
                 $mail->isHTML(true);
@@ -401,7 +401,7 @@ function sendAdmission($data)
                 $mail->addAddress($email);
                 $mail->Subject = isset($system['email_subject']) ? $system['email_subject'] : '';
                 
-                $domain = isset($system['domain']) ? $system['domain'] : '';
+                $domain = isset($system['domain']) ? $system['domain'] : 'https://madridejoscommunitycollege.com';
                 $admission = "$domain/admission-schedule?applicant_id=$applicant_id";
                 $body = isset($system['email_body']) ? $system['email_body'] : '';
 
