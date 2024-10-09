@@ -93,6 +93,7 @@ function getPostData($POST)
             break;
         case 'forgetStudent':
             $data = $POST['data'] ?? null;
+            print_r($data);
             forgetStudent($data);
             break;
         default:
