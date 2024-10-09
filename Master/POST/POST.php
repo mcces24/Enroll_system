@@ -467,12 +467,11 @@ function forgetStudent($data)
     );
 
     if ($verify) {
-
-
+        
         $email = $data['username'];
         $randomNumber = rand(100000, 999999);
 
-        $response = forgetStudentFuntion($params);
+        $response = forgetStudentFuntion($data);
         $params = [
             'email' => $email,
             'verified_status' => $randomNumber,
