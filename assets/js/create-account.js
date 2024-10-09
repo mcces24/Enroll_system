@@ -52,20 +52,32 @@ var KTCreateAccount = function () {
 	}
 
 	function submitForm(formData) {
-		// Make an AJAX request to the PHP script
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '../Master/POST/POST.php', true);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				// Handle the response from the server if needed
-				console.log(formData);
-			}
-		};
-		var data = { type: 'updateApplicantStatus', data: formData };
-		xhr.send(JSON.stringify(data));
+		return new Promise((resolve, reject) => {
+			// Make an AJAX request to the PHP script
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '../Master/POST/POST.php', true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+	
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						// Handle the response from the server if needed
+						console.log('Response from server:', xhr.responseText);
+						console.log(formData); // Log the form data
+						resolve(xhr.responseText); // Resolve the promise with the response
+					} else {
+						// Reject the promise if there's an error
+						reject('Error: ' + xhr.status);
+					}
+				}
+			};
+	
+			// Prepare the data to send
+			var data = { type: 'updateApplicantStatus', data: formData };
+			xhr.send(JSON.stringify(data)); // Send the JSON data
+		});
 	}
+
 	// Private Functions
 	var initStepper = function () {
 		// Initialize Stepper
@@ -126,9 +138,6 @@ var KTCreateAccount = function () {
 						saveFormDataToDatabaseStep1(formData)
 							.then(response => {
 								console.log('Data saved successfully:', response);
-								// Actions to take on success
-								alert('Form submitted successfully!'); // Example: Show success message
-								// You can also reset the form or redirect the user
 
 								stepper.goNext();
 						
@@ -136,8 +145,17 @@ var KTCreateAccount = function () {
 							})
 							.catch(error => {
 								console.error('Failed to save data:', error);
-								// Actions to take on error
-								alert('An error occurred while submitting the form. Please try again.');
+								Swal.fire({
+									text: "There are some errors in your submission. Please try again.",
+									icon: "error",
+									buttonsStyling: false,
+									confirmButtonText: "Okay",
+									customClass: {
+										confirmButton: "btn btn-success"
+									}
+								}).then(function () {
+									// KTUtil.scrollTop();
+								});
 							});
 					} else {
 						Swal.fire({
@@ -180,7 +198,6 @@ var KTCreateAccount = function () {
 				console.log('validated!');
 				
 				if (status == 'Valid') {
-					
 
 					for (var i = 0; i < formElements.length; i++) {
 						if (formElements[i].type === 'radio' && formElements[i].checked) {
@@ -203,44 +220,59 @@ var KTCreateAccount = function () {
   						formData['acafail'] = selectedOptions;
 					}
 
+					// Prevent default button action
+					e.preventDefault();
 
-					
-					
+					// Disable button to avoid multiple click 
+					formSubmitButton.disabled = true;
+								
+					// Show loading indication
+					formSubmitButton.setAttribute('data-kt-indicator', 'on');
+
 					saveFormDataToDatabaseStep1(formData)
 						.then(response => {
 							console.log('Data saved successfully111:', response);
-							// Actions to take on success
-							alert('Form submitted successfully!111'); // Example: Show success message
-							// You can also reset the form or redirect the user
 
-							submitForm(formData);
-							// Prevent default button action
-							e.preventDefault();
+							submitForm(formData)
+								.then(response => {
+									console.log('Status updated submitForm:', response);
+									// Hide loading indication
+									formSubmitButton.removeAttribute('data-kt-indicator');
 
-							// Disable button to avoid multiple click 
-							formSubmitButton.disabled = true;
-								
-							
+									// Enable button
+									formSubmitButton.disabled = false;
 
-							// Show loading indication
-							formSubmitButton.setAttribute('data-kt-indicator', 'on');
-
-							// Simulate form submission
-							setTimeout(function() {
-								// Hide loading indication
-								formSubmitButton.removeAttribute('data-kt-indicator');
-
-								// Enable button
-								formSubmitButton.disabled = false;
-
-								stepperObj.goNext();
-								KTUtil.scrollTop();
-							}, 2000);
+									stepperObj.goNext();
+									KTUtil.scrollTop();
+								})
+								.catch(error => {
+									console.error('Failed to save data:', error);
+									Swal.fire({
+										text: "There are some errors in your submission. Please try again.",
+										icon: "error",
+										buttonsStyling: false,
+										confirmButtonText: "Okay",
+										customClass: {
+											confirmButton: "btn btn-success"
+										}
+									}).then(function () {
+										// KTUtil.scrollTop();
+									});
+								});
 						})
 						.catch(error => {
 							console.error('Failed to save data:', error);
-							// Actions to take on error
-							alert('An error occurred while submitting the form. Please try again.');
+							Swal.fire({
+								text: "There are some errors in your submission. Please try again.",
+								icon: "error",
+								buttonsStyling: false,
+								confirmButtonText: "Okay",
+								customClass: {
+									confirmButton: "btn btn-success"
+								}
+							}).then(function () {
+								// KTUtil.scrollTop();
+							});
 						});
 				} else {
 					Swal.fire({
