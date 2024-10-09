@@ -25,7 +25,13 @@ if (isStudentLogin()) {
     <!--//Style-CSS -->
 
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
-
+    
+    <style>
+        .alert-link {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -192,7 +198,7 @@ if (isStudentLogin()) {
                             $('.btn').prop('disabled', false);
                             $('.btn').text('Login');
                             if (response.message && response.message.includes("Account is not yet verified")) {
-                                $('.alert').append(`<a href="/verify" class="alert-link\">Verify here.</a>`);
+                                $('.alert').append(` <a href="./verify" class="alert-link\">No email received? Click</a>`);
                             }
                         }
                     },
