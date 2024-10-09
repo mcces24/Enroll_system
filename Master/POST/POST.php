@@ -368,7 +368,6 @@ function sendAdmission($data)
         $name = $value['name'];
 
         if (!empty($value)) {
-            $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : "MCC Admission Schedule";
             $mail = new PHPMailer(true);
             try {
                 // PHPMailer setup
@@ -399,7 +398,7 @@ function sendAdmission($data)
 
                 $mail->setFrom($senderEmail, $senderName);
                 $mail->addAddress($email);
-                $mail->Subject = isset($system['email_subject']) ? $system['email_subject'] : '';
+                $mail->Subject = 'MCC Admission Schedule';
                 
                 $domain = isset($system['domain']) ? $system['domain'] : 'https://madridejoscommunitycollege.com';
                 $admission = "$domain/admission-schedule?applicant_id=$applicant_id";
