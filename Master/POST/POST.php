@@ -445,7 +445,9 @@ function forgetStudent($data)
     );
 
     if ($verify) {
-        echo "Test";
+        $response = forgetStudentFuntion($params);
+        echo json_encode($response);
+        return;
     } else {
         if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
             if ($sendingOtp) {
