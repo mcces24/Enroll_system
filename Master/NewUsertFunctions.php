@@ -53,6 +53,7 @@ function getLoginUser($username, $password) {
 }
 
 function forgetStudentFuntion($data) {
+    print_r($data);
     global $newUserController; // Use global to access the variable declared outside the function
     try {
         $getVerifiedData = $newUserController->forgetPassword($data);
