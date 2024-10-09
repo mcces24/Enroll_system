@@ -187,12 +187,14 @@ class NewUserController extends NewUser {
     }
 
     public function forgetPassword($data) {
+        print_r($data);
         $responseData = [];
         try {
             // Get data by email
             $username = isset($data['username']) ? $data['username'] : null;
             $otp_code = isset($data['otp_code']) ? $data['otp_code'] : null;
             $new_password = isset($data['new_password']) ? $data['new_password'] : null;
+            $confirm_password = isset($data['confirm_password']) ? $data['confirm_password'] : null;
             $otp_code_verify = isset($data['otp_code_verify']) ? $data['otp_code_verify'] : null;
             $sendingOtp = isset($data['sendingOtp']) ? $data['sendingOtp'] : false;
             $email = isset($data['email']) ? $data['email'] : false;
@@ -260,6 +262,14 @@ class NewUserController extends NewUser {
             } 
 
             if (!empty($new_password) && !empty($otp_code_verify)) {
+                
+                if ($new_password != $confirm_password) {
+                    $responseData['status'] = 'failed';
+                    $responseData['message'] = 'Password does not match.';
+                    $responseData['type'] = 'error'; 
+                    return $responseData;
+                }
+
                 $password = md5($new_password);
                 $params = [
                     "SET" => "password = '$password', verified_status = '1'",
