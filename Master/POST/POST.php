@@ -518,7 +518,6 @@ function forgetStudent($data)
 
                 if ($mail->send()) {
                     $response = forgetStudentFuntion($params);
-                    header('Content-Type: application/json');
                     echo json_encode($response);
                 } else {
                     // Handle the error case, e.g.:
@@ -608,4 +607,3 @@ function forgetStudent($data)
     
     echo json_encode($verifiedData);
 }
-
