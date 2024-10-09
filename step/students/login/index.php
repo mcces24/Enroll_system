@@ -186,6 +186,9 @@ if (isStudentLogin()) {
                                 
                             }, 1000);
                         } else {
+                            if (data.message && data.message.includes("Account is not yet verified")) {
+                                console.log("yes");
+                            }
                             $('.alert').html(response.message);
                             $('.alert').prop('style', `display: block;`);
                             $('.alert').addClass(`alert-${response.type}`);
