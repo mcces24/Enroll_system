@@ -140,6 +140,11 @@ if (isStudentLogin()) {
                     
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
+                    $('.alert').addClass('alert-danger');
+                    $('.alert').html('There was an error while submitting the form. Please try again later.');
+                    $('.alert').prop('style', `display: block;`);
+                    $('.btn').prop('disabled', false);
+                    $('.btn').text('Verify');
                     // Handle errors here
                     console.log('Error: ' + textStatus, errorThrown);
                 }
