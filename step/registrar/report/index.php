@@ -310,7 +310,7 @@ require '../../../database/regis3.php';
 												$query1 = "SELECT * FROM students 
 													INNER JOIN course ON students.course_id=course.course_id
 													INNER JOIN year_lvl ON students.year_id=year_lvl.year_id
-													INNER JOIN section ON students.section_id=section.section_id
+													INNER JOIN sections ON students.section_id=sections.section_id
 													WHERE (status_type='Enroll Old Students' OR status_type='Enroll New Students') AND academic = '$academic' AND semester_id = '$semester'
 													ORDER BY id ASC
 												";
