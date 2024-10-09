@@ -126,9 +126,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
    </style>
    <link rel="stylesheet" id="astra-theme-css-css" href="./../wp-content/themes/astra/assets/css/minified/main.min.css?ver=3.9.2" media="all">
    <style id="astra-theme-css-inline-css">
+	  
+	  .swal-text {
+		text-align: center;
+	  }
       .picker__select--year, .picker__select--month {
          padding: 2px !important;
       }
+	  
       .ast-no-sidebar .entry-content .alignfull {
          margin-left: calc(-50vw + 50%);
          margin-right: calc(-50vw + 50%);
