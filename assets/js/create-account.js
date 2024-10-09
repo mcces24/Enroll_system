@@ -30,7 +30,7 @@ var KTCreateAccount = function () {
 		return new Promise((resolve, reject) => {
 			// Create a new XMLHttpRequest
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '../Master/POST/POSTS.php', true);
+			xhr.open('POST', '../Master/POST/POST.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 	
 			// Define what happens on successful data submission
@@ -55,7 +55,7 @@ var KTCreateAccount = function () {
 		return new Promise((resolve, reject) => {
 			// Make an AJAX request to the PHP script
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '../Master/POST/POST.php', true);
+			xhr.open('POST', '../Master/POST/POSTS.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 	
 			xhr.onreadystatechange = function () {
