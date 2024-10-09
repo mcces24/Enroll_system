@@ -93,7 +93,6 @@ function getPostData($POST)
             break;
         case 'forgetStudent':
             $data = $POST['data'] ?? null;
-            print_r($data);
             forgetStudent($data);
             break;
         default:
@@ -434,7 +433,6 @@ function forgetStudent($data)
     $sendingOtp = isset($data['sendingOtp']) ? $data['sendingOtp'] : false;
     $sendingEmail = isset($data['sendingEmail']) ? $data['sendingEmail'] : null;
     $otp_code_verify = isset($data['otp_code_verify']) ? $data['otp_code_verify'] : null;
-    $verify = isset($data['verify']) ? $data['verify'] : false;
 
     $data = array(
         'username' => $username,
@@ -442,81 +440,76 @@ function forgetStudent($data)
         'new_password' => $new_password,
         'sendingOtp' => $sendingOtp,
         'otp_code_verify' => $otp_code_verify,
-        'verify' => $verify,
     );
 
-    if ($verify) {
-        echo "Test";
-    } else {
-        if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
-            if ($sendingOtp) {
-                $email = $sendingEmail;
-                $randomNumber = rand(100000, 999999);
-    
-                $params = [
-                    'email' => $email,
-                    'verified_status' => $randomNumber
-                ];
-    
-                $response = forgetStudentFuntion($params);
-    
-                if () {
-                }
-    
-                if ($response) {
-                    $mail = new PHPMailer(true);
-    
-                    try {
-                        // PHPMailer setup
-                        $mail->isSMTP();
-                        $mail->Host       = 'smtp.gmail.com';
-                        $mail->SMTPAuth   = true;
-                        $mail->Username   = 'capstone.project2022.2023@gmail.com';
-                        $mail->Password   = 'nxnqxklsnggbkdtc';
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                        $mail->Port       = 465;
-    
-                        $senderName = 'Forgot Password - Madridejos Community College';
-                        $senderEmail = 'capstone.project2022.2023@gmail.com';
-    
-                        //hostinger
-                        // $mail->isSMTP();
-                        // $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
-                        // $mail->SMTPAuth = true;  // Enable SMTP authentication
-                        // $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
-                        // $mail->Password = 'MCCes@2024';  // Your Hostinger email password
-                        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-                        // $mail->Port = 587;
-            
-                        // $senderName = 'Forgot Password - Madridejos Community College';
-                        // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
-    
-                        $mail->setFrom($senderEmail, $senderName);
-                        $mail->addAddress($email);
-    
-                        $mail->isHTML(true);
-                        $mail->Subject = 'Madridejos Community College - Verify Account';
-    
-                        
-                        $mail->isHTML(true);
-                        $mail->Body = file_get_contents('Layout/forgot_password.html');
-                        $mail->Body = str_replace('<?= $OTP ?>', $randomNumber, $mail->Body);
-    
-                        $mail->send();
-                    } catch (Exception $e) {
-                        $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
-                        header('HTTP/1.1 500 Internal Server Error');
-                    }
-                }
-                echo json_encode($response);
-                return;
+    if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
+        if ($sendingOtp) {
+            $email = $sendingEmail;
+            $randomNumber = rand(100000, 999999);
+
+            $params = [
+                'email' => $email,
+                'verified_status' => $randomNumber
+            ];
+
+            $response = forgetStudentFuntion($params);
+
+            if () {
             }
-            if (!empty($username) || !empty($otp_code) || !empty($new_password)) {
-                $verifiedData = forgetStudentFuntion($data);
+
+            if ($response) {
+                $mail = new PHPMailer(true);
+
+                try {
+                    // PHPMailer setup
+                    $mail->isSMTP();
+                    $mail->Host       = 'smtp.gmail.com';
+                    $mail->SMTPAuth   = true;
+                    $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                    $mail->Password   = 'nxnqxklsnggbkdtc';
+                    $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                    $mail->Port       = 465;
+
+                    $senderName = 'Forgot Password - Madridejos Community College';
+                    $senderEmail = 'capstone.project2022.2023@gmail.com';
+
+                    //hostinger
+                    // $mail->isSMTP();
+                    // $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
+                    // $mail->SMTPAuth = true;  // Enable SMTP authentication
+                    // $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
+                    // $mail->Password = 'MCCes@2024';  // Your Hostinger email password
+                    // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+                    // $mail->Port = 587;
+        
+                    // $senderName = 'Forgot Password - Madridejos Community College';
+                    // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+
+                    $mail->setFrom($senderEmail, $senderName);
+                    $mail->addAddress($email);
+
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Madridejos Community College - Verify Account';
+
+                    
+                    $mail->isHTML(true);
+                    $mail->Body = file_get_contents('Layout/forgot_password.html');
+                    $mail->Body = str_replace('<?= $OTP ?>', $randomNumber, $mail->Body);
+
+                    $mail->send();
+                } catch (Exception $e) {
+                    $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                    header('HTTP/1.1 500 Internal Server Error');
+                }
             }
-        } else {
-            $verifiedData = null;
+            echo json_encode($response);
+            return;
         }
+        if (!empty($username) || !empty($otp_code) || !empty($new_password)) {
+            $verifiedData = forgetStudentFuntion($data);
+        }
+    } else {
+        $verifiedData = null;
     }
     
     echo json_encode($verifiedData);
