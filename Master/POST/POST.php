@@ -539,7 +539,7 @@ function forgetStudent($data)
                 $randomNumber = rand(100000, 999999);
     
                 $params = [
-                    'username' => $email,
+                    'email' => $email,
                     'verified_status' => $randomNumber
                 ];
     
