@@ -289,12 +289,14 @@ require '../../../database/regis3.php';
 										<table id="Mytableid">
 											<thead style="text-align: center;">
 												<tr>
-													<th width="25%">Full Name</th>
-													<th width="10%">ID Number</th>
-													<th width="10%">Course</th>
-													<th width="10%">Year Level</th>
-													<th width="10%">Section</th>
-													<th width="10%">Status</th>
+													<th>ID Number</th>
+													<th>Full Name</th>
+													<th>Address</th>
+													<th>Gender</th>
+													<th>Course</th>
+													<th>Year Level</th>
+													<th>Section</th>
+													<th >Status</th>
 													<!-- <th width="10%">Select All <input type="checkbox" onclick="select_all()" id="delete" /></th>
 													<th width="15%">Action</th> -->
 												</tr>
@@ -324,12 +326,13 @@ require '../../../database/regis3.php';
 												?>
 														<tr style="text-align: center;">
 
-															<td style="text-align:left"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
-
 															<td><?= $student['id_number']; ?></td>
+															<td style="text-align:left"><?= $student['fname']; ?> <?= $student['mname']; ?> <?= $student['lname']; ?></td>
+															<td style="text-align:left"><?= $student['address']; ?></td>
+															<td><?= $student['gender']; ?></td>
 															<td><?= $student['course_code']; ?></td>
 															<td><?= $student['year_name']; ?></td>
-															<td><?= $student['section_name']; ?></td>
+															<td><?= $student['sections']; ?></td>
 															<td><?= $student['type']; ?></td>
 															<!-- <td>
 																<?php
