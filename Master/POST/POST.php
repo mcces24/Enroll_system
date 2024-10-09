@@ -583,7 +583,6 @@ function forgetStudent($data)
     
                         if ($mail->send()) {
                             $response = forgetStudentFuntion($params);
-                            header('Content-Type: application/json');
                         } else {
                             $response['error'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
                             $response['type'] = 'danger';
