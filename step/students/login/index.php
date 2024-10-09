@@ -28,7 +28,7 @@ if (isStudentLogin()) {
 
     <style>
         .alert-link {
-            color: #000;
+            color: #fff;
             text-decoration: none;
         }
     </style>
