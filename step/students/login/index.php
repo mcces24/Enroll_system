@@ -25,10 +25,10 @@ if (isStudentLogin()) {
     <!--//Style-CSS -->
 
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
-    
+
     <style>
         .alert-link {
-            color: #007bff;
+            color: #000;
             text-decoration: none;
         }
     </style>
