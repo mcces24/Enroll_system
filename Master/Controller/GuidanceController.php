@@ -718,7 +718,7 @@ class GuidanceController extends Student {
             'applicantList' =>  [
                 'FIELDS' => "students.applicant_id, students.fname, students.mname, students.lname, students.age",
                 'WHERE' => "academic = '$academic' AND semester_id = '$semester' AND admission_score.applicant_id IS NULL AND students.applicant_id != ''",
-                'JOIN' => 'LEFT JOIN admission_score ON students.applicant_id = admission_score.applicant_id',
+                'JOIN' => 'LEFT JOIN admission_score ON students.applicant_id = admission_score.applicant_id INNER JOIN admission_list ON students.applicant_id = admission_list.applicant_id',
             ],
         ];
 
