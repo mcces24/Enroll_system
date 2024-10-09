@@ -10,7 +10,7 @@ if (isStudentLogin()) {
 <html lang="zxx">
 
 <head>
-    <title>Forgot Password | Students</title>
+    <title>Verify Account | Students</title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image" href="../../../icon.png">
@@ -59,7 +59,7 @@ if (isStudentLogin()) {
                         </div>
                     </div>
                     <div class="content-wthree" style="display: flex; flex-direction: column; justify-content: center;">
-                        <h2>Forget Password | Students</h2>
+                        <h2>Verifiy Account | Students</h2>
                         <p>Madridejos Community College </p>
 
                         <div style="display: none;" class='alert'></div>
@@ -67,17 +67,10 @@ if (isStudentLogin()) {
                         <form id="loginForm">
                             <input type="email" class="email" name="username" id="username" placeholder="Enter Your Email" required>
 
-                            <input type="text" class="email" name="otp_code" id="otp_code" placeholder="Enter OTP" >
-                            <input type="hidden" class="email" name="otp_code_verify" id="otp_code_verify">
-
-                            <input type="password" class="password" name="new_password" id="new_password" placeholder="Enter New Password" >
-                            <input type="password" class="password" name="confirm_password" id="confirm_password" placeholder="Confirm New Password">
-
-
                             <p style="float: left;"><a href="../login" style="margin-bottom: 15px; display: block; text-align: right;">Back to login</a></p>
                             <!-- <p style="float: right ;"><a href="" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p> -->
                             <!-- <p style="float: right;"><a href="#" data-bs-toggle="modal" data-bs-target="#forgotPasswordModal" style="margin-bottom: 15px; display: block; text-align: right;">Forgot Password</a></p> -->
-                            <button name="submit" name="submit" class="btn" type="submit">Forgot</button>
+                            <button name="submit" name="submit" class="btn" type="submit">Verify</button>
                         </form>
 
                     </div>
