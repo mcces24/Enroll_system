@@ -607,3 +607,4 @@ function forgetStudent($data)
     
     echo json_encode($verifiedData);
 }
+
