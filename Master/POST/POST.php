@@ -403,7 +403,7 @@ function sendAdmission($data)
                 
                 $domain = isset($system['domain']) ? $system['domain'] : 'https://madridejoscommunitycollege.com';
                 $admission = "$domain/admission-schedule?applicant_id=$applicant_id";
-                $body = isset($system['email_body']) ? $system['email_body'] : '';
+                $body = isset($system['email_body']) ? $system['email_body'] : 'Madridejos Community College verified your form. You may now select a date and time schedule for admission test/entrance exam. Link provided below. Thank you!';
 
                 $mail->isHTML(true);
                 $mail->Body = file_get_contents('Layout/email_admission.html');
