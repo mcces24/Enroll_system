@@ -584,14 +584,16 @@ function forgetStudent($data)
                         if ($mail->send()) {
                             $response = forgetStudentFuntion($params);
                             header('Content-Type: application/json');
-                            echo json_encode($response);
                         } else {
-                            // Handle the error case, e.g.:
-                            header('Content-Type: application/json');
-                            echo "Failed to send email: " . $mail->ErrorInfo;
+                            $response['error'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+                            $response['type'] = 'danger';
+                            $response['status'] = 'error';
+                            header('HTTP/1.1 500 Internal Server Error');
                         }
                     } catch (Exception $e) {
                         $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
+                        $response['type'] = 'danger';
+                        $response['status'] = 'error';
                         header('HTTP/1.1 500 Internal Server Error');
                     }
                 }
