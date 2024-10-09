@@ -471,13 +471,14 @@ function forgetStudent($data)
         $email = $data['username'];
         $randomNumber = rand(100000, 999999);
 
-        $response = forgetStudentFuntion($data);
         $params = [
-            'email' => $email,
+            'username' => $email,
             'verified_status' => $randomNumber,
             'verify' => $verify
         ];
 
+        $response = forgetStudentFuntion($params);
+        
         echo json_encode($response);
         return;
     } else {
