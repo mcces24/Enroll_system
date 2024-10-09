@@ -190,8 +190,6 @@ class NewUserController extends NewUser {
         $responseData = [];
         try {
             // Get data by email
-            
-
             $username = isset($data['username']) ? $data['username'] : null;
             $otp_code = isset($data['otp_code']) ? $data['otp_code'] : null;
             $new_password = isset($data['new_password']) ? $data['new_password'] : null;
@@ -199,6 +197,7 @@ class NewUserController extends NewUser {
             $sendingOtp = isset($data['sendingOtp']) ? $data['sendingOtp'] : false;
             $email = isset($data['email']) ? $data['email'] : false;
             $verified_status = isset($data['verified_status']) ? $data['verified_status'] : false;
+            $verify = isset($data['verify']) ? $data['verify'] : false;
 
             if (!empty($email) && !empty($verified_status)) {
                 $params = [
@@ -227,9 +226,15 @@ class NewUserController extends NewUser {
                 if ($stmt->rowCount() > 0) {
                     $row = $stmt->fetch(PDO::FETCH_ASSOC);
                     if ($row) {
-                        $responseData['status'] = 'success';
-                        $responseData['message'] = 'Sending OTP to your Email.';
-                        $responseData['type'] = 'success';
+                        if ($verify) {
+                            $responseData['status'] = 'success';
+                            $responseData['message'] = 'Verification link send to your email.';
+                            $responseData['type'] = 'success';
+                        } else {
+                            $responseData['status'] = 'success';
+                            $responseData['message'] = 'Sending OTP to your Email.';
+                            $responseData['type'] = 'success';
+                        }
                     }
                 } else {
                     $responseData['status'] = 'failed';
