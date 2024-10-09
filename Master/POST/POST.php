@@ -276,37 +276,35 @@ function sendGuidanceForm($data)
         $applicant_id = $value['applicant_id'];
         $name = $value['name'];
 
-        $response = sendGuidanceFormFunction($value);
-        $responseJson = json_decode($response, true);
-        if ($responseJson['status'] = 'success') {
+        if (!empty($value)) {
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
                 // PHPMailer setup
-                $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
-                $mail->SMTPAuth   = true;
-                // $mail->Username   = !empty($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
-                // $mail->Password   = !empty($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
-                $mail->Username   = 'capstone.project2022.2023@gmail.com';
-                $mail->Password   = 'nxnqxklsnggbkdtc';
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $mail->Port       = 465;
+                // $mail->isSMTP();
+                // $mail->Host       = 'smtp.gmail.com';
+                // $mail->SMTPAuth   = true;
+                // // $mail->Username   = !empty($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                // // $mail->Password   = !empty($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                // $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                // $mail->Password   = 'nxnqxklsnggbkdtc';
+                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                // $mail->Port       = 465;
 
-                $senderName = 'Guidance Office - Madridejos Community College';
-                $senderEmail = 'capstone.project2022.2023@gmail.com';
+                // $senderName = 'Guidance Office - Madridejos Community College';
+                // $senderEmail = 'capstone.project2022.2023@gmail.com';
 
                 //hostinger
-                // $mail->isSMTP();
-                // $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
-                // $mail->SMTPAuth = true;  // Enable SMTP authentication
-                // $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
-                // $mail->Password = 'MCCes@2024';  // Your Hostinger email password
-                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-                // $mail->Port = 587;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
+                $mail->SMTPAuth = true;  // Enable SMTP authentication
+                $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
+                $mail->Password = 'MCCes@2024';  // Your Hostinger email password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+                $mail->Port = 587;
     
-                // $senderName = 'Guidance Office - Madridejos Community College';
-                // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+                $senderName = 'Guidance Office - Madridejos Community College';
+                $senderEmail = 'no-reply@madridejoscommunitycollege.com';
 
                 $mail->setFrom($senderEmail, $senderName);
                 $mail->addAddress($email);
@@ -321,7 +319,18 @@ function sendGuidanceForm($data)
                 $mail->Body = str_replace('<?= $applicant_id ?>', $applicant_id, $mail->Body);
                 $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
 
-                $mail->send();
+                if ($mail->send()) {
+                    $response = sendGuidanceFormFunction($value);
+                    $responseJson = json_decode($response, true);
+
+                    if ($responseJson['status'] != 'success') {
+                        $response['message'] = 'Internal error occured';
+                        $response['type'] = 'danger';
+                    } 
+                } else {
+                    $response['message'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+                    $response['type'] = 'danger';
+                }
             } catch (Exception $e) {
                 $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
                 header('HTTP/1.1 500 Internal Server Error');
@@ -358,37 +367,35 @@ function sendAdmission($data)
         $applicant_id = $value['applicant_id'];
         $name = $value['name'];
 
-        $response = sendAdmissionFunction($value);
-        $responseJson = json_decode($response, true);
-        if ($responseJson['status'] = 'success') {
+        if (!empty($value)) {
             $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
             $mail = new PHPMailer(true);
             try {
                 // PHPMailer setup
-                $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
-                $mail->SMTPAuth   = true;
-                // $mail->Username   = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
-                // $mail->Password   = isset($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
-                $mail->Username   = 'capstone.project2022.2023@gmail.com';
-                $mail->Password   = 'nxnqxklsnggbkdtc';
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                $mail->Port       = 465;
+                // $mail->isSMTP();
+                // $mail->Host       = 'smtp.gmail.com';
+                // $mail->SMTPAuth   = true;
+                // // $mail->Username   = isset($system['email_user']) ? $system['email_user'] : 'capstone.project2022.2023@gmail.com';
+                // // $mail->Password   = isset($system['email_pass']) ? $system['email_pass'] : 'nxnqxklsnggbkdtc';
+                // $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                // $mail->Password   = 'nxnqxklsnggbkdtc';
+                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                // $mail->Port       = 465;
 
-                $senderName = 'Guidance Office - Madridejos Community College';
-                $senderEmail = 'capstone.project2022.2023@gmail.com';
+                // $senderName = 'Guidance Office - Madridejos Community College';
+                // $senderEmail = 'capstone.project2022.2023@gmail.com';
 
                 //hostinger
-                // $mail->isSMTP();
-                // $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
-                // $mail->SMTPAuth = true;  // Enable SMTP authentication
-                // $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
-                // $mail->Password = 'MCCes@2024';  // Your Hostinger email password
-                // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-                // $mail->Port = 587;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
+                $mail->SMTPAuth = true;  // Enable SMTP authentication
+                $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
+                $mail->Password = 'MCCes@2024';  // Your Hostinger email password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+                $mail->Port = 587;
     
-                // $senderName = 'Guidance Office - Madridejos Community College';
-                // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+                $senderName = 'Guidance Office - Madridejos Community College';
+                $senderEmail = 'no-reply@madridejoscommunitycollege.com';
 
                 $mail->setFrom($senderEmail, $senderName);
                 $mail->addAddress($email);
@@ -405,7 +412,18 @@ function sendAdmission($data)
                 $mail->Body = str_replace('<?= $body ?>', $body, $mail->Body);
                 $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
 
-                $mail->send();
+                if ($mail->send()) {
+                    $response = sendAdmissionFunction($value);
+                    $responseJson = json_decode($response, true);
+
+                    if ($responseJson['status'] != 'success') {
+                        $response['message'] = 'Internal error occured';
+                        $response['type'] = 'danger';
+                    } 
+                } else {
+                    $response['message'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+                    $response['type'] = 'danger';
+                }
             } catch (Exception $e) {
                 $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
                 header('HTTP/1.1 500 Internal Server Error');
@@ -474,35 +492,33 @@ function forgetStudent($data)
                     'verified_status' => $randomNumber
                 ];
     
-                $response = forgetStudentFuntion($params);
-    
-                if ($response) {
+                if (!empty($email)) {
                     $mail = new PHPMailer(true);
     
                     try {
                         // PHPMailer setup
-                        $mail->isSMTP();
-                        $mail->Host       = 'smtp.gmail.com';
-                        $mail->SMTPAuth   = true;
-                        $mail->Username   = 'capstone.project2022.2023@gmail.com';
-                        $mail->Password   = 'nxnqxklsnggbkdtc';
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-                        $mail->Port       = 465;
+                        // $mail->isSMTP();
+                        // $mail->Host       = 'smtp.gmail.com';
+                        // $mail->SMTPAuth   = true;
+                        // $mail->Username   = 'capstone.project2022.2023@gmail.com';
+                        // $mail->Password   = 'nxnqxklsnggbkdtc';
+                        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+                        // $mail->Port       = 465;
     
-                        $senderName = 'Forgot Password - Madridejos Community College';
-                        $senderEmail = 'capstone.project2022.2023@gmail.com';
+                        // $senderName = 'Forgot Password - Madridejos Community College';
+                        // $senderEmail = 'capstone.project2022.2023@gmail.com';
     
                         //hostinger
-                        // $mail->isSMTP();
-                        // $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
-                        // $mail->SMTPAuth = true;  // Enable SMTP authentication
-                        // $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
-                        // $mail->Password = 'MCCes@2024';  // Your Hostinger email password
-                        // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
-                        // $mail->Port = 587;
+                        $mail->isSMTP();
+                        $mail->Host = 'smtp.hostinger.com';  // Set the Hostinger SMTP server
+                        $mail->SMTPAuth = true;  // Enable SMTP authentication
+                        $mail->Username = 'no-reply@madridejoscommunitycollege.com';  // Your Hostinger email address
+                        $mail->Password = 'MCCes@2024';  // Your Hostinger email password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
+                        $mail->Port = 587;
             
-                        // $senderName = 'Forgot Password - Madridejos Community College';
-                        // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+                        $senderName = 'Forgot Password - Madridejos Community College';
+                        $senderEmail = 'no-reply@madridejoscommunitycollege.com';
     
                         $mail->setFrom($senderEmail, $senderName);
                         $mail->addAddress($email);
@@ -515,7 +531,15 @@ function forgetStudent($data)
                         $mail->Body = file_get_contents('Layout/forgot_password.html');
                         $mail->Body = str_replace('<?= $OTP ?>', $randomNumber, $mail->Body);
     
-                        $mail->send();
+                        if ($mail->send()) {
+                            $response = forgetStudentFuntion($params);
+                            header('Content-Type: application/json');
+                            echo json_encode($response);
+                        } else {
+                            // Handle the error case, e.g.:
+                            header('Content-Type: application/json');
+                            echo "Failed to send email: " . $mail->ErrorInfo;
+                        }
                     } catch (Exception $e) {
                         $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
                         header('HTTP/1.1 500 Internal Server Error');
