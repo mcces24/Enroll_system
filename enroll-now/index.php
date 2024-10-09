@@ -9393,9 +9393,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
             data[pair[0]] = pair[1];
          }
 
-		 console.log('data:', data);
-
-		 if (data.age && parseInt(data.age, 10) >= 17) {
+		 if (data.age && parseInt(data.age, 10) < 17) {
 			console.log("The age is valid and is at least 17.");
 
 			swal({
@@ -9403,7 +9401,12 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
 				text: 'The age is valid and is at least 17.',
 				icon: 'error',
 				button: "Okay",
+			}).then((value) => {
+				$('.form-btn').prop('readonly', false);
+				$('.form-btn').text('Submit');
+				return;
 			});
+
 		 }
          
          if (data) {
