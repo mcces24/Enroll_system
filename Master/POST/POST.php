@@ -368,7 +368,7 @@ function sendAdmission($data)
         $name = $value['name'];
 
         if (!empty($value)) {
-            $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : "MCC Admission Schedule'";
+            $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : "MCC Admission Schedule";
             $mail = new PHPMailer(true);
             try {
                 // PHPMailer setup
