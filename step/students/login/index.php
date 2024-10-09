@@ -186,14 +186,14 @@ if (isStudentLogin()) {
                                 
                             }, 1000);
                         } else {
-                            if (response.message && response.message.includes("Account is not yet verified")) {
-                                alert("yes");
-                            }
                             $('.alert').html(response.message);
                             $('.alert').prop('style', `display: block;`);
                             $('.alert').addClass(`alert-${response.type}`);
                             $('.btn').prop('disabled', false);
                             $('.btn').text('Login');
+                            if (response.message && response.message.includes("Account is not yet verified")) {
+                                $('.alert').append(`<a href="/verify" class="alert-link\">Verify here.</a>`);
+                            }
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
