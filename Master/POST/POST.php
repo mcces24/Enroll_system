@@ -571,13 +571,12 @@ function forgetStudent($data)
                         // $senderName = 'Forgot Password - Madridejos Community College';
                         // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
     
-                        // $mail->setFrom($senderEmail, $senderName);
-                        // $mail->addAddress($email);
+                        $mail->setFrom($senderEmail, $senderName);
+                        $mail->addAddress($email);
     
                         $mail->isHTML(true);
                         $mail->Subject = 'Madridejos Community College - Verify Account';
     
-                        
                         $mail->isHTML(true);
                         $mail->Body = file_get_contents('Layout/forgot_password.html');
                         $mail->Body = str_replace('<?= $OTP ?>', $randomNumber, $mail->Body);
