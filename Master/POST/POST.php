@@ -535,6 +535,7 @@ function forgetStudent($data)
                 echo json_encode($response);
             }
         }
+        echo json_encode($response);
     } else {
         if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
             if ($sendingOtp) {
