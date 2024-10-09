@@ -187,8 +187,6 @@ class NewUserController extends NewUser {
     }
 
     public function forgetPassword($data) {
-
-        print_r($data);
         $responseData = [];
         try {
             // Get data by email
