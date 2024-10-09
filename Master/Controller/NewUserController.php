@@ -262,6 +262,9 @@ class NewUserController extends NewUser {
 
             if (!empty($new_password) && !empty($otp_code_verify)) {
 
+                echo $new_password;
+                echo $confirm_password;
+
                 if ($new_password != $confirm_password) {
                     $responseData['status'] = 'failed';
                     $responseData['message'] = 'Password does not match.';
