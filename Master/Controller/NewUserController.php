@@ -187,7 +187,6 @@ class NewUserController extends NewUser {
     }
 
     public function forgetPassword($data) {
-        print_r($data);
         $responseData = [];
         try {
             // Get data by email
@@ -262,7 +261,7 @@ class NewUserController extends NewUser {
             } 
 
             if (!empty($new_password) && !empty($otp_code_verify)) {
-                
+
                 if ($new_password != $confirm_password) {
                     $responseData['status'] = 'failed';
                     $responseData['message'] = 'Password does not match.';
