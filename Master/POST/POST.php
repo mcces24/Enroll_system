@@ -452,6 +452,7 @@ function forgetStudent($data)
     $username = isset($data['username']) ? $data['username'] : null;
     $otp_code = isset($data['otp_code']) ? $data['otp_code'] : null;
     $new_password = isset($data['new_password']) ? $data['new_password'] : null;
+    $confirm_password = isset($data['confirm_password']) ? $data['confirm_password'] : null;
     $sendingOtp = isset($data['sendingOtp']) ? $data['sendingOtp'] : false;
     $sendingEmail = isset($data['sendingEmail']) ? $data['sendingEmail'] : null;
     $otp_code_verify = isset($data['otp_code_verify']) ? $data['otp_code_verify'] : null;
@@ -461,6 +462,7 @@ function forgetStudent($data)
         'username' => $username,
         'otp_code' => $otp_code,
         'new_password' => $new_password,
+        'confirm_password' => $confirm_password,
         'sendingOtp' => $sendingOtp,
         'otp_code_verify' => $otp_code_verify,
         'verify' => $verify,
