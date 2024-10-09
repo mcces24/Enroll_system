@@ -529,7 +529,6 @@ function forgetStudent($data)
                 header('HTTP/1.1 500 Internal Server Error');
             }
         }
-        return;
     } else {
         if (!empty($username) || !empty($otp_code) || !empty($new_password) || $sendingOtp) {
             if ($sendingOtp) {
