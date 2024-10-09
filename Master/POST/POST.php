@@ -185,7 +185,8 @@ function register($data)
             $mail->Port = 587;
 
             $senderName = 'Verify Account - Madridejos Community College';
-            $senderEmail = 'capstone.project2022.2023@gmail.com';
+            $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+            // $senderEmail = 'capstone.project2022.2023@gmail.com';
 
             $mail->setFrom($senderEmail, $senderName);
             $mail->addAddress($email);
