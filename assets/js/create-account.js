@@ -55,7 +55,7 @@ var KTCreateAccount = function () {
 		return new Promise((resolve, reject) => {
 			// Make an AJAX request to the PHP script
 			var xhr = new XMLHttpRequest();
-			xhr.open('POST', '../Master/POST/POSTS.php', true);
+			xhr.open('POST', '../Master/POST/POST.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 	
 			xhr.onreadystatechange = function () {
@@ -112,8 +112,6 @@ var KTCreateAccount = function () {
 
 					if (status == 'Valid') {
 
-						
-
 						for (var i = 0; i < formElements.length; i++) {
 							if (formElements[i].type === 'radio' && formElements[i].checked) {
 						        formData[formElements[i].name] = formElements[i].value;
@@ -133,7 +131,6 @@ var KTCreateAccount = function () {
 						        }
 						    }
 						}
-
 
 						saveFormDataToDatabaseStep1(formData)
 							.then(response => {
