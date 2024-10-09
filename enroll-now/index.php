@@ -9392,6 +9392,17 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
          for (var pair of formData.entries()) {
             data[pair[0]] = pair[1];
          }
+
+		 if (data.age && parseInt(data.age, 10) >= 17) {
+			console.log("The age is valid and is at least 17.");
+
+			swal({
+				title: "Age Requirement",
+				text: 'The age is valid and is at least 17.',
+				icon: 'error',
+				button: "Okay",
+			});
+		 }
          
          if (data) {
             // Create a variable to hold the AJAX request
