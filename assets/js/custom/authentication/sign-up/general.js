@@ -49,7 +49,7 @@ var KTSignupGeneral = function () {
                 var response = JSON.parse(xhrInsertUser.responseText);
                 if (response.isSave) {
                     Swal.fire({
-                        text: "Account created successfully. Email verification was send your email. Please verify your account.",
+                        text: "Account registered successfully. Email verification was send to your email. Please verify your account.",
                         icon: "success",
                         buttonsStyling: false,
                         confirmButtonText: "Login Now",
@@ -62,7 +62,7 @@ var KTSignupGeneral = function () {
                             e.reset();
                             s.reset();
 
-                            window.location.href = "./step/students/login/";
+                            // window.location.href = "./step/students/login/";
                         }
                     });
                 } else {
