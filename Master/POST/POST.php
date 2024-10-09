@@ -445,7 +445,18 @@ function forgetStudent($data)
     );
 
     if ($verify) {
+
+
+        $email = $data['username'];
+        $randomNumber = rand(100000, 999999);
+
         $response = forgetStudentFuntion($params);
+        $params = [
+            'email' => $email,
+            'verified_status' => $randomNumber
+            'verify' => $verify
+        ];
+
         echo json_encode($response);
         return;
     } else {
@@ -455,7 +466,7 @@ function forgetStudent($data)
                 $randomNumber = rand(100000, 999999);
     
                 $params = [
-                    'email' => $email,
+                    'username' => $email,
                     'verified_status' => $randomNumber
                 ];
     
