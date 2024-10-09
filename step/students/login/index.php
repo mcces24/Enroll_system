@@ -109,7 +109,7 @@ if (isStudentLogin()) {
     <script src="js/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://madridejoscommunitycollege.com/assets/js/location.js"></script>
-    <script src="https://madridejoscommunitycollege.com/assets/js/camera.js"></script>
+<!--     <script src="https://madridejoscommunitycollege.com/assets/js/camera.js"></script> -->
     <script>
         $(document).ready(function() {
             var BASE_PATH = <?php echo json_encode(BASE_PATH_URL); ?>;
