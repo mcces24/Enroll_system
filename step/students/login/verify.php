@@ -126,10 +126,9 @@ if (isStudentLogin()) {
                             $('.alert').addClass(`alert-${response.type}`);
                             $('.alert').html(response.message);
                             $('.alert').prop('style', `display: block;`);
-                            $('.btn').text('Sending...');
+							$('.btn').prop('disabled', false);
+                            $('.btn').text('Verify');
                             $("#username").prop('disabled', true);
-                            sendAjaxRequest(formData);
-                            return true;
                         } else {
                             $('.alert').html(response.message);
                             $('.alert').prop('style', `display: block;`);
