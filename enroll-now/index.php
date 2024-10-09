@@ -9393,6 +9393,8 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
             data[pair[0]] = pair[1];
          }
 
+		 console.log('data:', data);
+
 		 if (data.age && parseInt(data.age, 10) >= 17) {
 			console.log("The age is valid and is at least 17.");
 
