@@ -162,9 +162,7 @@ function register($data)
         'verified_status' => $randomNumber
     ];
 
-    $response = createNewUser($params);
-
-    if ($response) {
+    if (!empty($email) && !empty($password)) {
         $mail = new PHPMailer(true);
 
         try {
@@ -203,14 +201,20 @@ function register($data)
             $mail->Body = file_get_contents('Layout/email_verification.html');
             $mail->Body = str_replace('<?= $link ?>', $link, $mail->Body);
 
-            $mail->send();
+            if ($mail->send()) {
+                $response = createNewUser($params);
+                header('Content-Type: application/json');
+                echo json_encode($response);
+            } else {
+                // Handle the error case, e.g.:
+                header('Content-Type: application/json');
+                echo "Failed to send email: " . $mail->ErrorInfo;
+            }
         } catch (Exception $e) {
             $response['error'] = 'Message could not be sent. Mailer Error: ' . $e->getMessage();
             header('HTTP/1.1 500 Internal Server Error');
         }
     }
-    header('Content-Type: application/json');
-    echo json_encode($response);
 }
 
 function fetchYear($data)
