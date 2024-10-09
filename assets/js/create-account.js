@@ -27,17 +27,28 @@ var KTCreateAccount = function () {
 	formData.append('acafail', selectedValues);
 
 	function saveFormDataToDatabaseStep1(formData) {
-		// Make an AJAX request to the PHP script
-		var xhr = new XMLHttpRequest();
-		xhr.open('POST', '../Master/POST/POST.php', true);
-		xhr.setRequestHeader('Content-Type', 'application/json');
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState == 4 && xhr.status == 200) {
-				console.log(formData);
-			}
-		};
-		var data = { type: 'saveApplicantGuidanceRecord', data: formData };
-		xhr.send(JSON.stringify(data));
+		return new Promise((resolve, reject) => {
+			// Create a new XMLHttpRequest
+			var xhr = new XMLHttpRequest();
+			xhr.open('POST', '../Master/POST/POST.php', true);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+	
+			// Define what happens on successful data submission
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4) {
+					if (xhr.status == 200) {
+						console.log(formData); // Log the form data
+						resolve(xhr.responseText); // Resolve the promise with the response
+					} else {
+						reject('Error: ' + xhr.status); // Reject the promise on error
+					}
+				}
+			};
+	
+			// Prepare the data to send
+			var data = { type: 'saveApplicantGuidanceRecord', data: formData };
+			xhr.send(JSON.stringify(data)); // Send the JSON data
+		});
 	}
 
 	function submitForm(formData) {
@@ -112,10 +123,22 @@ var KTCreateAccount = function () {
 						}
 
 
-						saveFormDataToDatabaseStep1(formData);
-						stepper.goNext();
+						saveFormDataToDatabaseStep1(formData)
+							.then(response => {
+								console.log('Data saved successfully:', response);
+								// Actions to take on success
+								alert('Form submitted successfully!'); // Example: Show success message
+								// You can also reset the form or redirect the user
+
+								stepper.goNext();
 						
-						KTUtil.scrollTop();
+								KTUtil.scrollTop();
+							})
+							.catch(error => {
+								console.error('Failed to save data:', error);
+								// Actions to take on error
+								alert('An error occurred while submitting the form. Please try again.');
+							});
 					} else {
 						Swal.fire({
 							text: "Please fill the required items.",
@@ -183,30 +206,42 @@ var KTCreateAccount = function () {
 
 					
 					
-					saveFormDataToDatabaseStep1(formData);
-					submitForm(formData);
-					// Prevent default button action
-					e.preventDefault();
+					saveFormDataToDatabaseStep1(formData)
+						.then(response => {
+							console.log('Data saved successfully111:', response);
+							// Actions to take on success
+							alert('Form submitted successfully!111'); // Example: Show success message
+							// You can also reset the form or redirect the user
 
-					// Disable button to avoid multiple click 
-					formSubmitButton.disabled = true;
-						
-					
+							submitForm(formData);
+							// Prevent default button action
+							e.preventDefault();
 
-					// Show loading indication
-					formSubmitButton.setAttribute('data-kt-indicator', 'on');
+							// Disable button to avoid multiple click 
+							formSubmitButton.disabled = true;
+								
+							
 
-					// Simulate form submission
-					setTimeout(function() {
-						// Hide loading indication
-						formSubmitButton.removeAttribute('data-kt-indicator');
+							// Show loading indication
+							formSubmitButton.setAttribute('data-kt-indicator', 'on');
 
-						// Enable button
-						formSubmitButton.disabled = false;
+							// Simulate form submission
+							setTimeout(function() {
+								// Hide loading indication
+								formSubmitButton.removeAttribute('data-kt-indicator');
 
-						stepperObj.goNext();
-						KTUtil.scrollTop();
-					}, 2000);
+								// Enable button
+								formSubmitButton.disabled = false;
+
+								stepperObj.goNext();
+								KTUtil.scrollTop();
+							}, 2000);
+						})
+						.catch(error => {
+							console.error('Failed to save data:', error);
+							// Actions to take on error
+							alert('An error occurred while submitting the form. Please try again.');
+						});
 				} else {
 					Swal.fire({
 						text: "Sorry, please try again.",
