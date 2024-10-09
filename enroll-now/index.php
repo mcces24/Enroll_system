@@ -9398,15 +9398,14 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
 
 			swal({
 				title: "Age Requirement",
-				text: 'The age is valid and is at least 17.',
+				text: 'Age must be at least 17 years old. Please check your birthdate.',
 				icon: 'error',
 				button: "Okay",
 			}).then((value) => {
 				$('.form-btn').prop('readonly', false);
 				$('.form-btn').text('Submit');
-				return;
 			});
-
+			return;
 		 }
          
          if (data) {
