@@ -168,7 +168,7 @@ License: For each use you must have a valid license purchased only from above li
 															Name</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="fname" placeholder="Ex: Jose" value="<?php echo $applicant['fname'] ?? null ?>"  />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="fname" placeholder="Ex: Jose" value="<?php echo $applicant['fname'] ?? null ?>" <?php echo isset($applicant['fname']) ? 'readonly' : null ?> />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -179,7 +179,7 @@ License: For each use you must have a valid license purchased only from above li
 															Name</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="mname" placeholder="Ex: Laurel" value="<?php echo $applicant['mname'] ?? null  ?>"  />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="mname" placeholder="Ex: Laurel" value="<?php echo $applicant['mname'] ?? null  ?>" <?php echo isset($applicant['mname']) ? 'readonly' : null ?> />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -189,7 +189,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Surname</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="lname" placeholder="Ex: Dela Crus" value="<?php echo $applicant['lname'] ?? null  ?>"  />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="lname" placeholder="Ex: Dela Crus" value="<?php echo $applicant['lname'] ?? null  ?>" <?php echo isset($applicant['lname']) ? 'readonly' : null ?> />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
@@ -227,7 +227,6 @@ License: For each use you must have a valid license purchased only from above li
 															<option></option>
 															<option <?php echo  $applicant['gender'] == 'Male' ? 'selected' : '' ?> value="Male">Male</option>
 															<option <?php echo  $applicant['gender'] == 'Female' ? 'selected' : '' ?> value="Female">Female</option>
-
 														</select>
 													</div>
 													<!--end::Col-->
@@ -239,7 +238,7 @@ License: For each use you must have a valid license purchased only from above li
 														<!--begin::Input-->
 
 														<!-- <input type="text" class="form-control" id="kt_datepicker_1" readonly placeholder="Select date"/> -->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $applicant['date_of_birth'] ?? null  ?>"  />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="dbirth" placeholder="Ex: 01/01/1990" value="<?php echo $applicant['date_of_birth'] ?? null  ?>" <?php echo isset($applicant['date_of_birth']) ? 'readonly' : null ?> />
 
 														<!--end::Input-->
 													</div>
@@ -376,7 +375,7 @@ License: For each use you must have a valid license purchased only from above li
 														<label class="required fs-6 fw-bold form-label mb-2">Email Address</label>
 														<!--end::Label-->
 														<!--begin::Input-->
-														<input type="text" class="form-control form-control-lg form-control-solid" name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $applicant['email'] ?? null  ?>"  />
+														<input type="text" class="form-control form-control-lg form-control-solid" name="email" placeholder="Ex: juan.delacruz@gmail.com" value="<?php echo $applicant['email'] ?? null  ?>" <?php echo isset($applicant['email']) ? 'readonly' : null ?> />
 														<!--end::Input-->
 													</div>
 													<!--end::Col-->
