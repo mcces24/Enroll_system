@@ -304,13 +304,6 @@ var KTCreateAccount = function () {
 							}
 						}
 					},
-					mname: {
-						validators: {
-							notEmpty: {
-								message: 'Field is required'
-							}
-						}
-					},
 					lname: {
 						validators: {
 							notEmpty: {
