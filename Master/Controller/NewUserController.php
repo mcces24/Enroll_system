@@ -260,10 +260,7 @@ class NewUserController extends NewUser {
                 return $responseData;
             } 
 
-            if (!empty($new_password) && !empty($otp_code_verify)) {
-
-                echo $new_password;
-                echo $confirm_password;
+            if (!empty($new_password) && !empty($confirm_password) && !empty($otp_code_verify)) {
 
                 if ($new_password != $confirm_password) {
                     $responseData['status'] = 'failed';
