@@ -189,8 +189,8 @@ function register($data)
             // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;  // Enable TLS encryption
             // $mail->Port = 587;
 
-            $senderName = 'Verify Account - Madridejos Community College';
-            $senderEmail = 'no-reply@madridejoscommunitycollege.com';
+            // $senderName = 'Verify Account - Madridejos Community College';
+            // $senderEmail = 'no-reply@madridejoscommunitycollege.com';
             
             $mail->setFrom($senderEmail, $senderName);
             $mail->addAddress($email);
