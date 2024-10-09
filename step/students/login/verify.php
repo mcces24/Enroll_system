@@ -128,20 +128,14 @@ if (isStudentLogin()) {
                             $('.alert').prop('style', `display: block;`);
                             $('.btn').text('Sending...');
                             $("#username").prop('disabled', true);
-                            formData.sendingOtp = true;
-                            formData.sendingEmail = formData.username;
-                            formData.username = null;
                             sendAjaxRequest(formData);
                             return true;
                         } else {
-                            $("#otp_code").hide().val('');
-                            $("#new_password").hide().val('');
-                            $("#confirm_password").hide().val('');
                             $('.alert').html(response.message);
                             $('.alert').prop('style', `display: block;`);
                             $('.alert').addClass(`alert-${response.type}`);
                             $('.btn').prop('disabled', false);
-                            $('.btn').text('Forgot');
+                            $('.btn').text('Verify');
                         }
                     }
                     
