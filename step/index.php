@@ -37,8 +37,10 @@ if (isStudentLogin()) {
 
     .modal-content {
         background-color: #fefefe;
-        margin: auto auto; /* 15% from the top and centered */
+        margin: auto; 
+        top: calc(50% - 100px);
         padding: 20px;
+        position: relative;
         border: 1px solid #888;
         width: 300px; /* Width of the modal */
         text-align: center;
