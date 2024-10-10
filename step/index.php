@@ -33,6 +33,7 @@ if (isStudentLogin()) {
         width: 100%; /* Full width */
         height: 100%; /* Full height */
         background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        border-radius: 20px;
     }
 
     .modal-content {
