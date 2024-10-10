@@ -136,6 +136,7 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                 var id = $(this).attr("id");
                 var action = $(this).data("action");
                 var data = [];
+                console.log(action);
                 if (action == 'single') {
                     data.push({
                         email: $(this).data("email"),
