@@ -162,7 +162,7 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                     data.forEach((value, index) => {
                         
                         var id = value.id
-                        console.log(value);
+                        console.log(id);
 
                         $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
                         $('#' + id).addClass('btn-danger');
