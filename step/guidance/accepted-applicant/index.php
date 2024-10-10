@@ -170,7 +170,7 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                             },
                             beforeSend: function() {
 
-                                if (action != 'single') {
+                                if (action != 'single' && send == 0) {
                                     $('#bulk_send').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Sending...');
                                     $('#bulk_send').addClass('btn-info');
                                     $('#bulk_send').prop('disabled', true);
