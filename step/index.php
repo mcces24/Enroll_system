@@ -63,6 +63,10 @@ if (isStudentLogin()) {
         background-color: #45a049;
     }
 
+    .hide {
+        display: none;
+    }
+
   </style>
 </head>
 
@@ -83,7 +87,7 @@ if (isStudentLogin()) {
     <img class="logo" src="../icon.png" alt="">
     <h2>Madridejos Community College</h2>
     <div class="radio-buttons">
-      <label class="custom-radio">
+      <label class="custom-radio students hide">
         <a href="students/?id=0">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -94,7 +98,7 @@ if (isStudentLogin()) {
           </span>
         </a>
       </label>
-      <label class="custom-radio">
+      <label class="custom-radio guidance hide">
         <a href="guidance/home/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -105,7 +109,7 @@ if (isStudentLogin()) {
           </span>
         </a>
       </label>
-      <label class="custom-radio">
+      <label class="custom-radio bsit hide">
         <a href="bsit/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -117,7 +121,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio bsba hide">
         <a href="bsba-fm/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -129,7 +133,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio bshm hide">
         <a href="bshm/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -141,7 +145,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio beed hide">
         <a href="beed/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -153,7 +157,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio bsed hide">
         <a href="bsed/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -165,7 +169,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio registrar hide">
         <a href="registrar/home/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -177,7 +181,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio id hide">
         <a href="id/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -189,7 +193,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio cor hide">
         <a href="cor/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -201,7 +205,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio admin hide">
         <a href="../admin/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -213,7 +217,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio">
+      <label class="custom-radio home hide">
         <a href="../">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -237,7 +241,7 @@ if (isStudentLogin()) {
     })
 
     document.getElementById('students').onclick = function() {
-        alert('Students selected!');
+        document.getElementById('students').style.display = 'block';
     };
 
     document.getElementById('staff').onclick = function() {
