@@ -241,7 +241,7 @@ if (isStudentLogin()) {
     })
 
     document.getElementById('students').onclick = function() {
-        document.getElementById('students').style.display = 'block';
+        document.getElementById('students').classList.remove('hide');
         document.getElementById('myModal').style.display = 'none';
     };
 
