@@ -412,13 +412,13 @@ function sendAdmission($data)
             $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
 
             if ($mail->send()) {
-                $response = sendAdmissionFunction($value);
-                $responseJson = json_decode($response, true);
+                // $response = sendAdmissionFunction($value);
+                // $responseJson = json_decode($response, true);
 
-                if ($responseJson['status'] != 'success') {
-                    $response['message'] = 'Internal error occured';
-                    $response['type'] = 'danger';
-                } 
+                // if ($responseJson['status'] != 'success') {
+                //     $response['message'] = 'Internal error occured';
+                //     $response['type'] = 'danger';
+                // } 
             } else {
                 $response['message'] = 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
                 $response['type'] = 'danger';
