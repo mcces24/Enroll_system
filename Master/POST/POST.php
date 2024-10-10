@@ -319,7 +319,7 @@ function sendGuidanceForm($data)
             $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
 
             if ($mail->send()) {
-                $response = sendGuidanceFormFunction($value);
+                $response = sendGuidanceFormFunction($data);
                 $responseJson = json_decode($response, true);
 
                 if ($responseJson['status'] != 'success') {
