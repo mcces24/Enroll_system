@@ -169,6 +169,13 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                                 data: value
                             },
                             beforeSend: function() {
+
+                                if (action != 'single') {
+                                    $('#bulk_send').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Sending...');
+                                    $('#bulk_send').addClass('btn-info');
+                                    $('#bulk_send').prop('disabled', true);
+                                }
+
                                 var id = value.id
                                 $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
                                 $('#id-' + id).addClass('btn-info');
@@ -204,17 +211,11 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                                 }
                                 $('#id-' + id).attr('disabled', false);
 
-                                if (action != 'single') {
-                                    $('#bulk_send').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Sending...');
+                                if (send == totalData) {
+                                    $('#bulk_send').text('Send Selected');
                                     $('#bulk_send').addClass('btn-info');
-                                    $('#bulk_send').prop('disabled', true);
-
-                                    if (send == totalData) {
-                                        $('#bulk_send').text('Send Selected');
-                                        $('#bulk_send').addClass('btn-info');
-                                        $('#bulk_send').removeClass('btn-success');
-                                        $('#bulk_send').prop('disabled', false);
-                                    }
+                                    $('#bulk_send').removeClass('btn-success');
+                                    $('#bulk_send').prop('disabled', false);
                                 }
                             },
                             error: function(xhr, status, error) {
