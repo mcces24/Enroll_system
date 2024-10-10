@@ -22,8 +22,6 @@ if (isStudentLogin()) {
   <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 0; /* Remove default margin */
-        height: 100vh; /* Full height for body */
     }
 
     .modal {
@@ -35,17 +33,13 @@ if (isStudentLogin()) {
         width: 100%; /* Full width */
         height: 100%; /* Full height */
         background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-        display: flex; /* Use flexbox */
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
     }
 
     .modal-content {
         background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
         padding: 20px;
         border: 1px solid #888;
-        border-radius: 8px; /* Rounded corners */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Material shadow effect */
         width: 300px; /* Width of the modal */
         text-align: center;
     }
@@ -54,15 +48,13 @@ if (isStudentLogin()) {
         margin: 10px;
         padding: 10px 20px;
         border: none;
-        border-radius: 4px; /* Rounded corners for buttons */
-        background-color: #4CAF50; /* Primary button color */
+        background-color: #4CAF50;
         color: white;
         cursor: pointer;
-        transition: background-color 0.3s; /* Smooth transition */
     }
 
     button:hover {
-        background-color: #45a049; /* Darker shade on hover */
+        background-color: #45a049;
     }
 
   </style>
@@ -80,7 +72,7 @@ if (isStudentLogin()) {
         <button id="students">Students</button>
         <button id="staff">Staff</button>
     </div>
-  </div>
+</div>
   <div class="main-container">
     <img class="logo" src="../icon.png" alt="">
     <h2>Madridejos Community College</h2>
