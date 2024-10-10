@@ -143,12 +143,10 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                 }
                 console.log(data);
                 if (data.length > 0) {
-                    
+                    var totalData = data.length;
+                    var send = 0;
+
                     data.forEach((value, index) => {
-                        var id = value.id
-                        $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Accepting...');
-                        $('#id-' + id).addClass('btn-info');
-                        $('#id-' + id).prop('disabled', true);
                         $.ajax({
                             dataType: 'json',
                             url: BASE_PATH + '/Master/POST/POST.php',
@@ -158,13 +156,20 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                                 data: value
                             },
                             beforeSend: function() {
+
+                                if (action != 'single' && send == 0) {
+                                    $('#bulk_send').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Accepting...');
+                                    $('#bulk_send').addClass('btn-info');
+                                    $('#bulk_send').prop('disabled', true);
+                                }
+
                                 var id = value.id
                                 $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Accepting...');
                                 $('#id-' + id).addClass('btn-info');
                                 $('#id-' + id).prop('disabled', true);
                             },
                             success: function(data) {
-
+                                send++;
                                 var response = JSON.parse(data);
                                 var id = response.id;
                                 var message = response.message;
@@ -192,16 +197,11 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                                 }
                                 $('#id-' + id).attr('disabled', false);
 
-                                if (action != 'single') {
-                                    $('#' + id).text('Selected Accepted');
-                                    $('#' + id).addClass('btn-success');
-                                    $('#' + id).removeClass('btn-info');
-                                    setTimeout(function() {
-                                        $('#' + id).text('Accept Selected');
-                                        $('#' + id).addClass('btn-info');
-                                        $('#' + id).removeClass('btn-success');
-                                        $('#' + id).prop('disabled', false);
-                                    }, 2000);
+                                if (send == totalData) {
+                                    $('#bulk_send').text('Send Selected');
+                                    $('#bulk_send').addClass('btn-info');
+                                    $('#bulk_send').removeClass('btn-success');
+                                    $('#bulk_send').prop('disabled', false);
                                 }
                             }, 
                             error: function(xhr, status, error) {
