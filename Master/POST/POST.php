@@ -248,17 +248,17 @@ function guidanceLogout()
 
 function acceptNewApplicant($data)
 {
-    foreach ($data as $key => $value) {
-        if (empty($value)) {
-            $response['message'] = "Requirments not met";
-            $response['type'] = "danger";
-            echo json_encode($response);
-            return;
-        }
-
-        $response = acceptNewApplicantFunction($value);
-        $return[] = $response;
+   
+    if (empty($data)) {
+        $response['message'] = "Requirments not met";
+        $response['type'] = "danger";
+        echo json_encode($response);
+        return;
     }
+
+    $response = acceptNewApplicantFunction($data);
+    $return = $response;
+
     header('Content-Type: application/json');
     echo json_encode($return);
 }
