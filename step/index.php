@@ -53,6 +53,8 @@ if (isStudentLogin()) {
         background-color: #4CAF50;
         color: white;
         cursor: pointer;
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     }
 
     button:hover {
