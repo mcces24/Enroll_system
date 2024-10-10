@@ -149,72 +149,71 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                         $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Accepting...');
                         $('#id-' + id).addClass('btn-info');
                         $('#id-' + id).prop('disabled', true);
-                        // $.ajax({
-                        //     dataType: 'json',
-                        //     url: BASE_PATH + '/Master/POST/POST.php',
-                        //     method: "POST",
-                        //     data: {
-                        //         type: 'acceptNewApplicant',
-                        //         data: value
-                        //     },
-                        //     beforeSend: function() {
-                        //         var id = value.id
-                        //         $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Accepting...');
-                        //         $('#id-' + id).addClass('btn-info');
-                        //         $('#id-' + id).prop('disabled', true);
-                        //     },
-                        //     success: function(data) {
-                        //         $.each(data, function(key, value) {
-                        //             var response = JSON.parse(value);
-                        //             var id = response.id;
-                        //             var message = response.message;
-                        //             var type = response.type;
-                        //             var status = response.status;
-                        //             if (status == 'success') {
-                        //                 $('#id-' + id).text(message);
-                        //                 $('#id-' + id).removeClass('btn-danger');
-                        //                 $('#id-' + id).removeClass('btn-info');
-                        //                 $('#id-' + id).addClass('btn-' + type);
-                        //                 $('#table-row-' + id).fadeOut(2000, function() {
-                        //                     $(this).html('');
-                        //                 });
-                        //             } else if (status == 'failed') {
-                        //                 $('#id-' + id).text(message);
-                        //                 $('#id-' + id).removeClass('btn-danger');
-                        //                 $('#id-' + id).removeClass('btn-info');
-                        //                 $('#id-' + id).removeClass('btn-success');
-                        //                 $('#id-' + id).addClass('btn-' + type);
-                        //             } else {
-                        //                 $('#id-' + id).text('Cannot Accept Request');
-                        //                 $('#id-' + id).removeClass('btn-danger');
-                        //                 $('#id-' + id).removeClass('btn-info');
-                        //                 $('#id-' + id).addClass('btn-info');
-                        //             }
-                        //             $('#id-' + id).attr('disabled', false);
-                        //         });
+                        $.ajax({
+                            dataType: 'json',
+                            url: BASE_PATH + '/Master/POST/POST.php',
+                            method: "POST",
+                            data: {
+                                type: 'acceptNewApplicant',
+                                data: value
+                            },
+                            beforeSend: function() {
+                                var id = value.id
+                                $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Accepting...');
+                                $('#id-' + id).addClass('btn-info');
+                                $('#id-' + id).prop('disabled', true);
+                            },
+                            success: function(data) {
 
-                        //         if (action != 'single') {
-                        //             $('#' + id).text('Selected Accepted');
-                        //             $('#' + id).addClass('btn-success');
-                        //             $('#' + id).removeClass('btn-info');
-                        //             setTimeout(function() {
-                        //                 $('#' + id).text('Accept Selected');
-                        //                 $('#' + id).addClass('btn-info');
-                        //                 $('#' + id).removeClass('btn-success');
-                        //                 $('#' + id).prop('disabled', false);
-                        //             }, 2000);
-                        //         }
-                        //     }, 
-                        //     error: function(xhr, status, error) {
-                        //         console.error("Error: " + error);
-                        //         console.error("Status: " + status);
-                        //         console.error("Response: " + xhr.responseText);
-                        //         $('#' + id).html("Cannot Accept Request");
-                        //         $('#' + id).removeClass('btn-info');
-                        //         $('#' + id).addClass('btn-danger');
-                        //         $('#' + id).prop('disabled', false);
-                        //     }
-                        // });
+                                var response = JSON.parse(data);
+                                var id = response.id;
+                                var message = response.message;
+                                var type = response.type;
+                                var status = response.status;
+                                if (status == 'success') {
+                                    $('#id-' + id).text(message);
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).addClass('btn-' + type);
+                                    $('#table-row-' + id).fadeOut(2000, function() {
+                                        $(this).html('');
+                                    });
+                                } else if (status == 'failed') {
+                                    $('#id-' + id).text(message);
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).removeClass('btn-success');
+                                    $('#id-' + id).addClass('btn-' + type);
+                                } else {
+                                    $('#id-' + id).text('Cannot Accept Request');
+                                    $('#id-' + id).removeClass('btn-danger');
+                                    $('#id-' + id).removeClass('btn-info');
+                                    $('#id-' + id).addClass('btn-info');
+                                }
+                                $('#id-' + id).attr('disabled', false);
+
+                                if (action != 'single') {
+                                    $('#' + id).text('Selected Accepted');
+                                    $('#' + id).addClass('btn-success');
+                                    $('#' + id).removeClass('btn-info');
+                                    setTimeout(function() {
+                                        $('#' + id).text('Accept Selected');
+                                        $('#' + id).addClass('btn-info');
+                                        $('#' + id).removeClass('btn-success');
+                                        $('#' + id).prop('disabled', false);
+                                    }, 2000);
+                                }
+                            }, 
+                            error: function(xhr, status, error) {
+                                console.error("Error: " + error);
+                                console.error("Status: " + status);
+                                console.error("Response: " + xhr.responseText);
+                                $('#' + id).html("Cannot Accept Request");
+                                $('#' + id).removeClass('btn-info');
+                                $('#' + id).addClass('btn-danger');
+                                $('#' + id).prop('disabled', false);
+                            }
+                        });
                     });
                     
                     data = [];
