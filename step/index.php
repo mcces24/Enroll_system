@@ -16,7 +16,48 @@ if (isStudentLogin()) {
   <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image" href="../icon.png">
+  <link rel="stylesheet" type="text/css" href="../loader/styles.css" />
   <title>LOGIN | Madridejos Community College</title>
+
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 300px; /* Width of the modal */
+        text-align: center;
+    }
+
+    button {
+        margin: 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -24,13 +65,14 @@ if (isStudentLogin()) {
   <div class="loader-wrapper" id="preloader">
     <span class="loader"><span class="loader-inner"></span></span>
   </div>
-  <link rel="stylesheet" type="text/css" href="../loader/styles.css" />
-  <script>
-    var loader = document.getElementById("preloader");
-    window.addEventListener("load", function() {
-      loader.style.display = "none"
-    })
-  </script>
+  
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+        <h2>Select Role</h2>
+        <button id="students">Students</button>
+        <button id="staff">Staff</button>
+    </div>
+</div>
   <div class="main-container">
     <img class="logo" src="../icon.png" alt="">
     <h2>Madridejos Community College</h2>
@@ -181,7 +223,21 @@ if (isStudentLogin()) {
     </div>
   </div>
 
+  <script>
+    var loader = document.getElementById("preloader");
+    window.addEventListener("load", function() {
+      loader.style.display = "none"
+      document.getElementById('myModal').style.display = 'block';
+    })
+
+    document.getElementById('students').onclick = function() {
+        alert('Students selected!');
+    };
+
+    document.getElementById('staff').onclick = function() {
+        alert('Staff selected!');
+    };
+  </script>
 
 </body>
-
 </html>
