@@ -271,11 +271,13 @@ function sendGuidanceForm($data)
         echo json_encode($response);
         return;
     }
-    $email = $data['email'];
-    $applicant_id = $data['applicant_id'];
-    $name = $data['name'];
-
+   
     if (!empty($data)) {
+        print_r($data);
+        $email = $data['email'];
+        $applicant_id = $data['applicant_id'];
+        $name = $data['name'];
+
         $system = isset($responseJson['system'][0]) ? $responseJson['system'][0] : [];
         $mail = new PHPMailer(true);
         try {
