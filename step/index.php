@@ -253,6 +253,7 @@ if (isStudentLogin()) {
     };
 
     document.getElementById('staff_btn').onclick = function() {
+        document.getElementById('myModal').style.display = 'none';
         radioElements.forEach(element => {
         if (element.id !== 'home' && element.id !== 'students') {
                 element.classList.remove('hide');
