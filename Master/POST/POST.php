@@ -273,7 +273,6 @@ function sendGuidanceForm($data)
     }
    
     if (!empty($data)) {
-        print_r($data);
         $email = $data['email'];
         $applicant_id = $data['applicant_id'];
         $name = $data['name'];
