@@ -79,15 +79,15 @@ if (isStudentLogin()) {
   <div id="myModal" class="modal">
     <div class="modal-content">
         <h2>Select Role</h2>
-        <button id="students">Students</button>
-        <button id="staff">Staff</button>
+        <button id="students_btn">Students</button>
+        <button id="staff_btn">Staff</button>
     </div>
 </div>
   <div class="main-container">
     <img class="logo" src="../icon.png" alt="">
     <h2>Madridejos Community College</h2>
     <div class="radio-buttons">
-      <label class="custom-radio students hide">
+      <label class="custom-radio students hide" id="students">
         <a href="students/?id=0">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -98,7 +98,7 @@ if (isStudentLogin()) {
           </span>
         </a>
       </label>
-      <label class="custom-radio guidance hide">
+      <label class="custom-radio guidance hide" id="guidance">
         <a href="guidance/home/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -109,7 +109,7 @@ if (isStudentLogin()) {
           </span>
         </a>
       </label>
-      <label class="custom-radio bsit hide">
+      <label class="custom-radio bsit hide" id="bsit">
         <a href="bsit/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -121,7 +121,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio bsba hide">
+      <label class="custom-radio bsba hide" id="bsba">
         <a href="bsba-fm/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -133,7 +133,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio bshm hide">
+      <label class="custom-radio bshm hide" id="bshm">
         <a href="bshm/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -145,7 +145,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio beed hide">
+      <label class="custom-radio beed hide" id="beed">
         <a href="beed/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -157,7 +157,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio bsed hide">
+      <label class="custom-radio bsed hide" id="bsed">
         <a href="bsed/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -169,7 +169,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio registrar hide">
+      <label class="custom-radio registrar hide" id="registrar">
         <a href="registrar/home/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -181,7 +181,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio id hide">
+      <label class="custom-radio id hide" id="id">
         <a href="id/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -193,7 +193,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio cor hide">
+      <label class="custom-radio cor hide" id="cor">
         <a href="cor/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -205,7 +205,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio admin hide">
+      <label class="custom-radio admin hide" id="admin">
         <a href="../admin/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -217,7 +217,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio home hide">
+      <label class="custom-radio home hide" id="home">
         <a href="../">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -240,12 +240,13 @@ if (isStudentLogin()) {
       document.getElementById('myModal').style.display = 'block';
     })
 
-    document.getElementById('students').onclick = function() {
+    document.getElementById('students_btn').onclick = function() {
         document.getElementById('students').classList.remove('hide');
+        document.getElementById('home').classList.remove('hide');
         document.getElementById('myModal').style.display = 'none';
     };
 
-    document.getElementById('staff').onclick = function() {
+    document.getElementById('staff_btn').onclick = function() {
         alert('Staff selected!');
     };
   </script>
