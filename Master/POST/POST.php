@@ -412,7 +412,7 @@ function sendAdmission($data)
             $mail->Body = str_replace('<?= $name ?>', $name, $mail->Body);
 
             if ($mail->send()) {
-                $response = sendAdmissionFunction($value);
+                $response = sendAdmissionFunction($data);
                 $responseJson = json_decode($response, true);
 
                 if ($responseJson['status'] != 'success') {
