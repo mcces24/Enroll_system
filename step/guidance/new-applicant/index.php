@@ -158,9 +158,9 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                             beforeSend: function() {
 
                                 if (action != 'single' && send == 0) {
-                                    $('#bulk_send').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Accepting...');
-                                    $('#bulk_send').addClass('btn-info');
-                                    $('#bulk_send').prop('disabled', true);
+                                    $('#accept_button').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Accepting...');
+                                    $('#accept_button').addClass('btn-info');
+                                    $('#accept_button').prop('disabled', true);
                                 }
 
                                 var id = value.id
@@ -198,10 +198,10 @@ $newApplicatTableData = isset($data['newApplicantData']) ? $data['newApplicantDa
                                 $('#id-' + id).attr('disabled', false);
 
                                 if (send == totalData) {
-                                    $('#bulk_send').text('Send Selected');
-                                    $('#bulk_send').addClass('btn-info');
-                                    $('#bulk_send').removeClass('btn-success');
-                                    $('#bulk_send').prop('disabled', false);
+                                    $('#accept_button').text('Accept Selected');
+                                    $('#accept_button').addClass('btn-info');
+                                    $('#accept_button').removeClass('btn-success');
+                                    $('#accept_button').prop('disabled', false);
                                 }
                             }, 
                             error: function(xhr, status, error) {
