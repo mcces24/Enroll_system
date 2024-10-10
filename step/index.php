@@ -24,9 +24,6 @@ if (isStudentLogin()) {
         font-family: Arial, sans-serif;
         margin: 0; /* Remove default margin */
         height: 100vh; /* Full height for body */
-        display: flex; /* Flexbox for centering */
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
     }
 
     .modal {
@@ -38,6 +35,9 @@ if (isStudentLogin()) {
         width: 100%; /* Full width */
         height: 100%; /* Full height */
         background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        display: flex; /* Use flexbox */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
     }
 
     .modal-content {
@@ -48,7 +48,6 @@ if (isStudentLogin()) {
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Material shadow effect */
         width: 300px; /* Width of the modal */
         text-align: center;
-        margin: auto; /* Center the modal content */
     }
 
     button {
@@ -81,7 +80,7 @@ if (isStudentLogin()) {
         <button id="students">Students</button>
         <button id="staff">Staff</button>
     </div>
-</div>
+  </div>
   <div class="main-container">
     <img class="logo" src="../icon.png" alt="">
     <h2>Madridejos Community College</h2>
