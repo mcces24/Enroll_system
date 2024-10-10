@@ -242,6 +242,7 @@ if (isStudentLogin()) {
 
     document.getElementById('students').onclick = function() {
         document.getElementById('students').style.display = 'block';
+        document.getElementById('myModal').style.display = 'none';
     };
 
     document.getElementById('staff').onclick = function() {
