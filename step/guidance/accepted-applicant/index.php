@@ -157,7 +157,8 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                 }
                 console.log(data);
                 if (data.length > 0) {
-                    console.log("Data more than 1");
+                    var totalData = data.length;
+                    var send = 0;
                     data.forEach((value, index) => {
                         $.ajax({
                             dataType: 'json',
@@ -174,7 +175,7 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                                 $('#id-' + id).prop('disabled', true);
                             },
                             success: function(data) {
-
+                                send++;
                                 var response = JSON.parse(data);
                                 console.log(response);
                                 var id = response.id
@@ -204,16 +205,16 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                                 $('#id-' + id).attr('disabled', false);
 
                                 if (action != 'single') {
-                                    $('#' + id).text('Selected Sent');
-                                    $('#' + id).addClass('btn-success');
-                                    $('#' + id).removeClass('btn-info');
-                                    $('#' + id).removeClass('btn-danger');
-                                    setTimeout(function() {
-                                        $('#' + id).text('Send Selected');
-                                        $('#' + id).addClass('btn-info');
-                                        $('#' + id).removeClass('btn-success');
-                                        $('#' + id).prop('disabled', false);
-                                    }, 2000);
+                                    $('#bulk_send').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Sending...');
+                                    $('#bulk_send').addClass('btn-info');
+                                    $('#bulk_send').prop('disabled', true);
+
+                                    if (send == totalData) {
+                                        $('#bulk_send').text('Send Selected');
+                                        $('#bulk_send').addClass('btn-info');
+                                        $('#bulk_send').removeClass('btn-success');
+                                        $('#bulk_send').prop('disabled', false);
+                                    }
                                 }
                             },
                             error: function(xhr, status, error) {
