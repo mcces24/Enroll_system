@@ -963,22 +963,6 @@ $successful_result_student = $conn->query($successful_sql_student);
     </div>
 </div>
 
-<script>
-    if ('clearSiteData' in navigator) {
-        window.onload = function() {
-            navigator.clearSiteData().then(() => {
-                console.log("Site data cleared!");
-                alert('test1');
-            }).catch(err => {
-                alert('test2');
-                console.error("Failed to clear site data:", err);
-            });
-        };
-    } else {
-        alert('test');
-    }
-</script>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
