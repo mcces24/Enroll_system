@@ -960,6 +960,18 @@ $successful_result_student = $conn->query($successful_sql_student);
     </div>
 </div>
 
+    <script>
+    window.onload = function() {
+        if ('caches' in window) {
+            caches.keys().then(function(names) {
+                for (let name of names) {
+                    caches.delete(name);
+                }
+            });
+        }
+    };
+    </script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
