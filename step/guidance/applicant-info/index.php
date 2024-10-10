@@ -186,7 +186,7 @@ $applicantAdmissionData = isset($data['applicantAdmissionData']) ? $data['applic
                                 $('#id-' + id).prop('disabled', true);
                             },
                             success: function(data) {
-
+                                send++;
                                 var response = JSON.parse(data);
                                 console.log(response);
                                 var id = response.id
