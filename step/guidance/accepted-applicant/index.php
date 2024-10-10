@@ -167,7 +167,7 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                             method: "POST",
                             data: {
                                 type: 'sendGuidanceForm',
-                                data: data
+                                data: value
                             },
                             beforeSend: function() {
                                 $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
