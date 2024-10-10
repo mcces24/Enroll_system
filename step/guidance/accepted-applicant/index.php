@@ -160,8 +160,13 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                 if (data.length > 0) {
                     console.log("Data more than 1");
                     data.forEach((value, index) => {
+                        
                         var id = value.id
                         console.log(value);
+
+                        $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
+                        $('#' + id).addClass('btn-info');
+                        $('#' + id).prop('disabled', true);
                         // $.ajax({
                         //     dataType: 'json',
                         //     url: BASE_PATH + '/Master/POST/POST.php',
