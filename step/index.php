@@ -234,12 +234,11 @@ if (isStudentLogin()) {
   </div>
 
   <script>
+    const radioElements = document.querySelectorAll('.custom-radio');
     var loader = document.getElementById("preloader");
     window.addEventListener("load", function() {
       loader.style.display = "none"
       document.getElementById('myModal').style.display = 'block';
-
-      const radioElements = document.querySelectorAll('.custom-radio');
 
       // Loop through the NodeList and add the 'hide' class
       radioElements.forEach(element => {
@@ -254,7 +253,11 @@ if (isStudentLogin()) {
     };
 
     document.getElementById('staff_btn').onclick = function() {
-        alert('Staff selected!');
+        radioElements.forEach(element => {
+        if (element.id !== 'home' && element.id !== 'students') {
+                element.classList.remove('hide');
+            }
+        });
     };
   </script>
 
