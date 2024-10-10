@@ -161,29 +161,33 @@ $applicantAdmissionData = isset($data['applicantAdmissionData']) ? $data['applic
                 }
                 console.log(data);
                 if (data.length > 0) {
-                    console.log(data);
-                    $.ajax({
-                        dataType: 'json',
-                        url: BASE_PATH + '/Master/POST/POST.php',
-                        method: "POST",
-                        data: {
-                            type: 'sendAdmission',
-                            data: data
-                        },
-                        beforeSend: function() {
-                            $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
-                            $('#' + id).addClass('btn-info');
-                            $('#' + id).prop('disabled', true);
-                            $.each(data, function(key, value) {
+                    var totalData = data.length;
+                    var send = 0;
+                    data.forEach((value, index) => {
+                        $.ajax({
+                            dataType: 'json',
+                            url: BASE_PATH + '/Master/POST/POST.php',
+                            method: "POST",
+                            data: {
+                                type: 'sendAdmission',
+                                data: value
+                            },
+                            beforeSend: function() {
+
+                                if (action != 'single' && send == 0) {
+                                    $('#bulk_send').html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Bulk Sending...');
+                                    $('#bulk_send').addClass('btn-info');
+                                    $('#bulk_send').prop('disabled', true);
+                                }
+
                                 var id = value.id
                                 $('#id-' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
                                 $('#id-' + id).addClass('btn-info');
                                 $('#id-' + id).prop('disabled', true);
-                            });
-                        },
-                        success: function(data) {
-                            $.each(data, function(key, value) {
-                                var response = JSON.parse(value);
+                            },
+                            success: function(data) {
+
+                                var response = JSON.parse(data);
                                 console.log(response);
                                 var id = response.id
                                 var message = response.message;
@@ -210,29 +214,24 @@ $applicantAdmissionData = isset($data['applicantAdmissionData']) ? $data['applic
                                     $('#id-' + id).addClass('btn-info');
                                 }
                                 $('#id-' + id).attr('disabled', false);
-                            });
-                            if (action != 'single') {
-                                $('#' + id).text('Selected Sent');
-                                $('#' + id).addClass('btn-success');
-                                $('#' + id).removeClass('btn-info');
-                                $('#' + id).removeClass('btn-danger');
-                                setTimeout(function() {
-                                    $('#' + id).text('Send Selected');
-                                    $('#' + id).addClass('btn-info');
-                                    $('#' + id).removeClass('btn-success');
-                                    $('#' + id).prop('disabled', false);
-                                }, 2000);
+                                
+                                if (send == totalData) {
+                                    $('#bulk_send').text('Send Selected');
+                                    $('#bulk_send').addClass('btn-info');
+                                    $('#bulk_send').removeClass('btn-success');
+                                    $('#bulk_send').prop('disabled', false);
+                                }
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Error: " + error);
+                                console.error("Status: " + status);
+                                console.error("Response: " + xhr.responseText);
+                                $('#id-' + id).html("Cannot Send Email");
+                                $('#id-' + id).removeClass('btn-info');
+                                $('#id-' + id).addClass('btn-danger');
+                                $('#id-' + id).prop('disabled', false);
                             }
-                        },
-                        error: function(xhr, status, error) {
-                            console.error("Error: " + error);
-                            console.error("Status: " + status);
-                            console.error("Response: " + xhr.responseText);
-                            $('#' + id).html("Cannot Send Email");
-                            $('#' + id).removeClass('btn-info');
-                            $('#' + id).addClass('btn-danger');
-                            $('#' + id).prop('disabled', false);
-                        }
+                        });
                     });
                 } else {
                     alert("Please Select atleast one checkbox");
