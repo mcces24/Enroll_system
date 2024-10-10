@@ -639,8 +639,7 @@ class GuidanceController extends Student {
 
     public function sendAdmissionController($data) {
         global $db;
-        // $systemData = $this->getSystemData();
-        $systemData = [];
+        $systemData = $this->getSystemData();
         try {
 
             $id = $data['id'];
