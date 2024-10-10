@@ -164,8 +164,8 @@ $acceptedApplicantData = isset($data['acceptedApplicantData']) ? $data['accepted
                         var id = value.id
                         console.log(value);
 
-                        $('#' + id).html('Test');
-                        $('#' + id).addClass('btn-info');
+                        $('#' + id).html('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...');
+                        $('#' + id).addClass('btn-danger');
                         $('#' + id).prop('disabled', true);
                         // $.ajax({
                         //     dataType: 'json',
