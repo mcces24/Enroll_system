@@ -87,7 +87,7 @@ if (isStudentLogin()) {
     <img class="logo" src="../icon.png" alt="">
     <h2>Madridejos Community College</h2>
     <div class="radio-buttons">
-      <label class="custom-radio students hide" id="students">
+      <label class="custom-radio" id="students">
         <a href="students/?id=0">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -98,7 +98,7 @@ if (isStudentLogin()) {
           </span>
         </a>
       </label>
-      <label class="custom-radio guidance hide" id="guidance">
+      <label class="custom-radio" id="guidance">
         <a href="guidance/home/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -109,7 +109,7 @@ if (isStudentLogin()) {
           </span>
         </a>
       </label>
-      <label class="custom-radio bsit hide" id="bsit">
+      <label class="custom-radio" id="bsit">
         <a href="bsit/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -121,7 +121,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio bsba hide" id="bsba">
+      <label class="custom-radio" id="bsba">
         <a href="bsba-fm/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -133,7 +133,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio bshm hide" id="bshm">
+      <label class="custom-radio" id="bshm">
         <a href="bshm/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -145,7 +145,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio beed hide" id="beed">
+      <label class="custom-radio" id="beed">
         <a href="beed/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -157,7 +157,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio bsed hide" id="bsed">
+      <label class="custom-radio" id="bsed">
         <a href="bsed/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -169,7 +169,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio registrar hide" id="registrar">
+      <label class="custom-radio" id="registrar">
         <a href="registrar/home/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -181,7 +181,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio id hide" id="id">
+      <label class="custom-radio" id="id">
         <a href="id/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -193,7 +193,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio cor hide" id="cor">
+      <label class="custom-radio" id="cor">
         <a href="cor/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -205,7 +205,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio admin hide" id="admin">
+      <label class="custom-radio" id="admin">
         <a href="../admin/">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -217,7 +217,7 @@ if (isStudentLogin()) {
         </a>
       </label>
 
-      <label class="custom-radio home hide" id="home">
+      <label class="custom-radio" id="home">
         <a href="../">
           <input type="radio" name="radio" />
           <span class="radio-btn"><i class="las la-check"></i>
@@ -238,6 +238,13 @@ if (isStudentLogin()) {
     window.addEventListener("load", function() {
       loader.style.display = "none"
       document.getElementById('myModal').style.display = 'block';
+
+      const radioElements = document.querySelectorAll('.custom-radio');
+
+      // Loop through the NodeList and add the 'hide' class
+      radioElements.forEach(element => {
+          element.classList.add('hide');
+      });
     })
 
     document.getElementById('students_btn').onclick = function() {
