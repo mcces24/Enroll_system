@@ -33,15 +33,18 @@ if (isStudentLogin()) {
         width: 100%; /* Full width */
         height: 100%; /* Full height */
         background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+        display: flex; /* Center the modal content */
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
     }
 
     .modal-content {
-        background-color: #fefefe;
-        margin: 15% auto; /* 15% from the top and centered */
-        padding: 20px;
-        border: 1px solid #888;
-        width: 300px; /* Width of the modal */
-        text-align: center;
+        background-color: white; /* Background color for the modal */
+        border-radius: 8px; /* Rounded corners */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+        padding: 20px; /* Spacing inside the modal */
+        max-width: 500px; /* Maximum width */
+        width: 90%; /* Responsive width */
     }
 
     button {
