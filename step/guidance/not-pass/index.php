@@ -172,7 +172,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
 
                                                 $academic = "$start-$end";
 
-                                                $query1 = "SELECT * FROM students INNER JOIN admission_score a on students.applicant_id = a.applicant_id WHERE admission_score < 25 AND academic = '$academic' AND semester_id = '$semester'";
+                                                $query1 = "SELECT * FROM students INNER JOIN admission_score a on students.applicant_id = a.applicant_id WHERE a.admission_score < 25 AND academic = '$academic' AND semester_id = '$semester'";
 
                                                 $query_run1 = mysqli_query($conn, $query1);
                                                 $count = 0;
