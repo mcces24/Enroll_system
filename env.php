@@ -2,10 +2,9 @@
 // Check if the file is loaded (e.g., index.php)
 if (basename($_SERVER['PHP_SELF']) != 'env.php') {
     // Redirect to index.php if not already there
-    header("Location: " . BASE_PATH_URL . "/index.php");
+    header("Location: /");
     exit();  // Stop further execution of the script
 }
-
 // Define the base directory path
 define('BASE_PATH', dirname(__FILE__));
 define('BASE_PATH_URL', 'https://madridejoscommunitycollege.com');
