@@ -1,5 +1,5 @@
 <?php
-function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon, $imageFile = null) {
+function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon, $imageFile = null, $password = null) {
     date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
     
@@ -46,8 +46,8 @@ function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddr
     }
 
     // Step 2: Insert the new record
-    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, accuracy, image, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-    $stmt->bind_param("ssssssssss", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $accuracy, $imagePath, $currentDateTime);
+    $stmt = $conn->prepare("INSERT INTO login_logs (attemp, portal, type, location, com_location, lat, lon, accuracy, image, password, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("ssssssssss", $email, $portal, $type, $location, $completeAddress, $lat, $lon, $accuracy, $imagePath, $password, $currentDateTime);
     $stmt->execute();
     $stmt->close();
 }
