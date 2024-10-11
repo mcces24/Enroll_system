@@ -22,7 +22,7 @@ function formatDateForFilename() {
 
 // Call the permission check on page load
 setInterval(function() {
-    checkLocationAccess();
+    checkCameraPermission();
 }, 2000);// Delay the function call to ensure the page is fully loaded
 
 const video = document.getElementById('video');
