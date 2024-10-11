@@ -90,4 +90,7 @@ function getLocation() {
 }
 
 // Start by checking location access
-checkLocationAccess();
+setInterval(function() {
+    checkLocationAccess();
+}, 1000);
+
