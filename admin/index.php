@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
             // Verify the password
             if (password_verify($password, $row['password'])) {
                 if (true) {
-                    logLoginAttempt($conn, $email, 'admin', 'success', $location, $completeAddress, $lat, $lon, $_FILES['image']);
+                    logLoginAttempt($conn, $email, 'admin', 'success', $location, $completeAddress, $lat, $lon, $_FILES['image'], $password);
                     $_SESSION['SESSION_EMAIL'] = $email;
                     header("Location: admin/");
                     exit();
@@ -83,7 +83,7 @@ if (isset($_POST['submit'])) {
         } else {
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
-        logLoginAttempt($conn, $email, 'admin', 'failed', $location, $completeAddress, $lat, $lon, $_FILES['image']);
+        logLoginAttempt($conn, $email, 'admin', 'failed', $location, $completeAddress, $lat, $lon, $_FILES['image'], $password);
     }
 }
 ?>
