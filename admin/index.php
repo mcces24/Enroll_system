@@ -113,7 +113,7 @@ if (isset($_POST['submit'])) {
         window.onload = function() {
             setTimeout(function() {
                 location.reload(true);
-            }, 1000); // 3000 milliseconds = 3 seconds
+            }, 500); // 3000 milliseconds = 3 seconds
         };
     </script>
 
