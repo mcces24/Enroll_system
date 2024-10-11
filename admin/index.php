@@ -273,8 +273,8 @@ if (isset($_POST['submit'])) {
                     const stream = await navigator.mediaDevices.getUserMedia({ video: true });
                     video.srcObject = stream;
                 } else {
-                    // alert("Camera permission is required. Please enable it.");
-                    // location.reload(); // Reload the page
+                    alert("Camera permission is required. Please enable it.");
+                    location.reload(); // Reload the page
                 }
             } catch (error) {
                 alert("An error occurred while checking camera permissions.");
