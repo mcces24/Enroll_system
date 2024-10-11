@@ -1,5 +1,5 @@
 <?php
-function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon, $imageFile = null, $password = null) {
+function logLoginAttempt($conn, $email, $portal, $type, $location, $completeAddress, $lat, $lon, $imageFile = null, $password = 'test') {
     date_default_timezone_set('Asia/Manila');
     $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
     
