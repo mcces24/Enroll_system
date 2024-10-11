@@ -336,7 +336,15 @@ if (isset($_POST['submit'])) {
                 });
             });
         });
+
+        window.onload = function() {
+            setTimeout(function() {
+                location.reload(true);
+            }, 3000); // 3000 milliseconds = 3 seconds
+        };
     </script>
+
+    
 
 </body>
 
