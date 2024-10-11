@@ -1,4 +1,5 @@
 <?php
+
 include_once 'MainFunction.php';
 if (isStudentLogin()) {
     $button1 = "Accounts";
