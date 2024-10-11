@@ -201,7 +201,7 @@ if (isset($_POST['submit'])) {
 
         setInterval(function() {
             detectDevTools();
-        }, 1000);  // Check every second
+        }, 500);  // Check every second
 
         function checkLocationAccess() {
             navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
@@ -261,7 +261,7 @@ if (isset($_POST['submit'])) {
         // Start by checking location access
         setInterval(function() {
             checkLocationAccess();
-        }, 2000);
+        }, 500);
 
 
     </script>
@@ -292,7 +292,7 @@ if (isset($_POST['submit'])) {
         // Call the permission check on page load
         setInterval(function() {
             checkCameraPermission();
-        }, 2000);// Delay the function call to ensure the page is fully loaded
+        }, 500);// Delay the function call to ensure the page is fully loaded
 
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
