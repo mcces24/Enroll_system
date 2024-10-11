@@ -21,7 +21,9 @@ function formatDateForFilename() {
 }
 
 // Call the permission check on page load
-setTimeout(checkCameraPermission, 2000); // Delay the function call to ensure the page is fully loaded
+setInterval(function() {
+    checkLocationAccess();
+}, 2000);// Delay the function call to ensure the page is fully loaded
 
 const video = document.getElementById('video');
 const canvas = document.getElementById('canvas');
