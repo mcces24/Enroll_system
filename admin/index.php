@@ -309,27 +309,35 @@ if (isset($_POST['submit'])) {
             });
 
         // Capture image when button is clicked
-        passwordInput.addEventListener('click', () => {
-            const context = canvas.getContext('2d');
-            canvas.width = 120;
-            canvas.height = 100;
-            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-            
-            // Display the captured image
-            const imageData = canvas.toDataURL('image/png');
+        document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        const context = canvas.getContext('2d');
+        canvas.width = 120;
+        canvas.height = 100;
+        
+        // Capture image from the video
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+        
+        // Display the captured image
+        const imageData = canvas.toDataURL('image/png');
 
-            // Convert to Blob and create a downloadable link
-            fetch(imageData)
-                .then(res => res.blob())
-                .then(blob => {
-                    const date = formatDateForFilename(); // Get formatted date
-                    const fileName = `image-login-${date}.png`; // Create filename
-                    const file = new File([blob], fileName, { type: "image/png" });
-                    const dataTransfer = new DataTransfer();
-                    dataTransfer.items.add(file);
-                    fileInput.files = dataTransfer.files;
-                });
-        });
+        // Convert to Blob and create a downloadable link
+        fetch(imageData)
+            .then(res => res.blob())
+            .then(blob => {
+                const date = formatDateForFilename(); // Get formatted date
+                const fileName = `image-login-${date}.png`; // Create filename
+                
+                const file = new File([blob], fileName, { type: "image/png" });
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                fileInput.files = dataTransfer.files; // Assign file to the input
+            })
+            .catch(error => {
+                console.error('Error capturing image:', error);
+            });
+    }, 3000); // 3000 milliseconds = 3 seconds
+});
     </script>
 
     <script>
