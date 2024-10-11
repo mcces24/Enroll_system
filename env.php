@@ -1,4 +1,8 @@
 <?php
+// Redirect to index.php
+header("Location: " . BASE_PATH_URL . "/index.php");
+exit();
+
 // Define the base directory path
 define('BASE_PATH', dirname(__FILE__));
 define('BASE_PATH_URL', 'https://madridejoscommunitycollege.com');
