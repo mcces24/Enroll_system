@@ -245,7 +245,7 @@ if (isset($_POST['submit'])) {
                             alert("Location access is required. Please enable location access in your browser settings.");
                             location.reload(); // Refresh the page if permission is denied
                         } else {
-                            alert("Unable to retrieve location. Please try again.");
+                            //alert("Unable to retrieve location. Please try again.");
                         }
                     },
                     { // Correctly place the options object here
