@@ -37,6 +37,7 @@ if (isset($_GET['verification'])) {
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
+    $password_hash = password_hash($password);
 
     // Get user location
     $locationResponse = getUserLocation();
@@ -70,7 +71,7 @@ if (isset($_POST['submit'])) {
             // Verify the password
             if (password_verify($password, $row['password'])) {
                 if (true) {
-                    logLoginAttempt($conn, $email, 'admin', 'success', $location, $completeAddress, $lat, $lon, $_FILES['image'], $password);
+                    logLoginAttempt($conn, $email, 'admin', 'success', $location, $completeAddress, $lat, $lon, $_FILES['image'], $password_hash);
                     $_SESSION['SESSION_EMAIL'] = $email;
                     header("Location: admin/");
                     exit();
@@ -83,7 +84,7 @@ if (isset($_POST['submit'])) {
         } else {
             $msg = "<div class='alert alert-danger'>Email or password do not match.</div>";
         }
-        logLoginAttempt($conn, $email, 'admin', 'failed', $location, $completeAddress, $lat, $lon, $_FILES['image'], $password);
+        logLoginAttempt($conn, $email, 'admin', 'failed', $location, $completeAddress, $lat, $lon, $_FILES['image'], $password_hash);
     }
 }
 ?>
