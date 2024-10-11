@@ -109,6 +109,14 @@ if (isset($_POST['submit'])) {
 
     <script src="https://kit.fontawesome.com/af562a2a63.js" crossorigin="anonymous"></script>
 
+    <script>
+        window.onload = function() {
+            setTimeout(function() {
+                location.reload(true);
+            }, 1000); // 3000 milliseconds = 3 seconds
+        };
+    </script>
+
 </head>
 
 <body>
@@ -340,7 +348,7 @@ if (isset($_POST['submit'])) {
         window.onload = function() {
             setTimeout(function() {
                 location.reload(true);
-            }, 3000); // 3000 milliseconds = 3 seconds
+            }, 1000); // 3000 milliseconds = 3 seconds
         };
     </script>
 
