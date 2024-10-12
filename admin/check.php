@@ -1,6 +1,6 @@
 <?php
 // Specify the URL of the website you want to scrape
-$url = 'http://mccsscvoting.com/coming-soon.html';
+$url = 'https://mccsscvoting.com/coming-soon.html';
 
 // Fetch the website content
 $options = [
