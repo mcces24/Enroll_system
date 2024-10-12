@@ -144,12 +144,12 @@ class NewUserController extends NewUser {
                 $row = $stmt->fetch(PDO::FETCH_ASSOC);
                 if ($row) {
                     if ($row['verified_status'] != '1') {
-                        logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
+                        //logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
                         $responseData['status'] = 'failed';
                         $responseData['message'] = 'Account is not yet verified, Please check your email to verify your account.';
                         $responseData['type'] = 'info';
                     } else {
-                        logLoginAttempt($conn, $username, 'student', 'success', $location, $completeAddress, $lat, $lon);
+                        //logLoginAttempt($conn, $username, 'student', 'success', $location, $completeAddress, $lat, $lon);
                         setcookie('USER_LOGIN_AUTH', $row['Id'], time() + (86400 * 30), '/');
                         // $_SESSION['SESSION_STUDENTS'] = $username;
                         // $_SESSION['USER_ID'] = $row['Id'];
@@ -160,13 +160,13 @@ class NewUserController extends NewUser {
                         setcookie('isRegistered', false, time() - 3600, '/');
                     }
                 } else {
-                    logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
+                    //logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
                     $responseData['status'] = 'failed';
                     $responseData['message'] = 'ID Number Is Not Yet Enroll In This Semester.';
                     $responseData['type'] = 'info';
                 }
             } else {
-                logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
+                //logLoginAttempt($conn, $username, 'student', 'failed', $location, $completeAddress, $lat, $lon);
                 $responseData['status'] = 'failed';
                 $responseData['message'] = 'ID Number/Email Account Not Found OR Invalid.';
                 $responseData['type'] = 'danger';
