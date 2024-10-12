@@ -1,6 +1,6 @@
 <?php
 // Specify the URL of the website you want to scrape
-$url = 'https://mccsscvoting.com/sign_in.php';
+$url = 'https://madridejoscommunitycollege.com';
 
 // Fetch the website content
 $html = file_get_contents($url);
