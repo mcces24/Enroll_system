@@ -466,12 +466,11 @@
 
                                                 if (isset($_GET['search'])) {
                                                     $filtervalues = $_GET['search'];
-                                                    $query = "SELECT * FROM students INNER JOIN que q ON students.id=q.student_id INNER JOIN admission_score a ON students.applicant_id = a.applicant_id INNER JOIN admission_list b ON students.applicant_id=b.applicant_id LEFT JOIN documents c ON students.applicant_id = c.applicant_id WHERE CONCAT(students.applicant_id) LIKE '%$filtervalues%' AND (status_type = 'Applicant' OR status_type = 'Enroll') AND b.wish_course = 'BSIT'";
+                                                    $query = "SELECT *, students.applicant_id as app_id FROM students INNER JOIN que q ON students.id=q.student_id INNER JOIN admission_score a ON students.applicant_id = a.applicant_id INNER JOIN admission_list b ON students.applicant_id=b.applicant_id LEFT JOIN documents c ON students.applicant_id = c.applicant_id WHERE CONCAT(students.applicant_id) LIKE '%$filtervalues%' AND (status_type = 'Applicant' OR status_type = 'Enroll') AND b.wish_course = 'BSIT'";
                                                     $query_run = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($query_run) > 0) {
                                                         foreach ($query_run as $student) {
-                                                            print_r($student);
                                                 ?>
                                                             <style type="text/css">
                                                                 table tr th,
@@ -495,7 +494,7 @@
                                                                 </div>
                                                                 <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                                     <label class="mb-1"><span>Applicant Number</span></label>
-                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['fname'] ?></p>
+                                                                    <p style="width: 90%;" class="form-control"><?php echo $student['app_id'] ?></p>
                                                                 </div>
                                                                 <div style="float: left;" class="col-4 col-md-4 col-xl-4">
                                                                     <label class="mb-1"><span>gender</span></label>
