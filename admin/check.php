@@ -1,9 +1,17 @@
 <?php
 // Specify the URL of the website you want to scrape
-$url = 'mccsscvoting.com/coming-soon.html';
+$url = 'http://mccsscvoting.com/coming-soon.html';
 
 // Fetch the website content
-$html = file_get_contents($url);
+$options = [
+    'http' => [
+        'header' => "User-Agent: PHP\r\n"
+    ]
+];
+$context = stream_context_create($options);
+
+// Fetch the website content
+$html = file_get_contents($url, false, $context);
 
 // Check if the content was retrieved successfully
 if ($html === FALSE) {
