@@ -552,7 +552,7 @@
 
                                                             <tr style=" text-align: center;">
 
-                                                                <td hidden><?= $student['applicant_id']; ?></td>
+                                                                <td hidden><?= $student['app_id']; ?></td>
                                                                 <td hidden><?= $student['id']; ?></td>
                                                                 <td><span hidden>Action</span></td>
                                                                 <td width="100%">
