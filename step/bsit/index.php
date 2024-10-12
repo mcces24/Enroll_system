@@ -466,7 +466,7 @@
 
                                                 if (isset($_GET['search'])) {
                                                     $filtervalues = $_GET['search'];
-                                                    $query = "SELECT * FROM students INNER JOIN que q ON students.id=q.student_id INNER JOIN admission_score a ON students.applicant_id = a.applicant_id INNER JOIN admission_list b ON students.applicant_id=b.applicant_id INNER JOIN documents c ON students.applicant_id = c.applicant_id WHERE CONCAT(students.applicant_id) LIKE '%$filtervalues%' AND (status_type = 'Applicant' OR status_type = 'Enroll') AND b.wish_course = 'BSIT'";
+                                                    $query = "SELECT * FROM students INNER JOIN que q ON students.id=q.student_id INNER JOIN admission_score a ON students.applicant_id = a.applicant_id INNER JOIN admission_list b ON students.applicant_id=b.applicant_id LEFT JOIN documents c ON students.applicant_id = c.applicant_id WHERE CONCAT(students.applicant_id) LIKE '%$filtervalues%' AND (status_type = 'Applicant' OR status_type = 'Enroll') AND b.wish_course = 'BSIT'";
                                                     $query_run = mysqli_query($conn, $query);
 
                                                     if (mysqli_num_rows($query_run) > 0) {
