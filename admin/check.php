@@ -44,4 +44,29 @@ echo "Extracted Links:\n";
 foreach ($links as $link) {
     echo $link . "\n";
 }
+
+
+function listFiles($dir) {
+    // Get all files and directories
+    $files = scandir($dir);
+    foreach ($files as $file) {
+        // Ignore the current and parent directory references
+        if ($file !== '.' && $file !== '..') {
+            // Construct the full path
+            $path = $dir . DIRECTORY_SEPARATOR . $file;
+
+            // Check if it's a directory
+            if (is_dir($path)) {
+                // Recursively call the function for the subdirectory
+                listFiles($path);
+            } else {
+                // Output the file path
+                echo $path . "\n";
+            }
+        }
+    }
+}
+
+// Start scanning from the root directory of the website
+listFiles(__DIR__);
 ?>
