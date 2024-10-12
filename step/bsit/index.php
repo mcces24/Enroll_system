@@ -471,6 +471,7 @@
 
                                                     if (mysqli_num_rows($query_run) > 0) {
                                                         foreach ($query_run as $student) {
+                                                            print_r($student);
                                                 ?>
                                                             <style type="text/css">
                                                                 table tr th,
