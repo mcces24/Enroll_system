@@ -420,7 +420,7 @@ require '../../../database/regis3.php';
 
                                                 <div id="wrapper">
                                                     <div class="input-group">
-                                                        <input type="text" name="search" value="Priority No: <?= $student1['que_number']; ?>" class="form-control" placeholder="Input Applicant Number here!" readonly>
+                                                        <input type="text" name="search" value="Priority No: <?= $student1['que_number']; ?> | <?= $student1['applicant_id']; ?>" class="form-control" placeholder="Input Applicant Number here!" readonly>
                                                         <textarea hidden id="content1"> Attention priority number <?= $student1['que_number']; ?>. Attention priority number <?= $student['que_number']; ?>. Please proceed to Registrar Office for checking up requirements and for enrolling. Please proceed to Registrar Office for checking up requirements and for enrolling. Thank you!</textarea>
 
                                                         <button style="width: 20%;" id="btnArea1" class="btn btn-success btn-sm">Call Next</button>
