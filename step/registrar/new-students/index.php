@@ -368,7 +368,7 @@ require '../../../database/regis3.php';
 
                                 <?php
                                 $date_created = date("Y/m/d");
-                                $query = "SELECT * FROM que WHERE status = '1' AND date_created = '$date_created' ORDER BY id asc LIMIT 1  ";
+                                $query = "SELECT * FROM que LEFT JOIN students ON students.id = que.student_id WHERE status = '1' AND date_created = '$date_created' ORDER BY id asc LIMIT 1  ";
                                 $query_run = mysqli_query($conn, $query);
 
                                 if (mysqli_num_rows($query_run) > 0) {
@@ -377,7 +377,7 @@ require '../../../database/regis3.php';
 
                                         <div id="wrapper">
                                             <div class="input-group">
-                                                <input type="text" name="search" value="Priority No: <?= $student['que_number']; ?>" class="form-control" placeholder="Input Applicant Number here!" readonly>
+                                                <input type="text" name="search" value="Priority No: <?= $student['que_number']; ?> | <?= $student['applicant_id']; ?>" class="form-control" placeholder="Input Applicant Number here!" readonly>
                                                 <textarea hidden id="content"> Attention priority number <?= $student['que_number']; ?>. Please proceed to Registrar Office for checking up requirements and for enrolling. Attention priority number <?= $student['que_number']; ?>. Please proceed to Registrar Office for checking up requirements and for enrolling. Thank you!</textarea>
 
                                                 <button style="width: 20%;" id="btnArea" class="btn btn-success btn-sm">Call Now</button>
@@ -408,7 +408,7 @@ require '../../../database/regis3.php';
                                         <?php
                                         $date_created = date("Y/m/d");
                                         $next = $student['que_number'];
-                                        $query1 = "SELECT * FROM que WHERE status = '1' AND date_created = '$date_created' AND que_number != '$next' ORDER BY id asc LIMIT 1  ";
+                                        $query1 = "SELECT * FROM que LEFT JOIN students ON students.id = que.student_id WHERE status = '1' AND date_created = '$date_created' AND que_number != '$next' ORDER BY id asc LIMIT 1  ";
                                         $query_run1 = mysqli_query($conn, $query1);
 
                                         if (mysqli_num_rows($query_run1) > 0) {
