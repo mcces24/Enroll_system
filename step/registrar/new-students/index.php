@@ -408,7 +408,7 @@ require '../../../database/regis3.php';
                                         <?php
                                         $date_created = date("Y/m/d");
                                         $next = $student['que_number'];
-                                        $query1 = "SELECT * FROM que LEFT JOIN students ON students.id = que.student_id WHERE status = '1' AND date_created = '$date_created' AND que_number != '$next' ORDER BY id asc LIMIT 1  ";
+                                        $query1 = "SELECT * FROM que LEFT JOIN students ON students.id = que.student_id WHERE que.status = '1' AND que.date_created = '$date_created' AND que.que_number != '$next' ORDER BY que.id asc LIMIT 1  ";
                                         $query_run1 = mysqli_query($conn, $query1);
 
                                         if (mysqli_num_rows($query_run1) > 0) {
