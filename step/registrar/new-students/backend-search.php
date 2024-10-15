@@ -1,6 +1,8 @@
 <?php
                                 
         require '../../../database/config.php';
+        date_default_timezone_set('Asia/Manila');
+        $currentDate = date('Y/m/d');
 
         $querys = "SELECT * FROM academic GROUP BY status";
         $querys_run = mysqli_query ($conn, $querys);
@@ -72,7 +74,7 @@ if(isset($_REQUEST["term"])){
                                    
     $academic = "$start-$end";
 
-    $sql = "SELECT * FROM students  WHERE semester_id = '$semester' AND academic = '$academic' AND status_type = 'Enroll' AND applicant_id LIKE ? LIMIT 5";
+    $sql = "SELECT * FROM students INNER JOIN que ON students.id = que.student_id WHERE que.date_created LIKE '$currentDate' AND semester_id = '$semester' AND academic = '$academic' AND status_type = 'Enroll' AND applicant_id LIKE ? LIMIT 5";
     
     if($stmt = mysqli_prepare($conn, $sql)){
         // Bind variables to the prepared statement as parameters
