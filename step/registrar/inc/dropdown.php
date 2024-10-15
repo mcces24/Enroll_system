@@ -1,10 +1,13 @@
 <?php
+date_default_timezone_set('Asia/Manila');
+$currentDate = date('Y-m-d');
+
 $sql_new="SELECT COUNT(*) as new_students from students  INNER JOIN year_lvl y On students.year_id=y.year_id INNER JOIN course c ON students.course_id=c.course_id WHERE semester_id = '$semester' AND academic = '$academic' AND  status_type = 'Enroll'";
 $query_new = mysqli_query($conn,$sql_new);
 $new= mysqli_fetch_assoc($query_new);
 $new_students = $new['new_students'] ?? 0;
 
-$sql_new="SELECT students.applicant_id as app_id from students INNER JOIN year_lvl y On students.year_id=y.year_id INNER JOIN course c ON students.course_id=c.course_id WHERE semester_id = '$semester' AND academic = '$academic' AND  status_type = 'Enroll' ORDER BY id DESC LIMIT 1";
+$sql_new="SELECT students.applicant_id as app_id from students INNER JOIN que q ON q.student_id = students.id INNER JOIN year_lvl y On students.year_id=y.year_id INNER JOIN course c ON students.course_id=c.course_id WHERE q.date_created = $currentDate AND semester_id = '$semester' AND academic = '$academic' AND  status_type = 'Enroll' ORDER BY id DESC LIMIT 1";
 $query_new = mysqli_query($conn,$sql_new);
 $new= mysqli_fetch_assoc($query_new);
 $applicant_id_new = $new['app_id'] ?? 'NONE';
