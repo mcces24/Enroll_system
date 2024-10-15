@@ -1,4 +1,6 @@
 <?php
+date_default_timezone_set('Asia/Manila');
+$currentDate = date('Y/m/d');
 session_start();
 require '../../../database/config.php';
 
@@ -484,17 +486,14 @@ require '../../../database/regis3.php';
 
                                             <table>
 
-
-
                                                 <?php
-
 
                                                 $filtervalues = $_GET['search'];
 
                                                 $start = $rows11['academic_start'];
                                                 $end = $rows11['academic_end'];
                                                 $semester = $rows111['semester_name'];
-                                                $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id WHERE (status_type = 'Enroll' OR status_type = 'New Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(applicant_id) LIKE '%$filtervalues%'";
+                                                $query = "SELECT * FROM students INNER JOIN que ON students.id = que.student_id INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id WHERE que.date_created LIKE '$currentDate' AND (status_type = 'Enroll' OR status_type = 'New Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(applicant_id) LIKE '%$filtervalues%'";
                                                 $query_run = mysqli_query($conn, $query);
 
                                                 if (mysqli_num_rows($query_run) > 0) {
@@ -517,7 +516,7 @@ require '../../../database/regis3.php';
 
                                                         $academic = "$start-$end";
                                                         if ($student['section_id'] != 0) {
-                                                            $query = "SELECT * FROM students INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id  INNER JOIN sections s ON students.section_id=s.section_id WHERE (status_type = 'Enroll' OR status_type = 'New Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(applicant_id) LIKE '%$filtervalues%'";
+                                                            $query = "SELECT * FROM students INNER JOIN que ON students.id = que.student_id INNER JOIN course c ON students.course_id = c.course_id INNER JOIN year_lvl y ON students.year_id=y.year_id WHERE que.date_created LIKE '$currentDate' AND (status_type = 'Enroll' OR status_type = 'New Students') AND semester_id = '$semester' AND academic = '$academic' AND CONCAT(applicant_id) LIKE '%$filtervalues%'";
                                                         }
                                                         $query_run = mysqli_query($conn, $query);
 
