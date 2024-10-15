@@ -7,7 +7,26 @@ $query_new = mysqli_query($conn,$sql_new);
 $new= mysqli_fetch_assoc($query_new);
 $new_students = $new['new_students'] ?? 0;
 
-$sql_new="SELECT students.applicant_id as app_id from students LEFT JOIN que ON students.id = que.student_id INNER JOIN year_lvl y On students.year_id=y.year_id INNER JOIN course c ON students.course_id=c.course_id WHERE semester_id = '$semester' AND academic = '$academic' AND  status_type = 'Enroll' ORDER BY id DESC LIMIT 1";
+$sql_new = "
+    SELECT 
+        s.applicant_id AS app_id 
+    FROM 
+        students s
+    LEFT JOIN 
+        que q ON s.id = q.student_id 
+    INNER JOIN 
+        year_lvl y ON s.year_id = y.year_id 
+    INNER JOIN 
+        course c ON s.course_id = c.course_id 
+    WHERE 
+        q.semester_id = '$semester' 
+        AND q.academic = '$academic' 
+        AND s.status_type = 'Enroll' 
+    ORDER BY 
+        s.id DESC 
+    LIMIT 1
+";
+
 $query_new = mysqli_query($conn,$sql_new);
 $new= mysqli_fetch_assoc($query_new);
 $applicant_id_new = $new['app_id'] ?? 'NONE';
