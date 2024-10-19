@@ -406,7 +406,7 @@
 
                                             <div id="wrapper">
                                                 <div class="input-group">
-                                                    <input type="text" name="search" value="Priority No: <?= $student['que_number']; ?>" class="form-control" placeholder="Input Applicant Number here!" readonly>
+                                                    <input type="text" name="search" value="Priority No: <?= $student['que_number']; ?> | <?= $student['applicant_id']; ?>" class="form-control" placeholder="Input Applicant Number here!" readonly>
                                                     <textarea hidden id="content"> Attention priority number <?= $student['que_number']; ?>. Please proceed to B E ED Department Office. Attention priority number <?= $student['que_number']; ?>. Please proceed to B E ED Department Office. Thank you!</textarea>
 
                                                     <button style="text-align: ;" id="btnArea" class="btn btn-success btn-sm">Call Now</button>
