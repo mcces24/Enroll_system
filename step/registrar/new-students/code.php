@@ -44,6 +44,8 @@ if (isset($_POST['edit'])) {
 
     $stmt->close();
 
+    return;
+
     $query2 = "UPDATE documents SET id_number='$id_number', nso='$nso', card='$card', good_moral='$good_moral' WHERE applicant_id='$applicant_id' ";
     $query_run2 = mysqli_query($conn, $query2);
 
@@ -51,7 +53,7 @@ if (isset($_POST['edit'])) {
     $query = "UPDATE students SET type='$type', section_id='$section_id', id_number='$id_number', status_type='$status_type' WHERE applicant_id='$applicant_id' ";
     $query_run = mysqli_query($conn, $query);
 
-    if ($query_run && false) {
+    if ($query_run) {
 
         if ($type == 'Irregular') {
             $queryInsert = "INSERT INTO selected_subject (id_number, subject_codes) VALUES (?, ?)";
