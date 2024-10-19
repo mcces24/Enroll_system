@@ -44,8 +44,6 @@ if (isset($_POST['edit'])) {
 
     $stmt->close();
 
-    return;
-
     $query2 = "UPDATE documents SET id_number='$id_number', nso='$nso', card='$card', good_moral='$good_moral' WHERE applicant_id='$applicant_id' ";
     $query_run2 = mysqli_query($conn, $query2);
 
