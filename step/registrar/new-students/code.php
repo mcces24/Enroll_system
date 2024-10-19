@@ -36,7 +36,7 @@ if (isset($_POST['edit'])) {
     $stmt->bind_param("ii", $status, $student_id);
 
     if (!$stmt->execute()) {
-        $_SESSION['message'] = "There's an error:" . $stmt->error
+        $_SESSION['message'] = "There's an error:" . $stmt->error;
         $_SESSION['message_icon'] = "warning";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
         exit(0);
