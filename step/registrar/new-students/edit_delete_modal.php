@@ -215,7 +215,7 @@
                     <div class="form-group">
                         <label class="form-group"> ID NUMBER </label>
                         <?php if (in_array($rows12['status'], array('1'))) : ?>
-                            <input style="color: red;" type="text" name="id_number" id="id_number" class="form-control" value="<?php echo $customer_ID; ?>" readonly="false">
+                            <input style="color: red;" type="text" name="id_number" id="id_number" class="form-control" value="<?php echo $customer_ID; ?>">
                         <?php endif; ?>
                     </div>
                     <div class="form-group">
