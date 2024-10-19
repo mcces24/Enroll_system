@@ -35,10 +35,7 @@ if (isset($_POST['edit'])) {
     $status = 2; // Assuming status is an integer
     $stmt->bind_param("ii", $status, $student_id);
 
-    if ($stmt->execute()) {
-        echo $student_id;
-        echo "updated";
-    } else {
+    if (!$stmt->execute()) {
         $_SESSION['message'] = "There's an error:" . $stmt->error;
         $_SESSION['message_icon'] = "warning";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
