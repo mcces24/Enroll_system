@@ -29,8 +29,19 @@ if (isset($_POST['edit'])) {
     $type = mysqli_real_escape_string($conn, $_POST['type']);
     $subjects = mysqli_real_escape_string($conn, $_POST['subjects']);
 
-    $query1 = "UPDATE que SET status='2' WHERE student_id='$student_id' ";
-    $query_run1 = mysqli_query($conn, $query1);
+    //$query1 = "UPDATE que SET status='2' WHERE student_id='$student_id' ";
+    //$query_run1 = mysqli_query($conn, $query1);
+    $stmt = $conn->prepare("UPDATE que SET status=? WHERE student_id=?");
+    $status = 2; // Assuming status is an integer
+    $stmt->bind_param("ii", $status, $student_id);
+
+    if ($stmt->execute()) {
+        echo "Record updated successfully.";
+    } else {
+        echo "Error updating record: " . $stmt->error;
+    }
+
+    $stmt->close();
 
     echo $query1;
     return;
