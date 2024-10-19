@@ -4392,7 +4392,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                               <span class="happyforms-required"></span>
                                                                            </label>
                                                                         </div>
-                                                                        <span class="happyforms-part__description">ex: Tugas, Madridejosm Cebu</span>
+                                                                        <span class="happyforms-part__description">ex: Tugas, Madridejos Cebu</span>
                                                                         <div class="happyforms-part__el">
                                                                            <div class="happyforms-input">
                                                                               <input id="happyforms-710_single_line_text_14" type="text" name="guardian_address" value="" placeholder="Addresss" autocomplete="off" spellcheck="false" autocorrect="off" required>
@@ -4424,7 +4424,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                               <span class="happyforms-required"></span>
                                                                            </label>
                                                                         </div>
-                                                                        <span class="happyforms-part__description">ex: 42, Please type NONE if not avialable.</span>
+                                                                        <span class="happyforms-part__description">ex: 42, Please type NONE if not available.</span>
                                                                         <div class="happyforms-part__el">
                                                                            <div class="happyforms-input">
                                                                               <input id="happyforms-710_single_line_text_16" type="text" name="nsat_score" value="" placeholder="NSAT score" autocomplete="off" spellcheck="false" autocorrect="off" required>
@@ -4440,7 +4440,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                               <span class="happyforms-required"></span>
                                                                            </label>
                                                                         </div>
-                                                                        <span class="happyforms-part__description">ex: 2016, Please type NONE if not avialable.</span>
+                                                                        <span class="happyforms-part__description">ex: 2016, Please type NONE if not available.</span>
                                                                         <div class="happyforms-part__el">
                                                                            <div class="happyforms-input">
                                                                               <input id="happyforms-710_single_line_text_17" type="text" name="year" value="" placeholder="Year" autocomplete="off" spellcheck="false" autocorrect="off" required>
