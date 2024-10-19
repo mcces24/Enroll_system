@@ -36,6 +36,7 @@ if (isset($_POST['edit'])) {
     $stmt->bind_param("ii", $status, $student_id);
 
     if ($stmt->execute()) {
+        echo $student_id;
         echo "updated";
     } else {
         $_SESSION['message'] = "There's an error:" . $stmt->error;
