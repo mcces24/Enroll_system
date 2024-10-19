@@ -64,7 +64,7 @@
 
     
                     <div class="form-group">
-                        <input type="hidden" name="student_id" id="student_id" value="<?php echo $student['id']; ?>">
+                        <input type="text" name="student_id" id="student_id" value="<?php echo $student['id']; ?>">
                         <input type="hidden" name="type" id="type_student" value="regular">
                         <input type="hidden" name="subjects" id="subjects" value="">
                         <label class="form-group"> Aplicant Number </label>
