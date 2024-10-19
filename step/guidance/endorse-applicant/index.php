@@ -243,7 +243,7 @@ if (mysqli_num_rows($querys_run111) > 0) {
                                                             <input type="hidden" name="status_type" value="Applicant">
                                                             <?php if (in_array($student['status_type'], array('Accept'))) : ?>
                                                                 <button type="submit" name="add_exam" class="btn btn-info btn-sm">
-                                                                    Endores Applicant
+                                                                    Endorse Applicant
                                                                 </button>
                                                             <?php endif; ?>
                                                             <?php if (in_array($student['status_type'], array('Applicant', 'Enroll'))) : ?>
