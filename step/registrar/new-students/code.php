@@ -32,7 +32,7 @@ if (isset($_POST['edit'])) {
     $query1 = "UPDATE que SET status='2' WHERE student_id='$student_id' ";
     $query_run1 = mysqli_query($conn, $query1);
 
-    echo '$query1';
+    echo $query1;
     return;
 
     $query2 = "UPDATE documents SET id_number='$id_number', nso='$nso', card='$card', good_moral='$good_moral' WHERE applicant_id='$applicant_id' ";
