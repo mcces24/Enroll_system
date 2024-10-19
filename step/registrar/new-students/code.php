@@ -31,7 +31,7 @@ if (isset($_POST['edit'])) {
 
     //$query1 = "UPDATE que SET status='2' WHERE student_id='$student_id' ";
     //$query_run1 = mysqli_query($conn, $query1);
-    $stmt = $conn->prepare("UPDATE que SET status=? WHERE student_id=?");
+    $stmt = $conn->prepare("UPDATE que SET status=? WHERE id=?");
     $status = 2; // Assuming status is an integer
     $stmt->bind_param("ii", $status, $student_id);
 
