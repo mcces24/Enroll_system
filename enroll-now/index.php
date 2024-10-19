@@ -4874,7 +4874,7 @@ $academic = !empty($academicYear) ? "$start-$end" : null;
                                                                   <div class="happyforms-part-wrap">
                                                                      <div class="happyforms-part__label-container">
                                                                         <label for="happyforms-710_single_line_text_9" class="happyforms-part__label">
-                                                                           <span class="label">Regilion</span>
+                                                                           <span class="label">Religion</span>
                                                                            <span class="happyforms-required"></span>
                                                                         </label>
                                                                      </div>
