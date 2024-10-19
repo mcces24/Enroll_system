@@ -35,16 +35,14 @@ if (isset($_POST['edit'])) {
     $status = 2; // Assuming status is an integer
     $stmt->bind_param("ii", $status, $student_id);
 
-    if ($stmt->execute()) {
-        echo "Record updated successfully.";
-    } else {
-        echo "Error updating record: " . $stmt->error;
+    if (!$stmt->execute()) {
+        $_SESSION['message'] = "There's an error:" . $stmt->error
+        $_SESSION['message_icon'] = "warning";
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit(0);
     }
 
     $stmt->close();
-
-    echo $query1;
-    return;
 
     $query2 = "UPDATE documents SET id_number='$id_number', nso='$nso', card='$card', good_moral='$good_moral' WHERE applicant_id='$applicant_id' ";
     $query_run2 = mysqli_query($conn, $query2);
